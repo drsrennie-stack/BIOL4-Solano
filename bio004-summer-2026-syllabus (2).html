@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIO 004 Human Anatomy, Summer 2026, Syllabus, Dr. Sharilyn Rennie</title>
+<meta name="description" content="Course syllabus for BIO 004 Human Anatomy, Summer 2026 8-week intensive at Solano Community College, taught by Dr. Sharilyn Rennie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C;
+  --navy-deep: #15262F;
+  --terra: #7C2018;
+  --terra-soft: #9A3A2E;
+  --gold: #C9A961;
+  --gold-soft: #DCC289;
+  --ink: #15262F;
+  --ink-soft: #3D4F5A;
+  --divider: #BFC8CD;
+  --divider-light: #D8DEE2;
+  --cream: #FAF7F2;
+  --cream-warm: #F5F2EC;
+  --white: #FFFFFF;
+  --focus: #1E3D4C;
+
+  /* Subtle lift, never bookend */
+  --lift-1: 0 1px 2px rgba(30, 61, 76, 0.05), 0 1px 3px rgba(30, 61, 76, 0.04);
+  --lift-2: 0 2px 4px rgba(30, 61, 76, 0.06), 0 4px 12px rgba(30, 61, 76, 0.06);
+  --lift-3: 0 4px 8px rgba(30, 61, 76, 0.07), 0 8px 24px rgba(30, 61, 76, 0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  background: var(--navy);
+  color: var(--cream);
+  padding: 12px 18px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  z-index: 1000;
+}
+.skip-link:focus { top: 12px; }
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Top bar */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--navy);
+  color: var(--cream);
+  border-bottom: 2px solid var(--gold);
+}
+.topbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.topbar-title {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: var(--cream);
+}
+.topbar-title small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--gold-soft);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+.topbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.topbar-btn {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid rgba(220, 194, 137, 0.4);
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.topbar-btn:hover {
+  background: rgba(201, 169, 97, 0.12);
+  border-color: var(--gold);
+  color: var(--gold-soft);
+}
+.topbar-btn.primary {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy-deep);
+  font-weight: 600;
+}
+.topbar-btn.primary:hover {
+  background: var(--gold-soft);
+  border-color: var(--gold-soft);
+  color: var(--navy-deep);
+}
+
+/* Layout */
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 48px;
+  padding: 32px 24px 80px;
+}
+@media (max-width: 880px) {
+  .layout { grid-template-columns: 1fr; gap: 0; padding: 16px; }
+}
+
+/* Sidebar nav */
+.sidenav {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-right: 8px;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+}
+@media (max-width: 880px) {
+  .sidenav {
+    position: static;
+    max-height: none;
+    margin-bottom: 24px;
+    padding: 18px 20px;
+    background: var(--cream-warm);
+    border-radius: 6px;
+    box-shadow: var(--lift-1);
+  }
+}
+.sidenav-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gold);
+}
+.sidenav ul { list-style: none; padding: 0; margin: 0; }
+.sidenav li { margin: 0; }
+.sidenav a {
+  display: block;
+  padding: 7px 12px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-left: 2px solid transparent;
+  border-radius: 0 3px 3px 0;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.sidenav a:hover {
+  background: var(--cream-warm);
+  border-left-color: var(--gold);
+  color: var(--navy);
+}
+.sidenav a.is-active {
+  background: var(--cream-warm);
+  border-left-color: var(--terra);
+  color: var(--navy);
+  font-weight: 600;
+}
+
+/* Main content */
+main { min-width: 0; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--cream);
+  border-radius: 8px;
+  padding: 44px 40px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--lift-2);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -120px;
+  left: -80px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(124, 32, 24, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero > * { position: relative; }
+.hero-eyebrow {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 14px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 2.7rem;
+  line-height: 1.05;
+  margin: 0 0 12px;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+.hero-subtitle {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: rgba(250, 247, 242, 0.88);
+  margin: 0 0 28px;
+  max-width: 60ch;
+}
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px 32px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(201, 169, 97, 0.35);
+  margin: 0;
+}
+.hero-meta > div { margin: 0; }
+.hero-meta dt {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+.hero-meta dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--white);
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  line-height: 1.45;
+}
+
+/* Sections */
+section {
+  margin-bottom: 44px;
+  scroll-margin-top: 80px;
+}
+section h2 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--navy);
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+.section-rule {
+  height: 3px;
+  width: 56px;
+  background: var(--gold);
+  margin: 8px 0 24px;
+  border-radius: 2px;
+}
+section h3 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--terra);
+  margin: 26px 0 10px;
+  letter-spacing: 0;
+}
+section h4 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--navy);
+  margin: 18px 0 6px;
+}
+section p { margin: 0 0 14px; }
+
+/* Cards: white, lifted, never book-end */
+.card {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 24px 26px;
+  margin: 18px 0;
+  box-shadow: var(--lift-1);
+}
+.card-accent {
+  border-left: 4px solid var(--gold);
+}
+.card-warn {
+  border-left: 4px solid var(--terra);
+}
+
+.callout {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-left: 4px solid var(--navy);
+  padding: 16px 20px;
+  margin: 18px 0;
+  border-radius: 0 6px 6px 0;
+  box-shadow: var(--lift-1);
+}
+.callout strong {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  color: var(--navy);
+}
+.callout-terra { border-left-color: var(--terra); }
+.callout-terra strong { color: var(--terra); }
+.callout-gold { border-left-color: var(--gold); }
+.callout-gold strong { color: var(--terra); }
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 18px 0;
+  background: var(--white);
+  border-radius: 6px;
+  box-shadow: var(--lift-1);
+  border: 1px solid var(--divider-light);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+}
+th, td {
+  padding: 13px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--divider-light);
+  vertical-align: top;
+}
+th {
+  background: var(--navy);
+  color: var(--cream);
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--gold);
+}
+tbody tr:nth-child(even) { background: var(--cream-warm); }
+tbody tr:hover { background: rgba(201, 169, 97, 0.10); }
+tbody tr:last-child td { border-bottom: none; }
+
+/* Lists */
+ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--gold); }
+
+/* Definition lists */
+.def-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 12px 28px;
+  margin: 14px 0;
+  font-size: 0.95rem;
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 22px 26px;
+  box-shadow: var(--lift-1);
+}
+@media (max-width: 600px) {
+  .def-grid { grid-template-columns: 1fr; gap: 4px 0; padding: 18px 20px; }
+  .def-grid dt { margin-top: 10px; }
+  .def-grid dt:first-child { margin-top: 0; }
+}
+.def-grid dt {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.def-grid dd { margin: 0; color: var(--ink); }
+
+/* Collapsible */
+details {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  margin: 12px 0;
+  box-shadow: var(--lift-1);
+  transition: box-shadow 0.15s;
+}
+details[open] { box-shadow: var(--lift-2); }
+details summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 22px;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--navy);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary:hover { background: var(--cream-warm); }
+details summary::after {
+  content: '+';
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--gold);
+  transition: transform 0.2s;
+  margin-left: 16px;
+  line-height: 1;
+}
+details[open] summary::after { content: '−'; color: var(--terra); }
+details .details-body {
+  padding: 4px 22px 22px;
+  border-top: 1px solid var(--divider-light);
+  color: var(--ink);
+}
+details[open] summary { border-radius: 6px 6px 0 0; }
+
+/* Schedule cards */
+.week-card {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 20px;
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  box-shadow: var(--lift-1);
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.week-card:hover {
+  box-shadow: var(--lift-2);
+  transform: translateY(-1px);
+}
+.week-card.is-current {
+  border-left: 4px solid var(--terra);
+  background: linear-gradient(to right, rgba(124, 32, 24, 0.04), var(--white) 30%);
+}
+.week-num {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--navy);
+  border-right: 1px solid var(--divider-light);
+  padding-right: 16px;
+}
+.week-num-big {
+  display: block;
+  font-size: 2.6rem;
+  line-height: 1;
+}
+.week-num-label {
+  display: block;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-style: normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 6px;
+  font-weight: 700;
+}
+.week-content h3 {
+  margin: 0 0 4px;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 1.05rem;
+  color: var(--navy);
+}
+.week-dates {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  margin-bottom: 10px;
+}
+.week-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+.tag-tbl {
+  background: var(--cream-warm);
+  color: var(--navy);
+  border-color: var(--divider);
+}
+.tag-exam {
+  background: rgba(201, 169, 97, 0.18);
+  color: var(--terra);
+  border-color: rgba(201, 169, 97, 0.5);
+}
+.tag-cum {
+  background: var(--terra);
+  color: var(--cream);
+  border-color: var(--terra);
+}
+
+/* Grade calculator */
+.calc {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 8px;
+  padding: 28px 30px;
+  margin: 22px 0;
+  box-shadow: var(--lift-2);
+  position: relative;
+}
+.calc::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--navy), var(--gold), var(--terra));
+  border-radius: 8px 8px 0 0;
+}
+.calc-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.calc-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.calc h3 { margin: 0; color: var(--navy); }
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin-top: 12px;
+}
+.calc-field label {
+  display: block;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.calc-field input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--divider);
+  border-radius: 4px;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.95rem;
+  background: var(--cream);
+  color: var(--ink);
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.calc-field input:focus {
+  border-color: var(--navy);
+  background: var(--white);
+  outline: 3px solid rgba(201, 169, 97, 0.4);
+  outline-offset: 0;
+}
+.calc-field-hint {
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+}
+.calc-result {
+  margin-top: 24px;
+  padding: 20px 22px;
+  background: var(--cream-warm);
+  border-radius: 6px;
+  border: 1px solid var(--divider-light);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+.calc-result-label {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 4px;
+}
+.calc-result-value {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.7rem;
+  color: var(--navy);
+}
+.calc-result-grade {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 4px;
+  background: var(--navy);
+  color: var(--gold);
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-style: normal;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-left: 4px;
+  border: 1px solid var(--gold);
+}
+
+/* Grade scale cells */
+.grade-scale {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin: 18px 0;
+}
+@media (max-width: 600px) {
+  .grade-scale { grid-template-columns: repeat(3, 1fr); }
+}
+.grade-cell {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 16px 12px;
+  text-align: center;
+  box-shadow: var(--lift-1);
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.grade-cell:hover {
+  box-shadow: var(--lift-2);
+  transform: translateY(-1px);
+}
+.grade-cell-letter {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: var(--navy);
+  display: block;
+  line-height: 1;
+}
+.grade-cell-range {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-top: 8px;
+  letter-spacing: 0.02em;
+}
+
+/* DOK chart */
+.dok-table {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 16px 0;
+  box-shadow: var(--lift-1);
+}
+.dok-row {
+  display: grid;
+  grid-template-columns: 80px 150px 1fr 90px;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--divider-light);
+}
+.dok-row:last-child { border-bottom: none; }
+.dok-row:nth-child(odd):not(:first-child) { background: var(--cream-warm); }
+.dok-row:first-child {
+  background: var(--navy);
+  color: var(--cream);
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--gold);
+}
+@media (max-width: 720px) {
+  .dok-row { grid-template-columns: 1fr; gap: 4px; padding: 14px 18px; }
+  .dok-row:first-child { display: none; }
+  .dok-row span:nth-child(1)::before { content: 'Level: '; font-weight: 700; color: var(--terra); }
+  .dok-row span:nth-child(2)::before { content: 'Type: '; font-weight: 700; color: var(--terra); }
+  .dok-row span:nth-child(3)::before { content: 'Use: '; font-weight: 700; color: var(--terra); }
+  .dok-row span:nth-child(4)::before { content: 'Weight: '; font-weight: 700; color: var(--terra); }
+}
+
+/* Footer */
+footer {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 36px 24px 60px;
+  border-top: 1px solid var(--divider-light);
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-align: center;
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+footer p { margin: 4px 0; }
+footer strong { color: var(--navy); font-weight: 700; }
+
+/* Print styles */
+@media print {
+  .topbar, .sidenav, .calc { display: none; }
+  .layout { grid-template-columns: 1fr; padding: 0; }
+  body { font-size: 11pt; background: white; }
+  .hero {
+    background: white !important;
+    color: var(--ink) !important;
+    border: 2px solid var(--navy);
+    box-shadow: none;
+  }
+  .hero::before, .hero::after { display: none; }
+  .hero h1, .hero-eyebrow { color: var(--navy) !important; }
+  .hero-subtitle, .hero-meta dt, .hero-meta dd { color: var(--ink) !important; }
+  .hero-eyebrow { color: var(--terra) !important; }
+  .hero-meta dt { color: var(--navy) !important; }
+  details { break-inside: avoid; box-shadow: none; }
+  details:not([open]) { page-break-inside: avoid; }
+  details summary::after { display: none; }
+  details[open] summary { background: var(--cream-warm); }
+  section { page-break-inside: avoid; }
+  .week-card, .card, .grade-cell, .calc, .def-grid, .table-wrap { box-shadow: none; }
+  a { color: var(--ink); text-decoration: underline; }
+}
+
+/* Inline emphasis */
+.eyebrow {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin: 0 0 6px;
+}
+
+a.inline-link {
+  color: var(--terra);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: 500;
+}
+a.inline-link:hover { color: var(--navy); }
+
+strong, b { font-weight: 700; color: var(--navy); }
+em, i { font-style: italic; color: var(--ink); }
+
+/* Utility */
+.mt-0 { margin-top: 0; }
+.mb-0 { margin-bottom: 0; }
+.text-muted { color: var(--ink-soft); }
+.text-terra { color: var(--terra); }
+.text-navy { color: var(--navy); }
+.weight-pct {
+  font-weight: 700;
+  color: var(--terra);
+  text-align: right;
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<div class="topbar" role="banner">
+  <div class="topbar-inner">
+    <div class="topbar-title">
+      BIO 004, Human Anatomy
+      <small>Summer 2026, 8-Week Intensive, Solano Community College</small>
+    </div>
+    <div class="topbar-actions">
+      <button class="topbar-btn" type="button" id="expand-all" aria-label="Expand all collapsible sections">Expand all</button>
+      <button class="topbar-btn" type="button" id="collapse-all" aria-label="Collapse all collapsible sections">Collapse all</button>
+      <button class="topbar-btn primary" type="button" id="print-btn" aria-label="Print this syllabus">Print</button>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <nav class="sidenav" aria-label="Syllabus sections">
+    <p class="sidenav-label">On this page</p>
+    <ul>
+      <li><a href="#overview">Course overview</a></li>
+      <li><a href="#instructor">Instructor &amp; contact</a></li>
+      <li><a href="#description">Course description</a></li>
+      <li><a href="#outcomes">Learning outcomes</a></li>
+      <li><a href="#materials">Course materials</a></li>
+      <li><a href="#workload">Course workload</a></li>
+      <li><a href="#attendance">Attendance policy</a></li>
+      <li><a href="#grading">Grading &amp; assessments</a></li>
+      <li><a href="#calculator">Grade calculator</a></li>
+      <li><a href="#assessments">Assessment details</a></li>
+      <li><a href="#scholar">Scholar points</a></li>
+      <li><a href="#schedule">8-week schedule</a></li>
+      <li><a href="#integrity">Academic integrity</a></li>
+      <li><a href="#ai-policy">AI policy</a></li>
+      <li><a href="#digital-devices">Digital device policy</a></li>
+      <li><a href="#teams">Working with your team</a></li>
+      <li><a href="#dates">Critical dates</a></li>
+      <li><a href="#accommodations">Accommodations</a></li>
+      <li><a href="#tips">Tips for success</a></li>
+    </ul>
+  </nav>
+
+  <main id="main-content">
+
+    <header class="hero">
+      <p class="hero-eyebrow">Solano Community College, Summer 2026</p>
+      <h1>Human Anatomy</h1>
+      <p class="hero-subtitle">An 8-week intensive study of the structural organization of the human body, from cellular to organismal level.</p>
+      <dl class="hero-meta">
+        <div>
+          <dt>Course</dt>
+          <dd>BIO 004, Section 0, 5 units</dd>
+        </div>
+        <div>
+          <dt>CRN</dt>
+          <dd>60099</dd>
+        </div>
+        <div>
+          <dt>Term</dt>
+          <dd>Summer 2026, 202660</dd>
+        </div>
+        <div>
+          <dt>Dates</dt>
+          <dd>June 15 to August 7, 2026</dd>
+        </div>
+        <div>
+          <dt>Lecture</dt>
+          <dd>M, T, W, Th, 10:00 to 11:20 AM, Fairfield Campus, Science Bldg, Room 2702</dd>
+        </div>
+        <div>
+          <dt>Lab</dt>
+          <dd>M, T, W, Th, 11:30 AM to 2:35 PM, Fairfield Campus, Science Bldg, Room 2736</dd>
+        </div>
+      </dl>
+    </header>
+
+    <section id="overview">
+      <h2>Course at a Glance</h2>
+      <div class="section-rule"></div>
+      <div class="card card-accent">
+        <p style="margin: 0 0 12px;"><strong>This is an 8-week summer intensive.</strong> The course covers the same content, depth, and rigor as the 16-week semester format, compressed into half the time. Each class day represents roughly two days of regular semester instruction. Plan accordingly.</p>
+        <p style="margin: 0;">Class meets <strong>four days per week</strong> (Monday through Thursday), with both lecture and lab on the same day. Plan on approximately <strong>20 hours per week of outside-class study</strong> to maintain pace, more if you are aiming for an A.</p>
+      </div>
+
+      <h3>The summer compact</h3>
+      <p>Because of the compressed pace, three things matter more than usual:</p>
+      <ol>
+        <li><strong>Show up prepared.</strong> Pre-work is the foundation of TBL, and TBL is 40% of your grade. Walking in unprepared will cost you points immediately, before you even sit down.</li>
+        <li><strong>Don't fall behind.</strong> You cannot catch up in this course the way you might in a regular semester. One missed day is roughly two missed days of content.</li>
+        <li><strong>Use lab time well.</strong> Lab is your structured, forward-moving study time. Treat it as study time, not social time.</li>
+      </ol>
+    </section>
+
+    <section id="instructor">
+      <h2>Instructor &amp; Contact</h2>
+      <div class="section-rule"></div>
+      <dl class="def-grid">
+        <dt>Instructor</dt>
+        <dd>Dr. Sharilyn Rennie, Adjunct Professor of Biology</dd>
+        <dt>Email</dt>
+        <dd>Use the Canvas Inbox or email <a class="inline-link" href="mailto:sharilyn.rennie@solano.edu" target="_top">sharilyn.rennie@solano.edu</a> at any time. Response within 48 to 72 hours.</dd>
+        <dt>Canvas board</dt>
+        <dd>Post a question to Dr. Rennie's Virtual Office. Reply within 48 to 72 hours.</dd>
+        <dt>Office hours</dt>
+        <dd>By appointment, scheduled before class on Monday and Wednesday. Please confirm via Canvas message.</dd>
+      </dl>
+    </section>
+
+    <section id="description">
+      <h2>Course Description</h2>
+      <div class="section-rule"></div>
+      <p>A study of the structural organization of the human body, from cellular to organismal level. Throughout the course, various types of instruction are used, including microscopic investigation of prepared slides of tissues and organs, gross (macroscopic) anatomical dissection, and examination of prosected human material.</p>
+      <p><strong>Hours:</strong> 48 to 54 lecture, 96 to 108 lab. This course is primarily intended for nursing, allied health, kinesiology, and other health-related majors. (Formerly BIO 006.)</p>
+
+      <h3>Prerequisites &amp; advisories</h3>
+      <ul>
+        <li><strong>Prerequisites:</strong> None</li>
+        <li><strong>Co-requisites:</strong> None</li>
+        <li><strong>Advisories:</strong> SCC minimum Math and English standards</li>
+        <li><strong>Recommended:</strong> Satisfactory completion of BIO 16 (Introduction to Human Biology) and BIO 16L (Human Biology Laboratory) is strongly recommended but not required.</li>
+      </ul>
+    </section>
+
+    <section id="outcomes">
+      <h2>Student Learning Outcomes</h2>
+      <div class="section-rule"></div>
+      <p>Upon successful completion of the course, students should be able to:</p>
+      <ol>
+        <li>Identify and distinguish tissues based on currently recognized criteria.</li>
+        <li>Describe the basic microscopic and gross anatomy of the major systems of the human body.</li>
+        <li>Identify, in the laboratory, major microscopic and gross structures of the major systems of the human body.</li>
+      </ol>
+    </section>
+
+    <section id="materials">
+      <h2>Course Materials &amp; Technology</h2>
+      <div class="section-rule"></div>
+
+      <h3>Textbook, recommended (not required)</h3>
+      <p><strong>No textbook is required for this course.</strong> You may use any of the following resources, listed in order of cost. Pick what works for your budget and learning style.</p>
+      <ol>
+        <li><strong>OpenStax <em>Anatomy and Physiology</em>, 2nd Edition</strong> (recommended): Free, peer-reviewed, available online and as a free PDF at openstax.org. This covers the anatomy material in our course and is the most accessible option.</li>
+        <li><strong>A used copy of Marieb, Brady, and Mallatt, <em>Human Anatomy</em>, 9th Edition</strong>. ISBN-13: 9780135240601. Look for used copies online or at the SCC Bookstore (phone: 707-864-7111).</li>
+        <li><strong>A used copy of Marieb's two-semester <em>Human Anatomy and Physiology</em></strong> textbook. Any recent edition will cover the anatomy content for this course.</li>
+      </ol>
+      <p>Mastering A&amp;P access is <strong>optional</strong> and is not required for any graded course component.</p>
+
+      <h3>Lab supplies, needed by week 3</h3>
+      <ul>
+        <li>Non-latex nitrile gloves (share a box within your group to reduce cost)</li>
+        <li>Lab coat (required), to be stored in the lab through the end of the term, cannot be shared with chemistry</li>
+      </ul>
+      <div class="callout callout-terra">
+        <strong>Heads up:</strong> The 8-week pace means you need lab supplies on hand by <strong>week 3</strong>, not week 6. Plan to order or pick up supplies during week 1 or 2.
+      </div>
+
+      <h3>Optional materials</h3>
+      <ul>
+        <li>Krieger, P. A. (2021). <em>A Visual Analogy Guide to Human Anatomy</em> (5th ed.). Morton Publishing. (Workbook)</li>
+        <li>Malakhova, Chinn, Krabbenhoft, &amp; Smith (2022). <em>A Photographic Atlas for Anatomy &amp; Physiology</em> (2nd ed.). Pearson.</li>
+        <li>Complete Anatomy by 3B Medical (App)</li>
+      </ul>
+
+      <h3>Required technology</h3>
+      <p>To be successful in this course, students must have access to the following:</p>
+      <ul>
+        <li><strong>Tablet, laptop, or desktop computer</strong> capable of running multiple browser tabs, streaming videos, and using PDF editing or scanning tools. Recommended minimum: 8 GB RAM and at least 10 GB available storage.</li>
+        <li><strong>Reliable internet connection</strong> for accessing Canvas, instructional videos, and submitting work on time.</li>
+        <li><strong>Printer and scanner</strong>, or a scanning app like Adobe Scan or CamScanner, for legible handwritten work.</li>
+        <li><strong>Camera-enabled device</strong> for capturing clear images of models, lab work, or assignment pages.</li>
+        <li><strong>PDF conversion tool</strong>. All scanned or photographed assignments must be submitted as PDFs through Canvas.</li>
+      </ul>
+      <p class="text-muted" style="font-size: 0.9rem;"><strong>Important:</strong> You are responsible for ensuring your devices meet these requirements. Inadequate technology access may result in missed deadlines and academic penalties unless prior arrangements are made.</p>
+    </section>
+
+    <section id="workload">
+      <h2>Course Workload Expectations</h2>
+      <div class="section-rule"></div>
+      <p>This is a 5-unit course (3 lecture units, 2 lab units) delivered in 8 weeks. Per the Carnegie Unit standard (2 hours of outside study per credit hour per week), applied to <strong>both lecture and lab credits</strong> because anatomy lab is memorization-intensive study (atlas drilling, structure identification, lab practical preparation) rather than wet-lab experimentation that completes itself in the lab session, plan on approximately <strong>20 hours per week of outside-class study</strong> to maintain pace at a passing-grade level (C). Students aiming for higher grades typically invest 25 or more hours per week, depending on prior exposure to the material, study skills, and preparation.</p>
+      <p>Be realistic about your current commitments. Consider your other courses, employment, and personal responsibilities, and evaluate where additional study time could realistically come from without making changes that could negatively affect your overall well-being.</p>
+      <div class="callout">
+        <strong>If your schedule does not allow for this level of sustained effort,</strong> the 8-week intensive may not be the right fit this term. Proceeding carefully through foundational courses is often more beneficial than rushing. Repeating this course or physiology due to insufficient preparation creates greater delays in your academic progress than planning a manageable schedule from the outset.
+      </div>
+
+      <h3>Homework &amp; success strategy</h3>
+      <p>Homework is recommended, not always required or graded. It is designed to reinforce your learning and improve exam performance.</p>
+      <p><strong>Prioritize:</strong> high lab exam scores, strong TBL performance, and consistent end-of-day lab quiz performance. Homework is minimal and intentionally structured to support mastery, not to pad your grade.</p>
+      <ul>
+        <li><strong>Pros:</strong> Fewer mandatory tasks let you focus on high-impact studying. Missing a non-graded assignment will not significantly hurt your grade.</li>
+        <li><strong>Cons:</strong> If you are used to earning points from low-effort tasks, that strategy will not work here. Your competence is measured directly through assessments and TBL.</li>
+      </ul>
+      <p><strong>Bottom line:</strong> There are no shortcuts. Focus on learning the material deeply, performing well on exams and team work, and becoming truly competent in the content.</p>
+    </section>
+
+    <section id="attendance">
+      <h2>Attendance Policy</h2>
+      <div class="section-rule"></div>
+      <p>In an 8-week intensive course, consistent attendance is not just encouraged, it is essential. The cumulative nature of anatomy makes it extremely difficult for even the strongest students to recover after missing more than one day. Missing one class day in summer is roughly equivalent to missing two days in a regular semester.</p>
+
+      <h3>Course requirements</h3>
+      <ul>
+        <li>You must be present every class for the <strong>first week</strong>. Any absence during week 1, your seat will be given to the next student on the waitlist and you will be dropped.</li>
+        <li>Log in to Canvas <strong>at least three times each week</strong> to check announcements, assignments, and discussions. Set up notifications, at minimum for announcements. Set up the Canvas app. You are responsible for anything posted there.</li>
+        <li>If you encounter technical difficulties, report them immediately to IT or Canvas support.</li>
+      </ul>
+
+      <h3>If you miss class</h3>
+      <ul>
+        <li>You may miss <strong>a maximum of 3 classes the entire term</strong> (excused or unexcused). On the 3rd absence, I receive the right to drop you from the course.</li>
+        <li>You must be present for <strong>90% of lab and lecture</strong> to count as attendance. Leaving 20 minutes early or arriving 20 minutes late counts as an absence.</li>
+        <li><strong>Missed activities cannot be made up.</strong> If you are absent, you will not have the opportunity to make up any in-class assignments, team-based learning activities, or exams. No exceptions.</li>
+        <li>Missed classes are treated uniformly. There are no excused absences. If you are having a difficult day and need time away, you are not required to justify your absence. Likewise, if you miss class for any other reason, no explanation is necessary, and no exceptions will be made. Regardless of the reason, missing class means missing instruction, practice, and experiential learning. Absences negatively affect your understanding, your performance on missed material, and ultimately your course grade.</li>
+        <li>In healthcare programs, including nursing, respiratory therapy, and radiologic sciences, students are required to complete a minimum number of laboratory and instructional hours. More than three absences violates these program requirements and renders a student ineligible to continue. This policy is non-negotiable and aligned with professional and accreditation standards.</li>
+        <li><strong>Doors will be locked once a lab exam starts.</strong> If you are late to the exam, you will not be able to enter the classroom.</li>
+      </ul>
+
+      <h3>Engagement</h3>
+      <ul>
+        <li>You will be placed on a team that should remain the same for the duration of the term. I reserve the right to move you to a different team if needed, but will try not to.</li>
+        <li>Active participation in discussions, group activities, and forums is required. Your grade depends on both your individual prep and your ability to contribute to a team.</li>
+        <li>Complete all pre-work and come prepared so everyone can benefit from your contribution.</li>
+      </ul>
+
+      <h3>Assignments</h3>
+      <ul>
+        <li>All graded assignments must be completed and submitted by their posted deadlines. <strong>Late submissions and make-up assignments are not accepted.</strong></li>
+        <li>Most assignments are released at the start of each module and due on the day of the corresponding assessment. Delaying work until the last minute risks technical issues and incomplete submissions. Begin assignments early.</li>
+        <li>Many assignments are recommended but not graded. They are designed to support mastery. Choosing not to complete them may affect your level of understanding and your performance, even though they do not directly count toward your grade.</li>
+        <li><strong>This is a mastery-based course.</strong> Simply attending class or completing assignments does not guarantee success. Strong performance requires active engagement and demonstrated understanding. Minor assignments cannot compensate for poor performance on exams or TBL.</li>
+        <li>Work collaboratively during designated group activities. Respect diverse viewpoints and contribute equally.</li>
+      </ul>
+
+      <h3>Dropping the class</h3>
+      <p>It is ultimately your responsibility to drop this class if you decide not to attend. Take full responsibility if you wish to drop or withdraw. <strong>Do not assume I will take care of it for you</strong>, irrespective of the instructor's prerogative to drop a student for absences. Failure to formally take care of this can lead to an unfortunate and unnecessary "F" grade. If you choose to take a "W" instead of an "F," ensure you drop the course.</p>
+    </section>
+
+    <section id="grading">
+      <h2>Grading Structure</h2>
+      <div class="section-rule"></div>
+
+      <p>Your grade is based on three components:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Detail</th>
+              <th style="text-align: right;">Weight</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Team-Based Learning (TBL)</strong></td>
+              <td>8 TBLs total (one per week). <strong>Lowest score dropped at end of term.</strong> Use them or skip wisely, you only get one drop.</td>
+              <td class="weight-pct">40%</td>
+            </tr>
+            <tr>
+              <td><strong>Lab Practical Exams</strong></td>
+              <td>7 lab exams: 6 module exams plus 1 cumulative lab exam at the end of the term.</td>
+              <td class="weight-pct">50%</td>
+            </tr>
+            <tr>
+              <td><strong>End-of-Day Lab Quizzes</strong></td>
+              <td>Community accountability format: one randomly selected student answers a single question for the whole class. Everyone earns the same score.</td>
+              <td class="weight-pct">10%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-gold">
+        <strong>Note:</strong> This summer format does not include separate lecture exams. The TBL system, with its iRAT and tRAT structure, serves as the assessment of lecture material. Application of clinical reasoning is built directly into the TBL workflow.
+      </div>
+
+      <h3>Grading scale</h3>
+      <div class="grade-scale" role="presentation">
+        <div class="grade-cell">
+          <span class="grade-cell-letter">A</span>
+          <span class="grade-cell-range">89.5 to 100%</span>
+        </div>
+        <div class="grade-cell">
+          <span class="grade-cell-letter">B</span>
+          <span class="grade-cell-range">79.5 to 89.4%</span>
+        </div>
+        <div class="grade-cell">
+          <span class="grade-cell-letter">C</span>
+          <span class="grade-cell-range">69.5 to 79.4%</span>
+        </div>
+        <div class="grade-cell">
+          <span class="grade-cell-letter">D</span>
+          <span class="grade-cell-range">59.5 to 69.4%</span>
+        </div>
+        <div class="grade-cell">
+          <span class="grade-cell-letter">F</span>
+          <span class="grade-cell-range">0 to 59.4%</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="calculator">
+      <h2>Grade Calculator</h2>
+      <div class="section-rule"></div>
+      <p>Estimate your current standing in the course. All averages should be entered as percentages out of 100. Leave fields blank to exclude them.</p>
+
+      <div class="calc">
+        <div class="calc-header">
+          <div class="calc-icon" aria-hidden="true">%</div>
+          <h3>Current standing estimator</h3>
+        </div>
+
+        <div class="calc-grid">
+          <div class="calc-field">
+            <label for="tbl-avg">TBL average (40%)</label>
+            <input type="number" id="tbl-avg" min="0" max="100" step="0.1" placeholder="e.g., 84" inputmode="decimal" aria-describedby="tbl-hint">
+            <div class="calc-field-hint" id="tbl-hint">Average of your 7 best TBLs after the drop</div>
+          </div>
+          <div class="calc-field">
+            <label for="lab-avg">Lab exam average (50%)</label>
+            <input type="number" id="lab-avg" min="0" max="100" step="0.1" placeholder="e.g., 78" inputmode="decimal" aria-describedby="lab-hint">
+            <div class="calc-field-hint" id="lab-hint">Average across the lab exams you have taken so far</div>
+          </div>
+          <div class="calc-field">
+            <label for="quiz-avg">Lab quiz average (10%)</label>
+            <input type="number" id="quiz-avg" min="0" max="100" step="0.1" placeholder="e.g., 90" inputmode="decimal" aria-describedby="quiz-hint">
+            <div class="calc-field-hint" id="quiz-hint">Average across all completed end-of-day lab quizzes</div>
+          </div>
+        </div>
+
+        <div class="calc-result" role="status" aria-live="polite" aria-atomic="true">
+          <div>
+            <div class="calc-result-label">Weighted total</div>
+            <div class="calc-result-value" id="result-pct">--</div>
+          </div>
+          <div>
+            <div class="calc-result-label">Letter grade</div>
+            <div class="calc-result-value">
+              <span class="calc-result-grade" id="result-letter">--</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted" style="font-size: 0.82rem; margin-top: 16px; margin-bottom: 0;">This calculator is a personal estimation tool. Your official grade is recorded in Canvas.</p>
+      </div>
+    </section>
+
+    <section id="assessments">
+      <h2>Assessment Details</h2>
+      <div class="section-rule"></div>
+
+      <details>
+        <summary>Team-Based Learning (TBL)</summary>
+        <div class="details-body">
+          <p>TBL assessments link course material to clinical problems and concepts. They encourage consistent preparation and active engagement with problem-based learning. Each TBL focuses on a clinical case that integrates the anatomy of the week.</p>
+
+          <h4>Each TBL has two graded components</h4>
+          <ul>
+            <li><strong>iRAT</strong> (Individual Readiness Assessment Test): a 10 to 15 question individual quiz assessing basic preparation. <em>Weighted 3x.</em></li>
+            <li><strong>tRAT</strong> (Team Readiness Assessment Test): the same quiz, taken with your team. <em>Weighted 1x.</em></li>
+          </ul>
+          <p>Following the tRAT, students work collaboratively on problem-solving and application questions. Discussion is strongly encouraged. These application questions are not graded, in order to encourage open discussion. However, every student is expected to understand and be able to explain the rationale for application answers if called upon.</p>
+
+          <h4>Scoring</h4>
+          <ul>
+            <li>Each quiz is 10 points.</li>
+            <li>iRAT: 10 points x 3 = 30 points</li>
+            <li>tRAT: 10 points x 1 = 10 points</li>
+            <li><strong>Total possible per TBL: 40 points</strong></li>
+          </ul>
+
+          <h4>Example</h4>
+          <ul>
+            <li>iRAT: 7 of 10 = 21 points</li>
+            <li>tRAT: 9 of 10 = 9 points</li>
+            <li>Total: 30 of 40 = 75%</li>
+          </ul>
+
+          <p>This weighting heavily emphasizes individual performance to encourage personal preparation rather than reliance on team members. The iRAT alone accounts for 75% of your TBL grade. Most teams score 90% or higher on the tRAT, so your individual iRAT scores largely determine your final TBL outcome.</p>
+
+          <div class="callout callout-terra">
+            <strong>TBL assessments cannot be made up. No exceptions.</strong> The lowest TBL score will be dropped at the end of the term. Use this drop wisely.
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Lab Practical Exams</summary>
+        <div class="details-body">
+          <p>There are 7 lab practical exams: 6 module exams plus 1 cumulative lab exam at the end of the term. Exams consist of short answer and fill-in-the-blank questions, in which you will identify anatomy from microscope slides, pictures, charts, anatomical models, and human dissections.</p>
+
+          <h4>Format</h4>
+          <ul>
+            <li>Approximately 50 to 60 questions per exam</li>
+            <li>You rotate through stations on a timer</li>
+            <li>Each station has 2 questions</li>
+            <li>You have <strong>90 seconds per station</strong></li>
+            <li>Remain at each station until told to move</li>
+          </ul>
+
+          <h4>Exam conduct</h4>
+          <ul>
+            <li><strong>Spelling counts.</strong> Bring your favorite pen(s). Pencils are not permitted.</li>
+            <li>Do <strong>not</strong> look around the room or at other stations while at your station.</li>
+            <li>Fold your paper in half so your answers are covered. Look at the wall or the table.</li>
+            <li>Failure to comply will result in collection of your exam, graded as is.</li>
+            <li><strong>No makeup lab practicals will be given.</strong></li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Cumulative Lab Exam</summary>
+        <div class="details-body">
+          <p>During the final week of the term, you will complete one cumulative lab exam, which counts as your seventh lab exam grade.</p>
+
+          <h4>Partial grade improvement</h4>
+          <p>The cumulative exam provides an opportunity for partial grade improvement on previous module lab exams. If your score on the cumulative is higher than your score on a prior module lab exam, I will apply <strong>50% of the improvement</strong> to the corresponding earlier exam. The original exam grade is not replaced.</p>
+
+          <h4>Example</h4>
+          <p>If you earned a 40% on Lab Exam 1 and an 80% on the cumulative lab exam, the improvement is 40 percentage points. Half of that improvement (20 points) is added to your original score, raising it to 60%.</p>
+
+          <p>The cumulative exam includes equal representation of material from each module and is comprehensive. This structure is intentional and is designed to ensure continued engagement with all course content.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>End-of-Day Lab Quizzes</summary>
+        <div class="details-body">
+          <p>End-of-day lab quizzes use a <strong>community accountability format</strong>. The mechanism is intentionally designed to make lab time a real collaborative work session, not parallel solo study.</p>
+
+          <h4>How it works</h4>
+          <ul>
+            <li>At the end of nearly every lab session, I ask <strong>one person in one randomly selected group</strong> a single quiz question covering material from that day's lab period.</li>
+            <li><strong>The entire class earns the same score</strong> based on that one student's answer. Each quiz is worth 3 points.</li>
+            <li>You do not know in advance who will be called on or which group will be selected.</li>
+          </ul>
+
+          <h4>What this means for you</h4>
+          <p>Your lab quiz grade depends on the readiness of every student in the room, not just yourself. If everyone uses lab time well, the selected student knows the answer and the class earns full credit. If any student has not engaged with the material, that student could be the one called on, and the whole class loses points.</p>
+
+          <div class="callout callout-terra">
+            <strong>Show up for each other. Put the work in during lab.</strong> Help your group members understand the material as you go. This mechanism rewards collective preparation and penalizes isolated effort. Lab time is collaborative time by design.
+          </div>
+
+          <h4>Attendance and scoring</h4>
+          <ul>
+            <li>Students present during a lab quiz earn the class score for that quiz.</li>
+            <li>Students absent during a lab quiz earn a zero for that quiz, per the no-makeup attendance policy.</li>
+            <li>There are no dropped lab quiz scores at the end of the term.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Depth of Knowledge (DOK) levels</summary>
+        <div class="details-body">
+          <p>My goal is to help you learn anatomy in a way that prepares you for real-world healthcare applications, not just memorization. Exam and assignment questions are structured using different Depth of Knowledge levels. Most assessment questions will be DOK 2 and DOK 3.</p>
+
+          <div class="dok-table">
+            <div class="dok-row">
+              <span>Level</span>
+              <span>Type</span>
+              <span>How you will use it</span>
+              <span>Weight</span>
+            </div>
+            <div class="dok-row">
+              <span><strong>DOK 1</strong></span>
+              <span>Basic recall</span>
+              <span>Naming structures, defining terms, simple labeling. Helpful for learning the material early on.</span>
+              <span>~10%</span>
+            </div>
+            <div class="dok-row">
+              <span><strong>DOK 2</strong></span>
+              <span>Skills &amp; concepts</span>
+              <span>Applying knowledge to identify relationships, structures in context, or interpreting images.</span>
+              <span>~40 to 50%</span>
+            </div>
+            <div class="dok-row">
+              <span><strong>DOK 3</strong></span>
+              <span>Strategic thinking</span>
+              <span>Solving clinical problems, justifying answers, predicting the impact of injuries. Requires explanation and reasoning.</span>
+              <span>~40 to 50%</span>
+            </div>
+            <div class="dok-row">
+              <span><strong>DOK 4</strong></span>
+              <span>Extended thinking</span>
+              <span>Optional in this course. Used in bonus, advanced, or optional integrative projects across systems.</span>
+              <span>~0 to 10%</span>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Make-up &amp; late work policy</summary>
+        <div class="details-body">
+          <ul>
+            <li>You must complete all quizzes, discussion boards, exams, lab reports, and other assignments by the scheduled due date.</li>
+            <li><strong>There are no make-ups, no late work accepted.</strong></li>
+            <li>All in-class assessments must be completed in person. If you are absent, you earn a zero. No make-ups, no exceptions.</li>
+            <li>Lab quizzes follow the community accountability format described above and are unannounced. The key: do not miss class.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section id="scholar">
+      <h2>Scholar Points (Up to 3.0% Bonus)</h2>
+      <div class="section-rule"></div>
+      <p>Scholar Points are an academic incentive designed to reward proactive learning behaviors and academic competence. These points are not extra credit for missed work. They are a structured way to recognize consistent effort and performance across the term.</p>
+
+      <h3>How to earn Scholar Points</h3>
+      <p>The 3.0% bonus has two requirements. <strong>The 1% academic performance bump is only awarded when paired with completed tutoring hours.</strong> Strong grades alone do not earn the bump. Tutoring is the gateway.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Requirement</th>
+              <th>Details</th>
+              <th>Bonus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tutoring engagement</td>
+              <td>Complete <strong>18 verified hours</strong> of tutoring, study sessions, or academic support across the 8-week term. Use approved on-campus tutors. Hours must be documented and verifiable.</td>
+              <td>2.0%</td>
+            </tr>
+            <tr>
+              <td>Academic performance <em>(only when paired with tutoring)</em></td>
+              <td>Maintain an average of <strong>80% or higher</strong> across lab exams, lab quizzes, and TBL activities. This bump is only awarded if you also complete the 18 tutoring hours above.</td>
+              <td>1.0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Tutoring guidelines</h3>
+      <ul>
+        <li>Use on-campus tutoring with an approved embedded tutor. I will provide names of students who have taken this class and would be especially useful.</li>
+        <li>Hours must be logged and verifiable. I will total them at the end of the term.</li>
+        <li>Target: <strong>3 hours per week for at least 6 weeks</strong>, totaling 18 hours.</li>
+        <li>You may attend more than 3 hours in a given week, but I will count <strong>a maximum of 3 hours per week</strong> toward the 18 hour requirement. This ensures tutoring is spread across at least 6 weeks rather than crammed into the last two.</li>
+      </ul>
+
+      <h3>Additional bonus points</h3>
+      <p>In addition to the 3.0% scholar bonus, you may earn up to <strong>25 additional scholar points</strong> added to your final point total. These come from two self-directed sources:</p>
+      <ol>
+        <li><strong>End-of-day lab challenge questions:</strong> 1 point per correct answer. These help offset a bad night, but cannot replace a missed lab. You are still allowed only 3 absences before being dropped.</li>
+        <li><strong>Community Rounds participation:</strong> Host or attend peer-led review sessions (see below for the mechanism).</li>
+      </ol>
+      <p>The 25 point cap applies across both sources combined.</p>
+
+      <div class="callout callout-terra">
+        <strong>No additional extra credit will be given in this course.</strong> Scholar Points are your only path to any extra credit. <strong>Please do not ask. No exceptions.</strong>
+      </div>
+
+      <h3>Community Rounds, peer-led learning</h3>
+      <p>Community Rounds are student-organized review sessions that you run for each other outside of class time. Examples: a peer-led Zoom session drilling spiral lab ID, a Saturday Kahoot game covering recent module content, a small study circle working through TBL prep together. The goal is to build the kind of mutual support that healthcare programs depend on, while reinforcing material through teaching and active recall.</p>
+
+      <div class="callout callout-gold">
+        <strong>This is fully peer-organized.</strong> I do not schedule, host, or attend these sessions. Students design them, invite each other, and run them. The Canvas "Community Rounds" discussion thread is the central record.
+      </div>
+
+      <h4>How it works</h4>
+      <ul>
+        <li><strong>Hosting:</strong> Post your session in the Canvas "Community Rounds" thread at least 24 hours in advance, with the date, format (Zoom, Kahoot, in-person), topic, and how to join.</li>
+        <li><strong>After hosting:</strong> Reply to your own announcement post with a short session log: who attended (names or count), what was covered, and any resource link (Kahoot code, slide link, etc.).</li>
+        <li><strong>Attending:</strong> Reply in the announcement thread after the session: "Attended on [date]. One thing I'll remember: [one sentence]."</li>
+        <li>Sessions must be open to the class (posted to the thread). Private group sessions do not qualify.</li>
+      </ul>
+
+      <h4>Points</h4>
+      <ul>
+        <li><strong>Hosting a Community Round:</strong> 3 points per session</li>
+        <li><strong>Attending a Community Round:</strong> 1 point per session</li>
+        <li>Counted toward the 25 point supplemental pool described above.</li>
+      </ul>
+
+      <p>The Canvas thread is the artifact. I review it at the end of the term and total the points. No separate forms, no logs to submit. Run sessions, post in the thread, get credit.</p>
+
+      <div class="callout">
+        <strong>Important notes.</strong> Scholar Points are not retroactive and cannot replace missed assignments or exams. They are earned through both intentional effort and sustained academic performance. The maximum bonus is 3.0%, applied at the end of the term. You will see it reflected in your final grade, but it will not show on Canvas.
+      </div>
+    </section>
+
+    <section id="schedule">
+      <h2>8-Week Schedule</h2>
+      <div class="section-rule"></div>
+      <p>The course is divided into 8 weeks. Each week pairs a clinical TBL case with the corresponding system. Lab practical exams take place on <strong>Thursdays</strong>. The schedule below is the planned structure and may be adjusted with advance notice.</p>
+
+      <div class="callout callout-gold">
+        <strong>Reading the schedule.</strong> The "TBL case" is the clinical anchor for that week's content. The "Lab Exam" listed for a given week tests the previous week's lab content (one week behind to allow time for study). The cumulative exam in week 8 covers all systems studied across the term.
+      </div>
+
+      <div id="schedule-list">
+
+        <article class="week-card" data-week="1" data-start="2026-06-15" data-end="2026-06-18">
+          <div class="week-num">
+            <span class="week-num-big">1</span>
+            <span class="week-num-label">Week</span>
+          </div>
+          <div class="week-content">
+            <h3>Body organization, cells, tissues, integumentary</h3>
+            <p class="week-dates">June 15 to 18, 2026, M, T, W, Th</p>
+            <p class="mb-0">Course orientation, anatomical terminology, microscopy intro, the four tissue types, integumentary system anatomy. The integumentary system is your introduction to identifying structures clinically.</p>
+            <div class="week-tags">
+              <span class="tag tag-tbl">TBL 1, Stevens-Johnson Syndrome / Toxic Epidermal Necrolysis</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="week-card" data-week="2" data-start="2026-06-22" data-end="2026-06-25">
+          <div class="week-num">
+            <span class="week-num-big">2</span>
+            <span class="week-num-label">Week</span>
+          </div>
+          <div class="week-content">
+            <h3>Skeletal system</h3>
+            <p class="week-dates">June 22 to 25, 2026, M, T, W, Th</p>
+            <p class="mb-0">Bone tissue, axial skeleton, appendicular skeleton, joints. Lab focus on bone identification and joint articulation.</p>
+            <div class="week-tags">
+              <span class="tag tag-tbl">TBL 2, Osteogenesis Imperfecta</span>
+              <span class="tag tag-exam">Lab Exam 1, Cells, Tissues, Integumentary</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="week-card" data-week="3" data-start="2026-06-29" data-end="2026-07-02">
+          <div class="week-num">
+            <span class="week-num-big">3</span>
+            <span class="week-num-label">Week</span>
+          </div>
+          <div class="week-content">
+            <h3>Muscular system</h3>
+            <p class="week-dates">June 29 to July 2, 2026, M, T, W, Th</p>
+            <p class="mb-0">Muscle tissue types, skeletal muscle anatomy, the neuromuscular junction, major muscle groups. Lab includes NMJ drawing and muscle origin/insertion identification.</p>
+            <div class="week-tags">
+              <span class="tag tag-tbl">TBL 3, Marfan Syndrome</span>
+              <span class="tag tag-exam">Lab Exam 2, Skeletal</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="week-card" data-week="4" data-start="2026-07-06" data-end="2026-07-09">
+          <div class="week-num">
+            <span class="week-num-big">4</span>
+            <span class="week-num-label">Week</span>
+          </div>
+          <div class="week-content">
+            <h3>Nervous system &amp; special senses</h3>
+            <p class="week-dates">July 6 to 9, 2026, M, T, W, Th</p>
+            <p class="mb-0">Central and peripheral nervous system, brain anatomy, cranial nerves, special senses (eye, ear).</p>
+            <div class="week-tags">
+              <span class="tag tag-tbl">TBL 4, Normal Pressure Hydrocephalus</span>
+              <span class="tag tag-exam">Lab Exam 3, Muscular</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="week-card" data-week="5" data-start="2026-07-13" data-end="2026-07-16">
+          <div class="week-num">
+            <span class="week-num-big">5</span>
+            <span class="week-num-label">Week</span>
+          </div>
+          <div class="week-content">
+            <h3>Cardiovascular system, heart &amp; blood</h3>
+            <p class="week-dates">July 13 to 16, 2026, M, T, W, Th</p>
+            <p class="mb-0">Heart anatomy, cardiac chambers and valves, conduction system, blood components.</p>
+            <div class="week-tags">
+              <span class="tag tag-tbl">TBL 5, Tetralogy of Fallot</span>
+              <span class="tag tag-exam">Lab Exam 4, Nervous System &amp; Special Senses</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="week-card" data-week="6" data-start="2026-07-20" data-end="2026-07-23">
+          <div class="week-num">
+            <span class="week-num-big">6</span>
+            <span class="week-num-label">Week</span>
+          </div>
+          <div class="week-content">
+            <h3>Vessels, lymphatic, respiratory</h3>
+            <p class="week-dates">July 20 to 23, 2026, M, T, W, Th</p>
+            <p class="mb-0">Major arteries and veins, lymphatic anatomy, respiratory system gross anatomy and histology.</p>
+            <div class="week-tags">
+              <span class="tag tag-tbl">TBL 6, Sickle Cell Disease</span>
+              <span class="tag tag-exam">Lab Exam 5, Heart &amp; Blood</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="week-card" data-week="7" data-start="2026-07-27" data-end="2026-07-30">
+          <div class="week-num">
+            <span class="week-num-big">7</span>
+            <span class="week-num-label">Week</span>
+          </div>
+          <div class="week-content">
+            <h3>Digestive &amp; urinary systems</h3>
+            <p class="week-dates">July 27 to 30, 2026, M, T, W, Th</p>
+            <p class="mb-0">GI tract anatomy from mouth to anus, accessory digestive organs, kidney and urinary tract anatomy.</p>
+            <div class="week-tags">
+              <span class="tag tag-tbl">TBL 7, Hirschsprung Disease</span>
+              <span class="tag tag-exam">Lab Exam 6, Vessels, Lymphatic, Respiratory</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="week-card" data-week="8" data-start="2026-08-03" data-end="2026-08-06">
+          <div class="week-num">
+            <span class="week-num-big">8</span>
+            <span class="week-num-label">Week</span>
+          </div>
+          <div class="week-content">
+            <h3>Reproductive &amp; endocrine, cumulative review</h3>
+            <p class="week-dates">August 3 to 6, 2026, M, T, W, Th</p>
+            <p class="mb-0">Male and female reproductive anatomy, endocrine glands, cumulative review of all systems studied.</p>
+            <div class="week-tags">
+              <span class="tag tag-tbl">TBL 8, Polycystic Kidney Disease</span>
+              <span class="tag tag-cum">Lab Exam 7, Cumulative, all systems</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="callout" style="margin-top: 24px;">
+        <strong>Schedule changes.</strong> We will follow this schedule, but occasionally a change may make sense, such as a shifted exam time, an extended due date, or adjusted point values. If you miss a class meeting, check with classmates for any announcements. Exam dates are unlikely to change unless there are extenuating circumstances.
+      </div>
+    </section>
+
+    <section id="integrity">
+      <h2>Academic Integrity</h2>
+      <div class="section-rule"></div>
+      <p>Academic dishonesty, cheating, and plagiarism will not be tolerated. Such activities will result in at least an "F" (0 points) on the work in question and may result in an "F" for the course. All such activities will be reported to the V.P. of Student Services for disciplinary action.</p>
+      <ul>
+        <li>Complete your own work.</li>
+        <li>Cite sources and references according to MLA or APA format.</li>
+        <li>If you need assistance with citing your sources, please ask for help.</li>
+        <li>Do not cheat or participate in academic dishonesty. All suspected violations will be subject to a zero on the assignment and the appropriate disciplinary action.</li>
+        <li>Reference your Student Handbook for your Rights and Responsibilities.</li>
+        <li>Any violation of academic integrity will result in a zero on the exam or assignment.</li>
+      </ul>
+    </section>
+
+    <section id="ai-policy">
+      <h2>AI Policy</h2>
+      <div class="section-rule"></div>
+      <p>The World Economic Forum defines generative AI as "a category of artificial intelligence (AI) algorithms that generate new outputs based on the data they have been trained on. Unlike traditional AI systems that are designed to recognize patterns and make predictions, generative AI creates new content in the form of images, text, audio, and more." I may use AI detection tools to screen student work in this class. Please discuss any questions or concerns about these tools with me.</p>
+
+      <h3>When AI is allowed</h3>
+      <p>You will be taught some powerful ways to use AI to your advantage in this course. There will be occasional assignments that you can complete using AI. They will be designated as such in the assignment title or details. You may use AI to help with tutoring yourself or creating study sheets, and I highly recommend you do so.</p>
+
+      <h3>When AI is not allowed</h3>
+      <ul>
+        <li>You may <strong>not</strong> turn in any graded assignment after having used AI (or Grammarly) unless the assignment is designated as AI-allowed.</li>
+        <li>You may <strong>only</strong> use AI for AI-designated graded assignments and anything else that is not graded.</li>
+        <li>You may <strong>not</strong> use AI for exams or graded portions of TBL.</li>
+        <li>Any plagiarism or AI-detection rating on graded assignments above <strong>25%</strong> will earn an automatic zero.</li>
+        <li>If you are unsure whether a tool or website is a generative AI tool, or whether it is permitted on a specific assignment, contact me for clarification before submitting your work.</li>
+      </ul>
+      <p>See the AI Honor Contract for additional requirements.</p>
+    </section>
+
+    <section id="digital-devices">
+      <h2>Digital Device Policy</h2>
+      <div class="section-rule"></div>
+      <p>The use of digital devices in the anatomy laboratory is strictly regulated due to ethical, legal, and professional obligations associated with working with human cadavers. To protect donor dignity, privacy, and institutional compliance, unauthorized use of phones, cameras, smart devices, or recording technology is prohibited in the lab at all times.</p>
+
+      <p>All students are required to read, sign, and comply with the full Digital Device Policy as a condition of enrollment. You will be held fully accountable to the terms outlined in the signed policy. Violations may result in immediate removal from the course and further disciplinary action.</p>
+
+      <p>This policy is non-negotiable and reflects standards expected in clinical, educational, and professional healthcare environments where confidentiality and ethical conduct are mandatory.</p>
+
+      <p>Students under the age of 18 must sign the policy, and a parent or legal guardian must also sign before the student is permitted to participate in laboratory activities.</p>
+    </section>
+
+    <section id="teams">
+      <h2>Working with Your Team</h2>
+      <div class="section-rule"></div>
+      <p>Team-Based Learning depends on your ability to communicate regularly with your group outside of class. Establishing clear communication early helps you stay organized, support each other, and succeed together.</p>
+
+      <h3>Get started</h3>
+      <ol>
+        <li><strong>Exchange contact information.</strong> Trade emails, phone numbers, and any other preferred points of contact. Be clear about the best times and days to reach you and your preferred response window.</li>
+        <li><strong>Choose a communication platform.</strong> As a team, decide how you will stay in touch. Options include Canvas messages or threads, group text or email, Discord, WhatsApp, GroupMe, or Slack. Choose one that works for everyone.</li>
+      </ol>
+      <p><strong>Confirm your team's communication platform by the end of class on the first day.</strong></p>
+
+      <h3>Respect, safety, accountability</h3>
+      <ul>
+        <li>Share contact information responsibly. Use all communication tools for class-related purposes only.</li>
+        <li>Respect your peers' time, privacy, and boundaries.</li>
+        <li>Ignoring messages is not an option. If you are part of a group, you are expected to respond to team communications in a timely and professional manner.</li>
+        <li>If you drop the course or stop participating, remove yourself from any group communication platforms out of courtesy to your team.</li>
+      </ul>
+    </section>
+
+    <section id="dates">
+      <h2>Critical Dates</h2>
+      <div class="section-rule"></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Milestone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>June 15, 2026</strong></td>
+              <td>Section start date, first day of class</td>
+            </tr>
+            <tr>
+              <td>June 19, 2026</td>
+              <td>Juneteenth (Friday), no class day, no impact on M-Th schedule</td>
+            </tr>
+            <tr>
+              <td>July 3, 2026</td>
+              <td>Independence Day observed (Friday), no class day, no impact on M-Th schedule</td>
+            </tr>
+            <tr>
+              <td><strong>August 3 to 6, 2026</strong></td>
+              <td>Final week, cumulative lab exam</td>
+            </tr>
+            <tr>
+              <td><strong>August 7, 2026</strong></td>
+              <td>Section end date</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-muted" style="font-size: 0.9rem;">Add, drop, and withdrawal deadlines for the summer term will be posted by the SCC Admissions Office. Confirm these dates in your Self-Service portal early in the term.</p>
+    </section>
+
+    <section id="accommodations">
+      <h2>Accommodations &amp; Inclusive Learning</h2>
+      <div class="section-rule"></div>
+      <p>Your success in this class is important to me. We all need accommodations because we all learn differently. If there are aspects of this course that prevent you from learning or that exclude you, please let me know as soon as possible. Together we will develop strategies to meet your needs and ensure that you meet the academic standards and requirements of the course. You are also encouraged to visit the Disabilities Services Program to determine how you could improve your learning. If you need official accommodations, you have a right to have these met. There is also a range of resources on campus, including the Academic Success and Tutoring Center.</p>
+
+      <h3>Accessibility Services Center</h3>
+      <p>If you have a disability and might need accommodations in this class, please contact the Disability Services Program as soon as possible to ensure that you receive the accommodations in a timely manner. You may also discuss your need for accommodations with me.</p>
+
+      <p>As part of Solano Community College, you have an important role in helping ensure your educational needs are met. The Accessibility Services Center (ASC) is here to assist you by providing appropriate accommodations, such as extra time on tests or the use of specialized technology. The appropriate accommodations will be determined as you speak with your ASC counselor.</p>
+
+      <p>You have a responsibility to inform your instructors of your approved accommodations during the first week you attend classes, and to provide the appropriate forms to arrange necessary services throughout the term. You can do this by accessing accommodations in Clockwork at <a class="inline-link" href="https://clockwork.solano.edu" target="_blank" rel="noopener">clockwork.solano.edu</a>, or with your counselor when meeting about accommodations. It is highly recommended that you make an appointment with each of your instructors to discuss your accommodations and any other disability-related concerns. Minimally, check with your instructors to make sure they received your accommodations. You are expected to meet all academic standards instructors have set, with the benefit of decided-upon accommodations.</p>
+
+      <p>The ASC office is located on the Fairfield campus in Building 400, room 407. Contact ASC at (707) 864-7136 or <a class="inline-link" href="mailto:ASC@solano.edu" target="_top">ASC@solano.edu</a>. More information at <a class="inline-link" href="https://welcome.solano.edu/asc-students/" target="_blank" rel="noopener">welcome.solano.edu/asc-students</a>.</p>
+    </section>
+
+    <section id="tips">
+      <h2>Tips for Success</h2>
+      <div class="section-rule"></div>
+      <p>Anatomy is a challenging course, and the 8-week intensive amplifies that. There is no sugar-coating it. By the end, you will be amazed at how much you have learned and how far your critical thinking and study skills have come. Expect obstacles, and know that you can overcome them with the right strategies.</p>
+
+      <h3>This is not a passive class</h3>
+      <p>To succeed, you need more than watching lectures and skimming the textbook. Passive learning is not enough, especially in summer. Students who treat anatomy like a lecture-based memorize-and-regurgitate course often find themselves surprised by exam scores that do not match their effort.</p>
+      <p><strong>The truth:</strong> Success requires active engagement, consistent effort, and strategic study methods.</p>
+
+      <h3>Build &amp; use learning tools</h3>
+      <p>Be creative. Be resourceful. Use the tools I provide and learn how to build your own. Successful students often make:</p>
+      <ul>
+        <li>Color-coded diagrams</li>
+        <li>Concept maps</li>
+        <li>Flashcards and apps like Anki</li>
+        <li>Study sheets that compare and contrast structures or processes</li>
+        <li>Self-quizzes or practice questions they design themselves</li>
+      </ul>
+
+      <h3>The secret sauce: less prep, more recall</h3>
+      <p>Memorization matters in anatomy, but visuals matter too. Recall is the goal. Too many students spend 90% of their study time preparing (retyping notes, organizing folders, rewatching lectures) and only 10% testing themselves.</p>
+      <div class="callout callout-gold">
+        <strong>Recommended rule:</strong> 20% prep, 80% active recall. If your study time is not giving you the grades you expect, examine how you are spending that time. Quantity matters, but quality matters more.
+      </div>
+
+      <h3>Learn how to learn</h3>
+      <p>If you are struggling, do not just try harder, try smarter. Use the learning resources posted in Canvas. Explore how successful learners study when the material is fast-paced and high-stakes. That is a skill that will serve you in this course and in every professional program that follows.</p>
+
+      <h3>Attitude &amp; accountability</h3>
+      <p>A positive, respectful attitude goes a long way. Avoid complaining about the class, the professor, the material, or your group. It erodes morale, yours and others'.</p>
+      <ul>
+        <li>Stay solution-focused.</li>
+        <li>Be respectful of your peers' time and contributions.</li>
+        <li>Carry your weight in group activities.</li>
+        <li>Support one another, and expect the same in return.</li>
+        <li>Stop negative, unproductive talk when you hear it.</li>
+      </ul>
+      <p>You will spend the next 8 weeks learning together. Treat each other like teammates, because that is what you are.</p>
+
+      <h3>Your grade does not define your worth</h3>
+      <p>Let me be clear: your grade is feedback, not a verdict. It is one data point in your journey, not the sum of who you are. If you fall short of your expectations, do not give up. Adjust your approach, ask for help, and try again.</p>
+      <p>Comparison is the enemy of progress. Focus on your growth.</p>
+      <p style="font-style: italic; font-family: 'Lora', Georgia, serif; font-size: 1.08rem; color: var(--terra); margin-top: 18px;">You belong here. Keep showing up, and keep going. I am here to support you. Your crew is here for you too.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <p><strong>BIO 004 Human Anatomy, Summer 2026, Solano Community College</strong></p>
+  <p>Dr. Sharilyn Rennie, sharilyn.rennie@solano.edu</p>
+  <p>This syllabus is a guide. Course details may be updated with advance notice via Canvas Announcements.</p>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  var printBtn = document.getElementById('print-btn');
+  if (printBtn) {
+    printBtn.addEventListener('click', function() { window.print(); });
+  }
+
+  var expandBtn = document.getElementById('expand-all');
+  var collapseBtn = document.getElementById('collapse-all');
+  if (expandBtn) {
+    expandBtn.addEventListener('click', function() {
+      document.querySelectorAll('details').forEach(function(d) { d.open = true; });
+    });
+  }
+  if (collapseBtn) {
+    collapseBtn.addEventListener('click', function() {
+      document.querySelectorAll('details').forEach(function(d) { d.open = false; });
+    });
+  }
+
+  var sections = document.querySelectorAll('main section[id]');
+  var navLinks = document.querySelectorAll('.sidenav a');
+  var linkMap = {};
+  navLinks.forEach(function(a) {
+    var href = a.getAttribute('href');
+    if (href && href.indexOf('#') === 0) {
+      linkMap[href.slice(1)] = a;
+    }
+  });
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var id = entry.target.id;
+        var link = linkMap[id];
+        if (!link) return;
+        if (entry.isIntersecting) {
+          navLinks.forEach(function(l) { l.classList.remove('is-active'); });
+          link.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+    sections.forEach(function(s) { observer.observe(s); });
+  }
+
+  function highlightCurrentWeek() {
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var cards = document.querySelectorAll('.week-card');
+    cards.forEach(function(card) {
+      var start = new Date(card.dataset.start);
+      var end = new Date(card.dataset.end);
+      end.setHours(23, 59, 59, 999);
+      if (today >= start && today <= end) {
+        card.classList.add('is-current');
+        card.setAttribute('aria-current', 'true');
+      }
+    });
+  }
+  highlightCurrentWeek();
+
+  var tblInput = document.getElementById('tbl-avg');
+  var labInput = document.getElementById('lab-avg');
+  var quizInput = document.getElementById('quiz-avg');
+  var resultPct = document.getElementById('result-pct');
+  var resultLetter = document.getElementById('result-letter');
+
+  function clampNum(v) {
+    if (v === '' || v === null || v === undefined) return null;
+    var n = parseFloat(v);
+    if (isNaN(n)) return null;
+    if (n < 0) return 0;
+    if (n > 100) return 100;
+    return n;
+  }
+
+  function letterFor(pct) {
+    if (pct >= 89.5) return 'A';
+    if (pct >= 79.5) return 'B';
+    if (pct >= 69.5) return 'C';
+    if (pct >= 59.5) return 'D';
+    return 'F';
+  }
+
+  function recalc() {
+    var weights = { tbl: 40, lab: 50, quiz: 10 };
+    var values = {
+      tbl: clampNum(tblInput.value),
+      lab: clampNum(labInput.value),
+      quiz: clampNum(quizInput.value)
+    };
+    var totalWeight = 0;
+    var weightedSum = 0;
+    Object.keys(values).forEach(function(k) {
+      if (values[k] !== null) {
+        weightedSum += values[k] * weights[k];
+        totalWeight += weights[k];
+      }
+    });
+    if (totalWeight === 0) {
+      resultPct.textContent = '--';
+      resultLetter.textContent = '--';
+      return;
+    }
+    var pct = weightedSum / totalWeight;
+    resultPct.textContent = pct.toFixed(1) + '%';
+    resultLetter.textContent = letterFor(pct);
+  }
+
+  [tblInput, labInput, quizInput].forEach(function(el) {
+    if (el) el.addEventListener('input', recalc);
+  });
+  recalc();
+
+  function sendHeight() {
+    try {
+      var height = document.documentElement.scrollHeight;
+      var id = window.frameElement ? window.frameElement.id : '';
+      window.parent.postMessage({ type: 'iframeHeight', id: id, height: height }, '*');
+    } catch (e) { /* ignore cross-origin errors when not embedded */ }
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(sendHeight);
+    ro.observe(document.body);
+  }
+  document.querySelectorAll('details').forEach(function(d) {
+    d.addEventListener('toggle', sendHeight);
+  });
+})();
+</script>
+
+</body>
+</html>
