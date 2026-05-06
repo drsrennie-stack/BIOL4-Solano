@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedule | BIO 004 Human Anatomy, Summer 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Pure white page, white cards lifted by shadow */
+  --vanilla: #FFFFFF;
+  --vanilla-tint: #FAFAF8;       /* subtle row stripe / next highlight */
+  --card: #FFFFFF;
+
+  /* Brand */
+  --navy: #1E3D4C;                /* section banner, primary brand */
+  --navy-soft: #335E6E;           /* labels, eyebrows */
+  --terra: #7C2018;               /* exam block, deepened for AA on small text */
+  --terra-light: #A0402A;          /* week numbers, accents on white only */
+  --gold: #C9A961;                /* week tab, exam tag */
+  --gold-soft: #E5D5A8;            /* gold tab on terra blocks (lighter for contrast) */
+  --sea-glass: #8FB8BF;
+  --sea-glass-mist: #DCE8EB;
+
+  /* Ink */
+  --ink: #15262F;
+  --ink-soft: #3D4F5A;
+
+  /* Structure */
+  --divider: rgba(30, 61, 76, 0.32);
+  --divider-strong: rgba(30, 61, 76, 0.45);
+  --card-shadow: 0 4px 14px rgba(30, 61, 76, 0.10), 0 1px 3px rgba(30, 61, 76, 0.06);
+  --focus-ring: #15262F;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { background: var(--vanilla); }
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   SKIP LINK + FOCUS
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 16px;
+  background: var(--ink);
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+  outline: 3px solid #FFFFFF;
+  outline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ============================================================
+   NAVY BANNER (full-width header)
+   ============================================================ */
+.banner {
+  background: var(--navy);
+  color: #FFFFFF;
+  padding: 56px 32px 48px;
+  position: relative;
+}
+
+.banner-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.banner-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #E5D5A8;
+  margin-bottom: 16px;
+}
+
+.banner-eyebrow-sep {
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: #E5D5A8;
+  margin: 0 12px;
+  vertical-align: middle;
+  opacity: 0.6;
+}
+
+.banner-title {
+  font-size: clamp(36px, 5.5vw, 54px);
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin-bottom: 14px;
+}
+
+.banner-subtitle {
+  font-style: italic;
+  font-size: clamp(16px, 2vw, 18px);
+  font-weight: 400;
+  color: #DCE8EB;
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+}
+
+/* Print version action button */
+.banner-actions {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  color: var(--navy);
+  padding: 12px 22px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  border: 1px solid #FFFFFF;
+  min-height: 44px;
+  min-width: 44px;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.action-btn:hover {
+  background: var(--vanilla);
+}
+
+.action-btn:focus-visible {
+  outline: 3px solid #FFFFFF;
+  outline-offset: 3px;
+}
+
+.action-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   CONTAINER + OVERVIEW STRIP
+   ============================================================ */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 36px 32px 64px;
+}
+
+.overview-strip {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 18px 28px;
+  margin-bottom: 36px;
+  border: 1px solid var(--divider);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 28px;
+  font-size: 13px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.overview-strip strong {
+  color: var(--terra);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.overview-divider {
+  color: var(--sea-glass);
+  opacity: 0.8;
+}
+
+/* ============================================================
+   SCHEDULE LIST + WEEK CARDS
+   ============================================================ */
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.week-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--divider);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+
+/* Gold week tab on left edge */
+.week-tab {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 28px 14px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(30, 61, 76, 0.15);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .week-tab {
+    writing-mode: horizontal-tb;
+    transform: none;
+    padding: 10px 16px;
+    width: 100%;
+    text-align: left;
+    letter-spacing: 0.16em;
+    border-right: none;
+    border-bottom: 1px solid rgba(30, 61, 76, 0.15);
+  }
+  .week-card { flex-direction: column; }
+}
+
+.week-body {
+  flex: 1;
+  padding: 28px 32px;
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .week-body { padding: 24px; }
+}
+
+.week-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.week-number {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--terra-light);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  padding-top: 2px;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.week-meta {
+  flex: 1;
+  min-width: 200px;
+}
+
+.week-dates {
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.week-module {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy-soft);
+}
+
+@media (max-width: 640px) {
+  .week-number { font-size: 34px; }
+  .week-dates { font-size: 20px; }
+}
+
+/* ============================================================
+   TERRA EXAM BLOCK (full-width on lab exam weeks)
+   ============================================================ */
+.exam-block {
+  background: var(--terra);
+  color: #FFFFFF;
+  margin: 0 -32px 22px;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 640px) {
+  .exam-block {
+    margin: 0 -24px 22px;
+    padding: 16px 24px;
+  }
+}
+
+.exam-tag {
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.exam-block-content {
+  flex: 1;
+  min-width: 200px;
+}
+
+.exam-block-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.exam-block-detail {
+  font-size: 13px;
+  color: #FCE8E2;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.exam-block-day {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  text-align: right;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .exam-block-day { text-align: left; }
+}
+
+/* ============================================================
+   DAY LIST
+   ============================================================ */
+.day-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 20px;
+  row-gap: 14px;
+  padding: 18px 0;
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 20px;
+}
+
+.day-list dt {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy-soft);
+  padding-top: 5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.day-list dd {
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.5;
+  font-weight: 500;
+  margin: 0;
+}
+
+.day-list .day-secondary {
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .day-list { column-gap: 14px; }
+}
+
+/* Pills inside day rows */
+.day-list .pill-tbl {
+  display: inline-block;
+  background: var(--sea-glass);
+  color: var(--navy);
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 100px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  vertical-align: baseline;
+}
+
+.day-list .pill-exam {
+  display: inline-block;
+  background: var(--terra);
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 100px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  vertical-align: baseline;
+}
+
+.day-list .activity-plain {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.day-list .pre-work {
+  color: var(--navy-soft);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.005em;
+}
+
+.day-list .bundle-note {
+  color: var(--terra-light);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.005em;
+}
+
+/* ============================================================
+   WEEK FOOTER (case + notes)
+   ============================================================ */
+.week-footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 640px) {
+  .week-footer {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .week-footer--single {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy-soft);
+}
+
+.field-value {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.field-value--placeholder {
+  font-style: italic;
+  color: var(--navy-soft);
+  opacity: 0.8;
+}
+
+/* ============================================================
+   COURSE FOOTER
+   ============================================================ */
+.course-footer {
+  margin-top: 48px;
+  padding: 28px 32px;
+  background: var(--card);
+  border: 1px solid var(--divider);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.course-footer strong {
+  color: var(--navy);
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* ============================================================
+   ACCESSIBILITY MEDIA QUERIES
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --divider: rgba(21, 38, 47, 0.55);
+    --divider-strong: rgba(21, 38, 47, 0.7);
+    --ink-soft: #15262F;
+    --navy-soft: #1E3D4C;
+  }
+}
+
+/* ============================================================
+   PRINT: redirect to print version
+   The screen file is for screen. If a student prints anyway,
+   collapse to a clean text-only fallback, no inks wasted.
+   ============================================================ */
+@media print {
+  :root {
+    --vanilla: #FFFFFF;
+    --card: #FFFFFF;
+    --navy: #000000;
+    --navy-soft: #000000;
+    --terra: #FFFFFF;
+    --terra-light: #000000;
+    --gold: #FFFFFF;
+    --gold-soft: #FFFFFF;
+    --sea-glass: #FFFFFF;
+    --sea-glass-mist: #FFFFFF;
+    --ink: #000000;
+    --ink-soft: #000000;
+    --divider: #000000;
+    --card-shadow: none;
+  }
+
+  @page { size: letter; margin: 0.5in; }
+
+  html, body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 10.5pt;
+  }
+
+  .skip-link, .banner-actions { display: none !important; }
+
+  .banner {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    padding: 0 0 12pt;
+    border-bottom: 1pt solid #000000;
+  }
+
+  .banner-eyebrow,
+  .banner-title,
+  .banner-subtitle { color: #000000 !important; }
+
+  .banner-eyebrow-sep { background: #000000; opacity: 1; }
+
+  .container { padding: 12pt 0 0; }
+
+  .overview-strip,
+  .week-card,
+  .course-footer {
+    background: #FFFFFF !important;
+    box-shadow: none !important;
+    border: 1pt solid #000000;
+    border-radius: 0;
+    page-break-inside: avoid;
+  }
+
+  .week-tab {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    writing-mode: horizontal-tb;
+    transform: none;
+    border-right: none;
+    border-bottom: 0.5pt solid #000000;
+    padding: 4pt 8pt;
+    width: 100%;
+  }
+
+  .week-card { display: block; }
+  .week-body { padding: 8pt 10pt; }
+
+  .exam-block {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 0.5pt solid #000000;
+    margin: 0 0 10pt;
+    padding: 6pt 8pt;
+  }
+
+  .exam-block-title,
+  .exam-block-detail,
+  .exam-block-day { color: #000000 !important; }
+
+  .exam-tag {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 0.5pt solid #000000;
+  }
+
+  .day-list .pill-tbl,
+  .day-list .pill-exam {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 0.5pt solid #000000;
+  }
+
+  *, *::before, *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Suggest the print version for better experience */
+  body::before {
+    content: "For a print-optimized version, see the printable schedule linked from the online version.";
+    display: block;
+    font-size: 9pt;
+    font-style: italic;
+    margin-bottom: 10pt;
+    padding: 6pt;
+    border: 0.5pt solid #000000;
+  }
+}
+</style>
+</head>
+<body>
+<a href="#schedule-list" class="skip-link">Skip to schedule</a>
+
+<header class="banner" role="banner">
+  <div class="banner-inner">
+    <p class="banner-eyebrow">BIO 004 <span class="banner-eyebrow-sep" aria-hidden="true"></span> Summer Session 2026</p>
+    <h1 class="banner-title">Course Schedule</h1>
+    <p class="banner-subtitle">Eight-week session, June 15 to August 7. Team-based learning Monday through Thursday.</p>
+    <div class="banner-actions">
+      <a class="action-btn" href="schedule-print.html" target="_top" aria-label="Open print-friendly version of the schedule">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Print-friendly version
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="overview-strip" aria-label="Session overview">
+    <span><strong>5</strong> modules</span>
+    <span class="overview-divider" aria-hidden="true">.</span>
+    <span><strong>8</strong> weeks</span>
+    <span class="overview-divider" aria-hidden="true">.</span>
+    <span><strong>5</strong> lab exams</span>
+    <span class="overview-divider" aria-hidden="true">.</span>
+    <span><strong>8</strong> weekly cases</span>
+  </section>
+
+  <ol id="schedule-list" class="schedule-list" aria-label="Weekly schedule"></ol>
+
+  <footer class="course-footer">
+    <strong>How the week runs.</strong><br>
+    Each day lists the class activity first, then the pre-work that supports it. Pre-work is completed the night before: Sunday prepares Monday's session, Monday prepares Tuesday's, and so on. Cases run Monday through Thursday: intro Monday, prep Tuesday, run Wednesday, TBL and case presentation Thursday. Lab exams run during the afternoon lab session on the day shown, so morning lecture continues the normal case rhythm. Upper and lower extremity muscles are covered primarily in lab and do not appear as dedicated lecture days. Completed homework bundles are handed in at the start of each lab exam, before students enter.
+  </footer>
+</main>
+
+<script>
+const weeks = [
+  {
+    number: 1,
+    dates: 'June 15 to 18',
+    moduleLabel: 'Module 1',
+    moduleTitle: 'Foundations and Integumentary System',
+    days: [
+      { day: 'Mon', activity: 'Case intro', prework: 'Anatomical terminology and orientation; body cavities' },
+      { day: 'Tue', activity: 'Case prep', prework: 'Cells and tissue overview' },
+      { day: 'Wed', activity: 'Case run', prework: 'Connective tissue subtypes and bone tissue' },
+      { day: 'Thu', activity: 'TBL and presentation', pill: 'tbl', prework: 'Integumentary system and skin appendages' }
+    ],
+    caseOfWeek: 'Unknown Case 1. Work up the differential live in class. Present your reasoning at the weekly TBL Thursday.',
+    notes: 'Juneteenth weekend. No classes June 19 to 21.',
+    examBlock: null
+  },
+  {
+    number: 2,
+    dates: 'June 22 to 25',
+    moduleLabel: 'Module 2, Part 1',
+    moduleTitle: 'Skeletal: Bone Microanatomy and Axial Skeleton',
+    days: [
+      { day: 'Mon', activity: 'Case intro', prework: 'Bone classification, gross long bone, compact bone microanatomy' },
+      { day: 'Tue', activity: 'Case prep', prework: 'Spongy bone, bone cells, ossification' },
+      { day: 'Wed', activity: 'Case run', prework: 'Cranial bones, facial bones, hyoid' },
+      { day: 'Thu', activity: 'TBL and presentation', pill: 'tbl', prework: 'Vertebral column and thoracic cage' }
+    ],
+    caseOfWeek: 'Unknown Case 2. Work up the differential live in class. Present your reasoning at the weekly TBL Thursday.',
+    notes: null,
+    examBlock: {
+      label: 'Lab Exam 1',
+      title: 'Lab Exam 1',
+      detail: 'Covers Week 1 content: anatomical terminology, body cavities, cells, tissues, integumentary system. 50 minutes, 25 stations, 2 questions per station.',
+      day: 'Monday, June 22'
+    }
+  },
+  {
+    number: 3,
+    dates: 'June 29 to July 2',
+    moduleLabel: 'Module 2, Part 2',
+    moduleTitle: 'Appendicular Skeleton, Joints, and Muscle as a System',
+    days: [
+      { day: 'Mon', activity: 'Case intro', prework: 'Pectoral and pelvic girdles; upper and lower limb bones' },
+      { day: 'Tue', activity: 'Case prep', prework: 'Foot arches; joint classification' },
+      { day: 'Wed', activity: 'Case run', prework: 'Synovial joint structure, subtypes, and movements' },
+      { day: 'Thu', activity: 'TBL and presentation', pill: 'tbl', prework: 'Major joints; muscle as a system lecture' }
+    ],
+    caseOfWeek: 'Unknown Case 3. Work up the differential live in class. Present your reasoning at the weekly TBL Thursday.',
+    notes: 'Independence Day observed Friday July 3.',
+    examBlock: {
+      label: 'Lab Exam 2',
+      title: 'Lab Exam 2',
+      detail: 'Covers Week 2 content: bone microanatomy, ossification, skull, vertebral column, thoracic cage. 50 minutes, 25 stations, 2 questions per station.',
+      day: 'Monday, June 29'
+    }
+  },
+  {
+    number: 4,
+    dates: 'July 6 to 9',
+    moduleLabel: 'Module 3, Part 1',
+    moduleTitle: 'Cardiovascular: Heart, Great Vessels, Thoracic and Upper Extremity Region',
+    days: [
+      { day: 'Mon', activity: 'Case intro', prework: 'Heart anatomy, conduction, vessel histology' },
+      { day: 'Tue', activity: 'Case prep', prework: 'Great vessels, fetal circulation, thoracic and upper extremity vessels' },
+      { day: 'Wed', activity: 'Case run', prework: 'Thoracic, back, pectoral, and shoulder muscles (IOA)' },
+      { day: 'Thu', activity: 'TBL and presentation', pill: 'tbl', prework: 'Arm and forearm muscles (IOA); regional integration' }
+    ],
+    caseOfWeek: 'Unknown Case 4. Work up the differential live in class. Present your reasoning at the weekly TBL Thursday.',
+    notes: null,
+    examBlock: {
+      label: 'Lab Exam 3',
+      title: 'Lab Exam 3',
+      detail: 'Covers Week 3 content: appendicular skeleton, joints, muscle as a system. 50 minutes, 25 stations, 2 questions per station.',
+      day: 'Monday, July 6'
+    }
+  },
+  {
+    number: 5,
+    dates: 'July 13 to 16',
+    moduleLabel: 'Module 3, Part 2',
+    moduleTitle: 'Respiratory, Lymphatic, Immune, and Blood',
+    days: [
+      { day: 'Mon', activity: 'Case intro', prework: 'Upper respiratory, pharynx, larynx, bronchial tree' },
+      { day: 'Tue', activity: 'Case prep', prework: 'Alveoli, lung gross anatomy, pulmonary circulation' },
+      { day: 'Wed', activity: 'Case run', prework: 'Lymphatic vessels and organs (spleen, thymus, tonsils)' },
+      { day: 'Thu', activity: 'TBL and presentation', pill: 'tbl', prework: 'Blood composition, formed elements, hematopoiesis' }
+    ],
+    caseOfWeek: 'Unknown Case 5. Work up the differential live in class. Present your reasoning at the weekly TBL Thursday.',
+    notes: null,
+    examBlock: {
+      label: 'Lab Exam 4',
+      title: 'Lab Exam 4',
+      detail: 'Covers Week 4 content: heart, great vessels, fetal circulation, vessel histology, thoracic and upper extremity muscles and vessels. 50 minutes, 25 stations, 2 questions per station.',
+      day: 'Monday, July 13'
+    }
+  },
+  {
+    number: 6,
+    dates: 'July 20 to 23',
+    moduleLabel: 'Module 4',
+    moduleTitle: 'Digestive System with Abdominal, Pelvic, and Lower Extremity Regional Anatomy',
+    days: [
+      { day: 'Mon', activity: 'Case intro', prework: 'Oral cavity, pharynx, esophagus, stomach' },
+      { day: 'Tue', activity: 'Case prep', prework: 'Small and large intestine; liver, biliary tree, pancreas, peritoneum' },
+      { day: 'Wed', activity: 'Case run', prework: 'Abdominal aorta, hepatic portal system, pelvic and lower extremity vessels' },
+      { day: 'Thu', activity: 'TBL and presentation', pill: 'tbl', prework: 'Abdominal wall, pelvic floor, gluteal, thigh, leg muscles (IOA)' }
+    ],
+    caseOfWeek: 'Unknown Case 6. Work up the differential live in class. Present your reasoning at the weekly TBL Thursday.',
+    notes: null,
+    examBlock: {
+      label: 'Lab Exam 5',
+      title: 'Lab Exam 5',
+      detail: 'Covers Week 5 content: respiratory, lymphatic, immune, blood. 50 minutes, 25 stations, 2 questions per station.',
+      day: 'Monday, July 20'
+    }
+  },
+  {
+    number: 7,
+    dates: 'July 27 to 30',
+    moduleLabel: 'Module 5',
+    moduleTitle: 'Urinary, Reproductive, and Endocrine Systems',
+    days: [
+      { day: 'Mon', activity: 'Case intro', prework: 'Kidney gross anatomy and nephron' },
+      { day: 'Tue', activity: 'Case prep', prework: 'Renal vasculature; ureters, bladder, urethra' },
+      { day: 'Wed', activity: 'Case run', prework: 'Male and female reproductive systems' },
+      { day: 'Thu', activity: 'TBL and presentation', pill: 'tbl', prework: 'Endocrine glands (hypothalamus to gonads)' }
+    ],
+    caseOfWeek: 'Unknown Case 7. Work up the differential live in class. Present your reasoning at the weekly TBL Thursday.',
+    notes: null,
+    examBlock: {
+      label: 'Lab Exam 6',
+      title: 'Lab Exam 6',
+      detail: 'Covers Week 6 content: digestive system, abdominal/pelvic vessels and muscles, lower extremity. 50 minutes, 25 stations, 2 questions per station.',
+      day: 'Monday, July 27'
+    }
+  },
+  {
+    number: 8,
+    dates: 'August 3 to 6',
+    moduleLabel: 'Module 6',
+    moduleTitle: 'Nervous System with Head, Neck, Face, and Eye Regional Anatomy',
+    days: [
+      { day: 'Mon', activity: 'Case intro', prework: 'Cerebrum, cerebellum, brainstem, diencephalon' },
+      { day: 'Tue', activity: 'Case prep', prework: 'Ventricular system, meninges, spinal cord' },
+      { day: 'Wed', activity: 'Case run', prework: 'Cranial nerves, plexuses, ANS, cranial vasculature' },
+      { day: 'Thu', activity: 'TBL, presentation, and Lab Exam 8', pill: 'tbl', prework: 'Head, neck, face, and extraocular muscles. TBL morning, Lab Exam 8 afternoon' }
+    ],
+    caseOfWeek: 'Unknown Case 8. Work up the differential live in class. Present your reasoning at the weekly TBL Thursday morning. Lab Exam 8 (covering Week 8 content) follows in the afternoon.',
+    notes: 'Last day of term August 6. Lab Exam 8 is Thursday afternoon and covers Week 8 content only.',
+    examBlock: {
+      label: 'Lab Exam 7',
+      title: 'Lab Exam 7',
+      detail: 'Covers Week 7 content: urinary, reproductive, endocrine. 50 minutes, 25 stations, 2 questions per station. Note: Lab Exam 8 is Thursday afternoon of this week.',
+      day: 'Monday, August 3'
+    }
+  }
+];
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function renderDay(d) {
+  let primaryHtml;
+  if (d.pill === 'tbl') {
+    primaryHtml = '<span class="pill-tbl">' + escapeHtml(d.activity) + '</span>';
+  } else if (d.pill === 'exam') {
+    primaryHtml = '<span class="pill-exam">' + escapeHtml(d.activity) + '</span>';
+  } else {
+    primaryHtml = '<span class="activity-plain">' + escapeHtml(d.activity) + '</span>';
+  }
+
+  if (d.prework) {
+    primaryHtml += ' <span class="pre-work"><span aria-hidden="true">. </span>Pre-work: ' + escapeHtml(d.prework) + '</span>';
+  } else if (d.bundleNote) {
+    primaryHtml += ' <span class="bundle-note"><span aria-hidden="true">. </span>' + escapeHtml(d.bundleNote) + '</span>';
+  }
+
+  return '<dt>' + escapeHtml(d.day) + '</dt><dd>' + primaryHtml + '</dd>';
+}
+
+function renderExamBlock(eb) {
+  if (!eb) return '';
+  return '<aside class="exam-block" aria-label="' + escapeHtml(eb.title) + '">' +
+    '<span class="exam-tag">' + escapeHtml(eb.label) + '</span>' +
+    '<div class="exam-block-content">' +
+      '<p class="exam-block-title">' + escapeHtml(eb.title) + '</p>' +
+      '<p class="exam-block-detail">' + escapeHtml(eb.detail) + '</p>' +
+    '</div>' +
+    '<p class="exam-block-day">' + escapeHtml(eb.day) + '</p>' +
+  '</aside>';
+}
+
+function renderSchedule() {
+  const list = document.getElementById('schedule-list');
+
+  weeks.forEach(function(wk) {
+    const numberLabel = String(wk.number).padStart(2, '0');
+    const tabLabel = 'Wk ' + numberLabel;
+
+    const daysHtml = wk.days.map(renderDay).join('');
+
+    const caseValue = wk.caseOfWeek
+      ? '<p class="field-value">' + escapeHtml(wk.caseOfWeek) + '</p>'
+      : '<p class="field-value field-value--placeholder">To be assigned</p>';
+
+    const hasNotes = wk.notes && wk.notes.length > 0;
+    const notesHtml = hasNotes
+      ? '<div class="field">' +
+          '<p class="field-label">Notes</p>' +
+          '<p class="field-value">' + escapeHtml(wk.notes) + '</p>' +
+        '</div>'
+      : '';
+
+    const footerClass = hasNotes ? 'week-footer' : 'week-footer week-footer--single';
+
+    const li = document.createElement('li');
+    li.className = 'week-card';
+    li.setAttribute('aria-label', 'Week ' + wk.number + ', ' + wk.dates + ', ' + wk.moduleLabel + ', ' + wk.moduleTitle);
+    li.innerHTML =
+      '<div class="week-tab" aria-hidden="true">' + escapeHtml(tabLabel) + '</div>' +
+      '<div class="week-body">' +
+        '<div class="week-header">' +
+          '<div class="week-number" aria-hidden="true">' + numberLabel + '</div>' +
+          '<div class="week-meta">' +
+            '<h2 class="week-dates">' + escapeHtml(wk.dates) + '</h2>' +
+            '<p class="week-module">' + escapeHtml(wk.moduleLabel) + ' <span aria-hidden="true">.</span> ' + escapeHtml(wk.moduleTitle) + '</p>' +
+          '</div>' +
+        '</div>' +
+        renderExamBlock(wk.examBlock) +
+        '<dl class="day-list" aria-label="Daily schedule for week ' + wk.number + '">' + daysHtml + '</dl>' +
+        '<div class="' + footerClass + '">' +
+          '<div class="field">' +
+            '<p class="field-label">Case of the Week</p>' +
+            caseValue +
+          '</div>' +
+          notesHtml +
+        '</div>' +
+      '</div>';
+    list.appendChild(li);
+  });
+}
+
+renderSchedule();
+
+(function() {
+  const FRAME_ID = 'anatomy-schedule';
+  function sendHeight() {
+    try {
+      const height = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+        document.documentElement.offsetHeight,
+        document.body.offsetHeight
+      );
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'setHeight', id: FRAME_ID, height: height }, '*');
+      }
+    } catch (e) {}
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if (typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(sendHeight);
+    ro.observe(document.body);
+  }
+  setTimeout(sendHeight, 100);
+  setTimeout(sendHeight, 500);
+  setTimeout(sendHeight, 1500);
+})();
+</script>
+</body>
+</html>

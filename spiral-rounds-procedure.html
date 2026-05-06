@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spiral Rounds Procedure | BIO 004 Human Anatomy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C;
+  --terra: #7C2018;
+  --gold: #C9A961;
+  --gold-deep: #A8893E;
+  --ink: #15262F;
+  --ink-soft: #3D4F5A;
+  --divider: #D0D8DD;
+  --white: #FFFFFF;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+.title-block {
+  text-align: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--gold);
+}
+.eyebrow {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--terra);
+  margin: 0 0 8px;
+}
+h1 {
+  font-family: 'Lora', serif; font-weight: 600;
+  font-size: clamp(26px, 4vw, 34px); line-height: 1.2;
+  color: var(--navy); margin: 0 0 8px;
+}
+.subtitle {
+  font-size: 14px; color: var(--ink-soft);
+  margin: 0; font-style: italic;
+}
+
+.svg-wrapper {
+  margin: 24px 0;
+  text-align: center;
+}
+.svg-wrapper svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.rules {
+  background: var(--white);
+  border: 1px solid var(--divider);
+  border-left: 4px solid var(--gold);
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.rules h2 {
+  font-size: 14px; font-weight: 800; letter-spacing: 0.10em;
+  text-transform: uppercase; color: var(--navy);
+  margin: 0 0 10px;
+}
+.rules p {
+  margin: 0 0 8px; font-size: 13px; line-height: 1.55;
+}
+.rules p:last-child { margin-bottom: 0; }
+.rules strong { color: var(--terra); }
+
+.print-btn {
+  display: inline-block;
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  padding: 10px 20px; border-radius: 4px;
+  border: 2px solid var(--gold); background: var(--gold);
+  color: var(--navy); cursor: pointer;
+}
+.print-btn:hover { background: var(--gold-deep); color: var(--white); border-color: var(--gold-deep); }
+
+.actions {
+  text-align: center;
+  margin: 24px 0;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--divider);
+  font-size: 11px; color: var(--ink-soft);
+}
+
+@media print {
+  @page { margin: 0.5in; }
+  body { background: var(--white); }
+  .page { padding: 0; max-width: 100%; }
+  .actions { display: none; }
+}
+</style>
+</head>
+<body>
+
+<main class="page">
+  <header class="title-block">
+    <p class="eyebrow">Spiral Rounds &middot; BIO 004 Human Anatomy</p>
+    <h1>The Five-Round Procedure</h1>
+    <p class="subtitle">Keep this page next to your study group during lab. Run each set of 10 to 12 structures through all five rounds.</p>
+  </header>
+
+  <div class="svg-wrapper">
+    <svg viewBox="0 0 1060 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="proc-title">
+      <title id="proc-title">Spiral Rounds: five rounds in sequence with arrows between each</title>
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#7C2018"/>
+        </marker>
+      </defs>
+      <g transform="translate(0, 20)">
+        <rect x="0" y="0" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="2"/>
+        <circle cx="32" cy="32" r="20" fill="#C9A961"/>
+        <text x="32" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="14" fill="#1E3D4C">R1</text>
+        <text x="62" y="38" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" font-size="13" fill="#1E3D4C">Introduce</text>
+        <line x1="14" y1="64" x2="166" y2="64" stroke="#D0D8DD" stroke-width="1"/>
+        <text x="14" y="86" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">One person IDs all</text>
+        <text x="14" y="102" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">structures aloud for</text>
+        <text x="14" y="118" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">the group. Start with</text>
+        <text x="14" y="134" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">5 to 8 structures and</text>
+        <text x="14" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">build up.</text>
+        <text x="14" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-style="italic" fill="#7C2018" font-weight="700">EXPOSURE</text>
+      </g>
+      <path d="M 184 140 L 218 140" stroke="#7C2018" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      <g transform="translate(220, 20)">
+        <rect x="0" y="0" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="2"/>
+        <circle cx="32" cy="32" r="20" fill="#C9A961"/>
+        <text x="32" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="14" fill="#1E3D4C">R2</text>
+        <text x="62" y="38" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" font-size="13" fill="#1E3D4C">Read &amp; point</text>
+        <line x1="14" y1="64" x2="166" y2="64" stroke="#D0D8DD" stroke-width="1"/>
+        <text x="14" y="86" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Reader names a</text>
+        <text x="14" y="102" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">structure (random).</text>
+        <text x="14" y="118" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Each peer points to</text>
+        <text x="14" y="134" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">it on the model.</text>
+        <text x="14" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Rotate readers.</text>
+        <text x="14" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-style="italic" fill="#7C2018" font-weight="700">RECOGNITION</text>
+      </g>
+      <path d="M 404 140 L 438 140" stroke="#7C2018" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      <g transform="translate(440, 20)">
+        <rect x="0" y="0" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="2"/>
+        <circle cx="32" cy="32" r="20" fill="#C9A961"/>
+        <text x="32" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="14" fill="#1E3D4C">R3</text>
+        <text x="62" y="38" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" font-size="13" fill="#1E3D4C">Reverse + spell</text>
+        <line x1="14" y1="64" x2="166" y2="64" stroke="#D0D8DD" stroke-width="1"/>
+        <text x="14" y="86" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Tester points to a</text>
+        <text x="14" y="102" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">structure. Student</text>
+        <text x="14" y="118" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">names it AND spells</text>
+        <text x="14" y="134" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">it aloud. Catch your</text>
+        <text x="14" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">spelling errors.</text>
+        <text x="14" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-style="italic" fill="#7C2018" font-weight="700">RECALL + WRITE</text>
+      </g>
+      <path d="M 624 140 L 658 140" stroke="#7C2018" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      <g transform="translate(660, 20)">
+        <rect x="0" y="0" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="2"/>
+        <circle cx="32" cy="32" r="20" fill="#C9A961"/>
+        <text x="32" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="14" fill="#1E3D4C">R4</text>
+        <text x="62" y="38" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" font-size="13" fill="#1E3D4C">Solo recall</text>
+        <line x1="14" y1="64" x2="166" y2="64" stroke="#D0D8DD" stroke-width="1"/>
+        <text x="14" y="86" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Each person, on their</text>
+        <text x="14" y="102" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">turn, points to and</text>
+        <text x="14" y="118" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">names every</text>
+        <text x="14" y="134" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">structure in the set</text>
+        <text x="14" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">from memory.</text>
+        <text x="14" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-style="italic" fill="#7C2018" font-weight="700">FREE RECALL</text>
+      </g>
+      <path d="M 844 140 L 878 140" stroke="#7C2018" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      <g transform="translate(880, 20)">
+        <rect x="0" y="0" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="2"/>
+        <circle cx="32" cy="32" r="20" fill="#C9A961"/>
+        <text x="32" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="14" fill="#1E3D4C">R5</text>
+        <text x="62" y="38" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" font-size="13" fill="#1E3D4C">Add layers</text>
+        <line x1="14" y1="64" x2="166" y2="64" stroke="#D0D8DD" stroke-width="1"/>
+        <text x="14" y="86" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Add information:</text>
+        <text x="14" y="102" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">function, composition,</text>
+        <text x="14" y="118" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">distinguishing</text>
+        <text x="14" y="134" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">characteristics.</text>
+        <text x="14" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Connect lab to lecture.</text>
+        <text x="14" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-style="italic" fill="#7C2018" font-weight="700">INTEGRATION</text>
+      </g>
+    </svg>
+  </div>
+
+  <section class="rules">
+    <h2>Ground rules</h2>
+    <p><strong>Group size:</strong> 3 to 5 students per Spiral Rounds set.</p>
+    <p><strong>Pace:</strong> 5 to 8 minutes per round per set. A set of 12 structures runs all 5 rounds in 30 to 40 minutes.</p>
+    <p><strong>Set size:</strong> 10 to 12 structures per set. Build from 5 to 8 in Round 1, add more as you go.</p>
+    <p><strong>Participation:</strong> every student takes a turn in every round. Active retrieval is the point. Mistakes are expected and useful. Don't opt out by watching.</p>
+  </section>
+
+  <div class="actions">
+    <button class="print-btn" type="button" onclick="window.print()">Print this page</button>
+  </div>
+
+  <footer class="footer">
+    BIO 004 Human Anatomy &middot; Dr. Sharilyn Rennie, Solano Community College
+  </footer>
+</main>
+
+</body>
+</html>
