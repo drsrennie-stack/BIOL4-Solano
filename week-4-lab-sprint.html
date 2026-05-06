@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 Lab Sprint | BIO 004 Human Anatomy, Summer 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C;
+  --navy-deep: #15262F;
+  --navy-soft: #335E6E;
+  --terra: #7C2018;
+  --terra-soft: #A0402A;
+  --gold: #C9A961;
+  --gold-deep: #A8893E;
+  --gold-tint: #F7EFD9;
+  --terra-tint: #F7E1DC;
+  --navy-tint: #E2EAEE;
+  --white: #FFFFFF;
+  --bg: #FFFFFF;
+  --panel-cream: #FAFAFA;
+  --ink: #15262F;
+  --ink-soft: #3D4F5A;
+  --divider: #D0D8DD;
+  --divider-light: #E6ECEF;
+  --shadow-md: 0 2px 8px rgba(21, 38, 47, 0.08);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 15px; line-height: 1.55;
+  color: var(--ink); background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+.skip-link {
+  position: absolute; top: -40px; left: 8px; padding: 8px 14px;
+  background: var(--navy); color: var(--white);
+  text-decoration: none; border-radius: var(--radius-sm);
+  font-weight: 600; z-index: 100;
+}
+.skip-link:focus { top: 8px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
+
+.hero {
+  background: var(--navy); color: var(--white);
+  padding: 36px 32px; border-radius: var(--radius-lg);
+  margin-bottom: 28px; border-bottom: 6px solid var(--gold);
+}
+.hero-eyebrow {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold); margin: 0 0 8px;
+}
+.hero h1 {
+  font-family: 'Lora', serif; font-weight: 600;
+  font-size: clamp(26px, 4vw, 36px); line-height: 1.2; margin: 0 0 14px;
+}
+.hero-sub {
+  font-size: 15px; line-height: 1.6; margin: 0 0 18px;
+  max-width: 760px; opacity: 0.92;
+}
+.hero-meta { font-size: 13px; opacity: 0.78; margin: 0; }
+.hero-meta strong { color: var(--gold); font-weight: 700; opacity: 1; }
+
+.toc {
+  background: var(--white); border: 1px solid var(--divider);
+  border-radius: var(--radius-md); padding: 14px 20px; margin-bottom: 32px;
+}
+.toc-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--navy); margin: 0 0 8px;
+}
+.toc-list {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  list-style: none; margin: 0; padding: 0;
+}
+.toc-list a {
+  color: var(--terra); text-decoration: none; font-weight: 600;
+  font-size: 14px; padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+.toc-list a:hover, .toc-list a:focus {
+  border-bottom-color: var(--terra); outline: none;
+}
+
+.section {
+  background: var(--white); border: 1px solid var(--divider);
+  border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 28px;
+}
+.section-eyebrow {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--terra); margin: 0 0 6px;
+}
+.section h2 {
+  font-family: 'Lora', serif; font-weight: 600;
+  font-size: clamp(22px, 3vw, 28px); line-height: 1.25;
+  color: var(--navy); margin: 0 0 8px;
+}
+.section-lede {
+  font-size: 14px; color: var(--ink-soft); line-height: 1.6;
+  margin: 0 0 24px; max-width: 800px;
+}
+.section h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+  font-size: 17px; color: var(--navy); margin: 24px 0 10px;
+}
+
+/* DAY CARDS — 5 days, 3-panel vertical layout */
+.day-card {
+  background: var(--white); border: 1px solid var(--divider);
+  border-radius: var(--radius-lg); margin-bottom: 18px; overflow: hidden;
+}
+.day-card-header {
+  background: var(--navy); color: var(--white);
+  padding: 14px 22px;
+  display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.day-card-name { font-size: 18px; font-weight: 700; }
+.day-card-date {
+  font-size: 12px; color: var(--gold);
+  letter-spacing: 0.06em; font-weight: 600;
+}
+.panel {
+  display: grid; grid-template-columns: 180px 1fr;
+  border-top: 1px solid var(--divider-light);
+}
+.panel:first-of-type { border-top: none; }
+.panel-header {
+  padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 6px;
+  border-right: 4px solid var(--divider-light);
+}
+.panel-eyebrow {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.16em;
+  text-transform: uppercase; margin: 0;
+}
+.panel-title { font-size: 14px; font-weight: 700; margin: 0; }
+.panel-time { font-size: 11px; color: var(--ink-soft); font-style: italic; margin: 0; }
+.panel-body { padding: 16px 22px; background: var(--white); }
+.panel-body p { margin: 0 0 8px; font-size: 14px; line-height: 1.55; }
+.panel-body ul { margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.55; }
+.panel-body ul li { margin-bottom: 4px; }
+
+.panel-prestudy { background: var(--gold-tint); }
+.panel-prestudy .panel-header { border-right-color: var(--gold); background: var(--gold-tint); }
+.panel-prestudy .panel-eyebrow { color: var(--gold-deep); }
+.panel-prestudy .panel-title { color: var(--navy); }
+
+.panel-inclass { background: var(--terra-tint); }
+.panel-inclass .panel-header { border-right-color: var(--terra); background: var(--terra-tint); }
+.panel-inclass .panel-eyebrow { color: var(--terra); }
+.panel-inclass .panel-title { color: var(--navy); }
+
+.panel-night { background: var(--navy-tint); }
+.panel-night .panel-header { border-right-color: var(--navy); background: var(--navy-tint); }
+.panel-night .panel-eyebrow { color: var(--navy); }
+.panel-night .panel-title { color: var(--navy); }
+
+.panel-organize { background: var(--gold-tint); }
+.panel-organize .panel-header { border-right-color: var(--gold); background: var(--gold-tint); }
+.panel-organize .panel-eyebrow { color: var(--gold-deep); }
+.panel-organize .panel-title { color: var(--navy); }
+
+.chip {
+  display: inline-block; background: var(--white);
+  border: 1px solid var(--divider); border-radius: 999px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700;
+  color: var(--navy); letter-spacing: 0.04em;
+  margin-right: 6px; margin-bottom: 4px;
+}
+.chip-gold { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+@media (max-width: 720px) {
+  .panel { grid-template-columns: 1fr; }
+  .panel-header { border-right: none; border-bottom: 4px solid var(--divider-light); }
+  .panel-prestudy .panel-header { border-bottom-color: var(--gold); }
+  .panel-inclass .panel-header { border-bottom-color: var(--terra); }
+  .panel-night .panel-header { border-bottom-color: var(--navy); }
+  .panel-organize .panel-header { border-bottom-color: var(--gold); }
+}
+
+/* SPIRAL ROUNDS */
+.procedure-wrapper {
+  background: var(--panel-cream); border: 1px solid var(--divider);
+  border-radius: var(--radius-md); padding: 24px;
+  margin-bottom: 24px; overflow-x: auto;
+}
+.procedure-svg-container { display: flex; justify-content: center; margin-bottom: 14px; }
+.procedure-svg-container svg { max-width: 100%; height: auto; }
+.procedure-actions {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid var(--divider-light);
+}
+.spiral-instructions {
+  background: var(--white); border-left: 4px solid var(--gold);
+  padding: 14px 18px; margin-bottom: 24px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.spiral-instructions p { margin: 0 0 6px; font-size: 13px; line-height: 1.55; color: var(--ink); }
+.spiral-instructions p:last-child { margin-bottom: 0; }
+.category-section {
+  margin-top: 22px; padding-top: 16px;
+  border-top: 2px solid var(--gold);
+}
+.category-section:first-of-type { border-top: none; padding-top: 0; }
+.category-title {
+  font-size: 14px; font-weight: 800; letter-spacing: 0.10em;
+  text-transform: uppercase; color: var(--navy); margin: 0 0 4px;
+}
+.category-meta { font-size: 11px; color: var(--ink-soft); margin: 0 0 14px; }
+.spiral-set {
+  background: var(--panel-cream); border: 1px solid var(--divider);
+  border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 12px;
+}
+.spiral-set-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 10px;
+}
+.spiral-set-title { font-size: 13px; font-weight: 700; color: var(--navy); }
+.spiral-set-tag {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--terra);
+  background: var(--white); padding: 3px 8px; border-radius: 999px;
+  border: 1px solid var(--terra);
+}
+.spiral-set-items {
+  list-style: none; margin: 0 0 10px; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 2px 12px;
+}
+.spiral-set-items li { font-size: 12px; line-height: 1.45; color: var(--ink); padding: 2px 0; }
+.spiral-rounds-progress {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  padding-top: 8px; border-top: 1px dashed var(--divider);
+}
+.spiral-round-checkbox {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700; color: var(--ink-soft);
+  cursor: pointer; user-select: none; padding: 2px 8px; border-radius: 4px;
+}
+.spiral-round-checkbox input { width: 14px; height: 14px; accent-color: var(--terra); cursor: pointer; }
+.spiral-round-checkbox input:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.spiral-round-checkbox.is-done { background: var(--terra); color: var(--white); }
+.spiral-round-checkbox.is-done input { accent-color: var(--white); }
+
+/* PRE-EXAM */
+.preexam-controls {
+  background: var(--panel-cream); border: 1px solid var(--divider);
+  border-radius: var(--radius-md); padding: 18px 20px; margin-bottom: 20px;
+  display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+}
+.preexam-controls label {
+  font-size: 13px; font-weight: 700; color: var(--navy);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.preexam-controls select {
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  padding: 6px 10px; border: 2px solid var(--navy);
+  border-radius: var(--radius-sm); background: var(--white);
+  color: var(--navy); cursor: pointer;
+}
+.preexam-controls select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.preexam-counter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.counter-tag { font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 999px; }
+.counter-known { background: #E0EBE3; color: #2D5439; }
+.counter-unknown { background: var(--terra-tint); color: var(--terra); border: 1px solid var(--terra); }
+.counter-total { background: var(--white); color: var(--navy); border: 1px solid var(--divider); }
+.checklist-controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.btn {
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--navy); background: var(--white);
+  color: var(--navy); cursor: pointer;
+}
+.btn:hover { background: var(--navy); color: var(--white); }
+.btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.btn-primary { background: var(--terra); color: var(--white); border-color: var(--terra); }
+.btn-primary:hover { background: var(--terra-soft); border-color: var(--terra-soft); }
+.btn-gold { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.btn-gold:hover { background: var(--gold-deep); color: var(--white); border-color: var(--gold-deep); }
+.checklist-cat { margin-bottom: 16px; }
+.checklist-cat-title {
+  font-size: 12px; font-weight: 800; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--navy);
+  margin: 0 0 8px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--divider-light);
+}
+.checklist-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2px 16px;
+}
+.checklist-grid li {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 5px 0; line-height: 1.4; font-size: 13px;
+}
+.checklist-grid label {
+  display: flex; align-items: flex-start; gap: 8px;
+  cursor: pointer; flex: 1; user-select: none;
+}
+.checklist-grid input[type="checkbox"] {
+  margin-top: 3px; flex-shrink: 0;
+  width: 15px; height: 15px;
+  accent-color: #2D5439; cursor: pointer;
+}
+.checklist-grid input[type="checkbox"]:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.checklist-grid label.is-known { color: #2D5439; text-decoration: line-through; }
+
+.dist-empty {
+  background: var(--panel-cream); border: 1px dashed var(--divider);
+  border-radius: var(--radius-md); padding: 22px;
+  text-align: center; color: var(--ink-soft); font-size: 14px;
+}
+.dist-day-card {
+  background: var(--white); border: 1px solid var(--divider);
+  border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 10px;
+}
+.dist-day-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 8px; flex-wrap: wrap; gap: 8px;
+}
+.dist-day-title { font-size: 14px; font-weight: 700; color: var(--navy); }
+.dist-day-when { font-size: 11px; color: var(--ink-soft); }
+.dist-list {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2px 14px;
+}
+.dist-list li { font-size: 12px; color: var(--ink); padding: 2px 0; }
+.dist-new::before { content: "● "; color: var(--terra); font-weight: 800; }
+.dist-review::before { content: "○ "; color: var(--gold-deep); font-weight: 800; }
+
+.notes-area {
+  width: 100%; min-height: 100px;
+  font-family: inherit; font-size: 14px; line-height: 1.55;
+  padding: 12px 14px; border: 1px solid var(--divider);
+  border-radius: var(--radius-sm); background: var(--panel-cream);
+  color: var(--ink); resize: vertical;
+}
+.notes-area:focus-visible { outline: 2px solid var(--gold); outline-offset: 0; border-color: var(--navy); }
+.utility-row {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--divider-light);
+}
+.utility-status { flex: 1; font-size: 12px; color: var(--ink-soft); align-self: center; }
+.footer { text-align: center; margin-top: 32px; font-size: 12px; color: var(--ink-soft); }
+
+@media print {
+  body { background: var(--white); }
+  .container { padding: 0; max-width: 100%; }
+  .hero, .toc, .section:not(.print-procedure) { display: none; }
+  .print-procedure { border: none; padding: 20px; box-shadow: none; }
+  .procedure-actions { display: none; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<main id="main" class="container">
+
+  <header class="hero">
+    <p class="hero-eyebrow">Week 4 of 8 &middot; Lab sprint</p>
+    <h1>Cardiovascular: Heart, Great Vessels, Thoracic and Upper Extremity</h1>
+    <p class="hero-sub">Walk through each day in three phases (pre-study, in-class Spiral Rounds, night review), drill structures by concept category, and build a custom pre-exam study plan.</p>
+    <p class="hero-meta">BIO 004 Human Anatomy, Summer 2026 &middot; <strong>Dr. Sharilyn Rennie</strong>, Solano Community College</p>
+  </header>
+
+  <nav class="toc" aria-label="Page sections">
+    <p class="toc-label">Jump to</p>
+    <ul class="toc-list">
+      <li><a href="#sec-week">Your week, day by day</a></li>
+      <li><a href="#sec-rounds">Spiral Rounds</a></li>
+      <li><a href="#sec-preexam">Pre-exam study plan</a></li>
+      <li><a href="#sec-notes">Notes</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECTION 1: 5 day cards with 3-panel layout -->
+  <section id="sec-week" class="section" aria-labelledby="sec-week-heading">
+    <p class="section-eyebrow">Section 1</p>
+    <h2 id="sec-week-heading">Your week, day by day</h2>
+    <p class="section-lede"><strong>Class time is always active learning — never concept lectures.</strong> Concept work is night work, done with your workbook and digital atlas the evening before each lab. Pre-study (gold) is a quick morning refresher, in-class (terra) is your Spiral Rounds reference during active work, and night review (navy) is the heavy concept lifting for tomorrow. Sunday is just an organize-for-the-week panel.</p>
+
+    <article class="day-card" aria-labelledby="day-sun">
+      <header class="day-card-header">
+        <span class="day-card-name" id="day-sun">Sunday</span>
+        <span class="day-card-date">July 5 &middot; before Week 4 begins</span>
+      </header>
+      <div class="panel panel-organize">
+        <div class="panel-header">
+          <p class="panel-eyebrow">Organize</p>
+          <p class="panel-title">Recover and prep</p>
+          <p class="panel-time">No pre-study required</p>
+        </div>
+        <div class="panel-body">
+          <p>Lab Exam 3 is tomorrow morning. Saturday was your big study day; Sunday is for recovery and light prep. Heads-up: Week 4 is a system shift — heart anatomy plus thoracic and upper extremity muscles, vessels, and nerves.</p>
+          <ul>
+            <li>Eat well, hydrate, sleep early. LE 3 is 50 minutes, 25 stations covering Week 3 (spine + appendicular + joints + muscle as a system).</li>
+            <li>Last-glance review: open your Week 3 pre-exam plan in the Week 3 Lab Sprint and re-test the items still flagged unknown (sarcomere parts especially trip people up).</li>
+            <li>Skim your Week 4 Research Workbook online (printed copy will be provided in class Monday). Glance at the heart, great vessels, chest and brachium muscles, and UE vessels and nerves sections.</li>
+            <li>Open the digital atlas and locate where to find: heart anterior and posterior views, valves, coronary circulation, anterior and posterior UE muscle groups, brachial plexus.</li>
+            <li>Plan your Monday morning: room, parking, what to bring (pencil, eraser, photo ID for the lab exam).</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="day-card" aria-labelledby="day-mon">
+      <header class="day-card-header">
+        <span class="day-card-name" id="day-mon">Monday</span>
+        <span class="day-card-date">July 6 &middot; Lab Exam 3 + heart anatomy</span>
+      </header>
+      <div class="panel panel-prestudy">
+        <div class="panel-header">
+          <p class="panel-eyebrow">Pre-study</p>
+          <p class="panel-title">Before lab</p>
+          <p class="panel-time">15 to 30 minutes Monday morning</p>
+        </div>
+        <div class="panel-body">
+          <p>Last-look on Week 3 content for Lab Exam 3. You did the heavy work Saturday; this morning is just confidence prep.</p>
+          <ul>
+            <li>Re-test the structures still flagged unknown in your Week 3 pre-exam plan</li>
+            <li>Mental rehearsal: 1 minute per station pacing, name cold without hesitation</li>
+            <li>Quick scan of today's Week 4 content (heart regions, chambers, valves) so the afternoon lab feels familiar</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel panel-inclass">
+        <div class="panel-header">
+          <p class="panel-eyebrow">In class</p>
+          <p class="panel-title">Lab Exam 3 + heart lab</p>
+          <p class="panel-time">Lab exam first, then continuing class</p>
+        </div>
+        <div class="panel-body">
+          <p><strong>Part 1: Lab Exam 3.</strong> 50 minutes, 25 stations, 2 questions per station = 50 questions total. 80 percent Week 3 content (spine + appendicular + joints + muscle as a system), 20 percent spiral review. Hold your one-minute-per-station pace.</p>
+          <p><strong>Part 2: continuing class on Week 4 material.</strong> You don't leave after the exam. Lab stations on heart regions, atrial structures, ventricular structures. Use a heart model and the heart in cadaveric specimens. No concept lecture (you did that last night with your workbook). Spiral Rounds on:</p>
+          <p><span class="chip chip-gold">Heart regions and pericardium</span> <span class="chip chip-gold">Atrial structures</span> <span class="chip chip-gold">Ventricular structures</span></p>
+          <p>Live in class: brief introduction to case 4 — record clue 1 in your workbook Section C.</p>
+        </div>
+      </div>
+      <div class="panel panel-night">
+        <div class="panel-header">
+          <p class="panel-eyebrow">Night review</p>
+          <p class="panel-title">After class</p>
+          <p class="panel-time">60 to 75 minutes Monday evening</p>
+        </div>
+        <div class="panel-body">
+          <p>Workbook Section D synthesis page for Monday night. <strong>This is concept-lecture time</strong> — done with your workbook + digital atlas, never in class.</p>
+          <ul>
+            <li><strong>75 percent</strong> for tomorrow: Workbook Section A modules on heart vasculature (great vessels, coronary circulation), fetal heart remnants, conduction system, plus chest + anterior brachium muscles</li>
+            <li><strong>25 percent</strong> for today: trace blood flow through the heart cold (RA → RV → pulmonary → LA → LV → aorta) and identify all 4 valves</li>
+            <li>Update your Section C clue tracker with case 4 clue 1</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="day-card" aria-labelledby="day-tue">
+      <header class="day-card-header">
+        <span class="day-card-name" id="day-tue">Tuesday</span>
+        <span class="day-card-date">July 7 &middot; Heart vasculature + fetal/electrophys + chest muscles</span>
+      </header>
+      <div class="panel panel-prestudy">
+        <div class="panel-header">
+          <p class="panel-eyebrow">Pre-study</p>
+          <p class="panel-title">Before lab</p>
+          <p class="panel-time">15 to 30 minutes Tuesday morning</p>
+        </div>
+        <div class="panel-body">
+          <p>You did 75 percent of this last night. This morning is a refresh.</p>
+          <ul>
+            <li>Recall the 3 branches off the aortic arch (brachiocephalic, left common carotid, left subclavian)</li>
+            <li>Recall the coronary circulation: RCA, LCA, LAD, circumflex, posterior interventricular, marginal</li>
+            <li>Recall the conduction sequence: SA node → AV node → bundle of His → R/L bundle branches → Purkinje fibers</li>
+            <li>Pectoralis major + minor, serratus anterior, biceps brachii actions</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel panel-inclass">
+        <div class="panel-header">
+          <p class="panel-eyebrow">In class</p>
+          <p class="panel-title">Active learning</p>
+          <p class="panel-time">During class, full session</p>
+        </div>
+        <div class="panel-body">
+          <p>Active learning only — no concept lecture (you did that last night with your workbook). Lab stations on great vessels and coronary circulation, fetal heart remnants, conduction system, and chest plus anterior brachium muscles. Spiral Rounds on:</p>
+          <p><span class="chip chip-gold">Heart vasculature</span> <span class="chip chip-gold">Fetal remnants and electrophysiology</span> <span class="chip chip-gold">Chest and anterior brachium muscles</span></p>
+          <p>Live in class: record case 4 clue 2 in your workbook Section C.</p>
+        </div>
+      </div>
+      <div class="panel panel-night">
+        <div class="panel-header">
+          <p class="panel-eyebrow">Night review</p>
+          <p class="panel-title">After class</p>
+          <p class="panel-time">60 to 75 minutes Tuesday evening</p>
+        </div>
+        <div class="panel-body">
+          <p>Workbook Section D synthesis page for Tuesday night. <strong>Concept work happens here, not in class.</strong></p>
+          <ul>
+            <li><strong>75 percent</strong> for tomorrow: do tomorrow's concept work — Workbook Section A modules on anterior + posterior antebrachium muscles plus UE arteries (subclavian → axillary → brachial → radial + ulnar)</li>
+            <li><strong>25 percent</strong> for today: cold re-test on the 5 fetal remnants (lig. arteriosum, lig. venosum, lig. teres, median umbilical lig., fossa ovalis) and the conduction system sequence</li>
+            <li>Update Section C with clue 2; check if your differential needs to narrow</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="day-card" aria-labelledby="day-wed">
+      <header class="day-card-header">
+        <span class="day-card-name" id="day-wed">Wednesday</span>
+        <span class="day-card-date">July 8 &middot; Antebrachium muscles + UE arteries</span>
+      </header>
+      <div class="panel panel-prestudy">
+        <div class="panel-header">
+          <p class="panel-eyebrow">Pre-study</p>
+          <p class="panel-title">Before lab</p>
+          <p class="panel-time">15 to 30 minutes Wednesday morning</p>
+        </div>
+        <div class="panel-body">
+          <p>Refresh on what you pre-studied last night.</p>
+          <ul>
+            <li>Recall the anterior antebrachium flexor compartment vs posterior extensor compartment</li>
+            <li>Recall the UE arterial sequence: subclavian → axillary → brachial → splits into radial + ulnar at the elbow</li>
+            <li>Recall: brachioradialis is anterior but lateral, supinator is deep posterior</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel panel-inclass">
+        <div class="panel-header">
+          <p class="panel-eyebrow">In class</p>
+          <p class="panel-title">Active learning</p>
+          <p class="panel-time">During class, full session</p>
+        </div>
+        <div class="panel-body">
+          <p>Active learning only — no concept lecture (you did that last night with your workbook). Lab stations on anterior and posterior antebrachium muscles plus the UE arterial tree from subclavian to digital arteries. Spiral Rounds on:</p>
+          <p><span class="chip chip-gold">Anterior antebrachium muscles</span> <span class="chip chip-gold">Posterior antebrachium muscles</span> <span class="chip chip-gold">UE arteries</span></p>
+          <p>Live in class: record case 4 clue 3 in your workbook Section C. Build evidence; team starts ranking the differential.</p>
+        </div>
+      </div>
+      <div class="panel panel-night">
+        <div class="panel-header">
+          <p class="panel-eyebrow">Night review</p>
+          <p class="panel-title">After class</p>
+          <p class="panel-time">60 to 75 minutes Wednesday evening</p>
+        </div>
+        <div class="panel-body">
+          <p>Workbook Section D synthesis page for Wednesday night, plus team prep. <strong>Concept work happens here, not in class.</strong></p>
+          <ul>
+            <li><strong>75 percent</strong> for tomorrow: do tomorrow's concept work — Workbook Section A modules on posterior thorax + shoulder + posterior brachium (including rotator cuff SITS), UE veins + nerves (brachial plexus), and vessel histology (artery vs vein layers)</li>
+            <li><strong>25 percent</strong> for today: cold re-test on UE arteries (trace from subclavian to digital arch) and the antebrachium flexor/extensor compartments</li>
+            <li>Build your team's master diagram for Thursday TBL (heart map, conduction trace, or UE vessel/nerve map)</li>
+            <li>Update Section C with clue 3; finalize your differential ranking with anatomic justification</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="day-card" aria-labelledby="day-thu">
+      <header class="day-card-header">
+        <span class="day-card-name" id="day-thu">Thursday</span>
+        <span class="day-card-date">July 9 &middot; Posterior UE + UE veins + nerves + vessel histology + TBL</span>
+      </header>
+      <div class="panel panel-prestudy">
+        <div class="panel-header">
+          <p class="panel-eyebrow">Pre-study</p>
+          <p class="panel-title">Before lab</p>
+          <p class="panel-time">15 to 30 minutes Thursday morning</p>
+        </div>
+        <div class="panel-body">
+          <p>Final review before TBL. Bring your team's master diagram.</p>
+          <ul>
+            <li>Recall the rotator cuff SITS (Supraspinatus, Infraspinatus, Teres minor, Subscapularis)</li>
+            <li>Recall the median cubital vein and the basilic vs cephalic distinction (basilic medial, cephalic lateral)</li>
+            <li>Recall the 5 major brachial plexus nerves: musculocutaneous, axillary, median, radial, ulnar</li>
+            <li>Vessel histology: artery has thick tunica media with smooth muscle and elastic laminae; vein has thin tunica media + valves</li>
+            <li>Quick scan of Workbook Section E (TBL prep checklist)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel panel-inclass">
+        <div class="panel-header">
+          <p class="panel-eyebrow">In class</p>
+          <p class="panel-title">Lab + TBL session</p>
+          <p class="panel-time">Morning lab, then TBL</p>
+        </div>
+        <div class="panel-body">
+          <p>Lab stations on posterior thorax, shoulder, posterior brachium, UE venous return, brachial plexus nerves, plus artery and vein histology. Spiral Rounds on:</p>
+          <p><span class="chip chip-gold">Posterior thorax, shoulder, posterior brachium</span> <span class="chip chip-gold">UE veins and nerves</span> <span class="chip chip-gold">Vessel histology</span></p>
+          <p>Then TBL session: iRAT, tRAT, application exercise, team presentations on case 4.</p>
+        </div>
+      </div>
+      <div class="panel panel-night">
+        <div class="panel-header">
+          <p class="panel-eyebrow">Night review</p>
+          <p class="panel-title">After class</p>
+          <p class="panel-time">Friday rest, Saturday cold re-test</p>
+        </div>
+        <div class="panel-body">
+          <p>Friday is your rest day. Saturday morning: do a full Week 4 cold re-test using Section 3 below (the pre-exam study plan) for Lab Exam 4. Sunday: prep into Week 5 (respiratory + lymphatic + blood).</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- SECTION 2: Spiral Rounds with SVG procedure visual + categorized sets -->
+  <section id="sec-rounds" class="section print-procedure" aria-labelledby="sec-rounds-heading">
+    <p class="section-eyebrow">Section 2</p>
+    <h2 id="sec-rounds-heading">Spiral Rounds (study group method)</h2>
+    <p class="section-lede">Spiral Rounds is your in-class and study-group method, organized by concept category. Each category has 1 or more sets of about 10 to 12 structures. Take each set through the five rounds below, escalating challenge each round.</p>
+
+    <div class="procedure-wrapper">
+      <div class="procedure-svg-container">
+        <svg viewBox="0 0 1060 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="procedure-title">
+          <title id="procedure-title">Spiral Rounds procedure: five escalating rounds with arrows</title>
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#7C2018"/>
+            </marker>
+          </defs>
+          <g transform="translate(0, 20)">
+            <rect x="0" y="0" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="2"/>
+            <circle cx="32" cy="32" r="20" fill="#C9A961"/>
+            <text x="32" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="14" fill="#1E3D4C">R1</text>
+            <text x="62" y="38" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" font-size="13" fill="#1E3D4C">Introduce</text>
+            <line x1="14" y1="64" x2="166" y2="64" stroke="#D0D8DD" stroke-width="1"/>
+            <text x="14" y="86" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">One person IDs all</text>
+            <text x="14" y="102" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">structures aloud for</text>
+            <text x="14" y="118" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">the group. Start with</text>
+            <text x="14" y="134" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">5 to 8 structures and</text>
+            <text x="14" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">build up.</text>
+            <text x="14" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-style="italic" fill="#7C2018" font-weight="700">EXPOSURE</text>
+          </g>
+          <path d="M 184 140 L 218 140" stroke="#7C2018" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+          <g transform="translate(220, 20)">
+            <rect x="0" y="0" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="2"/>
+            <circle cx="32" cy="32" r="20" fill="#C9A961"/>
+            <text x="32" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="14" fill="#1E3D4C">R2</text>
+            <text x="62" y="38" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" font-size="13" fill="#1E3D4C">Read &amp; point</text>
+            <line x1="14" y1="64" x2="166" y2="64" stroke="#D0D8DD" stroke-width="1"/>
+            <text x="14" y="86" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Reader names a</text>
+            <text x="14" y="102" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">structure (random).</text>
+            <text x="14" y="118" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Each peer points to</text>
+            <text x="14" y="134" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">it on the model.</text>
+            <text x="14" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Rotate readers.</text>
+            <text x="14" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-style="italic" fill="#7C2018" font-weight="700">RECOGNITION</text>
+          </g>
+          <path d="M 404 140 L 438 140" stroke="#7C2018" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+          <g transform="translate(440, 20)">
+            <rect x="0" y="0" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="2"/>
+            <circle cx="32" cy="32" r="20" fill="#C9A961"/>
+            <text x="32" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="14" fill="#1E3D4C">R3</text>
+            <text x="62" y="38" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" font-size="13" fill="#1E3D4C">Reverse + spell</text>
+            <line x1="14" y1="64" x2="166" y2="64" stroke="#D0D8DD" stroke-width="1"/>
+            <text x="14" y="86" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Tester points to a</text>
+            <text x="14" y="102" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">structure. Student</text>
+            <text x="14" y="118" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">names it AND spells</text>
+            <text x="14" y="134" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">it aloud. Catch your</text>
+            <text x="14" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">spelling errors.</text>
+            <text x="14" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-style="italic" fill="#7C2018" font-weight="700">RECALL + WRITE</text>
+          </g>
+          <path d="M 624 140 L 658 140" stroke="#7C2018" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+          <g transform="translate(660, 20)">
+            <rect x="0" y="0" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="2"/>
+            <circle cx="32" cy="32" r="20" fill="#C9A961"/>
+            <text x="32" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="14" fill="#1E3D4C">R4</text>
+            <text x="62" y="38" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" font-size="13" fill="#1E3D4C">Solo recall</text>
+            <line x1="14" y1="64" x2="166" y2="64" stroke="#D0D8DD" stroke-width="1"/>
+            <text x="14" y="86" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Each person, on their</text>
+            <text x="14" y="102" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">turn, points to and</text>
+            <text x="14" y="118" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">names every</text>
+            <text x="14" y="134" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">structure in the set</text>
+            <text x="14" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">from memory.</text>
+            <text x="14" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-style="italic" fill="#7C2018" font-weight="700">FREE RECALL</text>
+          </g>
+          <path d="M 844 140 L 878 140" stroke="#7C2018" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+          <g transform="translate(880, 20)">
+            <rect x="0" y="0" width="180" height="200" rx="10" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="2"/>
+            <circle cx="32" cy="32" r="20" fill="#C9A961"/>
+            <text x="32" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="14" fill="#1E3D4C">R5</text>
+            <text x="62" y="38" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" font-size="13" fill="#1E3D4C">Add layers</text>
+            <line x1="14" y1="64" x2="166" y2="64" stroke="#D0D8DD" stroke-width="1"/>
+            <text x="14" y="86" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Add information:</text>
+            <text x="14" y="102" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">function, composition,</text>
+            <text x="14" y="118" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">distinguishing</text>
+            <text x="14" y="134" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">characteristics.</text>
+            <text x="14" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#3D4F5A">Connect lab to lecture.</text>
+            <text x="14" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-style="italic" fill="#7C2018" font-weight="700">INTEGRATION</text>
+          </g>
+        </svg>
+      </div>
+      <div class="procedure-actions">
+        <button class="btn btn-gold" type="button" onclick="window.print()">Print this procedure</button>
+        <a class="btn" href="spiral-rounds-procedure.html" target="_blank" rel="noopener">Open standalone version</a>
+      </div>
+    </div>
+
+    <div class="spiral-instructions">
+      <p><strong>Group size:</strong> 3 to 5 students per Spiral Rounds set.</p>
+      <p><strong>Pace:</strong> aim for 5 to 8 minutes per round per set. A set of 12 structures runs all 5 rounds in roughly 30 to 40 minutes.</p>
+      <p><strong>Rule:</strong> every student participates. Active retrieval is the point. Mistakes are expected and useful. Don't opt out by watching.</p>
+    </div>
+
+    <p class="section-lede">The week's <strong>130 structures</strong> are organized into 12 concept categories below. Each category gets one or more sets of 10 to 12. Tick off rounds as your group completes them.</p>
+
+    <div id="spiral-container"></div>
+  </section>
+
+  <!-- SECTION 3: Pre-exam structure sort + spaced repetition -->
+  <section id="sec-preexam" class="section" aria-labelledby="sec-preexam-heading">
+    <p class="section-eyebrow">Section 3</p>
+    <h2 id="sec-preexam-heading">Pre-exam study plan (with spaced repetition)</h2>
+    <p class="section-lede">Tick the structures you know cold. The rest auto-distribute across the days you set below, with spaced repetition built in (each day reviews previous days' structures). The day before the exam is a final review pass.</p>
+
+    <div class="preexam-counter" role="status" aria-live="polite">
+      <span class="counter-tag counter-known">Known cold: <span id="cnt-known">0</span></span>
+      <span class="counter-tag counter-unknown">Need to drill: <span id="cnt-unknown">130</span></span>
+      <span class="counter-tag counter-total">Total: <span id="cnt-total">130</span></span>
+    </div>
+
+    <div class="preexam-controls">
+      <label>
+        <span>Days to study before exam:</span>
+        <select id="days-select" aria-label="Days to study before exam">
+          <option value="2">2 days</option>
+          <option value="3" selected>3 days</option>
+          <option value="4">4 days</option>
+          <option value="5">5 days</option>
+          <option value="6">6 days</option>
+        </select>
+      </label>
+      <button class="btn btn-primary" id="btn-distribute" type="button">Generate study plan</button>
+    </div>
+
+    <div class="checklist-controls">
+      <button class="btn" id="btn-mark-all-known" type="button">Mark all known</button>
+      <button class="btn" id="btn-mark-all-unknown" type="button">Reset all to unknown</button>
+    </div>
+
+    <div id="checklist-container"></div>
+
+    <h3 style="margin-top:32px;">Your study plan</h3>
+    <div id="distribution-container">
+      <div class="dist-empty">No plan yet. Tick structures you know cold above, then click <em>Generate study plan</em>.</div>
+    </div>
+  </section>
+
+  <section id="sec-notes" class="section" aria-labelledby="sec-notes-heading">
+    <p class="section-eyebrow">Workspace</p>
+    <h2 id="sec-notes-heading">Notes for this week</h2>
+    <p class="section-lede">Free space for week-specific notes: questions to ask in lab, structures you keep mixing up, study strategies that worked.</p>
+    <textarea class="notes-area" id="notes-area" aria-label="Week 4 notes" placeholder="Type your notes here. They'll save automatically as you go."></textarea>
+    <div class="utility-row">
+      <span class="utility-status" id="save-status" aria-live="polite">Your progress saves automatically in this browser.</span>
+      <button class="btn" id="btn-clear-all" type="button">Reset everything for Week 4</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>BIO 004 Human Anatomy, Summer 2026 &middot; Week 4 Lab Sprint &middot; Dr. Sharilyn Rennie</p>
+  </footer>
+</main>
+
+<script>
+const STRUCTURES = [
+  // CATEGORY 1: Heart regions and pericardium (10)
+  { id:"heart-apex", name:"Apex of the heart", category:"Heart regions and pericardium" },
+  { id:"heart-base", name:"Base of the heart", category:"Heart regions and pericardium" },
+  { id:"right-atrium", name:"Right atrium", category:"Heart regions and pericardium" },
+  { id:"left-atrium", name:"Left atrium", category:"Heart regions and pericardium" },
+  { id:"right-auricle", name:"Right auricle", category:"Heart regions and pericardium" },
+  { id:"left-auricle", name:"Left auricle", category:"Heart regions and pericardium" },
+  { id:"right-ventricle", name:"Right ventricle", category:"Heart regions and pericardium" },
+  { id:"left-ventricle", name:"Left ventricle", category:"Heart regions and pericardium" },
+  { id:"interventricular-septum", name:"Interventricular septum", category:"Heart regions and pericardium" },
+  { id:"pericardium-overview", name:"Pericardium (parietal, visceral, cavity, fluid - refresher from Week 1)", category:"Heart regions and pericardium" },
+
+  // CATEGORY 2: Atrial structures (10)
+  { id:"pectinate-muscles", name:"Pectinate muscles", category:"Atrial structures" },
+  { id:"fossa-ovalis", name:"Fossa ovalis (closed foramen ovale)", category:"Atrial structures" },
+  { id:"coronary-sinus", name:"Coronary sinus (drains into right atrium)", category:"Atrial structures" },
+  { id:"superior-vena-cava", name:"Superior vena cava", category:"Atrial structures" },
+  { id:"inferior-vena-cava", name:"Inferior vena cava", category:"Atrial structures" },
+  { id:"pulmonary-veins", name:"Pulmonary veins (4 - drain into left atrium)", category:"Atrial structures" },
+  { id:"tricuspid-valve", name:"Tricuspid valve (right AV valve)", category:"Atrial structures" },
+  { id:"bicuspid-valve", name:"Bicuspid (mitral) valve (left AV valve)", category:"Atrial structures" },
+  { id:"aortic-semilunar", name:"Aortic semilunar valve", category:"Atrial structures" },
+  { id:"pulmonary-semilunar", name:"Pulmonary semilunar valve", category:"Atrial structures" },
+
+  // CATEGORY 3: Ventricular structures (12)
+  { id:"trabeculae-carneae", name:"Trabeculae carneae", category:"Ventricular structures" },
+  { id:"chordae-tendineae", name:"Chordae tendineae", category:"Ventricular structures" },
+  { id:"papillary-muscles", name:"Papillary muscles (anterior, posterior, septal)", category:"Ventricular structures" },
+  { id:"rv-myocardium", name:"Right ventricle myocardium (thinner)", category:"Ventricular structures" },
+  { id:"lv-myocardium", name:"Left ventricle myocardium (thicker)", category:"Ventricular structures" },
+  { id:"pulmonary-trunk", name:"Pulmonary trunk", category:"Ventricular structures" },
+  { id:"right-pulmonary-artery", name:"Right pulmonary artery", category:"Ventricular structures" },
+  { id:"left-pulmonary-artery", name:"Left pulmonary artery", category:"Ventricular structures" },
+  { id:"ascending-aorta", name:"Ascending aorta", category:"Ventricular structures" },
+  { id:"aortic-arch", name:"Aortic arch", category:"Ventricular structures" },
+  { id:"descending-aorta", name:"Descending (thoracic) aorta", category:"Ventricular structures" },
+  { id:"pulmonary-bifurcation", name:"Pulmonary trunk bifurcation", category:"Ventricular structures" },
+
+  // CATEGORY 4: Heart vasculature (12)
+  { id:"brachiocephalic-artery", name:"Brachiocephalic (innominate) artery", category:"Heart vasculature" },
+  { id:"left-common-carotid", name:"Left common carotid artery", category:"Heart vasculature" },
+  { id:"left-subclavian-artery", name:"Left subclavian artery", category:"Heart vasculature" },
+  { id:"right-coronary-artery", name:"Right coronary artery (RCA)", category:"Heart vasculature" },
+  { id:"left-coronary-artery", name:"Left coronary artery (LCA)", category:"Heart vasculature" },
+  { id:"lad", name:"Anterior interventricular artery (LAD)", category:"Heart vasculature" },
+  { id:"circumflex-artery", name:"Circumflex artery", category:"Heart vasculature" },
+  { id:"posterior-iv-artery", name:"Posterior interventricular artery", category:"Heart vasculature" },
+  { id:"marginal-artery", name:"Marginal artery (right)", category:"Heart vasculature" },
+  { id:"great-cardiac-vein", name:"Great cardiac vein", category:"Heart vasculature" },
+  { id:"middle-cardiac-vein", name:"Middle cardiac vein", category:"Heart vasculature" },
+  { id:"small-cardiac-vein", name:"Small cardiac vein", category:"Heart vasculature" },
+
+  // CATEGORY 5: Fetal remnants and electrophysiology (10)
+  { id:"ligamentum-arteriosum", name:"Ligamentum arteriosum (was ductus arteriosus)", category:"Fetal remnants and electrophysiology" },
+  { id:"ligamentum-venosum", name:"Ligamentum venosum (was ductus venosus, in liver)", category:"Fetal remnants and electrophysiology" },
+  { id:"ligamentum-teres", name:"Ligamentum teres / round ligament of liver (was umbilical vein)", category:"Fetal remnants and electrophysiology" },
+  { id:"median-umbilical", name:"Median umbilical ligaments (were umbilical arteries)", category:"Fetal remnants and electrophysiology" },
+  { id:"foramen-ovale-fetal", name:"Foramen ovale (fetal) → fossa ovalis (adult)", category:"Fetal remnants and electrophysiology" },
+  { id:"sa-node", name:"SA (sinoatrial) node — pacemaker", category:"Fetal remnants and electrophysiology" },
+  { id:"av-node", name:"AV (atrioventricular) node", category:"Fetal remnants and electrophysiology" },
+  { id:"bundle-of-his", name:"Bundle of His (AV bundle)", category:"Fetal remnants and electrophysiology" },
+  { id:"bundle-branches", name:"Right and left bundle branches", category:"Fetal remnants and electrophysiology" },
+  { id:"purkinje-fibers", name:"Purkinje fibers", category:"Fetal remnants and electrophysiology" },
+
+  // CATEGORY 6: Chest and anterior brachium muscles (12)
+  { id:"pectoralis-major", name:"Pectoralis major", category:"Chest and anterior brachium muscles" },
+  { id:"pectoralis-minor", name:"Pectoralis minor", category:"Chest and anterior brachium muscles" },
+  { id:"subclavius", name:"Subclavius", category:"Chest and anterior brachium muscles" },
+  { id:"serratus-anterior", name:"Serratus anterior", category:"Chest and anterior brachium muscles" },
+  { id:"biceps-long", name:"Biceps brachii (long head)", category:"Chest and anterior brachium muscles" },
+  { id:"biceps-short", name:"Biceps brachii (short head)", category:"Chest and anterior brachium muscles" },
+  { id:"brachialis", name:"Brachialis", category:"Chest and anterior brachium muscles" },
+  { id:"coracobrachialis", name:"Coracobrachialis", category:"Chest and anterior brachium muscles" },
+  { id:"anterior-deltoid", name:"Anterior deltoid", category:"Chest and anterior brachium muscles" },
+  { id:"external-intercostals", name:"External intercostals", category:"Chest and anterior brachium muscles" },
+  { id:"internal-intercostals", name:"Internal intercostals", category:"Chest and anterior brachium muscles" },
+  { id:"diaphragm-refresher", name:"Diaphragm (refresher from Week 1)", category:"Chest and anterior brachium muscles" },
+
+  // CATEGORY 7: Anterior antebrachium muscles (10)
+  { id:"pronator-teres", name:"Pronator teres", category:"Anterior antebrachium muscles" },
+  { id:"flexor-carpi-radialis", name:"Flexor carpi radialis", category:"Anterior antebrachium muscles" },
+  { id:"palmaris-longus", name:"Palmaris longus", category:"Anterior antebrachium muscles" },
+  { id:"flexor-carpi-ulnaris", name:"Flexor carpi ulnaris", category:"Anterior antebrachium muscles" },
+  { id:"flexor-digitorum-superficialis", name:"Flexor digitorum superficialis", category:"Anterior antebrachium muscles" },
+  { id:"flexor-digitorum-profundus", name:"Flexor digitorum profundus", category:"Anterior antebrachium muscles" },
+  { id:"flexor-pollicis-longus", name:"Flexor pollicis longus", category:"Anterior antebrachium muscles" },
+  { id:"pronator-quadratus", name:"Pronator quadratus", category:"Anterior antebrachium muscles" },
+  { id:"brachioradialis", name:"Brachioradialis (lateral compartment, but flexes elbow)", category:"Anterior antebrachium muscles" },
+  { id:"supinator", name:"Supinator (deep, posterior compartment)", category:"Anterior antebrachium muscles" },
+
+  // CATEGORY 8: Posterior antebrachium muscles (10)
+  { id:"extensor-carpi-radialis-longus", name:"Extensor carpi radialis longus", category:"Posterior antebrachium muscles" },
+  { id:"extensor-carpi-radialis-brevis", name:"Extensor carpi radialis brevis", category:"Posterior antebrachium muscles" },
+  { id:"extensor-digitorum", name:"Extensor digitorum", category:"Posterior antebrachium muscles" },
+  { id:"extensor-digiti-minimi", name:"Extensor digiti minimi", category:"Posterior antebrachium muscles" },
+  { id:"extensor-carpi-ulnaris", name:"Extensor carpi ulnaris", category:"Posterior antebrachium muscles" },
+  { id:"anconeus", name:"Anconeus", category:"Posterior antebrachium muscles" },
+  { id:"abductor-pollicis-longus", name:"Abductor pollicis longus", category:"Posterior antebrachium muscles" },
+  { id:"extensor-pollicis-brevis", name:"Extensor pollicis brevis", category:"Posterior antebrachium muscles" },
+  { id:"extensor-pollicis-longus", name:"Extensor pollicis longus", category:"Posterior antebrachium muscles" },
+  { id:"extensor-indicis", name:"Extensor indicis", category:"Posterior antebrachium muscles" },
+
+  // CATEGORY 9: Posterior thorax, shoulder, posterior brachium (12)
+  { id:"trapezius", name:"Trapezius", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"latissimus-dorsi", name:"Latissimus dorsi", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"rhomboid-major", name:"Rhomboid major", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"rhomboid-minor", name:"Rhomboid minor", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"levator-scapulae", name:"Levator scapulae", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"deltoid", name:"Deltoid (anterior, lateral, posterior)", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"supraspinatus", name:"Supraspinatus (rotator cuff S)", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"infraspinatus", name:"Infraspinatus (rotator cuff I)", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"teres-minor", name:"Teres minor (rotator cuff T)", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"subscapularis", name:"Subscapularis (rotator cuff S)", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"teres-major", name:"Teres major (NOT part of rotator cuff)", category:"Posterior thorax, shoulder, posterior brachium" },
+  { id:"triceps-brachii", name:"Triceps brachii (long, lateral, medial heads)", category:"Posterior thorax, shoulder, posterior brachium" },
+
+  // CATEGORY 10: UE arteries (10)
+  { id:"subclavian-artery", name:"Subclavian artery", category:"UE arteries" },
+  { id:"axillary-artery", name:"Axillary artery", category:"UE arteries" },
+  { id:"brachial-artery", name:"Brachial artery", category:"UE arteries" },
+  { id:"deep-brachial-artery", name:"Deep brachial (profunda brachii) artery", category:"UE arteries" },
+  { id:"radial-artery", name:"Radial artery", category:"UE arteries" },
+  { id:"ulnar-artery", name:"Ulnar artery", category:"UE arteries" },
+  { id:"common-interosseous", name:"Common interosseous artery", category:"UE arteries" },
+  { id:"superficial-palmar-arch", name:"Superficial palmar arch", category:"UE arteries" },
+  { id:"deep-palmar-arch", name:"Deep palmar arch", category:"UE arteries" },
+  { id:"digital-arteries", name:"Digital arteries", category:"UE arteries" },
+
+  // CATEGORY 11: UE veins and nerves (12)
+  { id:"subclavian-vein", name:"Subclavian vein", category:"UE veins and nerves" },
+  { id:"axillary-vein", name:"Axillary vein", category:"UE veins and nerves" },
+  { id:"brachial-vein", name:"Brachial vein (deep)", category:"UE veins and nerves" },
+  { id:"cephalic-vein", name:"Cephalic vein (lateral, superficial)", category:"UE veins and nerves" },
+  { id:"basilic-vein", name:"Basilic vein (medial, superficial)", category:"UE veins and nerves" },
+  { id:"median-cubital-vein", name:"Median cubital vein (venipuncture site)", category:"UE veins and nerves" },
+  { id:"brachial-plexus", name:"Brachial plexus (overview)", category:"UE veins and nerves" },
+  { id:"musculocutaneous-nerve", name:"Musculocutaneous nerve", category:"UE veins and nerves" },
+  { id:"axillary-nerve", name:"Axillary nerve", category:"UE veins and nerves" },
+  { id:"median-nerve", name:"Median nerve", category:"UE veins and nerves" },
+  { id:"ulnar-nerve", name:"Ulnar nerve", category:"UE veins and nerves" },
+  { id:"radial-nerve", name:"Radial nerve", category:"UE veins and nerves" },
+
+  // CATEGORY 12: Vessel histology (10)
+  { id:"tunica-intima", name:"Tunica intima (innermost)", category:"Vessel histology" },
+  { id:"endothelium-vessel", name:"Endothelium (lining of tunica intima)", category:"Vessel histology" },
+  { id:"tunica-media", name:"Tunica media (middle, smooth muscle)", category:"Vessel histology" },
+  { id:"tunica-externa", name:"Tunica externa / adventitia (outermost)", category:"Vessel histology" },
+  { id:"lumen-comparison", name:"Lumen comparison (artery: smaller, circular; vein: larger, often collapsed)", category:"Vessel histology" },
+  { id:"internal-elastic-lamina", name:"Internal elastic lamina (in arteries)", category:"Vessel histology" },
+  { id:"external-elastic-lamina", name:"External elastic lamina (in arteries)", category:"Vessel histology" },
+  { id:"smooth-muscle-tunica-media", name:"Smooth muscle in tunica media (thick in arteries, thin in veins)", category:"Vessel histology" },
+  { id:"venous-valves", name:"Valves (in veins, prevent backflow)", category:"Vessel histology" },
+  { id:"capillary-types", name:"Capillary types overview: continuous, fenestrated, sinusoidal", category:"Vessel histology" },
+];
+
+const CATEGORY_ORDER = [
+  "Heart regions and pericardium",
+  "Atrial structures",
+  "Ventricular structures",
+  "Heart vasculature",
+  "Fetal remnants and electrophysiology",
+  "Chest and anterior brachium muscles",
+  "Anterior antebrachium muscles",
+  "Posterior antebrachium muscles",
+  "Posterior thorax, shoulder, posterior brachium",
+  "UE arteries",
+  "UE veins and nerves",
+  "Vessel histology",
+];
+
+const STORAGE_KEY = "bio004-week4-lab-sprint-v3";
+let state = {
+  known: {}, spiral: {}, notes: "",
+  daysBeforeExam: 3, distribution: null, lastSaved: null,
+};
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const p = JSON.parse(raw);
+      if (p && typeof p === "object") state = Object.assign(state, p);
+    }
+  } catch (e) {}
+}
+let saveTimer = null;
+function save() {
+  state.lastSaved = new Date().toISOString();
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    setSaveStatus("Saved.");
+  } catch (e) { setSaveStatus("Could not save (storage unavailable)."); }
+  if (saveTimer) clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => setSaveStatus("Your progress saves automatically in this browser."), 1500);
+}
+function setSaveStatus(msg) {
+  const el = document.getElementById("save-status");
+  if (el) el.textContent = msg;
+}
+
+function chunkBySize(arr, target) {
+  if (arr.length <= target + 2) return [arr];
+  const numChunks = Math.ceil(arr.length / target);
+  const chunkSize = Math.ceil(arr.length / numChunks);
+  const chunks = [];
+  for (let i = 0; i < arr.length; i += chunkSize) chunks.push(arr.slice(i, i + chunkSize));
+  return chunks;
+}
+
+function renderSpiralRounds() {
+  const container = document.getElementById("spiral-container");
+  if (!container) return;
+  container.innerHTML = "";
+  CATEGORY_ORDER.forEach(cat => {
+    const items = STRUCTURES.filter(s => s.category === cat);
+    if (items.length === 0) return;
+    const sets = chunkBySize(items, 11);
+    const catBlock = document.createElement("div");
+    catBlock.className = "category-section";
+    catBlock.innerHTML = `<p class="category-title">${escHtml(cat)}</p><p class="category-meta">${items.length} structures &middot; ${sets.length} set${sets.length === 1 ? "" : "s"}</p>`;
+    sets.forEach((chunk, idx) => {
+      const setId = `${cat.replace(/[^a-z0-9]/gi, '-')}-set-${idx + 1}`.toLowerCase();
+      const itemsHtml = chunk.map(s => `<li>${escHtml(s.name)}</li>`).join("");
+      const roundsHtml = [1, 2, 3, 4, 5].map(r => {
+        const key = `${setId}:r${r}`;
+        const checked = state.spiral[key] ? "checked" : "";
+        const cls = state.spiral[key] ? "is-done" : "";
+        return `<label class="spiral-round-checkbox ${cls}"><input type="checkbox" data-spiral-key="${key}" ${checked}><span>R${r}</span></label>`;
+      }).join("");
+      const setEl = document.createElement("article");
+      setEl.className = "spiral-set";
+      setEl.innerHTML = `<div class="spiral-set-header"><span class="spiral-set-title">Set ${idx + 1}</span><span class="spiral-set-tag">${chunk.length} structures</span></div><ul class="spiral-set-items">${itemsHtml}</ul><div class="spiral-rounds-progress" role="group" aria-label="${escAttr(cat)} Set ${idx + 1} rounds">${roundsHtml}</div>`;
+      catBlock.appendChild(setEl);
+    });
+    container.appendChild(catBlock);
+  });
+  container.querySelectorAll('input[data-spiral-key]').forEach(cb => {
+    cb.addEventListener("change", e => {
+      const key = e.target.getAttribute("data-spiral-key");
+      state.spiral[key] = e.target.checked;
+      const label = e.target.closest("label");
+      if (label) label.classList.toggle("is-done", e.target.checked);
+      save();
+    });
+  });
+}
+
+function renderChecklist() {
+  const c = document.getElementById("checklist-container");
+  if (!c) return;
+  c.innerHTML = "";
+  CATEGORY_ORDER.forEach(cat => {
+    const items = STRUCTURES.filter(s => s.category === cat);
+    if (items.length === 0) return;
+    const block = document.createElement("div");
+    block.className = "checklist-cat";
+    const lis = items.map(s => {
+      const checked = state.known[s.id] ? "checked" : "";
+      const cls = state.known[s.id] ? "is-known" : "";
+      return `<li><label class="${cls}"><input type="checkbox" data-known-id="${s.id}" ${checked} aria-label="${escAttr(s.name)}"><span>${escHtml(s.name)}</span></label></li>`;
+    }).join("");
+    block.innerHTML = `<p class="checklist-cat-title">${escHtml(cat)}</p><ul class="checklist-grid">${lis}</ul>`;
+    c.appendChild(block);
+  });
+  c.querySelectorAll('input[data-known-id]').forEach(cb => {
+    cb.addEventListener("change", e => {
+      const id = e.target.getAttribute("data-known-id");
+      state.known[id] = e.target.checked;
+      const label = e.target.closest("label");
+      if (label) label.classList.toggle("is-known", e.target.checked);
+      updateCounters();
+      save();
+    });
+  });
+}
+
+function updateCounters() {
+  const knownCount = STRUCTURES.filter(s => state.known[s.id]).length;
+  const unknownCount = STRUCTURES.length - knownCount;
+  document.getElementById("cnt-known").textContent = knownCount;
+  document.getElementById("cnt-unknown").textContent = unknownCount;
+  document.getElementById("cnt-total").textContent = STRUCTURES.length;
+}
+
+function generateDistribution() {
+  const days = parseInt(document.getElementById("days-select").value, 10);
+  const unknowns = STRUCTURES.filter(s => !state.known[s.id]);
+  if (unknowns.length === 0) {
+    state.distribution = { days: [], message: "You've marked everything as known cold. If that's accurate, you're ready. If it's optimistic, untick a few and try again." };
+    save(); renderDistribution();
+    document.getElementById("sec-preexam").scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+  const newChunks = days <= 1 ? [unknowns] : chunkInto(unknowns, days - 1);
+  const daysList = [];
+  for (let i = 0; i < days; i++) {
+    const dayNum = i + 1;
+    const isLastDay = (i === days - 1);
+    let title, when, items;
+    if (isLastDay) {
+      title = `Day ${dayNum}: Final review pass`;
+      when = "Day before the exam — full cold re-test";
+      const reviewSet = [];
+      for (let j = 0; j < newChunks.length; j++) newChunks[j].forEach(s => reviewSet.push({ ...s, mode: "review" }));
+      items = reviewSet;
+    } else {
+      title = `Day ${dayNum}: New content`;
+      when = i === 0 ? "Start of your study window" : `Day ${dayNum} of ${days}`;
+      const newItems = newChunks[i].map(s => ({ ...s, mode: "new" }));
+      const reviewItems = [];
+      for (let j = 0; j < i; j++) newChunks[j].forEach(s => reviewItems.push({ ...s, mode: "review" }));
+      items = [...newItems, ...reviewItems];
+    }
+    daysList.push({ title, when, items });
+  }
+  state.distribution = { days: daysList };
+  save(); renderDistribution();
+  document.getElementById("sec-preexam").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function chunkInto(arr, n) {
+  if (n <= 0) return [arr];
+  const chunks = Array.from({ length: n }, () => []);
+  arr.forEach((item, idx) => chunks[idx % n].push(item));
+  return chunks;
+}
+
+function renderDistribution() {
+  const c = document.getElementById("distribution-container");
+  if (!c) return;
+  if (!state.distribution || (!state.distribution.days && !state.distribution.message)) {
+    c.innerHTML = `<div class="dist-empty">No plan yet. Tick structures you know cold above, then click <em>Generate study plan</em>.</div>`;
+    return;
+  }
+  if (state.distribution.message) {
+    c.innerHTML = `<div class="dist-empty">${escHtml(state.distribution.message)}</div>`;
+    return;
+  }
+  let html = "";
+  state.distribution.days.forEach(day => {
+    if (day.items.length === 0) return;
+    const newItems = day.items.filter(i => i.mode === "new");
+    const reviewItems = day.items.filter(i => i.mode === "review");
+    const lis = [];
+    if (newItems.length > 0) lis.push(...newItems.map(i => `<li class="dist-new">${escHtml(i.name)}</li>`));
+    if (reviewItems.length > 0) lis.push(...reviewItems.map(i => `<li class="dist-review">${escHtml(i.name)}</li>`));
+    html += `<article class="dist-day-card"><header class="dist-day-header"><span class="dist-day-title">${escHtml(day.title)} (${day.items.length} structure${day.items.length === 1 ? '' : 's'})</span><span class="dist-day-when">${escHtml(day.when)}</span></header><ul class="dist-list">${lis.join("")}</ul></article>`;
+  });
+  html += `<div class="dist-empty" style="background:#FAFAFA;border-style:solid;text-align:left;font-size:12px;"><strong>Legend:</strong> <span style="color:#7C2018;font-weight:800;">●</span> new content this day &middot; <span style="color:#A8893E;font-weight:800;">○</span> review of previous days' content (spaced repetition)</div>`;
+  c.innerHTML = html;
+}
+
+function escHtml(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+}
+function escAttr(s) { return escHtml(s); }
+
+load();
+renderSpiralRounds();
+renderChecklist();
+renderDistribution();
+updateCounters();
+
+const notes = document.getElementById("notes-area");
+notes.value = state.notes || "";
+notes.addEventListener("input", () => { state.notes = notes.value; save(); });
+
+const daysSelect = document.getElementById("days-select");
+daysSelect.value = state.daysBeforeExam || 3;
+daysSelect.addEventListener("change", () => {
+  state.daysBeforeExam = parseInt(daysSelect.value, 10);
+  save();
+});
+
+document.getElementById("btn-distribute").addEventListener("click", generateDistribution);
+
+document.getElementById("btn-mark-all-known").addEventListener("click", () => {
+  if (!confirm("Mark every structure as known cold? Use only if you have truly mastered them.")) return;
+  STRUCTURES.forEach(s => { state.known[s.id] = true; });
+  save(); renderChecklist(); updateCounters();
+});
+
+document.getElementById("btn-mark-all-unknown").addEventListener("click", () => {
+  if (!confirm("Reset all structures to unknown?")) return;
+  state.known = {}; state.distribution = null;
+  save(); renderChecklist(); renderDistribution(); updateCounters();
+});
+
+document.getElementById("btn-clear-all").addEventListener("click", () => {
+  if (!confirm("Reset everything for Week 4? This will clear your checklist, Spiral Rounds progress, study plan, and notes.")) return;
+  state = { known: {}, spiral: {}, notes: "", daysBeforeExam: 3, distribution: null, lastSaved: null };
+  save();
+  renderSpiralRounds(); renderChecklist(); renderDistribution(); updateCounters();
+  notes.value = ""; daysSelect.value = 3;
+});
+
+(function() {
+  const FRAME_ID = "bio004-week4-labsprint";
+  function sendHeight() {
+    const h = document.documentElement.scrollHeight;
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "iframeHeight", id: FRAME_ID, height: h }, "*");
+    }
+  }
+  if (typeof ResizeObserver !== "undefined") new ResizeObserver(sendHeight).observe(document.body);
+  window.addEventListener("load", sendHeight);
+  window.addEventListener("resize", sendHeight);
+  setTimeout(sendHeight, 100);
+  setTimeout(sendHeight, 500);
+})();
+</script>
+</body>
+</html>
