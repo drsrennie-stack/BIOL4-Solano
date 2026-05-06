@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 1: Foundations and Integumentary System - BIO 004 Summer 2026</title>
+  <meta name="description" content="Week 1 weekly view for BIO 004 Human Anatomy, Summer 2026, Solano Community College. Foundations and Integumentary System, June 15 to 18. By Dr. Sharilyn Rennie.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* Shared CSS for all 8 BIO 004 weekly pages */
+:root {
+  --paper: #FFFFFF;
+  --card: #FFFFFF;
+
+  --navy: #1E3D4C;
+  --navy-soft: #335E6E;
+  --terra: #7C2018;
+  --terra-light: #A0402A;
+  --gold: #C9A961;
+  --gold-soft: #E5D5A8;
+  --sea-glass: #8FB8BF;
+  --sea-glass-mist: #DCE8EB;
+
+  --case-bg: #F5DDD3;
+  --case-border: #D8A89A;
+  --case-text: #7C2018;
+
+  --class-bg: #DCE8EB;
+  --class-border: #8FB8BF;
+  --class-text: #1E3D4C;
+
+  --prework-bg: #F5EAD5;
+  --prework-border: #C9A961;
+  --prework-text: #6B4F1D;
+
+  --ink: #15262F;
+  --ink-soft: #3D4F5A;
+
+  --divider: rgba(30, 61, 76, 0.32);
+  --divider-light: rgba(30, 61, 76, 0.18);
+  --card-shadow: 0 4px 14px rgba(30, 61, 76, 0.10), 0 1px 3px rgba(30, 61, 76, 0.06);
+  --focus-ring: #15262F;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); }
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.skip-link {
+  position: absolute; top: -48px; left: 16px;
+  background: var(--ink); color: #FFFFFF;
+  padding: 12px 20px; border-radius: 8px;
+  font-size: 14px; font-weight: 600;
+  text-decoration: none; z-index: 1000;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 16px; outline: 3px solid #FFFFFF; outline-offset: 3px; }
+
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px; border-radius: 6px;
+}
+
+.banner { background: var(--navy); color: #FFFFFF; padding: 56px 32px 48px; }
+.banner-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+.banner-eyebrow {
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #E5D5A8; margin-bottom: 16px;
+}
+.banner-eyebrow-sep {
+  display: inline-block; width: 20px; height: 1px;
+  background: #E5D5A8; margin: 0 12px;
+  vertical-align: middle; opacity: 0.6;
+}
+.banner-title {
+  font-size: clamp(36px, 5.5vw, 54px);
+  font-weight: 700; color: #FFFFFF;
+  line-height: 1.05; letter-spacing: -0.035em;
+  margin-bottom: 14px;
+}
+.banner-subtitle {
+  font-style: italic; font-size: clamp(16px, 2vw, 18px);
+  font-weight: 400; color: #DCE8EB;
+  max-width: 700px; margin: 0 auto;
+  line-height: 1.5; letter-spacing: -0.005em;
+}
+.banner-actions {
+  margin-top: 28px; display: flex;
+  justify-content: center; gap: 12px; flex-wrap: wrap;
+}
+.action-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255, 255, 255, 0.08); color: #FFFFFF;
+  padding: 10px 18px; border-radius: 100px;
+  font-size: 13px; font-weight: 600;
+  text-decoration: none; letter-spacing: 0.01em;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-height: 44px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.action-btn:hover { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.6); }
+.action-btn--primary { background: #FFFFFF; color: var(--navy); border-color: #FFFFFF; }
+.action-btn--primary:hover { background: var(--gold-soft); border-color: var(--gold-soft); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 36px 32px 64px; }
+@media (max-width: 640px) { .container { padding: 28px 16px 48px; } }
+
+.section {
+  background: var(--card); border: 1px solid var(--divider);
+  border-radius: 16px; box-shadow: var(--card-shadow);
+  padding: 32px; margin-bottom: 24px;
+}
+@media (max-width: 640px) { .section { padding: 24px 20px; } }
+
+.section-eyebrow {
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+}
+.section-heading {
+  font-size: 26px; font-weight: 700;
+  color: var(--navy); letter-spacing: -0.02em;
+  line-height: 1.15; margin-bottom: 8px;
+}
+.section-lede {
+  font-size: 15px; color: var(--ink-soft);
+  line-height: 1.55; max-width: 720px; margin-bottom: 24px;
+}
+
+.stats-strip {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 14px 28px; font-size: 13px; color: var(--ink);
+  text-align: center; padding: 18px 28px;
+}
+.stats-strip strong { color: var(--terra); font-weight: 700; font-variant-numeric: tabular-nums; }
+.stats-divider { color: var(--sea-glass); opacity: 0.8; }
+
+.diagram-wrap { width: 100%; margin-top: 16px; overflow-x: auto; }
+.diagram-wrap svg { display: block; width: 100%; height: auto; min-width: 600px; }
+@media (max-width: 640px) { .diagram-wrap svg { min-width: 540px; } }
+
+.lab-exam-block {
+  background: var(--terra); color: #FFFFFF;
+  border-radius: 16px; padding: 22px 32px;
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 18px;
+  flex-wrap: wrap; box-shadow: var(--card-shadow);
+}
+.lab-exam-tag {
+  background: var(--gold); color: var(--navy);
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 6px; flex-shrink: 0;
+}
+.lab-exam-content { flex: 1; min-width: 200px; }
+.lab-exam-title {
+  font-size: 18px; font-weight: 700;
+  color: #FFFFFF; line-height: 1.3;
+  margin-bottom: 4px; letter-spacing: -0.01em;
+}
+.lab-exam-detail {
+  font-size: 13px; color: #FCE8E2;
+  line-height: 1.5; font-weight: 400;
+}
+.lab-exam-day {
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold-soft); flex-shrink: 0;
+}
+
+.case-card {
+  background: var(--card); border: 1px solid var(--divider);
+  border-radius: 16px; box-shadow: var(--card-shadow);
+  margin-bottom: 24px; overflow: hidden;
+}
+.case-banner {
+  background: var(--terra); color: #FFFFFF;
+  padding: 22px 32px;
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+}
+.case-banner-tag {
+  background: var(--gold); color: var(--navy);
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 6px; flex-shrink: 0;
+}
+.case-banner-title {
+  font-size: 22px; font-weight: 700; color: #FFFFFF;
+  letter-spacing: -0.015em; flex: 1;
+}
+.case-body { padding: 28px 32px; }
+.case-lede {
+  font-size: 15px; color: var(--ink-soft);
+  line-height: 1.55; max-width: 720px; margin-bottom: 24px;
+}
+@media (max-width: 640px) {
+  .case-banner { padding: 18px 20px; }
+  .case-body { padding: 24px 20px; }
+}
+
+.daily-plan-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+
+.day-card {
+  background: var(--card); border: 1px solid var(--divider);
+  border-radius: 14px; box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+.day-card-header {
+  background: var(--navy); color: #FFFFFF;
+  padding: 18px 24px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.day-card-tag {
+  background: var(--gold); color: var(--navy);
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px; flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.day-card-day {
+  font-size: 18px; font-weight: 700; color: #FFFFFF;
+  letter-spacing: -0.01em; flex: 1; min-width: 200px;
+}
+.day-card-pill {
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 5px 11px; border-radius: 100px; white-space: nowrap;
+}
+.pill-case-intro, .pill-case-prep, .pill-case-run { background: var(--case-bg); color: var(--case-text); }
+.pill-tbl { background: var(--sea-glass); color: var(--navy); }
+
+.day-card-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid var(--divider-light);
+}
+@media (max-width: 880px) { .day-card-grid { grid-template-columns: 1fr; } }
+
+.day-section { padding: 22px 24px; border-right: 1px solid var(--divider-light); }
+@media (max-width: 880px) {
+  .day-section { border-right: none; border-bottom: 1px solid var(--divider-light); }
+  .day-section:last-child { border-bottom: none; }
+}
+.day-section:last-child { border-right: none; }
+.section-yesterday { background: #FAFAF8; }
+.section-today { background: var(--card); }
+.section-tonight { background: #FAFAF8; }
+
+.day-section-label {
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--navy-soft); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.day-section-label-icon { width: 14px; height: 14px; flex-shrink: 0; }
+.day-section-content { font-size: 14px; color: var(--ink); line-height: 1.55; }
+.day-section-content ul { padding-left: 0; list-style: none; margin: 0; }
+.day-section-content li { padding: 5px 0 5px 18px; position: relative; }
+.day-section-content li::before {
+  content: ""; position: absolute; left: 0; top: 14px;
+  width: 8px; height: 1px; background: var(--navy-soft);
+}
+.tonight-subhead {
+  font-size: 11px; font-weight: 700; color: var(--terra);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin: 14px 0 6px;
+}
+.tonight-subhead:first-child { margin-top: 0; }
+.tonight-layer-label {
+  font-size: 11px; font-weight: 700; color: var(--navy);
+  letter-spacing: 0.04em; margin: 10px 0 4px;
+}
+.tonight-layer-label:first-child { margin-top: 0; }
+.atlas-cite {
+  font-size: 12px; font-style: italic; color: var(--navy-soft);
+  display: block; margin-top: 4px;
+}
+
+.differential-card {
+  background: var(--card); border: 1px solid var(--divider);
+  border-radius: 16px; box-shadow: var(--card-shadow);
+  padding: 32px; margin-bottom: 24px; overflow: hidden;
+}
+.differential-table {
+  width: 100%; border-collapse: collapse; margin-top: 16px;
+  font-size: 14px;
+}
+.differential-table thead {
+  background: var(--sea-glass-mist);
+}
+.differential-table th {
+  padding: 12px 14px; text-align: left;
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--navy); border-bottom: 1px solid var(--divider);
+}
+.differential-table td {
+  padding: 12px 14px; border-bottom: 1px solid var(--divider-light);
+  vertical-align: top; line-height: 1.5;
+}
+.differential-table tr:last-child td { border-bottom: none; }
+.differential-table .opt-name { font-weight: 600; color: var(--ink); }
+
+.tbl-instructions {
+  background: var(--sea-glass-mist); border-left: 4px solid var(--navy);
+  padding: 16px 20px; border-radius: 0 8px 8px 0; margin-top: 20px;
+}
+.tbl-instructions h3 {
+  font-size: 12px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--navy); margin-bottom: 8px;
+}
+.tbl-instructions ol {
+  margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6;
+}
+.tbl-instructions li { margin-bottom: 4px; }
+
+.weekend-card {
+  background: var(--card); border: 1px solid var(--divider);
+  border-radius: 16px; box-shadow: var(--card-shadow);
+  margin-bottom: 24px; overflow: hidden;
+}
+.weekend-banner {
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-soft) 100%);
+  color: var(--navy); padding: 22px 32px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.weekend-banner-tag {
+  background: var(--navy); color: #FFFFFF;
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 6px; flex-shrink: 0;
+}
+.weekend-banner-title {
+  font-size: 22px; font-weight: 700; color: var(--navy);
+  letter-spacing: -0.015em; flex: 1; min-width: 200px;
+}
+.weekend-banner-dates {
+  font-size: 12px; font-weight: 700; color: var(--navy);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.weekend-body { padding: 28px 32px; }
+.weekend-lede {
+  font-size: 15px; color: var(--ink-soft);
+  line-height: 1.6; margin-bottom: 24px;
+}
+.weekend-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+@media (max-width: 880px) { .weekend-grid { grid-template-columns: 1fr; } }
+.weekend-block {
+  background: #FAFAF8; border: 1px solid var(--divider-light);
+  border-radius: 12px; padding: 20px 22px;
+}
+.weekend-block-icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--gold-soft); color: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.weekend-block-icon svg { width: 16px; height: 16px; }
+.weekend-block-title {
+  font-size: 14px; font-weight: 700; color: var(--navy);
+  margin-bottom: 10px; letter-spacing: -0.005em;
+}
+.weekend-block-list { font-size: 13px; color: var(--ink); line-height: 1.55; list-style: none; padding: 0; }
+.weekend-block-list li { padding: 4px 0 4px 18px; position: relative; }
+.weekend-block-list li::before {
+  content: ""; position: absolute; left: 0; top: 11px;
+  width: 8px; height: 1px; background: var(--gold);
+}
+@media (max-width: 640px) {
+  .weekend-banner { padding: 18px 20px; }
+  .weekend-body { padding: 24px 20px; }
+}
+
+.week-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+  margin-top: 32px; padding-top: 24px;
+  border-top: 1px solid var(--divider-light);
+}
+.week-nav-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--navy); text-decoration: none;
+  font-size: 13px; font-weight: 600;
+  padding: 10px 18px; border: 1px solid var(--divider);
+  border-radius: 100px; background: var(--card); min-height: 44px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.week-nav-link:hover { background: var(--sea-glass-mist); border-color: var(--sea-glass); }
+.week-nav-link--disabled { opacity: 0.4; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+@media (prefers-contrast: more) {
+  :root {
+    --divider: rgba(21, 38, 47, 0.6);
+    --divider-light: rgba(21, 38, 47, 0.4);
+    --ink-soft: #15262F;
+    --navy-soft: #1E3D4C;
+  }
+}
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --card: #FFFFFF;
+    --navy: #000000; --navy-soft: #000000;
+    --terra: #FFFFFF; --terra-light: #000000;
+    --gold: #FFFFFF; --case-bg: #FFFFFF;
+    --class-bg: #FFFFFF; --prework-bg: #FFFFFF;
+    --ink: #000000; --ink-soft: #000000;
+    --divider: #000000; --divider-light: #000000;
+    --card-shadow: none;
+  }
+  @page { size: letter; margin: 0.5in; }
+  html, body { background: #FFFFFF !important; color: #000000 !important; font-size: 10.5pt; }
+  .skip-link, .banner-actions, .week-nav { display: none !important; }
+  .banner { background: #FFFFFF !important; color: #000000 !important; padding: 0 0 12pt; border-bottom: 1pt solid #000000; }
+  .banner * { color: #000000 !important; }
+  .container { padding: 12pt 0 0; }
+  .section, .case-card, .weekend-card, .day-card, .differential-card, .lab-exam-block {
+    background: #FFFFFF !important; box-shadow: none !important;
+    border: 0.5pt solid #000000; border-radius: 0;
+    page-break-inside: avoid; margin-bottom: 8pt;
+  }
+  .case-banner, .day-card-header, .weekend-banner, .lab-exam-block {
+    background: #FFFFFF !important; color: #000000 !important;
+    border-bottom: 0.5pt solid #000000;
+  }
+  .case-banner *, .day-card-header *, .weekend-banner *, .lab-exam-block * { color: #000000 !important; }
+  .case-banner-tag, .day-card-tag, .weekend-banner-tag, .day-card-pill, .lab-exam-tag {
+    background: #FFFFFF !important; color: #000000 !important; border: 0.5pt solid #000000;
+  }
+  .day-section { background: #FFFFFF !important; page-break-inside: avoid; }
+  .diagram-wrap { page-break-inside: avoid; }
+  .differential-table thead { background: #FFFFFF !important; }
+  *, *::before, *::after { box-shadow: none !important; text-shadow: none !important; }
+}
+
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header class="banner" id="top">
+    <div class="banner-inner">
+      <p class="banner-eyebrow"><span class="banner-eyebrow-sep"></span>Week 1 of 8<span class="banner-eyebrow-sep"></span></p>
+      <h1 class="banner-title">Foundations and Integumentary System</h1>
+      <p class="banner-subtitle">Module 1, June 15 to 18. Anatomical terminology, cells, tissues, and the integumentary system. One case, four days, one TBL.</p>
+      <div class="banner-actions">
+          <a href="schedule.html" class="action-btn" target="_top">All weeks</a>
+          <a href="week-2.html" class="action-btn action-btn--primary" target="_top">Next week</a>
+      </div>
+    </div>
+  </header>
+  <main class="container" id="main">
+  <section class="section" aria-label="Week at a glance">
+    <div class="stats-strip">
+      <span><strong>4</strong> class days</span>
+      <span class="stats-divider">/</span>
+      <span><strong>1</strong> case</span>
+      <span class="stats-divider">/</span>
+      <span><strong>1</strong> TBL session</span>
+      <span class="stats-divider">/</span>
+      <span><strong>0</strong> lab exam</span>
+      <span class="stats-divider">/</span>
+      <span><strong>1</strong> Kahoot</span>
+    </div>
+  </section>
+  <section class="section" aria-labelledby="rhythm-heading">
+    <p class="section-eyebrow">The rhythm of the week</p>
+    <h2 class="section-heading" id="rhythm-heading">Three lanes, four days</h2>
+    <p class="section-lede">Case arc, in-class work, and prework run in parallel across Monday through Thursday. Use the lanes to know what is in front of you and what is coming next.</p>
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rhythm-anatomy-week-1-title rhythm-anatomy-week-1-desc">
+      <title id="rhythm-anatomy-week-1-title">Weekly rhythm chart</title>
+      <desc id="rhythm-anatomy-week-1-desc">Three lanes across Monday through Thursday: case arc, in-class activity, and prework. Each cell shows the focus for that lane on that day.</desc>
+      <text x="120" y="50" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="800" fill="#1E3D4C" text-anchor="middle" letter-spacing="2">MON</text>
+      <text x="280" y="50" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="800" fill="#1E3D4C" text-anchor="middle" letter-spacing="2">TUE</text>
+      <text x="440" y="50" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="800" fill="#1E3D4C" text-anchor="middle" letter-spacing="2">WED</text>
+      <text x="600" y="50" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="800" fill="#1E3D4C" text-anchor="middle" letter-spacing="2">THU</text>
+      <text x="40" y="100" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#7C2018" letter-spacing="1.5">CASE ARC</text>
+      <text x="40" y="200" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#1E3D4C" letter-spacing="1.5">IN CLASS</text>
+      <text x="40" y="300" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#A0402A" letter-spacing="1.5">PREWORK</text>
+      <rect x="50" y="80" width="140" height="56" rx="8" fill="#F5DDD3" stroke="#A0402A" stroke-width="1"/>
+      <text x="120" y="105" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#7C2018" text-anchor="middle" font-weight="700">Case intro</text>
+      <text x="120" y="124" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#7C2018" text-anchor="middle">Patient presents</text>
+      <rect x="210" y="80" width="140" height="56" rx="8" fill="#F5DDD3" stroke="#A0402A" stroke-width="1"/>
+      <text x="280" y="105" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#7C2018" text-anchor="middle" font-weight="700">Case prep</text>
+      <text x="280" y="124" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#7C2018" text-anchor="middle">Build context</text>
+      <rect x="370" y="80" width="140" height="56" rx="8" fill="#F5DDD3" stroke="#A0402A" stroke-width="1"/>
+      <text x="440" y="105" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#7C2018" text-anchor="middle" font-weight="700">Case run</text>
+      <text x="440" y="124" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#7C2018" text-anchor="middle">Build evidence</text>
+      <rect x="530" y="80" width="140" height="56" rx="8" fill="#F5DDD3" stroke="#A0402A" stroke-width="1"/>
+      <text x="600" y="105" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#7C2018" text-anchor="middle" font-weight="700">TBL + present</text>
+      <text x="600" y="124" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#7C2018" text-anchor="middle">Defend, decide</text>
+      <rect x="50" y="180" width="140" height="56" rx="8" fill="#DCE8EB" stroke="#1E3D4C" stroke-width="1"/>
+      <text x="120" y="205" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#1E3D4C" text-anchor="middle" font-weight="700">Concept lec</text>
+      <text x="120" y="224" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#1E3D4C" text-anchor="middle">Terminology, cells</text>
+      <rect x="210" y="180" width="140" height="56" rx="8" fill="#DCE8EB" stroke="#1E3D4C" stroke-width="1"/>
+      <text x="280" y="205" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#1E3D4C" text-anchor="middle" font-weight="700">Concept lec</text>
+      <text x="280" y="224" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#1E3D4C" text-anchor="middle">Tissues + atlas</text>
+      <rect x="370" y="180" width="140" height="56" rx="8" fill="#DCE8EB" stroke="#1E3D4C" stroke-width="1"/>
+      <text x="440" y="205" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#1E3D4C" text-anchor="middle" font-weight="700">Lec + Kahoot</text>
+      <text x="440" y="224" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#1E3D4C" text-anchor="middle">Integumentary</text>
+      <rect x="530" y="180" width="140" height="56" rx="8" fill="#DCE8EB" stroke="#1E3D4C" stroke-width="1"/>
+      <text x="600" y="205" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#1E3D4C" text-anchor="middle" font-weight="700">TBL session</text>
+      <text x="600" y="224" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#1E3D4C" text-anchor="middle">iRAT, tRAT, AE</text>
+      <rect x="50" y="280" width="140" height="56" rx="8" fill="#F5EAD5" stroke="#A0402A" stroke-width="1"/>
+      <text x="120" y="305" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#A0402A" text-anchor="middle" font-weight="700">Terminology</text>
+      <text x="120" y="324" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#A0402A" text-anchor="middle">Atlas + region map</text>
+      <rect x="210" y="280" width="140" height="56" rx="8" fill="#F5EAD5" stroke="#A0402A" stroke-width="1"/>
+      <text x="280" y="305" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#A0402A" text-anchor="middle" font-weight="700">Cell anatomy</text>
+      <text x="280" y="324" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#A0402A" text-anchor="middle">Atlas + cell compare</text>
+      <rect x="370" y="280" width="140" height="56" rx="8" fill="#F5EAD5" stroke="#A0402A" stroke-width="1"/>
+      <text x="440" y="305" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#A0402A" text-anchor="middle" font-weight="700">Tissues</text>
+      <text x="440" y="324" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#A0402A" text-anchor="middle">Atlas + skin diagram</text>
+      <rect x="530" y="280" width="140" height="56" rx="8" fill="#F5EAD5" stroke="#A0402A" stroke-width="1"/>
+      <text x="600" y="305" font-family="'Plus Jakarta Sans',sans-serif" font-size="12" fill="#A0402A" text-anchor="middle" font-weight="700">Integumentary</text>
+      <text x="600" y="324" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#A0402A" text-anchor="middle">Master diagram + DOK</text>
+      <line x1="120" y1="138" x2="120" y2="180" stroke="#3D4F5A" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+      <line x1="120" y1="238" x2="120" y2="280" stroke="#3D4F5A" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+      <line x1="280" y1="138" x2="280" y2="180" stroke="#3D4F5A" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+      <line x1="280" y1="238" x2="280" y2="280" stroke="#3D4F5A" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+      <line x1="440" y1="138" x2="440" y2="180" stroke="#3D4F5A" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+      <line x1="440" y1="238" x2="440" y2="280" stroke="#3D4F5A" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+      <line x1="600" y1="138" x2="600" y2="180" stroke="#3D4F5A" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+      <line x1="600" y1="238" x2="600" y2="280" stroke="#3D4F5A" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+    </svg>
+    </div>
+  </section>
+  <section class="case-card" aria-labelledby="case-heading">
+    <header class="case-banner">
+      <span class="case-banner-tag">Week's case</span>
+      <h2 class="case-banner-title" id="case-heading">Unknown Case 1</h2>
+    </header>
+    <div class="case-body">
+      <p class="case-lede">Your case unfolds Monday through Thursday as new anatomic clues are revealed in class. By Thursday&#x27;s TBL, your team will investigate a five-option differential and defend your number 1 choice using anatomic reasoning.</p>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="prog-title prog-desc">
+      <title id="prog-title">Case clue progression across the week</title>
+      <desc id="prog-desc">Four stages of case clue release across Monday, Tuesday, Wednesday, and Thursday, each with a label describing the clinical content delivered.</desc>
+      <circle cx="80" cy="60" r="24" fill="#7C2018"/>
+      <text x="80" y="66" font-family="'Plus Jakarta Sans',sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="800">1</text>
+      <text x="80" y="110" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#1E3D4C" text-anchor="middle" font-weight="800" letter-spacing="2">MONDAY</text>
+      <text x="80" y="135" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" fill="#15262F" text-anchor="middle" font-weight="700">History</text>
+      <text x="80" y="155" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#3D4F5A" text-anchor="middle">Presenting</text>
+      <text x="80" y="170" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#3D4F5A" text-anchor="middle">complaint</text>
+      <line x1="106" y1="60" x2="214" y2="60" stroke="#A0402A" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="240" cy="60" r="24" fill="#7C2018"/>
+      <text x="240" y="66" font-family="'Plus Jakarta Sans',sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="800">2</text>
+      <text x="240" y="110" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#1E3D4C" text-anchor="middle" font-weight="800" letter-spacing="2">TUESDAY</text>
+      <text x="240" y="135" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" fill="#15262F" text-anchor="middle" font-weight="700">Exam findings</text>
+      <text x="240" y="155" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#3D4F5A" text-anchor="middle">Surface signs at</text>
+      <text x="240" y="170" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#3D4F5A" text-anchor="middle">cellular level</text>
+      <line x1="266" y1="60" x2="374" y2="60" stroke="#A0402A" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="400" cy="60" r="24" fill="#7C2018"/>
+      <text x="400" y="66" font-family="'Plus Jakarta Sans',sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="800">3</text>
+      <text x="400" y="110" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#1E3D4C" text-anchor="middle" font-weight="800" letter-spacing="2">WEDNESDAY</text>
+      <text x="400" y="135" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" fill="#15262F" text-anchor="middle" font-weight="700">Tissue findings</text>
+      <text x="400" y="155" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#3D4F5A" text-anchor="middle">Pathology at the</text>
+      <text x="400" y="170" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#3D4F5A" text-anchor="middle">tissue level</text>
+      <line x1="426" y1="60" x2="534" y2="60" stroke="#A0402A" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="560" cy="60" r="24" fill="#7C2018"/>
+      <text x="560" y="66" font-family="'Plus Jakarta Sans',sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="800">4</text>
+      <text x="560" y="110" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#1E3D4C" text-anchor="middle" font-weight="800" letter-spacing="2">THURSDAY</text>
+      <text x="560" y="135" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" fill="#15262F" text-anchor="middle" font-weight="700">TBL workup</text>
+      <text x="560" y="155" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#3D4F5A" text-anchor="middle">Differential</text>
+      <text x="560" y="170" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#3D4F5A" text-anchor="middle">+ defense</text>
+    </svg>
+      </div>
+    </div>
+  </section>
+  <section class="section" aria-labelledby="plan-heading">
+    <p class="section-eyebrow">Daily plan</p>
+    <h2 class="section-heading" id="plan-heading">Monday through Thursday</h2>
+    <p class="section-lede">Each day shows what students arrived having done, what happens in class, and what is on the plate for tonight. Tonight has two layers when prep is needed: organize the anatomy, then apply it to the case.</p>
+    <div class="daily-plan-grid">
+      <article class="day-card">
+        <header class="day-card-header">
+          <span class="day-card-tag">Day 1</span>
+          <h3 class="day-card-day">Monday, June 15</h3>
+          <span class="day-card-pill pill-case-intro">Case intro</span>
+        </header>
+        <div class="day-card-grid">
+          <div class="day-section section-yesterday">
+            <p class="day-section-label">Came in having done</p>
+            <div class="day-section-content">
+              <p style="font-size:12px;color:#3D4F5A;margin-bottom:8px;font-style:italic;">Should have completed last night:</p>
+              <ul class="day-list"><li>Foundation anatomy modules from last night (Section A in workbook)</li><li>Differential research progress (Section B)</li><li>Synthesis page from last night (Section D)</li></ul>
+            </div>
+          </div>
+          <div class="day-section section-today">
+            <p class="day-section-label">In class</p>
+            <div class="day-section-content">
+              <ul><li>Concept lecture: anatomical position, planes, regions, directional terms</li><li>Lab: atlas walk-through with directional terminology</li><li>Case 1 introduction: patient history and presenting complaint</li><li>Team forms first impressions and questions to investigate</li></ul>
+            </div>
+          </div>
+          <div class="day-section section-tonight">
+            <p class="day-section-label">Tonight</p>
+            <div class="day-section-content">
+            <p class="tonight-subhead">Review today (15 to 20 min)</p>
+            <ul><li>Re-test directional terms cold (15 minutes)</li><li>Atlas pages from today, flagged sections only</li></ul>
+            <p class="tonight-subhead">Prep tomorrow (45 to 60 min)</p>
+            <p class="tonight-layer-label">Layer 1: Organize the anatomy</p>
+            <p style="font-size:13px;color:#3D4F5A;margin-bottom:6px;font-style:italic;">Cell anatomy and organelles</p>
+            <p style="font-size:13px;color:#3D4F5A;line-height:1.55;">Work the foundation anatomy modules in Section A of your research workbook. Use your atlas, your textbook, and your own research. The workbook scaffolds the question sequence; the night-by-night plan inside the workbook tells you exactly which modules to complete.</p>
+            <p class="tonight-layer-label">Layer 2: Apply to the case</p>
+            <p style="font-size:13px;color:#3D4F5A;line-height:1.55;">Use the case clues you recorded live in class today. Bring your workbook (Section C clue tracker and Section D nightly synthesis) and your differential research (Section B). Update your team's working diagnosis based on today's findings.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="day-card">
+        <header class="day-card-header">
+          <span class="day-card-tag">Day 2</span>
+          <h3 class="day-card-day">Tuesday, June 16</h3>
+          <span class="day-card-pill pill-case-prep">Case prep</span>
+        </header>
+        <div class="day-card-grid">
+          <div class="day-section section-yesterday">
+            <p class="day-section-label">Came in having done</p>
+            <div class="day-section-content">
+              <p style="font-size:12px;color:#3D4F5A;margin-bottom:8px;font-style:italic;">Should have completed last night:</p>
+              <ul class="day-list"><li>Foundation anatomy modules from last night (Section A in workbook)</li><li>Differential research progress (Section B)</li><li>Synthesis page from last night (Section D)</li></ul>
+            </div>
+          </div>
+          <div class="day-section section-today">
+            <p class="day-section-label">In class</p>
+            <div class="day-section-content">
+              <ul><li>Concept lecture: cell anatomy detail, organelles in context</li><li>Lab: histology micrographs of skin and mucosal cells</li><li>Case prep: build context using today&#x27;s clue, list anatomic questions</li><li>Team identifies what they still need to know</li></ul>
+            </div>
+          </div>
+          <div class="day-section section-tonight">
+            <p class="day-section-label">Tonight</p>
+            <div class="day-section-content">
+            <p class="tonight-subhead">Review today (15 to 20 min)</p>
+            <ul><li>Cell organelle ID drill from atlas micrographs (15 minutes)</li><li>Match each organelle to the anatomy it serves</li></ul>
+            <p class="tonight-subhead">Prep tomorrow (45 to 60 min)</p>
+            <p class="tonight-layer-label">Layer 1: Organize the anatomy</p>
+            <p style="font-size:13px;color:#3D4F5A;margin-bottom:6px;font-style:italic;">Four tissue types and integumentary locations</p>
+            <p style="font-size:13px;color:#3D4F5A;line-height:1.55;">Work the foundation anatomy modules in Section A of your research workbook. Use your atlas, your textbook, and your own research. The workbook scaffolds the question sequence; the night-by-night plan inside the workbook tells you exactly which modules to complete.</p>
+            <p class="tonight-layer-label">Layer 2: Apply to the case</p>
+            <p style="font-size:13px;color:#3D4F5A;line-height:1.55;">Use the case clues you recorded live in class today. Bring your workbook (Section C clue tracker and Section D nightly synthesis) and your differential research (Section B). Update your team's working diagnosis based on today's findings.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="day-card">
+        <header class="day-card-header">
+          <span class="day-card-tag">Day 3</span>
+          <h3 class="day-card-day">Wednesday, June 17</h3>
+          <span class="day-card-pill pill-case-run">Case run</span>
+        </header>
+        <div class="day-card-grid">
+          <div class="day-section section-yesterday">
+            <p class="day-section-label">Came in having done</p>
+            <div class="day-section-content">
+              <p style="font-size:12px;color:#3D4F5A;margin-bottom:8px;font-style:italic;">Should have completed last night:</p>
+              <ul class="day-list"><li>Foundation anatomy modules from last night (Section A in workbook)</li><li>Differential research progress (Section B)</li><li>Synthesis page from last night (Section D)</li></ul>
+            </div>
+          </div>
+          <div class="day-section section-today">
+            <p class="day-section-label">In class</p>
+            <div class="day-section-content">
+              <ul><li>Concept lecture: integumentary system layers and accessory structures</li><li>Kahoot: tissue and integumentary recall, 10 minutes</li><li>Lab: skin layer micrograph identification</li><li>Case run: work the case using today&#x27;s clue and tissue knowledge</li></ul>
+            </div>
+          </div>
+          <div class="day-section section-tonight">
+            <p class="day-section-label">Tonight</p>
+            <div class="day-section-content">
+            <p class="tonight-subhead">Review today (15 to 20 min)</p>
+            <ul><li>Re-walk skin layer cross-section, surface to deep (20 minutes)</li><li>Match Kahoot misses to specific atlas pages</li></ul>
+            <p class="tonight-subhead">Prep tomorrow (45 to 60 min)</p>
+            <p class="tonight-layer-label">Layer 1: Organize the anatomy</p>
+            <p style="font-size:13px;color:#3D4F5A;margin-bottom:6px;font-style:italic;">Integumentary master diagram</p>
+            <p style="font-size:13px;color:#3D4F5A;line-height:1.55;">Work the foundation anatomy modules in Section A of your research workbook. Use your atlas, your textbook, and your own research. The workbook scaffolds the question sequence; the night-by-night plan inside the workbook tells you exactly which modules to complete.</p>
+            <p class="tonight-layer-label">Layer 2: Apply to the case</p>
+            <p style="font-size:13px;color:#3D4F5A;line-height:1.55;">Use the case clues you recorded live in class today. Bring your workbook (Section C clue tracker and Section D nightly synthesis) and your differential research (Section B). Update your team's working diagnosis based on today's findings.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="day-card">
+        <header class="day-card-header">
+          <span class="day-card-tag">Day 4</span>
+          <h3 class="day-card-day">Thursday, June 18</h3>
+          <span class="day-card-pill pill-tbl">TBL + present</span>
+        </header>
+        <div class="day-card-grid">
+          <div class="day-section section-yesterday">
+            <p class="day-section-label">Came in having done</p>
+            <div class="day-section-content">
+              <p style="font-size:12px;color:#3D4F5A;margin-bottom:8px;font-style:italic;">Should have completed last night:</p>
+              <ul class="day-list"><li>Foundation anatomy modules from last night (Section A in workbook)</li><li>Differential research progress (Section B)</li><li>Synthesis page from last night (Section D)</li></ul>
+            </div>
+          </div>
+          <div class="day-section section-today">
+            <p class="day-section-label">In class</p>
+            <div class="day-section-content">
+              <ul><li>iRAT: individual readiness assurance, 10 questions, 10 minutes</li><li>tRAT: team readiness, same questions, 15 minutes</li><li>Application: investigate the differential list using your master diagram</li><li>Team presentations: defend your number 1 choice with anatomic reasoning</li><li>Diagnosis revealed and case debrief after all teams present</li></ul>
+            </div>
+          </div>
+          <div class="day-section section-tonight">
+            <p class="day-section-label">Tonight</p>
+            <div class="day-section-content">
+            <p class="tonight-subhead">Review today (15 to 20 min)</p>
+            <ul><li>Take Friday off, you earned it</li><li>Skim the weekend block below before Saturday</li><li>No new content tonight</li></ul>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="differential-card" aria-labelledby="diff-heading">
+    <p class="section-eyebrow">Thursday TBL: investigate the differential</p>
+    <h2 class="section-heading" id="diff-heading">Five options. Anatomy decides.</h2>
+    <p class="section-lede">Each option below could produce blistering and skin loss. Your team&#x27;s job is to anatomically distinguish them using the layer where separation occurs and the BSA criterion.</p>
+    <p class="section-lede"><em>Research each option in your workbook (Section B). Document the underlying anatomy, mechanism, and characteristic findings yourself.</em></p>
+    <table class="differential-table">
+      <thead>
+        <tr>
+          <th class="th-num">#</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="opt-num">1</td>
+        <td class="opt-name">Stevens-Johnson Syndrome</td>
+      </tr>
+      <tr>
+        <td class="opt-num">2</td>
+        <td class="opt-name">Toxic Epidermal Necrolysis</td>
+      </tr>
+      <tr>
+        <td class="opt-num">3</td>
+        <td class="opt-name">Staphylococcal Scalded Skin Syndrome</td>
+      </tr>
+      <tr>
+        <td class="opt-num">4</td>
+        <td class="opt-name">Pemphigus vulgaris</td>
+      </tr>
+      <tr>
+        <td class="opt-num">5</td>
+        <td class="opt-name">Bullous pemphigoid</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="tbl-instructions">
+      <h3>Team task</h3>
+      <ol>
+        <li>For each option, locate the anatomic site on your master diagram.</li>
+        <li>Mark which case findings are consistent and inconsistent with each option.</li>
+        <li>Pick number one. Defend it using the anatomy you researched.</li>
+        <li>Be ready to explain why each rejected option does not fit, anatomically.</li>
+      </ol>
+    </div>
+  </section>
+  <section class="section" aria-labelledby="anat-heading">
+    <p class="section-eyebrow">Anatomy reference</p>
+    <h2 class="section-heading" id="anat-heading">Quick visual</h2>
+    <p class="section-lede">A schematic for orientation. Your atlas is the source of truth and the basis for prework citations.</p>
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="skin-title skin-desc">
+<title id="skin-title">Integumentary system cross-section</title>
+<desc id="skin-desc">Vertical cross-section showing five epidermal layers (corneum, lucidum, granulosum, spinosum, basale), papillary and reticular dermis, hypodermis, and accessory structures including hair follicle, sebaceous gland, and sweat gland.</desc>
+<rect x="40" y="40" width="500" height="36" fill="#F5DDD3" stroke="#7C2018" stroke-width="1"/>
+<rect x="40" y="76" width="500" height="20" fill="#FBE9DD" stroke="#7C2018" stroke-width="0.5"/>
+<rect x="40" y="96" width="500" height="32" fill="#F5DDD3" stroke="#7C2018" stroke-width="0.5"/>
+<rect x="40" y="128" width="500" height="56" fill="#E5D5A8" stroke="#A0402A" stroke-width="0.5"/>
+<rect x="40" y="184" width="500" height="20" fill="#C9A961" stroke="#A0402A" stroke-width="1"/>
+<rect x="40" y="204" width="500" height="64" fill="#DCE8EB" stroke="#1E3D4C" stroke-width="0.5"/>
+<rect x="40" y="268" width="500" height="80" fill="#8FB8BF" stroke="#1E3D4C" stroke-width="0.5" opacity="0.5"/>
+<rect x="40" y="348" width="500" height="40" fill="#FFFFFF" stroke="#1E3D4C" stroke-width="0.5" stroke-dasharray="3,3"/>
+<line x1="40" y1="184" x2="540" y2="184" stroke="#7C2018" stroke-width="2" stroke-dasharray="6,3"/>
+<text x="40" y="180" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" fill="#7C2018" font-weight="700">Dermal-epidermal junction</text>
+<rect x="240" y="240" width="20" height="100" fill="#A0402A" opacity="0.3"/>
+<circle cx="250" cy="350" r="14" fill="#A0402A" opacity="0.4"/>
+<circle cx="280" cy="240" r="10" fill="#C9A961" opacity="0.6"/>
+<text x="294" y="244" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#15262F">Sebaceous gland</text>
+<rect x="380" y="320" width="40" height="40" fill="#8FB8BF" opacity="0.5"/>
+<text x="424" y="344" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#15262F">Sweat gland</text>
+<text x="194" y="240" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#15262F">Hair follicle</text>
+<text x="560" y="62" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#15262F" font-weight="700">Stratum corneum</text>
+<text x="560" y="89" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#15262F" font-weight="700">Stratum lucidum</text>
+<text x="560" y="116" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#15262F" font-weight="700">Stratum granulosum</text>
+<text x="560" y="160" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#15262F" font-weight="700">Stratum spinosum</text>
+<text x="560" y="198" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#15262F" font-weight="700">Stratum basale</text>
+<text x="560" y="240" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#15262F" font-weight="700">Papillary dermis</text>
+<text x="560" y="308" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#15262F" font-weight="700">Reticular dermis</text>
+<text x="560" y="370" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#15262F" font-weight="700">Hypodermis</text>
+<text x="40" y="30" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#1E3D4C" letter-spacing="2">SURFACE</text>
+<text x="40" y="408" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#1E3D4C" letter-spacing="2">DEEP</text>
+</svg>
+    </div>
+  </section>
+  <section class="weekend-card" aria-labelledby="weekend-heading">
+    <header class="weekend-banner">
+      <span class="weekend-banner-tag">Weekend</span>
+      <h2 class="weekend-banner-title" id="weekend-heading">Juneteenth weekend</h2>
+      <span class="weekend-banner-dates">June 19 to 21</span>
+    </header>
+    <div class="weekend-body">
+      <p class="weekend-lede">No classes Friday through Sunday in observance of Juneteenth. Use this stretch deliberately. Three buckets, in order: rest, consolidate Week 1, prime Week 2.</p>
+      <div class="weekend-grid">
+      <article class="weekend-block">
+        <div class="weekend-block-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <h3 class="weekend-block-title">Rest first</h3>
+        <ul class="weekend-block-list"><li>Take Friday completely off, no biology</li><li>Sleep is consolidation, not laziness</li><li>Move your body, eat real food</li><li>Reconnect with the people in your life</li></ul>
+      </article>
+      <article class="weekend-block">
+        <div class="weekend-block-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 class="weekend-block-title">Consolidate Week 1 (Saturday)</h3>
+        <ul class="weekend-block-list"><li>Re-test directional terms cold</li><li>Cell organelle quick ID drill</li><li>Four tissue types: name, locate, contrast</li><li>Skin layer mnemonic to recall test</li><li>Re-read Case 1 reveal and your team&#x27;s TBL notes</li><li>Note one thing you got wrong, why, and what fixed it</li></ul>
+      </article>
+      <article class="weekend-block">
+        <div class="weekend-block-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+        <h3 class="weekend-block-title">Prime Week 2 (Sunday)</h3>
+        <ul class="weekend-block-list"><li>Atlas: cartilage and bone tissue overview</li><li>Read the Lab Practical 1 study guide</li><li>Print and start the Week 2 homework bundle</li><li>Block 60 minutes Monday morning for Mon prework</li><li>Lab Practical 1 is Monday, bundle due at entry</li></ul>
+      </article>
+      </div>
+    </div>
+  </section>
+  <section class="section" aria-labelledby="dok-heading">
+    <p class="section-eyebrow">Why the cognitive load builds</p>
+    <h2 class="section-heading" id="dok-heading">DOK ladder across the week</h2>
+    <p class="section-lede">Each day asks for harder thinking. Monday is recall and orientation. By Thursday, the team must defend a position with anatomic argument. The prework is sequenced so each layer of organization (Layer 1) and case application (Layer 2) prepares you to climb.</p>
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="dok-anatomy-week-1-title dok-anatomy-week-1-desc">
+      <title id="dok-anatomy-week-1-title">Depth of Knowledge ladder across the week</title>
+      <desc id="dok-anatomy-week-1-desc">A four-step ladder rising from Monday through Thursday, showing Depth of Knowledge progression: Monday is DOK 1 (recall), Tuesday is DOK 2 (skill and concept), Wednesday is DOK 3 (strategic thinking), Thursday is DOK 4 (extended thinking and defense).</desc>
+      <rect x="60" y="200" width="120" height="80" rx="8" fill="#C9A961" stroke="#15262F" stroke-width="1"/>
+      <text x="120" y="226" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="800" fill="#7C2018" text-anchor="middle" letter-spacing="1.5">MON</text>
+      <text x="120" y="250" font-family="'Plus Jakarta Sans',sans-serif" font-size="14" font-weight="800" fill="#7C2018" text-anchor="middle">DOK 1</text>
+      <text x="120" y="270" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#7C2018" text-anchor="middle" font-weight="700">Recall</text>
+      <text x="120" y="288" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" fill="#7C2018" text-anchor="middle">Define, identify, name</text>
+      <rect x="220" y="160" width="120" height="120" rx="8" fill="#8FB8BF" stroke="#15262F" stroke-width="1"/>
+      <text x="280" y="186" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="800" fill="#1E3D4C" text-anchor="middle" letter-spacing="1.5">TUE</text>
+      <text x="280" y="210" font-family="'Plus Jakarta Sans',sans-serif" font-size="14" font-weight="800" fill="#1E3D4C" text-anchor="middle">DOK 2</text>
+      <text x="280" y="230" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#1E3D4C" text-anchor="middle" font-weight="700">Skill / concept</text>
+      <text x="280" y="248" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" fill="#1E3D4C" text-anchor="middle">Compare, classify, apply</text>
+      <rect x="380" y="120" width="120" height="160" rx="8" fill="#A0402A" stroke="#15262F" stroke-width="1"/>
+      <text x="440" y="146" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.5">WED</text>
+      <text x="440" y="170" font-family="'Plus Jakarta Sans',sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">DOK 3</text>
+      <text x="440" y="190" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">Strategic</text>
+      <text x="440" y="208" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" fill="#FFFFFF" text-anchor="middle">Construct, justify, infer</text>
+      <rect x="540" y="80" width="120" height="200" rx="8" fill="#7C2018" stroke="#15262F" stroke-width="1"/>
+      <text x="600" y="106" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.5">THU</text>
+      <text x="600" y="130" font-family="'Plus Jakarta Sans',sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">DOK 4</text>
+      <text x="600" y="150" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">Extended</text>
+      <text x="600" y="168" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" fill="#FFFFFF" text-anchor="middle">Defend, synthesize, decide</text>
+      <line x1="60" y1="290" x2="740" y2="290" stroke="#1E3D4C" stroke-width="1.5"/>
+      <text x="40" y="294" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#3D4F5A">Mon</text>
+      <text x="745" y="294" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#3D4F5A">Thu</text>
+      <text x="40" y="20" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="800" fill="#1E3D4C" letter-spacing="2">COGNITIVE LOAD RISES MON TO THU</text>
+    </svg>
+    </div>
+  </section>
+  <nav class="week-nav" aria-label="Week navigation">
+        <span class="week-nav-link week-nav-link--disabled">&larr; Previous</span>
+        <a href="schedule.html" class="week-nav-link" target="_top">All weeks</a>
+        <a href="week-2.html" class="week-nav-link" target="_top">Week 2 &rarr;</a>
+      </nav>
+  </main>
+  <script>
+    (function() {
+      var FRAME_ID = 'anatomy-week-1';
+      function sendHeight() {
+        var h = document.documentElement.scrollHeight;
+        try {
+          window.parent.postMessage({ type: 'setHeight', id: FRAME_ID, height: h }, '*');
+        } catch(e) {}
+      }
+      window.addEventListener('load', sendHeight);
+      window.addEventListener('resize', sendHeight);
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(sendHeight);
+        ro.observe(document.body);
+      } else {
+        setInterval(sendHeight, 800);
+      }
+      setTimeout(sendHeight, 100);
+      setTimeout(sendHeight, 500);
+      setTimeout(sendHeight, 1500);
+    })();
+  </script>
+</body>
+</html>
