@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinical Reasoning Simulator, Week 8, BIO 004</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="description" content="Week 8 clinical reasoning case, nervous system. Educational simulation only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#142940; --navy-deep:#0A1A2A; --navy-bg:#E8EDF3; --navy-bd:#B8C5D5;
+  --terra:#7C2018; --terra-bg:#F5E5E2; --terra-bd:#E5BFB8;
+  /* Gold/warn states remapped to terra family for restricted palette */
+  --gold:#7C2018; --gold-bg:#F5E5E2; --gold-bd:#E5BFB8;
+  --warn:#7C2018; --warn-bg:#F5E5E2; --warn-bd:#E5BFB8;
+  /* Success states remapped to navy family */
+  --ok:#142940; --ok-bg:#E8EDF3; --ok-bd:#B8C5D5;
+  
+  --ink:#0A1A2A; --ink-soft:#3D4F5A; --ink-mute:#4A5965;
+  --divider:#BFC8CD; --divider-light:#D8DEE2;
+  --cream:#FAF7F2; --cream-warm:#F5F2EC; --cream-deep:#EEEAE0; --white:#FFFFFF;
+  --r:8px; --rs:5px;
+  --display:'Lora',Georgia,serif;
+  --sans:'Plus Jakarta Sans',Arial,sans-serif;
+  --body:'Plus Jakarta Sans',Arial,sans-serif;
+  --mono:'SF Mono',Monaco,'Courier New',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+*:not(input):not(textarea){user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms!important}}
+@media print{body{display:none!important}}
+body{font-family:var(--body);background:var(--white);color:var(--ink);min-height:100vh;font-size:17px;padding-bottom:80px;-webkit-font-smoothing:antialiased;line-height:1.6}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:1.25rem 1rem;position:relative;z-index:2}
+
+/* Watermark */
+.watermark{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:1;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.watermark-text{font-family:var(--sans);font-weight:700;font-size:72px;color:var(--navy);opacity:.05;transform:rotate(-30deg);white-space:nowrap;letter-spacing:.05em;text-align:center;line-height:1.2}
+
+h1{font-family:var(--sans);font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1.2}
+h2{font-family:var(--sans);font-size:20px;font-weight:700;color:var(--navy);margin-bottom:.5rem;letter-spacing:-.01em}
+p{font-size:16.5px;color:var(--ink-soft);line-height:1.65}
+
+button{font-family:var(--sans);font-size:15px;font-weight:600;padding:10px 20px;border:1px solid var(--divider);border-radius:var(--rs);background:var(--white);color:var(--ink);cursor:pointer;transition:all .15s}
+button:hover:not(:disabled){background:var(--cream-warm);border-color:var(--ink-soft)}
+button:disabled{opacity:.4;cursor:default}
+button.bb{background:var(--navy);color:var(--white);border-color:var(--navy)}
+button.bb:hover:not(:disabled){background:var(--navy-deep)}
+button.bt{background:var(--ok);color:var(--white);border-color:var(--ok)}
+button.bt:hover:not(:disabled){background:#1F4530}
+button.bg{background:var(--gold);color:var(--navy-deep);border-color:var(--gold)}
+button.bg:hover:not(:disabled){background:#B89545}
+
+input[type=text],input[type=password],textarea{font-family:var(--body);font-size:17px;border:1px solid var(--divider);border-radius:var(--rs);padding:10px 12px;width:100%;background:var(--white);color:var(--ink);line-height:1.55;resize:vertical}
+input:focus,textarea:focus{outline:3px solid var(--gold);outline-offset:0;border-color:var(--navy)}
+
+.card{background:var(--white);border:1px solid var(--divider-light);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;box-shadow:0 1px 2px rgba(20,41,64,.05),0 1px 3px rgba(20,41,64,.04)}
+.badge{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:700;padding:5px 13px;border-radius:13px;letter-spacing:.06em;text-transform:uppercase}
+.b-navy{background:var(--navy-bg);color:var(--navy);border:1px solid var(--navy-bd)}
+.b-terra{background:var(--terra-bg);color:var(--terra);border:1px solid var(--terra-bd)}
+.b-gold{background:var(--gold-bg);color:var(--warn);border:1px solid var(--gold-bd)}
+.b-ok{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+.b-reveal{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+
+.sl{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.sep{border:none;border-top:1px solid var(--divider-light);margin:1rem 0}
+.flex{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fb{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.g2{display:grid;grid-template-columns:300px 1fr;gap:1rem}
+@media(max-width:760px){.g2{grid-template-columns:1fr}}
+
+/* Credit bar */
+.cbar{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:10px 14px;display:flex;align-items:center;gap:14px;margin-bottom:.875rem}
+.cnum{font-family:var(--display);font-style:italic;font-weight:600;font-size:42px;color:var(--navy);line-height:1}
+.clabel{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--warn);letter-spacing:.04em;text-transform:uppercase}
+.csub{font-size:15px;color:var(--ink-soft);line-height:1.55;margin-top:6px;font-weight:500}
+.pb{height:6px;background:var(--cream-deep);border-radius:3px;overflow:hidden;margin-top:5px}
+.pf{height:100%;border-radius:3px;background:var(--gold);transition:width .3s}
+.pf.low{background:var(--terra)} .pf.mid{background:var(--gold)}
+
+/* Day tabs */
+.day-tabs{display:flex;gap:0;border:1px solid var(--divider);border-radius:var(--rs);overflow:hidden;margin-bottom:.875rem;background:var(--cream-warm)}
+.day-tab{flex:1;padding:14px 8px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--ink-soft);text-align:center;transition:all .15s;border-right:1px solid var(--divider);line-height:1.3}
+.day-tab:last-child{border-right:none}
+.day-tab.active{background:var(--white);color:var(--navy)}
+.day-tab.locked{color:var(--ink-mute);cursor:default}
+.day-tab.unlocked{color:var(--ok)}
+
+/* Unlock bar */
+.unlock-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);margin-bottom:.875rem;flex-wrap:wrap}
+.unlock-bar input{flex:1;min-width:140px;padding:11px 14px;font-size:16px;letter-spacing:.08em;text-transform:uppercase}
+
+/* Items */
+.fi{padding:13px 15px;border-radius:var(--rs);border:1px solid var(--divider-light);margin-bottom:7px;cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:space-between;font-size:15.5px;font-weight:500}
+.fi:hover{background:var(--ok-bg);border-color:var(--ok-bd)}
+.fi.got{background:var(--ok-bg);border-color:var(--ok-bd)}
+.oc{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 7px;padding-left:2px}
+.oi{padding:13px 15px;border-radius:var(--rs);border:1px solid var(--divider-light);margin-bottom:7px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .12s;font-size:15.5px;font-weight:500}
+.oi:hover:not(.done){background:var(--navy-bg);border-color:var(--navy-bd)}
+.oi.done{background:var(--ok-bg);border-color:var(--ok-bd);cursor:default}
+
+/* Chat */
+.chatbox{border:1px solid var(--divider-light);border-radius:var(--r);overflow:hidden;background:var(--white)}
+.ci{padding:.875rem;overflow-y:auto;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.msg{max-width:78%}
+.msg.user{align-self:flex-end}
+.msg.assistant{align-self:flex-start}
+.ml{font-family:var(--sans);font-size:14.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.msg.user .ml{text-align:right}
+.mb{padding:16px 20px;border-radius:var(--r);font-size:18px;line-height:1.65}
+.msg.user .mb{background:var(--navy-bg);border:1px solid var(--navy-bd);border-bottom-right-radius:3px;color:var(--navy)}
+.msg.assistant .mb{background:var(--cream-warm);border:1px solid var(--divider-light);border-bottom-left-radius:3px}
+.msg.assistant.gate .mb{background:var(--gold-bg);border-color:var(--gold-bd)}
+.msg.assistant.result .mb{background:var(--ok-bg);border-color:var(--ok-bd)}
+.msg.assistant.fail .mb{background:var(--terra-bg);border-color:var(--terra-bd);color:var(--terra)}
+.msg.assistant.patient .mb{background:var(--cream-warm);border-color:var(--terra-bd);border-left:4px solid var(--terra);font-family:var(--display);font-style:italic;color:var(--terra)}
+.msg.assistant.unlock .mb{background:var(--ok-bg);border-color:var(--ok-bd)}
+.ir{display:flex;gap:6px;padding:8px 10px;border-top:1px solid var(--divider-light);align-items:flex-end}
+.ir textarea{flex:1;min-height:38px;max-height:80px;resize:none}
+
+/* Result cards */
+.rc{background:var(--ok-bg);border:1px solid var(--ok-bd);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap;font-family:var(--mono)}
+.rl{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--ok);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.fc{background:var(--cream-warm);border:1px solid var(--divider-light);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap}
+.fl{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.ar{background:var(--terra-bg);border:1px solid var(--terra-bd);border-left:4px solid var(--terra);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap;font-family:var(--mono)}
+.al{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+
+/* Topic pills */
+.tpill{font-family:var(--sans);font-size:14.5px;padding:6px 14px;border-radius:14px;font-weight:600}
+.tpill.hit{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+.tpill.miss{background:var(--cream-deep);color:var(--ink-mute);border:1px solid var(--divider-light)}
+
+/* Score row */
+.score-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--divider-light);font-size:16px}
+.score-row:last-child{border-bottom:none}
+.sv{font-family:var(--mono);font-weight:700}
+.sv.full{color:var(--ok)} .sv.part{color:var(--warn)} .sv.zero{color:var(--terra)}
+.reveal-text{background:var(--cream-warm);border:1px solid var(--divider-light);border-radius:var(--rs);padding:18px 22px;font-size:15.5px;line-height:1.85;white-space:pre-wrap;max-height:560px;overflow-y:auto}
+.istep{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--divider-light);font-size:16px;line-height:1.7}
+.istep:last-child{border-bottom:none}
+.inum{width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--white);font-family:var(--sans);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+.note{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:15px 20px;font-size:15.5px;color:var(--warn);line-height:1.7;margin-bottom:1rem;font-weight:500}
+.alert-terra{background:var(--terra-bg);border:1px solid var(--terra-bd);border-left:4px solid var(--terra);border-radius:var(--rs);padding:15px 20px;font-size:16px;color:var(--terra);line-height:1.65;margin-bottom:1rem;font-weight:500}
+
+.dots{display:inline-flex;gap:4px;padding:5px 0;align-items:center}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--ink-mute);animation:bop 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s} .dot:nth-child(3){animation-delay:.4s}
+@keyframes bop{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+
+/* Disclaimer */
+.disclaimer{position:fixed;bottom:0;left:0;right:0;background:var(--gold-bg);border-top:1px solid var(--gold-bd);padding:11px 16px;font-family:var(--sans);font-size:14px;color:var(--warn);text-align:center;z-index:9999;font-weight:500}
+</style>
+</head>
+<body>
+<div class="watermark"><div class="watermark-text" id="wmt">BIO 004 ,  Confidential</div></div>
+<div class="wrap"><div id="app"></div></div>
+<div class="disclaimer">Educational simulation only. All patients and clinical scenarios are entirely fictional and created for learning purposes. Not medical advice.</div>
+<script>
+/* COURSE / DAY / REVEAL CODES */
+const COURSE_PW = "GYRUS";        // Initial access (instructor announces in Monday class)
+const REVEAL_CODE = "HAKIM";     // After Thursday TBL
+const FORM_URL = "";
+const FORM_FIELDS = {name:"entry.1",diag:"entry.2",rationale:"entry.3",credits:"entry.4",total:"entry.5"};
+
+/* THE CASE */
+const CASE = {
+  id:"BIO004-W8-THORNTON", title:"Week 8, Margaret Thornton",
+  system:"Nervous System: Brain, Ventricles, CSF & Meninges",
+  patient:{name:"Margaret Thornton", age:74, gender:"Female"},
+  cc:"I keep falling and something doesn't feel right anymore",
+  dayCodes:{2:"AQUEDUCT", 3:"ARACHNOID"},
+    highYield:["headct_d1","mri_d1","lp_d2","cisternogram_d2","tap_d3"],
+
+  /* DIFFERENTIALS, the 10 candidates students researched in pre-work.
+     Includes other causes of dementia (Alzheimer, vascular, Lewy body, B12),
+     other causes of gait dysfunction (Parkinson, cervical myelopathy),
+     and other causes of urinary incontinence (overactive bladder), so the
+     student must reason why "just one system" cannot explain Margaret's
+     full triad. */
+  differentials:[
+    {label:"Idiopathic Normal Pressure Hydrocephalus (NPH)",isCorrect:true},
+    {label:"Alzheimer disease",isCorrect:false},
+    {label:"Vascular (multi-infarct) dementia",isCorrect:false},
+    {label:"Parkinson disease",isCorrect:false},
+    {label:"Diffuse Lewy body disease",isCorrect:false},
+    {label:"Chronic subdural hematoma",isCorrect:false},
+    {label:"Cervical spondylotic myelopathy",isCorrect:false},
+    {label:"Obstructive (non-communicating) hydrocephalus from aqueductal stenosis",isCorrect:false},
+    {label:"Vitamin B12 deficiency / subacute combined degeneration",isCorrect:false},
+    {label:"Idiopathic detrusor overactivity / overactive bladder syndrome",isCorrect:false},
+  ],
+
+  /* INTERVIEW (handled by API persona) */
+  interviewTopics:{
+    onset:{label:"Onset/progression",pattern:/when|start|onset|begin|first|ago|month|year|gradual|sudden|progress|worsen/i},
+    gait:{label:"Gait/falls",pattern:/walk|gait|fall|leg|step|stuck|shuffle|balance|stand|stair|magnet/i},
+    cognition:{label:"Cognition",pattern:/memory|forget|confus|think|word|name|recall|attention|sharp|cognitive|mental/i},
+    urinary:{label:"Urinary",pattern:/urin|bladder|inconti|accident|wet|toilet|bathroom|leak|urgen/i},
+    pmh:{label:"PMH/meds",pattern:/medical|history|prior|previous|condition|hypertens|cholesterol|medication|allerg|surger|diabet/i},
+    family:{label:"Family hx",pattern:/family|mother|father|parent|sister|brother|relative|alzheim|dementia|stroke|parkinson/i},
+    social:{label:"Social/function",pattern:/work|retire|live|alone|smoke|drink|alcohol|drive|garden|active|mood|hobby|exercise/i},
+    acute:{label:"Acute neuro",pattern:/headache|head pain|nausea|vomit|vision|blurry|double|dizzy|weak|numb|tremor|facial|seizure|trauma/i},
+  },
+
+  /* FREE BEDSIDE DATA */
+  free:{
+    vitals:{icon:"VS",label:"Vital signs",result:"T: 36.8 C (98.2 F)\nHR: 78 bpm  (regular, no irregularity)\nBP: 138/82 mmHg  (well-controlled hypertensive on lisinopril)\nRR: 14 /min\nSpO2: 97% on room air\nWt: 64 kg  Ht: 162 cm  BMI: 24.4\nFingerstick glucose: 102 mg/dL"},
+    general:{icon:"GA",label:"General appearance",result:"Well-appearing 74-year-old woman accompanied by her adult daughter. Alert and oriented to person and place; slightly off on the day of the week. Speaks with mild slowness, occasional word-finding pause. Affect somewhat blunted but cooperative and engaged. No acute distress. Daughter occasionally provides corrections. Appears stated age. Well-groomed, well-nourished. Hearing intact. No facial asymmetry."},
+    gait:{icon:"GT",label:"Bedside gait observation",result:"Patient asked to walk 10 meters across the exam room.\n\nFINDINGS:\n  Wide-based stance.\n  Short, shuffling steps (~15 cm each).\n  Feet appear to stick to the floor when initiating each step.\n  Slow turning, takes multiple small steps to complete a 180-degree turn.\n  Mild postural instability on pull test (recovers without falling, but takes a step backward).\n  Reduced arm swing bilaterally and symmetrically.\n  No festination, no asymmetric lean, no leg circumduction.\n  No leg weakness when tested in supine position.\n\nThe gait pattern has been described in the literature as magnetic (feet stuck to floor) or apraxic (the patient appears to know how to walk but the legs do not fully respond)."},
+    neuro:{icon:"NE",label:"Bedside neuro screen",result:"MENTAL STATUS: Alert. Oriented to person and place; off on the date by 2 days. Slow processing. Word-finding pauses. No aphasia, no dysarthria.\n\nCRANIAL NERVES (gross): CN II-XII grossly intact. Pupils equal, round, reactive. Visual fields full to confrontation. EOMs intact, no nystagmus, no diplopia. Facial sensation and motor symmetric. Hearing intact. Tongue protrudes midline. Palate elevates symmetrically.\n\nMOTOR: Strength 5/5 in all extremities tested in supine. No drift. No atrophy. No fasciculations. Tone normal (not rigid, not spastic, no cogwheel).\n\nSENSORY: Light touch, pinprick, vibration, proprioception all intact.\n\nREFLEXES: 2+ symmetric upper and lower extremities. Plantar response down-going bilaterally (no Babinski sign).\n\nCEREBELLAR: Finger-to-nose accurate. Heel-to-shin accurate. No truncal ataxia when seated.\n\nNo focal deficits identified."},
+    mmse:{icon:"MM",label:"Bedside MMSE / MoCA",result:"BEDSIDE COGNITIVE SCREEN\n\nMINI-MENTAL STATE EXAM (MMSE): 24/30  (mild impairment range)\n  Orientation: 8/10 (missed day of week, exact date)\n  Registration: 3/3\n  Attention/Calculation: 3/5 (slow with serial 7s)\n  Recall: 1/3 (recalled 1 of 3 words after 5 minutes)\n  Language: 8/8\n  Visuospatial (intersecting pentagons): 1/1\n\nMONTREAL COGNITIVE ASSESSMENT (MoCA): 22/30  (mild cognitive impairment)\n  Most loss in: attention, delayed recall, executive function (trail-making).\n  Preserved: language, visuospatial, naming.\n\nINTERPRETATION: Subcortical pattern. Prominent slowing, recall difficulty, and executive dysfunction with relatively preserved language and visuospatial function. This pattern is more consistent with subcortical processes (NPH, vascular, Parkinson-related) than cortical dementia (Alzheimer-type, which typically shows aphasia and visuospatial deficits earlier)."},
+    chart:{icon:"CH",label:"Quick chart summary",result:"MARGARET THORNTON, 74 yo F\nLast wellness visit 4 months ago: BP 134/80, A1c 5.6%, lipid panel at goal on therapy.\n\nPMH:\n  Hypertension, well-controlled\n  Hyperlipidemia, well-controlled\n  Total abdominal hysterectomy at 52 (benign fibroids)\n\nMEDS:\n  Lisinopril 20 mg daily\n  Atorvastatin 40 mg daily\n  Calcium + Vit D supplement (OTC)\n\nALLERGIES: NKDA\n\nVACCINATIONS: Up to date (shingles, pneumococcal, influenza, COVID booster).\n\nFAMILY HX:\n  Father: Alzheimer's disease, onset age 80, died 86 (pneumonia)\n  Mother: Stroke at 78, died 81 (cardiac event)\n  Sister, 71: healthy\n\nSOCIAL: Lives with daughter, son-in-law, and two teenage grandchildren in Vacaville. Retired teacher (35 years, 4th grade). No tobacco. Occasional wine. Drives short distances only."},
+  },
+
+  /* DAYS */
+  days:{
+    1:{
+      label:"Day 1 ,  Monday: Initial encounter",
+      note:"Today's pre-work covers the major regions of the central nervous system: cerebrum (lobes, gyri, sulci), cerebellum (vermis, hemispheres, peduncles), brainstem (midbrain, pons, medulla), and diencephalon (thalamus, hypothalamus, epithalamus). Each test you order requires a gate question that applies that anatomy to Margaret's case. Order tests deliberately, credits do not refund.",
+      autoReveal:null,
+      orders:[
+        {id:"headct_d1",cat:"Imaging",name:"Non-contrast head CT",cost:25,
+          result:"NON-CONTRAST HEAD CT\n\nFINDINGS:\n  Lateral ventricles: Markedly enlarged bilaterally, symmetric.\n  Third ventricle: Enlarged, with thinning of the floor.\n  Fourth ventricle: Normal in size.\n  Evans index (max width of frontal horns of lateral ventricles divided by max internal cranial diameter): 0.36 (abnormal, >0.30 supports ventriculomegaly).\n  Cerebral cortex: Sulci appear LESS prominent than expected for the degree of ventricular enlargement (cortex is not significantly atrophied).\n  Cerebellum: Normal in size and contour.\n  Brainstem: Normal.\n  No hemorrhage, no mass lesion, no acute infarct.\n  No skull fracture.\n\nIMPRESSION: Marked ventriculomegaly disproportionate to cortical atrophy. Findings raise concern for a hydrocephalus process rather than ex-vacuo dilation from neurodegenerative atrophy.",
+          gate:{q:"Margaret's head CT shows enlargement of the lateral ventricles. The lateral ventricles sit deep within the largest part of the brain. Each lateral ventricle has portions extending into specific lobes of the cerebrum. The two halves of the cerebrum are separated from each other by which deep groove?",
+            opts:["A) Longitudinal (interhemispheric) fissure",
+                  "B) Central sulcus",
+                  "C) Lateral sulcus (Sylvian fissure)",
+                  "D) Cerebral aqueduct"],
+            correct:"A",
+            exp:"A: The LONGITUDINAL FISSURE (also called the interhemispheric fissure) is the deep midline groove that completely separates the right and left cerebral hemispheres. It is occupied by a fold of dura called the falx cerebri. B: the CENTRAL SULCUS separates the FRONTAL lobe (anteriorly) from the PARIETAL lobe (posteriorly), within one hemisphere. C: the LATERAL SULCUS (Sylvian fissure) separates the TEMPORAL lobe (below) from the FRONTAL and PARIETAL lobes (above), within one hemisphere. D: the CEREBRAL AQUEDUCT is part of the ventricular system, connecting the third and fourth ventricles, not a sulcus. Knowing the major sulci and fissures lets you describe where lesions sit and which lobes are involved."}},
+        {id:"mri_d1",cat:"Imaging",name:"MRI brain (T1, T2, FLAIR)",cost:30,
+          result:"MRI BRAIN (T1, T2, FLAIR sequences)\n\nFINDINGS:\n  Lateral and third ventricles: confirmed marked dilation. Frontal horns rounded.\n  Periventricular FLAIR hyperintensity: present, suggestive of transependymal CSF flow (CSF crossing into surrounding white matter under pressure).\n  Cortical sulci: less prominent at the high convexities (DESH pattern), with some Sylvian fissure widening (subarachnoid spaces inferiorly are wider than superiorly).\n  Cerebellum: normal vermis, normal hemispheres, normal cerebellar peduncles.\n  Brainstem (midbrain, pons, medulla): unremarkable.\n  Thalamus, hypothalamus: unremarkable.\n  Hippocampi: not significantly atrophied (would expect atrophy in early Alzheimer's).\n  No mass, no hemorrhage, no acute infarct, no white matter disease beyond age-expected.\n  No aqueductal stenosis, no obstructing lesion in ventricular system.\n\nIMPRESSION: Communicating hydrocephalus pattern. Disproportionately enlarged ventricles relative to cortical atrophy. Periventricular transependymal flow. No obstructive lesion.",
+          gate:{q:"The MRI report describes Margaret's CEREBELLUM as normal, including its vermis, hemispheres, and peduncles. The cerebellum sits in which of the following positions relative to the rest of the brain?",
+            opts:["A) Posterior to the brainstem and inferior to the occipital lobe (in the posterior cranial fossa)",
+                  "B) Anterior to the brainstem and superior to the frontal lobe",
+                  "C) Within the lateral ventricles",
+                  "D) Deep within the temporal lobe"],
+            correct:"A",
+            exp:"A: The CEREBELLUM occupies the POSTERIOR CRANIAL FOSSA, sitting posterior to the pons and medulla (the brainstem) and inferior to the occipital lobe of the cerebrum. The tentorium cerebelli (a sheet of dura) separates it superiorly from the occipital lobe. The cerebellum has a midline VERMIS, two HEMISPHERES, and three pairs of PEDUNCLES (superior, middle, inferior) that connect it to the brainstem. B: anterior/superior would describe the frontal lobe of the cerebrum, not the cerebellum. C: nothing brain-tissue sits within the ventricles (ventricles contain CSF). D: the cerebellum is separate from the temporal lobe."}},
+        {id:"tinetti_d1",cat:"Bedside",name:"Tinetti POMA gait + balance scoring",cost:10,
+          result:"TINETTI PERFORMANCE-ORIENTED MOBILITY ASSESSMENT (POMA)\n\nBALANCE SUBSCORE: 8/16\n  Sitting balance: normal\n  Rises from chair: requires arms\n  Standing balance (eyes open): unsteady\n  Pull test: takes a step backward, recovers\n  Eyes closed standing: unsteady\n  Turning 360 degrees: discontinuous, unstable\n\nGAIT SUBSCORE: 8/12\n  Initiation: hesitant, foot 'sticks'\n  Step length: short bilaterally\n  Step height: low (foot does not clear floor well)\n  Step symmetry: symmetric\n  Step continuity: discontinuous (stop-start)\n  Path: nearly straight\n  Trunk: stable\n  Walking stance: wide-based\n\nTOTAL: 16/28  (HIGH FALL RISK; <19 indicates high risk)\n\nIMPRESSION: Gait apraxia pattern. Magnetic gait, broad-based, with retropulsion on pull test. Falls highly predictable.",
+          gate:{q:"Margaret's gait test shows a striking inability to coordinate stepping despite normal leg strength when she is supine. Coordinated, smooth movement and balance are heavily dependent on which structure of the central nervous system?",
+            opts:["A) The cerebellum",
+                  "B) The frontal lobe of the cerebrum",
+                  "C) The medulla oblongata",
+                  "D) The thalamus"],
+            correct:"A",
+            exp:"A: The CEREBELLUM is the primary coordinator of smooth, accurate, balanced movement. It receives proprioceptive input from the body and motor copy from the cerebrum, then fine-tunes ongoing movement and posture. Damage to the cerebellum produces ataxia (uncoordinated movement), broad-based gait, dysmetria, and dysdiadochokinesia. Margaret's cerebellum LOOKED normal on MRI, which is informative because it argues that her gait problem is NOT cerebellar in origin. B: the FRONTAL LOBE houses the primary motor cortex (precentral gyrus) and premotor and supplementary motor areas, which initiate and plan movement; damage here gives weakness, not pure ataxia. C: the MEDULLA contains autonomic centers (cardiorespiratory) and motor pathway tracts; damage gives weakness or autonomic dysregulation. D: the THALAMUS relays sensory information; damage gives sensory loss or thalamic pain syndromes."}},
+        {id:"moca_d1",cat:"Bedside",name:"Detailed MoCA with subdomain breakdown",cost:10,
+          result:"MOCA (Montreal Cognitive Assessment), full administration\n\nTOTAL SCORE: 22/30 (mild cognitive impairment range)\n\nSUBDOMAIN BREAKDOWN:\n  Visuospatial / executive (trail-making, cube copy, clock draw): 3/5\n    -- failed alternating trail-making task (planning/sequencing problem)\n    -- clock draw mildly off (numbers correct, hands slightly off)\n  Naming (lion, rhinoceros, camel): 3/3\n  Attention (digit span, vigilance, serial 7s): 4/6\n  Language (sentence repetition, fluency): 2/3\n  Abstraction (similarities): 2/2\n  Delayed recall (5 words after 5 min): 2/5\n  Orientation: 6/6\n\nPATTERN: Greatest deficits in delayed recall, attention, and executive function (trail-making, planning). Naming, language, and orientation relatively preserved. This is a SUBCORTICAL pattern, distinct from the cortical pattern of Alzheimer's (which typically shows naming/language and visuospatial deficits early).",
+          gate:{q:"Margaret's MoCA shows the largest deficits in EXECUTIVE FUNCTION (planning, sequencing, judgment). Executive function is most associated with which lobe of the cerebrum?",
+            opts:["A) Frontal lobe",
+                  "B) Parietal lobe",
+                  "C) Occipital lobe",
+                  "D) Temporal lobe"],
+            correct:"A",
+            exp:"A: The FRONTAL LOBE houses executive function. Specifically the prefrontal cortex (anterior to the precentral gyrus and primary motor cortex) is responsible for planning, judgment, decision-making, working memory, behavioral inhibition, and personality. The frontal lobe also contains the precentral gyrus (primary motor cortex), Broca's area (motor speech, in the dominant hemisphere). B: the PARIETAL LOBE contains the postcentral gyrus (primary somatosensory cortex) and is involved in spatial processing and integration of sensory input. C: the OCCIPITAL LOBE handles primary visual processing. D: the TEMPORAL LOBE contains the primary auditory cortex, Wernicke's area (language comprehension), and structures critical for memory formation including the hippocampus. NPH affects subcortical white matter pathways including the periventricular white matter that connects the frontal lobe to subcortical structures, which is why frontal-executive deficits are prominent."}},
+        {id:"brainstemreflex_d1",cat:"Bedside",name:"Brainstem reflex screen (pupillary, corneal, gag)",cost:15,
+          result:"BRAINSTEM REFLEX SCREEN\n\nPUPILLARY LIGHT REFLEX: Intact bilaterally. Direct and consensual responses brisk and equal. Pupils 3 mm, equal, reactive.\n\nCORNEAL REFLEX: Intact bilaterally (afferent CN V, efferent CN VII).\n\nGAG REFLEX: Intact bilaterally (afferent CN IX, efferent CN X).\n\nVESTIBULOOCULAR REFLEX (head impulse test): Intact, no catch-up saccade.\n\nIMPRESSION: All tested brainstem reflexes intact. No evidence of brainstem injury or compression.",
+          gate:{q:"The pupillary light reflex Margaret demonstrated requires both an afferent limb (light to the brain) and an efferent limb (signal back to the iris muscle). The brainstem region that houses the cells of origin for the parasympathetic fibers controlling pupillary constriction (Edinger-Westphal nucleus, part of CN III) is in which subdivision of the brainstem?",
+            opts:["A) Midbrain",
+                  "B) Pons",
+                  "C) Medulla oblongata",
+                  "D) Cerebellum (as part of the brainstem)"],
+            correct:"A",
+            exp:"A: The MIDBRAIN (mesencephalon) is the most superior part of the brainstem, sitting between the diencephalon (above) and the pons (below). It contains the cells of origin for cranial nerves III (oculomotor) and IV (trochlear), the cerebral aqueduct (part of the ventricular system), the substantia nigra (Parkinson's disease), and the colliculi (visual and auditory reflexes). The Edinger-Westphal subnucleus of CN III sits here and provides parasympathetic supply for pupillary constriction. B: the PONS houses CN V, VI, VII, and VIII nuclei. C: the MEDULLA houses CN IX, X, XI, XII nuclei and the cardiorespiratory centers. D: the CEREBELLUM is a separate structure connected to the brainstem by peduncles, not part of it."}},
+      ]
+    },
+    2:{
+      label:"Day 2 ,  Tuesday: Ventricles and CSF",
+      note:"Code from Monday class unlocks today. Today's pre-work covers the ventricular system (lateral, third, and fourth ventricles, the interventricular foramen, the cerebral aqueduct, the median and lateral apertures, and the choroid plexus), the meninges (dura with periosteal and meningeal layers, arachnoid, pia, the subarachnoid space, and dural sinuses), and the spinal cord. Today's tests will help characterize Margaret's ventriculomegaly and CSF dynamics. Use today to understand WHY her ventricles are enlarged.",
+      autoReveal:{label:"OVERNIGHT: Tap test (lumbar drainage trial)",result:"OVERNIGHT EVENT (Monday night to Tuesday morning)\n\nA standard 30 mL lumbar puncture (tap test) was performed at 22:00 to assess for symptomatic improvement after CSF removal. Opening pressure was 14 cm H2O (within normal range, 7-18 cm H2O).\n\nRESULT (Tuesday morning, 12 hours post-LP):\n  Daughter reports patient slept better, woke up saying 'I feel a little lighter on my feet.'\n  Repeat Tinetti POMA: 19/28 (was 16/28 yesterday). Improvement of 3 points, especially in gait initiation and turning.\n  Repeat MoCA: 23/30 (was 22/30). Modest improvement.\n  Patient reports easier walking when she stood up to use the bathroom this morning.\n\nINTERPRETATION: A POSITIVE TAP TEST. Symptomatic improvement after temporary CSF drainage strongly supports a diagnosis where chronic CSF accumulation is the driver of symptoms (in other words, this argues for hydrocephalus over neurodegenerative atrophy)."},
+      orders:[
+        {id:"lp_d2",cat:"Procedure",name:"Lumbar puncture, opening pressure measurement",cost:25,
+          result:"LUMBAR PUNCTURE\n\nProcedure: Patient in lateral decubitus position, sterile prep, 22-gauge spinal needle inserted at the L3-L4 interspace. Free flow of clear CSF obtained on first attempt. Tolerated well.\n\nOPENING PRESSURE: 14 cm H2O  (NORMAL range 7-18)\nCLOSING PRESSURE (after 30 mL drained): 9 cm H2O\nVOLUME REMOVED: 30 mL  (large-volume tap test)\n\nAPPEARANCE: Crystal clear and colorless. No xanthochromia.\n\nIMPRESSION: Normal opening pressure. Normal CSF appearance. The pressure being NORMAL despite ventricular enlargement is the diagnostic paradox that gives this entity its name (the pressure is normal at rest, but the chronic accumulation is symptomatic).",
+          gate:{q:"The LP needle traveled through several layers to reach the CSF. Specifically, the needle pierced (in order): skin, subcutaneous tissue, supraspinous and interspinous ligaments, ligamentum flavum, then the DURA MATER and the ARACHNOID MATER, before entering the CSF-filled space. What is the name of the CSF-filled space that the needle ends up in, between the arachnoid and the pia mater?",
+            opts:["A) Subarachnoid space",
+                  "B) Subdural space",
+                  "C) Epidural space",
+                  "D) Central canal"],
+            correct:"A",
+            exp:"A: The SUBARACHNOID SPACE sits between the ARACHNOID MATER (the middle meningeal layer) and the PIA MATER (the innermost layer, adherent to the brain and spinal cord). It is filled with CSF and contains the major cerebral blood vessels. The lumbar cistern (a part of the subarachnoid space below the conus medullaris, around L1-L2 in adults) is where lumbar punctures sample CSF safely without risking cord injury. B: the SUBDURAL SPACE is a potential space between the dura and arachnoid (only really exists when blood collects there, as in subdural hematoma). C: the EPIDURAL SPACE is between the dura and the bone or vertebral canal; it contains fat and venous plexuses, no CSF. D: the CENTRAL CANAL runs through the middle of the spinal cord itself; LP does not enter it."}},
+        {id:"csf_d2",cat:"Lab",name:"CSF cell count, protein, glucose",cost:15,
+          result:"CSF ANALYSIS\n\nAppearance: clear, colorless\nWBC: 0 /uL (normal 0-5)\nRBC: 0 /uL (no traumatic tap)\nProtein: 32 mg/dL (normal 15-45)\nGlucose: 64 mg/dL (normal 40-70; serum glucose was 102, ratio 0.63, normal >0.6)\nXanthochromia: negative\nGram stain: no organisms\nCulture: pending (no growth at 24 hours)\n\nADDITIONAL TESTS:\n  Oligoclonal bands: not detected\n  IgG index: normal\n  Beta-amyloid 42, total tau, phospho-tau: pending (sent to specialty lab)\n\nIMPRESSION: Completely normal CSF profile. Excludes infection (meningitis), excludes hemorrhage, excludes inflammatory process (multiple sclerosis), and gives no support for an Alzheimer-pattern biomarker abnormality on initial review.",
+          gate:{q:"Margaret's CSF analysis came back normal: clear, no cells, normal protein and glucose. This CSF was originally produced somewhere in her ventricular system. CSF is produced by a specialized vascular structure that protrudes into the ventricles. What is this CSF-producing structure called, and where is it located?",
+            opts:["A) The choroid plexus, located in all four ventricles (especially the lateral ventricles)",
+                  "B) The arachnoid granulations, located along the dural sinuses",
+                  "C) The pia mater, located on the surface of the brain",
+                  "D) The cerebral aqueduct, located between the third and fourth ventricles"],
+            correct:"A",
+            exp:"A: The CHOROID PLEXUS produces CSF. It is a specialized network of capillaries surrounded by ependymal cells that protrudes into the ventricles. Choroid plexus is found in all four ventricles, but the largest contribution comes from the lateral ventricles. CSF is produced at about 500 mL per day in adults; the total CSF volume is only ~150 mL, so it turns over multiple times daily. B: ARACHNOID GRANULATIONS are sites of CSF REABSORPTION (not production). They project into the dural venous sinuses (especially the superior sagittal sinus) and allow CSF to drain back into the venous blood. In NPH, dysfunction here is one proposed mechanism. C: the PIA MATER is the innermost meningeal layer; it does not produce CSF. D: the CEREBRAL AQUEDUCT is a narrow channel that connects the third and fourth ventricles, not a production site."}},
+        {id:"cisternogram_d2",cat:"Imaging",name:"Radionuclide cisternogram (CSF flow + reabsorption study)",cost:30,
+          result:"RADIONUCLIDE CISTERNOGRAM\n\nA small dose of indium-111 DTPA was injected via lumbar puncture (subarachnoid). Imaging was performed at 4, 24, 48, and 72 hours.\n\n4 HOURS: Tracer ascending through spinal subarachnoid space normally, beginning to enter the basal cisterns.\n\n24 HOURS: Tracer is seen REFLUXED into the LATERAL VENTRICLES. Expected pattern at 24 hours is for tracer to be at the high cerebral convexities (en route to arachnoid granulations); reflux into ventricles is abnormal.\n\n48 HOURS: Tracer PERSISTS in the lateral ventricles (should have cleared by now). Convexity flow is delayed.\n\n72 HOURS: Tracer still present in ventricles; partial clearance over the convexities.\n\nIMPRESSION: Pattern of COMMUNICATING HYDROCEPHALUS with reflux of tracer into ventricles and delayed clearance over the cerebral convexities. Consistent with impaired CSF reabsorption at the arachnoid granulations or impaired CSF flow over the convexities. There is no obstruction within the ventricular system itself.",
+          gate:{q:"The cisternogram shows tracer entering the LATERAL VENTRICLES from below and then having difficulty leaving. Trace the normal flow path of CSF from a lateral ventricle to the fourth ventricle. Which of the following correctly describes the route?",
+            opts:["A) Lateral ventricle -> interventricular foramen (of Monro) -> third ventricle -> cerebral aqueduct -> fourth ventricle",
+                  "B) Lateral ventricle -> cerebral aqueduct -> third ventricle -> interventricular foramen -> fourth ventricle",
+                  "C) Lateral ventricle -> fourth ventricle -> cerebral aqueduct -> third ventricle",
+                  "D) Lateral ventricle -> subarachnoid space -> third ventricle -> fourth ventricle"],
+            correct:"A",
+            exp:"A: CSF flows from each LATERAL VENTRICLE through the INTERVENTRICULAR FORAMEN (of Monro) into the THIRD VENTRICLE (a thin midline cavity in the diencephalon). From the third ventricle, CSF flows down the CEREBRAL AQUEDUCT (of Sylvius), which runs through the midbrain, into the FOURTH VENTRICLE (between the brainstem and cerebellum). From the fourth ventricle, CSF exits through the median aperture (of Magendie) and the two lateral apertures (of Luschka) into the subarachnoid space, then circulates over the brain and spinal cord and is reabsorbed at the arachnoid granulations. B: this reverses the order. C: the fourth ventricle is downstream of the third, not upstream. D: CSF passes through the ventricular system before reaching the subarachnoid space, not the other way around."}},
+        {id:"flowmri_d2",cat:"Imaging",name:"Phase-contrast MRI CSF flow study",cost:30,
+          result:"PHASE-CONTRAST MRI CSF FLOW STUDY\n\nMeasurements taken at the level of the CEREBRAL AQUEDUCT.\n\nAQUEDUCTAL STROKE VOLUME: 87 microliters (markedly elevated; normal <42 microliters)\nAQUEDUCTAL CSF FLOW PATTERN: Hyperdynamic, with both forward (caudal) and backward (cranial) bidirectional flow exaggerated through the cardiac cycle.\nFLOW VOID ON T2: prominent.\n\nIMPRESSION: HYPERDYNAMIC AQUEDUCTAL CSF FLOW. This finding is highly associated with idiopathic normal pressure hydrocephalus and predicts response to ventriculoperitoneal shunt placement.",
+          gate:{q:"The MRI flow study measured CSF flow at the CEREBRAL AQUEDUCT. The cerebral aqueduct is a narrow channel that runs through which part of the brainstem, connecting which two ventricles?",
+            opts:["A) Through the midbrain, connecting the third ventricle to the fourth ventricle",
+                  "B) Through the pons, connecting the lateral ventricle to the third ventricle",
+                  "C) Through the medulla, connecting the fourth ventricle to the central canal of the spinal cord",
+                  "D) Through the diencephalon, connecting the lateral ventricle to the fourth ventricle"],
+            correct:"A",
+            exp:"A: The CEREBRAL AQUEDUCT (also called the aqueduct of Sylvius or the mesencephalic aqueduct) runs through the MIDBRAIN. It connects the THIRD VENTRICLE (above, in the diencephalon) to the FOURTH VENTRICLE (below, between the brainstem and the cerebellum). It is the narrowest part of the ventricular system, which is why obstruction at this level (aqueductal stenosis) produces hydrocephalus that affects only the lateral and third ventricles (the fourth remains normal). Margaret's aqueduct is patent, not stenosed, which is one piece of evidence for COMMUNICATING (not obstructive) hydrocephalus. B: the pons does not contain a CSF channel. C: the medulla contains the lower part of the fourth ventricle but not an aqueduct. D: the lateral ventricles connect to the third via the interventricular foramen, not the aqueduct."}},
+        {id:"hires_mri_d2",cat:"Imaging",name:"High-resolution MRI brain (subarachnoid space morphology)",cost:25,
+          result:"HIGH-RESOLUTION MRI (FLAIR + T2 + 3D-CISS)\n\nFINDINGS:\n  Subarachnoid space morphology shows a striking pattern:\n    - HIGH CONVEXITY sulci appear COMPRESSED ('tight') compared to expected for age.\n    - SYLVIAN FISSURES appear WIDENED.\n    - The sulcal CSF pattern is described as DESH (Disproportionately Enlarged Subarachnoid space Hydrocephalus), highly characteristic of NPH.\n  Periventricular FLAIR hyperintensity confirmed (transependymal CSF flow).\n  No aqueductal stenosis.\n  No mass, no obstructing lesion.\n  Hippocampi NOT significantly atrophied.\n  Meninges: no abnormal enhancement to suggest meningitis or carcinomatous meningitis (per FLAIR contrast administration).\n\nIMPRESSION: Imaging pattern strongly supportive of idiopathic normal pressure hydrocephalus. DESH plus aqueductal hyperdynamic flow plus disproportionate ventriculomegaly plus positive tap test creates a high-confidence picture.",
+          gate:{q:"The MRI report describes the subarachnoid space morphology, contrasting tight sulci at the high convexities with widened Sylvian fissures. The subarachnoid space sits between which two layers of the meninges?",
+            opts:["A) Between the arachnoid mater and the pia mater",
+                  "B) Between the dura mater and the arachnoid mater",
+                  "C) Between the periosteal and meningeal layers of the dura",
+                  "D) Between the pia mater and the brain parenchyma"],
+            correct:"A",
+            exp:"A: The SUBARACHNOID SPACE sits between the ARACHNOID MATER (middle layer) and the PIA MATER (innermost layer, adherent to the brain). It contains CSF and the major cerebral blood vessels. CSF flows here from the fourth ventricle apertures, circulates over the brain and spinal cord, and is reabsorbed at arachnoid granulations into dural venous sinuses. B: the space between dura and arachnoid is the SUBDURAL SPACE, normally only a potential space (collects blood in subdural hematomas). C: between the periosteal and meningeal layers of the dura is where DURAL VENOUS SINUSES sit (e.g., superior sagittal sinus). D: there is no real space between pia and brain; the pia is tightly adherent to the brain surface."}},
+      ]
+    },
+    3:{
+      label:"Day 3 ,  Wednesday: Cranial nerves and vascular workup",
+      note:"Code from Tuesday class unlocks today. Today's pre-work covers cranial nerves (12 pairs by name and number, with broad function), the major peripheral plexuses (cervical, brachial, lumbar, sacral), the autonomic nervous system (sympathetic chain and craniosacral parasympathetic), and the cranial vasculature (Circle of Willis with anterior, middle, posterior cerebral arteries plus communicating arteries; basilar; vertebral; internal carotid). Today's tests apply that anatomy to confirming Margaret's diagnosis and ruling out vascular contributors. Submit your final diagnosis any time after today's data is in.",
+      autoReveal:{label:"OVERNIGHT: Extended lumbar drainage trial",result:"OVERNIGHT EVENT (Tuesday night to Wednesday morning)\n\nA second, larger-volume LP was performed (40 mL over 30 minutes) at 21:00 as an extended tap test.\n\nMORNING ASSESSMENT (Wednesday):\n  Patient reports she walked to the cafeteria for breakfast 'almost like normal.'\n  Daughter Sarah is in tears, says 'this is my mom from a year ago.'\n  Repeat Tinetti POMA: 22/28 (was 16/28 at admission, 19/28 yesterday).\n  Repeat MoCA: 25/30 (was 22/30 at admission, 23/30 yesterday).\n  Patient continent overnight (no accident).\n\nINTERPRETATION: A STRONGLY POSITIVE EXTENDED TAP TEST. The triad of gait, cognition, and continence has all improved with CSF removal. This is the highest-confidence predictor of response to ventriculoperitoneal shunt surgery.\n\nNeurosurgical consult has been called for shunt evaluation."},
+      orders:[
+        {id:"cta_d3",cat:"Imaging",name:"CTA Circle of Willis",cost:30,
+          result:"CT ANGIOGRAM, CIRCLE OF WILLIS\n\nFINDINGS:\n  Anterior circulation:\n    Internal carotid arteries: patent bilaterally, no significant stenosis.\n    Anterior cerebral arteries (A1, A2 segments): patent bilaterally.\n    Anterior communicating artery: present, normal.\n    Middle cerebral arteries (M1, M2 segments): patent bilaterally.\n  Posterior circulation:\n    Vertebral arteries: patent bilaterally.\n    Basilar artery: patent, normal caliber.\n    Posterior cerebral arteries: patent bilaterally.\n    Posterior communicating arteries: present bilaterally (variant: small on the right, common normal variant).\n  No aneurysm. No significant atherosclerotic stenosis. No vascular malformation.\n\nIMPRESSION: Circle of Willis intact and patent. No vascular cause for cognitive or gait decline.",
+          gate:{q:"Margaret's CTA shows her Circle of Willis is intact. The Circle of Willis is a ring of arteries at the base of the brain that supplies the cerebrum. Which of the following pairs of arteries are connected by the ANTERIOR communicating artery?",
+            opts:["A) The two anterior cerebral arteries (right ACA to left ACA)",
+                  "B) The two middle cerebral arteries (right MCA to left MCA)",
+                  "C) An anterior cerebral artery to a middle cerebral artery on the same side",
+                  "D) An anterior cerebral artery to a posterior cerebral artery on the same side"],
+            correct:"A",
+            exp:"A: The ANTERIOR COMMUNICATING ARTERY (AComm) is a short midline artery that connects the right and left ANTERIOR CEREBRAL ARTERIES (ACA), bridging the front of the Circle of Willis. It is a common site of berry aneurysms. B: the right and left MCAs are not directly connected to each other in the Circle of Willis (they sit lateral on each side). C: the ACA and MCA on the same side are both branches of the internal carotid artery; they share the bifurcation point but are not joined by a separate communicating artery. D: the POSTERIOR COMMUNICATING ARTERIES (right and left, separately) connect the internal carotid (anterior circulation) to the posterior cerebral artery (posterior circulation) on each side. The anterior communicating connects the two ACAs; the posterior communicating arteries connect ICA to PCA. The full circle: ACA - AComm - ACA - ICA - PComm - PCA - basilar - PCA - PComm - ICA - back around."}},
+        {id:"carotid_d3",cat:"Imaging",name:"Carotid Doppler ultrasound",cost:20,
+          result:"CAROTID DOPPLER, BILATERAL\n\nRIGHT internal carotid artery: peak systolic velocity 78 cm/s, no significant stenosis (<50%).\nLEFT internal carotid artery: peak systolic velocity 82 cm/s, no significant stenosis (<50%).\nVertebral arteries: antegrade flow bilaterally, normal velocities.\n\nNo plaque, no significant stenosis, no occlusion. No flow reversal.\n\nIMPRESSION: Normal extracranial carotid and vertebral arterial flow. No vascular cause for cerebral hypoperfusion.",
+          gate:{q:"The internal carotid artery is the major arterial supply to the anterior cerebral circulation. After it enters the cranium, it gives off several major terminal branches that contribute to the Circle of Willis. Which of the following is NOT a direct branch of the internal carotid artery?",
+            opts:["A) Basilar artery",
+                  "B) Anterior cerebral artery",
+                  "C) Middle cerebral artery",
+                  "D) Posterior communicating artery"],
+            correct:"A",
+            exp:"A: The BASILAR ARTERY is NOT a branch of the internal carotid. The basilar artery is formed by the FUSION of the two VERTEBRAL ARTERIES (which themselves arise from the subclavian arteries). The basilar gives off the posterior cerebral arteries and several pontine and cerebellar branches. B: the ANTERIOR CEREBRAL ARTERY (ACA) is a direct terminal branch of the internal carotid. C: the MIDDLE CEREBRAL ARTERY (MCA) is the larger terminal branch of the internal carotid (often described as the 'continuation' of the ICA). D: the POSTERIOR COMMUNICATING ARTERY arises from the internal carotid and connects forward to the posterior cerebral artery, completing the Circle of Willis on each side. So the ICA gives rise to ACA, MCA, PComm, and the ophthalmic artery; the vertebrals give rise to the basilar."}},
+        {id:"cnexam_d3",cat:"Bedside",name:"Detailed cranial nerve examination (CN I-XII)",cost:10,
+          result:"DETAILED CRANIAL NERVE EXAMINATION\n\nCN I (olfactory): Patient correctly identifies coffee and vanilla bilaterally. Intact.\nCN II (optic): Visual acuity 20/40 corrected bilaterally. Visual fields full to confrontation. Optic discs sharp on fundoscopy. No papilledema.\nCN III, IV, VI (oculomotor, trochlear, abducens): EOMs intact in all directions. No diplopia. No ptosis. Pupils 3 mm equal, briskly reactive to light and accommodation.\nCN V (trigeminal): Light touch and pinprick intact V1, V2, V3 bilaterally. Masseter and temporalis strong symmetric. Corneal reflex intact.\nCN VII (facial): Facial movement symmetric (smile, eyebrow raise, eye closure, cheek puff). No drooping.\nCN VIII (vestibulocochlear): Hearing intact bilaterally to finger rub. Weber centralized. Rinne air > bone bilaterally.\nCN IX, X (glossopharyngeal, vagus): Palate elevates symmetrically, gag reflex intact.\nCN XI (accessory): Sternocleidomastoid and trapezius strength 5/5 symmetric.\nCN XII (hypoglossal): Tongue protrudes midline, no fasciculations or atrophy.\n\nIMPRESSION: All 12 cranial nerves grossly intact. No focal cranial nerve deficit, which argues against brainstem stroke, mass, or peripheral neurodegenerative process targeting CNs.",
+          gate:{q:"Margaret's cranial nerve exam is fully intact. Which cranial nerve is responsible for VISUAL information from the eyes traveling to the brain (the afferent limb of vision)?",
+            opts:["A) CN II, the optic nerve",
+                  "B) CN III, the oculomotor nerve",
+                  "C) CN VI, the abducens nerve",
+                  "D) CN V, the trigeminal nerve"],
+            correct:"A",
+            exp:"A: CN II, the OPTIC NERVE, carries visual information (special sensory) from the retina to the brain. It is purely sensory. The pathway: retina to optic nerve to optic chiasm (where nasal fibers cross) to optic tract to lateral geniculate nucleus of the thalamus to optic radiations to primary visual cortex (occipital lobe). B: CN III (OCULOMOTOR) is motor to most extraocular muscles (medial rectus, superior rectus, inferior rectus, inferior oblique, levator palpebrae) and parasympathetic to the pupillary sphincter and ciliary body; it has nothing to do with visual perception. C: CN VI (ABDUCENS) is motor to the lateral rectus only. D: CN V (TRIGEMINAL) is sensation to the face (V1 ophthalmic, V2 maxillary, V3 mandibular) and motor to the muscles of mastication; it does not carry visual information. Mnemonic for the 12 CNs: 'On Old Olympus' Towering Tops, A Finn And German Viewed Some Hops' = Olfactory, Optic, Oculomotor, Trochlear, Trigeminal, Abducens, Facial, Vestibulocochlear, Glossopharyngeal, Vagus, Spinal accessory, Hypoglossal."}},
+        {id:"urodynamic_d3",cat:"Specialty",name:"Urodynamic study + autonomic assessment",cost:25,
+          result:"URODYNAMIC STUDY (with autonomic correlates)\n\nFILLING PHASE:\n  Reduced bladder capacity (220 mL; normal 400-500 mL).\n  Detrusor overactivity at low filling volumes (involuntary contractions at 130 mL and 180 mL).\n  Patient reports strong urge at 90 mL filling.\n\nVOIDING PHASE:\n  Coordinated detrusor contraction with sphincter relaxation (no detrusor-sphincter dyssynergia).\n  No outlet obstruction.\n  Post-void residual: 30 mL (normal).\n\nAUTONOMIC ASSESSMENT:\n  Resting heart rate: 78\n  Heart rate response to standing: appropriate increase\n  Blood pressure response to standing: no orthostatic drop\n  Pupillary response: normal sympathetic and parasympathetic\n\nIMPRESSION: Detrusor overactivity (urge incontinence pattern) without outlet obstruction. Pattern consistent with LOSS OF CORTICAL INHIBITION of the bladder (the cerebral cortex normally inhibits the sacral parasympathetic micturition reflex; with NPH, this descending inhibition is impaired). Autonomic outflow is structurally intact, the lesion is at the cortical/subcortical level.",
+          gate:{q:"Margaret's bladder dysfunction reflects loss of cortical inhibition over the SACRAL PARASYMPATHETIC outflow that drives bladder emptying. The PARASYMPATHETIC division of the autonomic nervous system has CRANIOSACRAL outflow. The 'sacral' part originates from which segments of the spinal cord?",
+            opts:["A) Sacral segments S2-S4",
+                  "B) Lumbar segments L1-L3",
+                  "C) Thoracic segments T1-T12",
+                  "D) Cervical segments C1-C8"],
+            correct:"A",
+            exp:"A: The PARASYMPATHETIC nervous system has CRANIOSACRAL outflow. The CRANIAL portion exits with cranial nerves III (Edinger-Westphal, pupillary), VII (facial, salivary glands), IX (glossopharyngeal, parotid), and X (vagus, most thoracic and abdominal viscera). The SACRAL portion exits from spinal cord segments S2 to S4 as the pelvic splanchnic nerves, which supply the descending colon, rectum, bladder, and reproductive organs. The sacral parasympathetic drives bladder emptying (detrusor contraction). B: lumbar L1-L3 and most thoracic levels are SYMPATHETIC (thoracolumbar outflow). C: thoracic levels are sympathetic. D: cervical levels do not contribute autonomic outflow directly (the cervical sympathetic chain receives input from upper thoracic levels)."}},
+        {id:"tap_d3",cat:"Procedure",name:"Repeat extended-volume LP (40 mL drainage)",cost:25,
+          result:"EXTENDED-VOLUME LUMBAR PUNCTURE (40 mL drainage)\n\nProcedure: Patient in lateral decubitus position. Sterile prep. 22-gauge needle inserted at L4-L5 interspace (one level lower than yesterday's L3-L4 to avoid the prior puncture site). Free flow of clear CSF.\n\nOPENING PRESSURE: 13 cm H2O (normal)\nVOLUME REMOVED: 40 mL over 30 minutes (extended-volume tap test for higher diagnostic sensitivity)\nCLOSING PRESSURE: 4 cm H2O\n\nFOLLOW-UP TESTING (next morning, 12 hours post-LP):\n  Tinetti POMA: 22/28 (improvement of 6 points from baseline 16/28)\n  MoCA: 25/30 (improvement of 3 points from baseline 22/30)\n  Patient continent overnight\n  Daughter reports patient 'is back to herself'\n\nIMPRESSION: Strongly POSITIVE extended tap test. All three components of the clinical triad improved with CSF removal. This is the strongest pre-operative predictor of response to ventriculoperitoneal shunt placement.",
+          gate:{q:"Yesterday's LP was at L3-L4 and today's at L4-L5. These vertebral levels were chosen because they sit BELOW the level where the spinal cord ends in the adult. At what vertebral level does the spinal cord typically terminate in adults, and what is the inferior tip called?",
+            opts:["A) The cord ends at approximately L1 to L2 vertebral level; the tip is called the conus medullaris",
+                  "B) The cord ends at S5; the tip is called the cauda equina",
+                  "C) The cord ends at C7; the tip is called the filum terminale",
+                  "D) The cord ends at T12; the tip is called the dural sac"],
+            correct:"A",
+            exp:"A: The adult SPINAL CORD typically ends at the level of the L1 to L2 vertebra. The tapered inferior tip of the cord is the CONUS MEDULLARIS. Below that, the lumbar and sacral nerve roots float free in the CSF-filled lumbar cistern as the CAUDA EQUINA ('horse's tail'). A thin filament of pia, the FILUM TERMINALE, extends from the conus down to the coccyx and anchors the cord caudally. LPs are performed at L3-L4 or L4-L5 to be safely BELOW the conus, sampling CSF from the cauda equina region without risking spinal cord injury. (In children the cord ends slightly lower, around L3, so even more caution is required.) B: the cauda equina is below the conus, not a tip of the cord. C: the cord does not end at C7. D: the dural sac extends to S2, but T12 is not where the cord ends."}},
+        {id:"neurosurg_consult_d3",cat:"Management",name:"Neurosurgery consultation",cost:15,
+          result:"NEUROSURGERY CONSULTATION\n\nThe neurosurgical team reviewed Margaret's imaging, CSF studies, and the response to the tap tests.\n\nFINDINGS COMMUNICATED BY THE CONSULTING SURGEON:\n  This is a high-confidence case for ventriculoperitoneal (VP) shunt placement. The combination of disproportionate ventriculomegaly, communicating hydrocephalus pattern on cisternogram, hyperdynamic aqueductal flow, and a strongly positive extended tap test predicts a good response to permanent shunting.\n\nRECOMMENDATIONS:\n  1. Proceed with VP shunt placement under general anesthesia within the next 1 to 2 weeks (allow CSF dynamics to recover from the temporary drainage).\n  2. Use a programmable valve so the drainage rate can be adjusted post-operatively.\n  3. Plan post-operative MRI at 1 month and 3 months to monitor ventricular size, then yearly thereafter.\n  4. Risks include infection (1 to 5 percent), shunt malfunction over time (40 percent at 5 years requiring revision), subdural hematoma from over-drainage, and seizure (1 percent).\n  5. Expected outcome: 60 to 80 percent of patients with classic NPH triad and positive tap test show meaningful improvement in gait, with cognitive and urinary improvement following more variably.\n\nThe family was informed and is meeting with the surgeon tomorrow to consent."},
+        {id:"vp_shunt_d3",cat:"Management",name:"Ventriculoperitoneal (VP) shunt placement discussion",cost:25,
+          result:"VENTRICULOPERITONEAL SHUNT PLACEMENT, PROCEDURE DISCUSSION\n\nProcedure as it would be performed:\n  Under general anesthesia, a small burr hole is drilled in the right frontal skull (typically just anterior to the coronal suture, lateral to midline). A ventricular catheter is passed through brain parenchyma into the frontal horn of the right lateral ventricle, where the choroid plexus does NOT extend (to minimize catheter occlusion). A programmable valve is placed subcutaneously over the skull. A peritoneal catheter is tunneled subcutaneously down the neck, chest, and abdominal wall, then inserted into the peritoneal cavity through a small abdominal incision. CSF then drains from the lateral ventricle through the valve to the peritoneum, where it is reabsorbed by the peritoneal mesothelium.\n\nANATOMICAL CONSIDERATIONS:\n  The right hemisphere is preferred for catheter placement to spare the dominant (left) hemisphere from any iatrogenic injury. The catheter passes through frontal lobe white matter, an area that tolerates a thin catheter well. The peritoneal cavity is preferred over atrial placement (older approach) because the peritoneum has enormous reabsorptive surface area and complications are less severe.\n\nWHY THIS WORKS FOR NPH:\n  By providing an alternate route for CSF reabsorption, the shunt bypasses the failed arachnoid granulation reabsorption that drives NPH. The transmural pressure gradient acting on periventricular tissue is reduced, the ventricles partially decompress, and the periventricular white matter (carrying frontal-subcortical circuits, motor fibers serving the legs, and cortical inhibition of bladder reflexes) recovers function.\n\nPOST-OP: Hospital stay 2 to 4 days. Activity restrictions for 2 weeks. Programmable valve adjustment via external magnet during outpatient follow-up if drainage is too high or too low."},
+        {id:"pt_referral_d3",cat:"Management",name:"Outpatient physical therapy referral, gait training focus",cost:10,
+          result:"OUTPATIENT PHYSICAL THERAPY REFERRAL\n\nReason for referral: Gait apraxia and high fall risk (Tinetti POMA 16/28 at baseline, 22/28 after extended LP). Pre- and post-shunt gait retraining recommended.\n\nPROGRAM:\n  - 3 sessions per week for 8 weeks pre-operatively (to maximize baseline conditioning) and resume at 4 weeks post-operatively.\n  - Focus on stride length, cadence, dual-task gait (walking while answering questions), and turning strategies.\n  - Balance retraining with progressive challenge: parallel bars, then assistive device (walker), then unassisted on level surface, then uneven surfaces.\n  - Home exercise program: sit-to-stand repetitions, heel raises, marching in place.\n  - Falls prevention: home assessment, removal of throw rugs, grab bars in bathroom, night lighting.\n\nEXPECTED OUTCOME:\n  Gait typically continues to improve for 6 to 12 months post-shunt. Combination of mechanical decompression (shunt) and motor relearning (PT) gives the best functional results."},
+        {id:"cognitive_referral_d3",cat:"Management",name:"Outpatient cognitive specialist referral",cost:5,
+          result:"OUTPATIENT COGNITIVE SPECIALIST REFERRAL\n\nReason for referral: Subcortical cognitive impairment in the setting of NPH. Establish baseline neuropsychological testing pre-shunt and re-test 3 and 6 months post-shunt to document recovery trajectory.\n\nBASELINE NEUROPSYCHOLOGICAL BATTERY:\n  Trail Making Test A and B (executive, attention)\n  Stroop Color-Word Test (attention, inhibition)\n  Digit Span and Letter-Number Sequencing (working memory)\n  Boston Naming Test (language, expected to be normal)\n  Rey Auditory Verbal Learning Test (memory)\n  Beck Depression Inventory (rule out depressive pseudodementia contribution)\n\nWHY THIS MATTERS:\n  Cognitive recovery after NPH shunting is more variable than gait recovery. Documenting baseline lets the family see actual improvement (or lack of it) objectively rather than relying on subjective report. If cognition does NOT improve while gait does, that suggests an additional non-NPH process (Alzheimer's co-pathology, vascular contribution) and may change long-term care planning.\n\nThe family is also offered referral to a community NPH support group and to caregiver education resources."}
+      ]
+    }
+  }
+};
+
+/* STATE */
+const STORAGE_KEY = "bio004-w8-margaret-state-v1";
+let S = loadState() || newState();
+
+function newState(){return{
+  phase:"key",
+  studentName:"",
+  currentDay:1, daysUnlocked:1,
+  credits:200, maxCredits:200,
+  freeObtained:[], ordered:[], results:[], autoRevealed:[],
+  iMsgs:[], interviewCount:0, maxInterview:10, iTopicHit:{}, iPending:false,
+  invMsgs:[], gateActive:null, retries:0,
+  tMsgs:[], tPending:false, tutorOpen:false, tCount:0,
+  diffOrder:null,
+  diagText:"", rationaleText:"",
+  scores:null,
+};}
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(S));}catch(e){}}
+function loadState(){try{const v=localStorage.getItem(STORAGE_KEY);return v?JSON.parse(v):null;}catch(e){return null;}}
+function fullReset(){if(confirm("Reset Week 8 simulation? All progress will be lost.")){localStorage.removeItem(STORAGE_KEY);S=newState();render();}}
+
+/* PATIENT INTERVIEW (Anthropic API powered, via Cloudflare Worker proxy) */
+
+// Replace the URL below with your deployed Cloudflare Worker URL.
+// Looks like: https://bio004-patient-proxy.YOUR-USERNAME.workers.dev
+const PROXY_URL = "https://bio004-patient-proxy.dr-srennie.workers.dev";
+
+const PATIENT_PERSONA = `You are roleplaying MARGARET THORNTON, a 74-year-old retired schoolteacher seeing a doctor along with your adult daughter Sarah (age 35), who brought you in. You have been feeling that something is "not right" for several months and you cannot quite put your finger on it. You are alert and cooperative but slower in your thinking than you used to be. Stay strictly in character.
+
+CONTEXT
+Today is a clinic visit. Sarah brought you in after your fourth fall in two months, this one yesterday in the kitchen. You are 74 years old, retired after 35 years teaching 4th grade. You live with Sarah, her husband, and your two teenage grandchildren in Vacaville. Your husband died 6 years ago of pancreatic cancer.
+
+YOUR SYMPTOMS, CURRENT STATE
+
+GAIT AND FALLS:
+Your legs feel heavy, like your feet are stuck to the floor. Walking has gotten progressively harder over the past 6 to 9 months. You shuffle in small steps. You walk with your feet wide apart now, which feels safer. Turning is hard. Sometimes when you turn, you feel like you are going to fall backward. You have fallen 4 times in 2 months: twice in the kitchen, once on the stairs at home, once in the garden. You are afraid of stairs now and avoid them when you can. When you are sitting or lying down, your legs feel completely normal, no weakness, no numbness. The problem is only when you try to walk.
+
+COGNITION:
+You feel slower in your thinking. You forget things you used to remember easily, like the names of friends from your old book club, or what you had for breakfast yesterday. Sarah says you are "not as sharp" as you used to be. You can still do the New York Times crossword puzzle but it takes you longer than it did a year ago. You sometimes lose your train of thought in the middle of a sentence. Reading a novel is harder than it used to be, you have to reread paragraphs. Your language and speaking are normal, you can find your words.
+
+URINARY (you are EMBARRASSED about this and only mention it if specifically asked):
+You have had increasing urgency, sometimes you cannot make it to the bathroom in time. Three accidents at home in the past month, one of them in front of your grandchildren which mortified you. You wear protective pads now. You consider this the most embarrassing change and you do not bring it up unless someone specifically asks about your bladder, urination, or accidents.
+
+ONSET, PROGRESSION:
+All of these have come on gradually over 6 to 9 months. Gait was first, you noticed it last fall. Memory issues started about 3 to 4 months ago. The urinary problems started about 2 months ago. Each has gotten slowly worse, never any sudden change.
+
+NO ACUTE NEUROLOGIC SYMPTOMS:
+No headache, no head pain. No vision changes, no double vision, no blurry vision. No nausea or vomiting. No weakness on one side. No numbness or tingling. No facial drooping. No slurred speech. No tremor. No seizures.
+
+YOUR PAST MEDICAL HISTORY:
+Hypertension, diagnosed at 58, well controlled on lisinopril 20 mg daily.
+Hyperlipidemia, diagnosed at 60, well controlled on atorvastatin 40 mg daily.
+Total abdominal hysterectomy at age 52 for benign fibroids, no complications.
+No diabetes. No prior stroke. No prior heart attacks. No prior surgeries other than the hysterectomy.
+No drug allergies (NKDA).
+You take a calcium and vitamin D supplement daily (over the counter).
+Last colonoscopy 5 years ago, normal. Last mammogram 1 year ago, normal.
+Up to date on vaccinations including shingles, pneumococcal, annual flu, COVID booster.
+
+YOUR FAMILY HISTORY:
+Father had Alzheimer's disease, started age 80, died age 86 of pneumonia.
+Mother had a stroke at 78, died age 81 of a cardiac event.
+You have one sister, age 71, who is healthy.
+No family history of Parkinson's disease, no family history of any other neurodegenerative disease as far as you know.
+Husband died at 71 of pancreatic cancer (6 years ago).
+
+YOUR LIFE AND SOCIAL HISTORY:
+You retired at 65 after 35 years teaching 4th grade in the Vacaville Unified School District.
+You live with your daughter Sarah, her husband, and your two teenage grandchildren.
+You used to be very active: walking 3 miles a day, gardening, book club, Methodist church choir.
+In the last 6 months you have stopped most of these. Walking is too hard. You miss it.
+You drive but only short distances now (Sarah encouraged this; you have had a few near-misses).
+You drink an occasional glass of wine on holidays. Never smoked. No recreational drugs.
+Your mood has been a little down because you feel like you are losing your independence, but you are not severely depressed. You sleep okay. You eat normally.
+
+ANSWERING RULES
+
+A student question may contain multiple parts. Bundle related parts together, but do not bundle across unrelated categories. Use these categories to decide:
+
+A. CURRENT NEUROLOGIC SYMPTOMS: gait, falls, balance, walking, leg sensation; cognition, memory, attention, word-finding; urinary urgency, accidents, bladder.
+B. ACUTE OR FOCAL NEURO SYMPTOMS: headache, head pain, vision changes, double vision, weakness on one side, numbness, tingling, facial drooping, slurred speech, tremor, seizures, falls with head injury.
+C. PAST MEDICAL HISTORY: prior conditions, surgeries, current medications, supplements, allergies, immunizations, screening tests.
+D. FAMILY MEDICAL HISTORY: parents, siblings, children's health, especially neurologic and cardiovascular history.
+E. LIFESTYLE AND SOCIAL: living situation, work history, exercise, hobbies, tobacco/alcohol/drugs, mood, sleep, driving, daily function.
+
+THE RULE
+- If every sub-question is in the SAME category, answer all of them in one combined response.
+- If the sub-questions span DIFFERENT categories, answer only the parts in the category that comes FIRST in the student's sentence, then say something like "What else would you like to know?" so the student spends another question on the other category.
+
+URINARY EMBARRASSMENT RULE (important)
+You are embarrassed about your urinary symptoms. If asked DIRECTLY about urination, bladder, accidents, incontinence, or "trouble making it to the bathroom," you answer truthfully but with hesitation, like "Yes... I have had some accidents. It is embarrassing to talk about." If NOT asked specifically, you do NOT volunteer this information, even when asked open-ended questions like "tell me about your symptoms" or "is there anything else." It must be specifically elicited.
+
+FORMATTING
+Keep responses to 1 to 5 short sentences. You speak like a thoughtful retired teacher: clear and articulate, but slower than you used to be. Use ordinary vocabulary, not clinical jargon. Stay in first person. Show realistic emotion: somewhat frustrated about losing independence, embarrassed about urinary issues, scared about what is happening, occasionally apologetic to the doctor for taking their time.
+
+NEVER
+- Volunteer your diagnosis, name a condition, or speculate about what is wrong with you. You do not know.
+- Invent facts. If asked something not covered above, say you do not know or that nothing like that has happened.
+- Break the fourth wall. Never reveal you are an AI or simulation. Never compliment the student's question or give them instructional feedback.
+
+EXAMPLES
+
+Single-part question (Category A):
+Q: "Tell me about your walking."
+A: "My legs feel heavy, like my feet are stuck to the floor. I take small shuffling steps now. I have fallen four times in the last two months."
+
+Multi-part question, all in Category A (BUNDLE all):
+Q: "Tell me about your symptoms - your walking, your memory, anything else?"
+A: "My walking has gotten worse, my legs feel stuck. I have fallen four times in two months. My memory is slower, I forget names and lose my train of thought."
+(Notice: even when asked "anything else," you do NOT volunteer urinary symptoms. They must be asked specifically.)
+
+Multi-part question across categories (ANSWER FIRST CATEGORY ONLY):
+Q: "When did your falling start, and is there dementia in your family?"
+A: "About six months ago. The walking issues came first, gradually getting worse. What else would you like to know?"
+
+Direct urinary question:
+Q: "Have you had any problems with urination or accidents?"
+A: "Yes... I have had some accidents recently. It is embarrassing. I wear pads now. Three accidents in the last month."
+
+Diagnosis-seeking question (NEVER speculate):
+Q: "Do you think you have Alzheimer's like your father?"
+A: "I have wondered about that. I do not know. I am scared, honestly."
+
+Off-topic / unknown:
+Q: "Have you traveled internationally recently?"
+A: "No, I have not traveled in years."
+
+Begin in character now.`;
+
+async function askPatientAPI(messages){
+  try{
+    const response=await fetch(PROXY_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:400,
+        system:PATIENT_PERSONA,
+        messages:messages
+      })
+    });
+    if(!response.ok){
+      console.error("API error",response.status);
+      return "I am not feeling great. Could you ask me that again in a different way?";
+    }
+    const data=await response.json();
+    if(data.content&&Array.isArray(data.content)){
+      const text=data.content.filter(b=>b.type==="text").map(b=>b.text).join("\n").trim();
+      if(text)return text;
+    }
+    return "I am not sure how to answer that. Try asking it a different way.";
+  }catch(e){
+    console.error("API exception",e);
+    return "Sorry, I cannot respond right now. Try again in a moment.";
+  }
+}
+
+/* AI ANATOMY TUTOR (Anthropic API powered, separate persona)
+   The tutor explains anatomical terms, structures, and procedures.
+   It will NOT name or speculate on diagnoses, interpret case findings, or
+   answer gate-style questions. */
+const TUTOR_PERSONA = `You are an anatomy tutor for an undergraduate Human Anatomy course (BIO 004 at Solano Community College). A student is in the middle of a clinical reasoning case simulation. They may need help understanding anatomical vocabulary, anatomical structures, or general medical procedures by their anatomy. Treat this like a study group peer or a textbook glossary.
+
+WHAT YOU DO
+- Define anatomical terms (e.g., "medial," "lateral," "media," "tunica," "epiphysis").
+- Describe anatomical structures (e.g., "what is the periosteum," "what is the medullary cavity," "what does the choroid plexus do").
+- Compare related concepts (e.g., "compact bone vs spongy bone," "intramembranous vs endochondral ossification," "internal vs external fixation," "open vs closed reduction").
+- Explain procedures by their anatomy (e.g., "what does ORIF involve," "how is a long-leg cast different from a short-leg cast").
+- Keep answers under 100 words, 2 to 4 short sentences. Use clear undergraduate-level language.
+
+WHAT YOU NEVER DO
+- Do NOT name, suggest, hint at, or speculate on any patient's diagnosis.
+- Do NOT identify a specific disease as the explanation for a set of findings.
+- Do NOT answer questions framed as "given my patient has X, what is wrong with them" or "what disease causes these features."
+- Do NOT confirm or deny whether a particular diagnosis fits any case.
+- Do NOT recommend treatments specifically tailored to a presented case.
+- Do NOT solve gate questions or pick the right multiple-choice answer for the student.
+
+If the student asks about a SPECIFIC named disease (for example, "what is Stevens-Johnson syndrome," "what is normal pressure hydrocephalus," "describe Salter-Harris III"), you may give a SHORT generic textbook definition (one or two sentences) but you must end with: "I cannot say whether that fits the patient you are working on."
+
+If the question is clearly trying to get the diagnosis ("what does my patient have," "is this a Salter-Harris fracture," "is this NPH"), respond: "That is a diagnosis question I cannot answer in this case context. Try asking about the underlying anatomy or how a procedure works instead."
+
+Examples of fine questions: "what is the periosteum," "what is the difference between open and closed reduction," "what does ORIF stand for," "explain endochondral ossification," "where is the cerebral aqueduct."
+
+Examples of off-limits questions (decline): "is this a fracture," "what type of Salter-Harris is this," "given what I know, what is the diagnosis," "which differential fits best," "what should the answer to gate question be."
+
+Be warm, brief, and helpful within these limits.`;
+
+async function askTutorAPI(messages){
+  try{
+    const response=await fetch(PROXY_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:300,
+        system:TUTOR_PERSONA,
+        messages:messages
+      })
+    });
+    if(!response.ok){
+      console.error("Tutor API error",response.status);
+      return "The tutor is unavailable right now. Try again in a moment.";
+    }
+    const data=await response.json();
+    if(data.content&&Array.isArray(data.content)){
+      const text=data.content.filter(b=>b.type==="text").map(b=>b.text).join("\n").trim();
+      if(text)return text;
+    }
+    return "I am not sure how to answer that. Try rephrasing.";
+  }catch(e){
+    console.error("Tutor API exception",e);
+    return "The tutor is unavailable right now. Try again in a moment.";
+  }
+}
+
+const TUTOR_MAX = 10;
+
+async function sendTutor(){
+  const inp=document.getElementById("tinp");
+  if(!inp||!inp.value.trim()||S.tPending)return;
+  if(S.tCount>=TUTOR_MAX){
+    S.tMsgs.push({role:"assistant",content:"You have used all "+TUTOR_MAX+" tutor questions for this case. Pre-class research is the time to look up anatomical vocabulary; tutor questions are best saved for moments of confusion during the case. Use a textbook or your notes for further help on this case."});
+    saveState();render();scrollEl("t-ci");return;
+  }
+  const txt=inp.value.trim();inp.value="";
+  S.tMsgs.push({role:"user",content:txt});
+  S.tPending=true;
+  saveState();render();scrollEl("t-ci");
+  const messages=S.tMsgs.map(m=>({role:m.role,content:m.content}));
+  const reply=await askTutorAPI(messages);
+  S.tMsgs.push({role:"assistant",content:reply});
+  S.tCount++;
+  S.tPending=false;
+  saveState();render();scrollEl("t-ci");
+}
+
+function toggleTutor(){S.tutorOpen=!S.tutorOpen;saveState();render();}
+
+/* SCORING */
+const rationalePatternLabels=[
+  "Ventricular system anatomy (lateral, third, fourth, aqueduct)",
+  "CSF production (choroid plexus) and reabsorption (arachnoid granulations)",
+  "Meningeal layers (dura, arachnoid, pia, subarachnoid space)",
+  "CNS regional anatomy (cerebrum, cerebellum, brainstem, diencephalon)",
+  "Cerebral lobes, gyri, and sulci",
+  "Cranial nerves",
+  "Cranial vasculature (Circle of Willis)",
+  "Autonomic nervous system (sympathetic, parasympathetic)",
+  "Spinal cord anatomy (conus medullaris, cauda equina)",
+  "NPH-specific concepts (tap test, shunt, transependymal flow, DESH)",
+  "NPH symptom mechanism (cortical inhibition, periventricular tracts)"
+];
+
+function calcScores(){
+  const max={diag:35, eff:10, hy:15, seq:5, interview:10, gate:5, complete:5}, total_max=85;
+
+  const sel=(CASE.differentials||[]).find(d=>d.label===S.diagText);
+  const diagCorrect=!!(sel&&sel.isCorrect);
+  let diagPts=diagCorrect?20:0;
+  const rationalePatterns=[
+    /ventricl|lateral|third|fourth|aqueduct|monro|magendie|luschka|interventricular/i,
+    /CSF|cerebrospinal|choroid plexus|arachnoid granul/i,
+    /meninges|dura|arachnoid|pia|subarachnoid|epidural|subdural/i,
+    /cerebrum|cerebellum|brainstem|midbrain|pons|medulla|diencephal|thalamus|hypothalamus/i,
+    /frontal lobe|parietal|temporal|occipital|gyrus|sulcus|sylvian|central sulcus/i,
+    /cranial nerve|CN [IVX]|olfactory|optic|trigeminal|facial|vagus/i,
+    /circle of willis|cerebral artery|ACA|MCA|PCA|basilar|vertebral|carotid/i,
+    /autonomic|sympathetic|parasympathetic|sacral|craniosacral|S2|S3|S4/i,
+    /spinal cord|conus medullaris|cauda equina|filum terminale|lumbar cistern/i,
+    /tap test|shunt|VP shunt|ventriculoperitoneal|reabsorption|transependymal|DESH|evans/i,
+    /gait apraxia|magnetic gait|subcortical|periventricular|cortical inhibition/i,
+  ];
+  const hitFlags=rationalePatterns.map(p=>p.test(S.rationaleText));
+  const hitCount=hitFlags.filter(Boolean).length;
+  diagPts+=hitCount*3;
+  diagPts=Math.min(diagPts,max.diag);
+
+  const effPts=Math.round((S.credits/S.maxCredits)*max.eff);
+
+  const hyList=(CASE.highYield||[]);
+  const hyTotal=hyList.length;
+  const orderedHY=hyList.filter(id=>S.ordered.includes(id));
+  const missedHY=hyList.filter(id=>!S.ordered.includes(id));
+  const hyPts=hyTotal>0?Math.round((orderedHY.length/hyTotal)*max.hy):0;
+
+  const dayFirst={};
+  for(const id of S.ordered){
+    for(const d of [1,2,3]){
+      if(CASE.days[d].orders.find(o=>o.id===id)){
+        if(!(d in dayFirst))dayFirst[d]=id;
+        break;
+      }
+    }
+  }
+  let seqHits=0,seqOpps=0,seqDayDetail={};
+  for(const d of [1,2,3]){
+    const dayHY=CASE.days[d].orders.filter(o=>hyList.includes(o.id)).map(o=>o.id);
+    if(dayHY.length>0&&dayFirst[d]){
+      seqOpps++;
+      const ok=dayHY.includes(dayFirst[d]);
+      if(ok)seqHits++;
+      seqDayDetail[d]={firstId:dayFirst[d],wasHY:ok,hyOptions:dayHY};
+    }
+  }
+  const seqPts=seqOpps>0?Math.round((seqHits/seqOpps)*max.seq):0;
+
+  const topicKeys=Object.keys(CASE.interviewTopics);
+  const coveredTopics=topicKeys.filter(t=>S.iTopicHit[t]);
+  const missedTopics=topicKeys.filter(t=>!S.iTopicHit[t]);
+  const intPts=Math.round((coveredTopics.length/topicKeys.length)*max.interview);
+
+  const gatePts=Math.max(0,max.gate-(S.retries));
+  const completePts=S.daysUnlocked>=3?max.complete:0;
+
+  const idToName=id=>{
+    for(const d of [1,2,3]){
+      const o=CASE.days[d].orders.find(x=>x.id===id);
+      if(o)return o.name;
+    }
+    return id;
+  };
+
+  return{
+    diag:diagPts,eff:effPts,hy:hyPts,seq:seqPts,
+    interview:intPts,gate:gatePts,complete:completePts,
+    total:diagPts+effPts+hyPts+seqPts+intPts+gatePts+completePts,
+    max:total_max,
+    detail:{
+      diagCorrect,diagSelected:S.diagText||"(none)",
+      hitFlags,hitLabels:rationalePatternLabels.filter((_,i)=>hitFlags[i]),
+      missedLabels:rationalePatternLabels.filter((_,i)=>!hitFlags[i]),
+      totalPatterns:rationalePatterns.length,
+      orderedHYNames:orderedHY.map(idToName),
+      missedHYNames:missedHY.map(idToName),
+      hyTotal,
+      seqHits,seqOpps,seqDayDetail,
+      coveredTopicLabels:coveredTopics.map(t=>CASE.interviewTopics[t].label),
+      missedTopicLabels:missedTopics.map(t=>CASE.interviewTopics[t].label),
+      totalTopics:topicKeys.length,
+      retries:S.retries,
+      daysReached:S.daysUnlocked,
+      creditsLeft:S.credits,
+      creditsMax:S.maxCredits
+    }
+  };
+}
+
+function generateFeedback(sc){
+  const d=sc.detail;
+  const wins=[];
+  const opps=[];
+  // Diagnostic accuracy
+  if(d.diagCorrect){
+    wins.push("<strong>Correct diagnosis selection.</strong> You identified the case correctly from the differential list.");
+  }else{
+    opps.push("<strong>Diagnostic selection.</strong> You picked \"" + d.diagSelected + ",\" but the case findings supported a different option on your researched list. Re-examine which differential explains ALL of the patient's findings together, not just one of them.");
+  }
+  if(d.hitLabels.length>=Math.ceil(d.totalPatterns*0.7)){
+    wins.push("<strong>Strong rationale.</strong> Your written defense pulled in " + d.hitLabels.length + " of " + d.totalPatterns + " key anatomical concept areas, including: " + d.hitLabels.join("; ") + ".");
+  }else if(d.hitLabels.length>0){
+    wins.push("<strong>Rationale touched on " + d.hitLabels.length + " of " + d.totalPatterns + " concept areas:</strong> " + d.hitLabels.join("; ") + ".");
+  }
+  if(d.missedLabels.length>0&&d.hitLabels.length<d.totalPatterns){
+    opps.push("<strong>Rationale could go deeper.</strong> Concept areas your written defense did not address: " + d.missedLabels.join("; ") + ". Each one is worth 3 points if mentioned in your rationale.");
+  }
+  // High-yield
+  if(d.missedHYNames.length===0&&d.hyTotal>0){
+    wins.push("<strong>Ordered every high-yield test.</strong> All " + d.hyTotal + " indicated diagnostic anchors for this case were ordered.");
+  }else if(d.missedHYNames.length>0){
+    opps.push("<strong>High-yield tests not ordered.</strong> Without these, the case cannot be confidently locked in: " + d.missedHYNames.join("; ") + ". Each missed high-yield test costs " + Math.round(15/d.hyTotal) + " points on the high-yield score.");
+  }
+  // Sequencing
+  if(d.seqHits===d.seqOpps&&d.seqOpps>0){
+    wins.push("<strong>Excellent test sequencing.</strong> You started each day with a diagnostically-anchoring test rather than a peripheral one.");
+  }else if(d.seqOpps>0){
+    opps.push("<strong>Test ordering sequence.</strong> On " + (d.seqOpps-d.seqHits) + " of " + d.seqOpps + " days, your first order was not a high-yield test. Lead each day with the test most likely to narrow the differential.");
+  }
+  // Interview
+  if(d.coveredTopicLabels.length>=Math.ceil(d.totalTopics*0.75)){
+    wins.push("<strong>Thorough interview.</strong> You touched " + d.coveredTopicLabels.length + " of " + d.totalTopics + " topic areas: " + d.coveredTopicLabels.join("; ") + ".");
+  }else if(d.coveredTopicLabels.length>0){
+    wins.push("<strong>Interview covered " + d.coveredTopicLabels.length + " of " + d.totalTopics + " topic areas:</strong> " + d.coveredTopicLabels.join("; ") + ".");
+  }
+  if(d.missedTopicLabels.length>0&&d.coveredTopicLabels.length<d.totalTopics){
+    opps.push("<strong>Interview gaps.</strong> Topic areas you did not ask about: " + d.missedTopicLabels.join("; ") + ".");
+  }
+  // Gate accuracy
+  if(d.retries===0){
+    wins.push("<strong>Perfect gate accuracy.</strong> You answered every anatomy gate question correctly on the first try.");
+  }else if(d.retries>=3){
+    opps.push("<strong>Gate question accuracy.</strong> You used " + d.retries + " retries (each costs 15 credits and 1 gate point). The gate questions test the previous night's pre-work; review the schedule to know what to study before each class.");
+  }
+  // Efficiency
+  if(d.creditsLeft>=d.creditsMax*0.5){
+    wins.push("<strong>Strong data efficiency.</strong> You finished with " + d.creditsLeft + " of " + d.creditsMax + " credits remaining.");
+  }else if(d.creditsLeft<d.creditsMax*0.2){
+    opps.push("<strong>Data efficiency.</strong> You finished with " + d.creditsLeft + " of " + d.creditsMax + " credits remaining. Some tests on your list may have been redundant or non-contributory; aim to order with a working hypothesis in mind.");
+  }
+  // Completion
+  if(d.daysReached>=3){
+    wins.push("<strong>Reached Day 3.</strong> You unlocked and worked through all three days of the case.");
+  }else{
+    opps.push("<strong>Did not reach Day 3.</strong> The strongest tap-test evidence and the sequencing/high-yield items unique to Day 3 were not available, costing the completion bonus and limiting maximum scores.");
+  }
+  return {wins,opps};
+}
+
+async function submitToForm(sc){
+  if(!FORM_URL)return;
+  const d=new FormData();
+  d.append(FORM_FIELDS.name,S.studentName);d.append(FORM_FIELDS.diag,S.diagText);
+  d.append(FORM_FIELDS.rationale,S.rationaleText);d.append(FORM_FIELDS.credits,String(S.credits));
+  d.append(FORM_FIELDS.total,String(sc.total));
+  try{await fetch(FORM_URL,{method:"POST",mode:"no-cors",body:d});}catch(e){}
+}
+
+/* UNLOCK */
+function tryUnlockDay(){
+  const inp=document.getElementById("day-unlock-inp");
+  if(!inp)return;
+  const val=inp.value.trim().toUpperCase();
+  for(const[day,code] of Object.entries(CASE.dayCodes)){
+    const d=parseInt(day);
+    if(val===code.toUpperCase()&&d>S.daysUnlocked){
+      S.daysUnlocked=d; S.currentDay=d;
+      const dayData=CASE.days[d];
+      if(dayData.autoReveal&&!S.autoRevealed.includes(d)) S.autoRevealed.push(d);
+      inp.value="";
+      S.invMsgs.push({role:"assistant",cls:"unlock",content:`Day ${d} unlocked, ${dayData.label}${dayData.autoReveal?'\n\n'+dayData.autoReveal.label+' has been added to your results panel.':''}`});
+      saveState(); render(); scrollEl("inv-ci"); return;
+    }
+  }
+  if(val){inp.value="";S.invMsgs.push({role:"assistant",cls:"fail",content:"Incorrect unlock code. Wait for your instructor to announce it at the beginning of class."});render();scrollEl("inv-ci");}
+}
+
+/* RENDER ROUTER */
+function render(){
+  saveState();
+  const watermark=document.getElementById("wmt");
+  if(watermark&&S.studentName) watermark.textContent=`${S.studentName} . BIO 004 . Week 8`;
+  const p=S.phase;
+  if(p==="key") renderKey();
+  else if(p==="instructions") renderInstructions();
+  else if(p==="intro") renderIntro();
+  else if(p==="interview") renderInterview();
+  else if(p==="investigate") renderInvestigate();
+  else if(p==="submit") renderSubmit();
+  else if(p==="submitted") renderSubmitted();
+  else if(p==="reveal") renderReveal();
+}
+
+function renderKey(){
+  document.getElementById("app").innerHTML=`
+<div style="max-width:440px;margin:4rem auto;padding:0 1rem;text-align:center">
+  <div style="font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:.6rem">BIO 004 . Clinical Reasoning</div>
+  <div style="width:48px;height:3px;background:var(--gold);margin:0 auto 1.4rem;border-radius:2px"></div>
+  <h1 style="font-size:34px;margin-bottom:.4rem">Week 8, Margaret Thornton</h1>
+  <p style="margin-bottom:.4rem;font-size:16px;color:var(--ink-soft)">${CASE.system}</p>
+  <p style="margin-bottom:1.8rem;font-size:14px;color:var(--ink-mute)">Single file . 3 days . One credit bank . Code-locked progression</p>
+  <div class="card" style="text-align:left">
+    <div class="sl">Your name (required for tracking)</div>
+    <input type="text" id="ki-name" placeholder="First and last name" style="margin-bottom:14px" value="${S.studentName||''}">
+    <div class="sl">Course access code (instructor announces in Monday class)</div>
+    <input type="password" id="ki" placeholder="Enter code..." style="margin-bottom:10px;letter-spacing:.14em;font-size:17px;text-align:center;text-transform:uppercase" onkeydown="if(event.key==='Enter')subKey()">
+    <div id="kerr" style="color:var(--terra);font-size:14px;margin-bottom:8px;display:none">Incorrect. Check with your instructor.</div>
+    <button class="bb" onclick="subKey()" style="width:100%;font-size:15px;padding:14px">Enter</button>
+  </div>
+  <p style="margin-top:1rem;font-size:13px;color:var(--ink-mute);font-style:italic">By entering, you confirm this material is for your educational use only. Do not screenshot, share, or redistribute.</p>
+</div>`;
+  setTimeout(()=>{const i=document.getElementById("ki-name")||document.getElementById("ki");if(i)i.focus();},80);
+}
+function subKey(){
+  const ni=document.getElementById("ki-name");const i=document.getElementById("ki");
+  if(!i)return;
+  if(!ni.value.trim()){alert("Please enter your name.");ni.focus();return;}
+  if(i.value.trim().toUpperCase()===COURSE_PW.toUpperCase()){
+    S.studentName=ni.value.trim(); S.phase="instructions"; render();
+  } else {document.getElementById("kerr").style.display="block";i.value="";i.focus();}
+}
+
+function renderInstructions(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="border-top:4px solid var(--navy);max-width:720px;margin:0 auto">
+  <div style="text-align:center;margin-bottom:1.5rem">
+    <div class="sl" style="margin-bottom:8px">${CASE.system}</div>
+    <h1 style="margin-bottom:.4rem">Week 2, ${CASE.patient.name}</h1>
+    <p style="font-size:16px">Clinical Reasoning Simulation . 3-day case . One credit bank</p>
+  </div>
+  <div class="alert-terra"><strong>Welcome, ${S.studentName}.</strong> This case unfolds across Monday, Tuesday, and Wednesday class sessions. Day 2 and Day 3 unlock with codes your instructor announces at the beginning of each class, attendance is how you get the code. Use Thursday TBL to defend your final diagnosis.</div>
+  <h2>How it works</h2>
+  <div style="margin-bottom:1.4rem">
+    <div class="istep"><div class="inum">1</div><div><strong>Interview your patient (10 questions).</strong> Free. Ask about symptoms, mechanism, history. Interview is open all week.</div></div>
+    <div class="istep"><div class="inum">2</div><div><strong>Free bedside data is always available.</strong> Vitals, focused exam, neurovascular check, no credits.</div></div>
+    <div class="istep"><div class="inum">3</div><div><strong>Order tests with your 200-credit bank.</strong> Credits do not reset between days. Irrelevant tests still cost credits. Unused credits boost your efficiency score.</div></div>
+    <div class="istep"><div class="inum">4</div><div><strong>Answer an anatomy gate question for every test.</strong> Right means result released. Wrong means a 15-credit retry penalty.</div></div>
+    <div class="istep"><div class="inum">5</div><div><strong>Day 2 (Tuesday) unlocks with a code your instructor announces at the beginning of Tuesday class.</strong> Day 3 (Wednesday) unlocks with a code announced at the beginning of Wednesday class. You must be in class to get the code.</div></div>
+    <div class="istep"><div class="inum">6</div><div><strong>Submit your final diagnosis any time after Day 3 unlocks.</strong> Submission is private until reveal.</div></div>
+    <div class="istep"><div class="inum">7</div><div><strong>After Thursday TBL, enter the reveal code from your instructor.</strong> See the correct diagnosis, full rationale, and your week-long score.</div></div>
+  </div>
+  <div class="sep"></div>
+  <h2>Scoring (85 points)</h2>
+  <div style="font-size:14.5px;line-height:1.9;color:var(--ink-soft)">
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Diagnostic accuracy (final dx + anatomical rationale)</span><span style="font-weight:700">35 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Data efficiency (credits remaining of 200)</span><span style="font-weight:700">10 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Ordering high-yield (indicated) tests</span><span style="font-weight:700">15 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Test ordering sequence (right tests first)</span><span style="font-weight:700">5 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Interview quality (topic areas covered)</span><span style="font-weight:700">10 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Gate question performance (minus 1 per retry)</span><span style="font-weight:700">5 pts</span></div>
+    <div class="fb" style="padding:4px 0"><span>Bonus, completed through Day 3</span><span style="font-weight:700">5 pts</span></div>
+  
+  </div>
+  <div class="sep"></div>
+  <div style="text-align:center"><button class="bb" onclick="S.phase='intro';render()" style="font-size:16px;padding:16px 56px">Meet your patient</button></div>
+</div>`;
+}
+
+function renderIntro(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="text-align:center;padding:2.5rem 2rem;border-top:4px solid var(--navy);max-width:560px;margin:0 auto">
+  <div class="sl" style="margin-bottom:1rem">Your patient . Week 8, Day 1 (Monday)</div>
+  <div style="width:84px;height:84px;border-radius:50%;background:var(--navy-bg);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:28px;font-weight:700;margin:0 auto 1.2rem">MT</div>
+  <h1 style="font-size:36px;margin-bottom:.4rem;font-family:var(--display);font-style:italic;font-weight:600">${CASE.patient.name}</h1>
+  <p style="font-size:18px;color:var(--ink-soft);margin-bottom:.4rem">${CASE.patient.age} years old . ${CASE.patient.gender}</p>
+  <div style="background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:14px 22px;display:inline-block;margin:1.4rem 0">
+    <div class="sl" style="margin-bottom:6px">Chief complaint</div>
+    <p style="font-size:17px;color:var(--navy);font-weight:600;font-family:var(--display);font-style:italic">${CASE.cc}</p>
+  </div>
+  <p style="max-width:440px;margin:0 auto 1.8rem;font-size:15px">You have <strong>10 interview questions</strong> with Margaret available across the entire week. Spend them carefully.</p>
+  <button class="bb" onclick="S.phase='interview';render()" style="font-size:16px;padding:16px 42px">Begin patient interview</button>
+</div>`;
+}
+
+function renderInterview(){
+  const rem=S.maxInterview-S.interviewCount;
+  const done=rem<=0;
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-navy">Patient Interview</span> <strong style="margin-left:8px;font-family:var(--display);font-style:italic">${CASE.patient.name}</strong></div>
+  <div class="flex">
+    <button onclick="fullReset()" style="font-size:13px;padding:6px 12px;color:var(--terra);border-color:var(--terra-bd)">Reset session</button>
+    <button class="${done?'bt':'bb'}" onclick="S.phase='investigate';render()">${done?'Interview complete, investigate':'Skip to investigation'}</button>
+  </div>
+</div>
+<div style="background:var(--navy-bg);border:1px solid var(--navy-bd);border-radius:var(--rs);padding:11px 14px;display:flex;align-items:center;gap:14px;margin-bottom:.875rem;flex-wrap:wrap">
+  <div style="font-family:var(--display);font-style:italic;font-weight:600;font-size:46px;color:var(--navy);line-height:1">${rem}</div>
+  <div style="flex:1;min-width:160px"><div style="font-family:var(--sans);font-size:15.5px;font-weight:700;color:var(--navy);letter-spacing:.04em;text-transform:uppercase">Questions remaining (carry across all 3 days)</div><div style="font-size:15px;color:var(--ink-soft);margin-top:5px">Interview closes permanently when all 10 are used.</div></div>
+  <div style="display:flex;gap:5px;flex-wrap:wrap">
+    ${Object.entries(CASE.interviewTopics).map(([k,t])=>`<span class="tpill ${S.iTopicHit[k]?'hit':'miss'}">${t.label}</span>`).join("")}
+  </div>
+</div>
+<div class="chatbox">
+  <div class="ci" id="ci" style="height:440px">
+    ${S.iMsgs.length===0?`<div class="msg assistant patient"><div class="ml">${CASE.patient.name}</div><div class="mb">Thanks for seeing me. My ankle is killing me. What do you need to know?</div></div>`:""}
+    ${S.iMsgs.map(m=>`<div class="msg ${m.role} ${m.role==='assistant'?'patient':''}"><div class="ml">${m.role==='user'?'You':CASE.patient.name}</div><div class="mb">${m.content}</div></div>`).join("")}
+    ${S.iPending?`<div class="msg assistant patient"><div class="ml">${CASE.patient.name}</div><div class="mb"><span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div></div>`:""}
+    ${done&&S.iMsgs.length>0&&!S.iPending?`<div class="msg assistant"><div class="mb" style="background:var(--gold-bg);border-color:var(--gold-bd);color:var(--warn)">You have used all 10 questions. The interview is now closed.</div></div>`:""}
+  </div>
+  ${!done?`<div class="ir"><textarea id="qi" rows="2" placeholder="${S.iPending?'Margaret is thinking...':'Ask Margaret anything... (click Ask or press Cmd+Enter to send)'}" ${S.iPending?'disabled':''} onkeydown="if((event.metaKey||event.ctrlKey)&&event.key==='Enter'){event.preventDefault();sendInterview();}"></textarea><button onclick="sendInterview()" ${S.iPending?'disabled':''}>${S.iPending?'...':'Ask'}</button></div>`:`<div style="padding:12px;border-top:1px solid var(--divider-light);text-align:center"><button class="bt" onclick="S.phase='investigate';render()" style="width:100%">Interview complete, begin investigation</button></div>`}
+</div>`;
+  scrollEl("ci");
+}
+async function sendInterview(){
+  if(S.interviewCount>=S.maxInterview)return;
+  if(S.iPending)return;
+  const inp=document.getElementById("qi");
+  if(!inp||!inp.value.trim())return;
+  const txt=inp.value.trim();inp.value="";
+  // Topic-hit tracking via the question text
+  for(const[topic,info] of Object.entries(CASE.interviewTopics)){
+    if(info.pattern.test(txt)) S.iTopicHit[topic]=true;
+  }
+  S.iMsgs.push({role:"user",content:txt});
+  S.interviewCount++;
+  S.iPending=true;
+  saveState();render();scrollEl("ci");
+  // Build messages array from full conversation history (already includes the new user msg)
+  const apiMessages=S.iMsgs.map(m=>({role:m.role,content:m.content}));
+  const reply=await askPatientAPI(apiMessages);
+  S.iMsgs.push({role:"assistant",content:reply});
+  S.iPending=false;
+  saveState();render();scrollEl("ci");
+}
+
+function renderInvestigate(){
+  const pct=Math.max(0,(S.credits/S.maxCredits)*100);
+  const pcls=pct<25?"low":pct<50?"mid":"";
+  const dayData=CASE.days[S.currentDay];
+  const cats=[...new Set(dayData.orders.map(o=>o.cat))];
+
+  const tabHtml=Object.keys(CASE.days).map(d=>{
+    const di=parseInt(d);
+    const unlocked=di<=S.daysUnlocked;
+    const active=di===S.currentDay;
+    const dayLabel=CASE.days[di].label.split(", ")[0].trim();
+    return`<button class="day-tab ${active?'active':unlocked?'unlocked':'locked'}" onclick="${unlocked?`switchDay(${di})`:'void(0)'}">${dayLabel}${!unlocked?' [locked]':''}</button>`;
+  }).join("");
+
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-navy">Week 2 Investigation</span> <strong style="margin-left:8px;font-family:var(--display);font-style:italic">${CASE.patient.name}, ${CASE.patient.age}y ${CASE.patient.gender}</strong></div>
+  <div class="flex">
+    <button onclick="fullReset()" style="font-size:13px;padding:6px 12px;color:var(--terra);border-color:var(--terra-bd)">Reset session</button>
+    <button onclick="S.phase='interview';render()" style="font-size:15px">Interview (${S.maxInterview-S.interviewCount} left)</button>
+    ${S.daysUnlocked>=3?`<button class="bt" onclick="S.phase='submit';render()" style="font-size:15px">Submit final diagnosis</button>`:""}
+  </div>
+</div>
+<div class="cbar">
+  <div class="cnum">${S.credits}</div>
+  <div style="flex:1"><div class="clabel">Credits, carry across all 3 days</div><div class="csub">All tests cost credits. Wrong gate retries cost 15 each. Unused credits give a higher efficiency score.</div><div class="pb"><div class="pf ${pcls}" style="width:${pct}%"></div></div></div>
+</div>
+<div class="day-tabs">${tabHtml}</div>
+<div class="unlock-bar">
+  <span style="font-family:var(--sans);font-size:15px;font-weight:700;color:var(--warn);letter-spacing:.04em;text-transform:uppercase">Day unlock code</span>
+  <input id="day-unlock-inp" type="text" placeholder="Enter code from instructor..." onkeydown="if(event.key==='Enter')tryUnlockDay()">
+  <button onclick="tryUnlockDay()" class="bg" style="padding:10px 20px;font-size:15px">Unlock</button>
+</div>
+<div style="background:var(--navy-bg);border:1px solid var(--navy-bd);border-radius:var(--rs);padding:16px 20px;margin-bottom:.875rem;font-size:16px;color:var(--navy);line-height:1.7">${dayData.note}</div>
+<div class="g2">
+  <div>
+    <div class="card" style="padding:1rem">
+      <div class="sl" style="margin-bottom:8px">Free bedside data, always available</div>
+      ${Object.entries(CASE.free).map(([k,v])=>`<div class="fi ${S.freeObtained.includes(k)?'got':''}" onclick="getFree('${k}')">
+        <span>[${v.icon}] ${v.label}</span>
+        <span class="badge ${S.freeObtained.includes(k)?'b-ok':'b-navy'}" style="font-size:13px;letter-spacing:.04em">${S.freeObtained.includes(k)?'viewed':'free'}</span>
+      </div>`).join("")}
+    </div>
+    ${dayData.orders.length>0?`<div class="card" style="padding:1rem">
+      <div class="sl" style="margin-bottom:6px">Day ${S.currentDay} orders (credits + gate)</div>
+      ${cats.map(cat=>`<div class="oc">${cat}</div>${dayData.orders.filter(o=>o.cat===cat).map(o=>{const done=!!S.results.find(r=>r.id===o.id);return`<div class="oi ${done?'done':''}" onclick="${done?'':"orderTest('"+o.id+"',"+S.currentDay+")"}"><span>${o.name}</span><span style="font-size:14.5px;font-weight:700;color:${done?'var(--ok)':'var(--terra)'}">${done?'done':'-'+o.cost+' cr'}</span></div>`;}).join("")}`).join("")}
+    </div>`:`<div class="card" style="padding:1rem;text-align:center"><p style="color:var(--ink-soft);font-size:15px">No additional tests on this day.</p></div>`}
+  </div>
+  <div>
+    <div class="card" style="padding:1rem;margin-bottom:.75rem;max-height:300px;overflow-y:auto">
+      <div class="sl" style="margin-bottom:8px">All results, running total (${S.results.length} ordered . ${S.freeObtained.length} free . ${S.autoRevealed.length} day reveals)</div>
+      ${S.freeObtained.length===0&&S.results.length===0&&S.autoRevealed.length===0?`<p style="color:var(--ink-soft);font-size:15px">No data yet. Click items to the left to begin.</p>`:""}
+      ${S.freeObtained.map(k=>`<div class="fc"><div class="fl">[${CASE.free[k].icon}] ${CASE.free[k].label}</div>${CASE.free[k].result}</div>`).join("")}
+      ${S.autoRevealed.map(d=>{const ar=CASE.days[d].autoReveal;return`<div class="ar"><div class="al">${ar.label}</div>${ar.result}</div>`;}).join("")}
+      ${S.results.map(r=>{const order=Object.values(CASE.days).flatMap(d=>d.orders).find(o=>o.id===r.id);return`<div class="rc"><div class="rl">${order?.name||r.id}</div>${r.result}</div>`;}).join("")}
+    </div>
+    <div class="chatbox">
+      <div class="ci" id="inv-ci" style="height:340px">
+        ${S.invMsgs.length===0?`<div class="msg assistant"><div class="ml">Clinical Facilitator</div><div class="mb">Click a test on the left to order it. You will receive an anatomy gate question before each result is released. Day unlock codes appear after your instructor announces them.</div></div>`:""}
+        ${S.invMsgs.map(m=>`<div class="msg ${m.role} ${m.cls||''}"><div class="ml">${m.role==='user'?'You':'Clinical Facilitator'}</div><div class="mb">${m.isHtml?m.content:m.content.replace(/\n/g,'<br>')}</div></div>`).join("")}
+      </div>
+      <div class="ir"><textarea id="invi" rows="2" placeholder="Type A, B, C, or D to answer gate question..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendInv();}"></textarea><button onclick="sendInv()">Send</button></div>
+    </div>
+    <div style="margin-top:.75rem">
+      <button onclick="toggleTutor()" class="${S.tutorOpen?'bb':''}" style="width:100%;text-align:left;font-size:14.5px">${S.tutorOpen?'Hide':'Open'} AI anatomy tutor (${TUTOR_MAX-S.tCount} of ${TUTOR_MAX} questions left)</button>
+      ${S.tutorOpen?`
+      <div class="chatbox" style="margin-top:8px">
+        <div class="ci" id="t-ci" style="height:260px">
+          ${S.tMsgs.length===0?`<div class="msg assistant"><div class="ml">AI Tutor</div><div class="mb" style="font-size:15px">Ask me about anatomy terms, structures, or procedures. For example: "what is the periosteum," "what is the difference between open and closed reduction," "what does ORIF stand for." I will not give you the diagnosis, interpret findings, or solve gate questions.<br><br>You have ${TUTOR_MAX-S.tCount} of ${TUTOR_MAX} tutor questions remaining for this case.</div></div>`:""}
+          ${S.tMsgs.map(m=>`<div class="msg ${m.role}"><div class="ml">${m.role==='user'?'You':'AI Tutor'}</div><div class="mb" style="font-size:15.5px">${m.content.replace(/\n/g,'<br>')}</div></div>`).join("")}
+          ${S.tPending?`<div class="msg assistant"><div class="ml">AI Tutor</div><div class="mb"><span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div></div>`:""}
+        </div>
+        <div class="ir"><textarea id="tinp" rows="2" placeholder="${S.tCount>=TUTOR_MAX?'No tutor questions remaining for this case.':S.tPending?'Tutor is thinking...':'Ask about a term, structure, or procedure (Cmd+Enter to send)'}" ${S.tPending||S.tCount>=TUTOR_MAX?'disabled':''} onkeydown="if((event.metaKey||event.ctrlKey)&&event.key==='Enter'){event.preventDefault();sendTutor();}"></textarea><button onclick="sendTutor()" ${S.tPending||S.tCount>=TUTOR_MAX?'disabled':''}>${S.tPending?'...':'Ask'}</button></div>
+      </div>`:""}
+    </div>
+  </div>
+</div>`;
+  scrollEl("inv-ci");
+  if(S.tutorOpen)scrollEl("t-ci");
+}
+
+function switchDay(d){S.currentDay=d;saveState();render();}
+function getFree(k){if(!S.freeObtained.includes(k)){S.freeObtained.push(k);saveState();}render();}
+
+/* ------ GATE SHUFFLER ------
+   Runtime: each gate gets a per-session randomized letter mapping.
+   The original CASE always defines correct:"A". Here we permute the four
+   options and rewrite both the option labels and the explanation prefixes.
+*/
+function shuffleGateOptions(gate){
+  const origCorrectIdx=["A","B","C","D"].indexOf(gate.correct);
+  // Fisher-Yates shuffle
+  const perm=[0,1,2,3];
+  for(let i=perm.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [perm[i],perm[j]]=[perm[j],perm[i]];
+  }
+  const letters=["A","B","C","D"];
+  const shuffledOpts=perm.map((origIdx,newIdx)=>{
+    const text=gate.opts[origIdx].replace(/^[A-D]\)\s*/,"");
+    return `${letters[newIdx]}) ${text}`;
+  });
+  const newCorrect=letters[perm.indexOf(origCorrectIdx)];
+  const shuffledExp=gate.exp.replace(/\b([A-D]):\s/g,(m,origLetter)=>{
+    const origIdx=origLetter.charCodeAt(0)-65;
+    const newIdx=perm.indexOf(origIdx);
+    return `${letters[newIdx]}: `;
+  });
+  return {q:gate.q, opts:shuffledOpts, correct:newCorrect, exp:shuffledExp};
+}
+
+function orderTest(id,day){
+  if(S.results.find(r=>r.id===id))return;
+  const order=CASE.days[day].orders.find(o=>o.id===id);
+  if(!order)return;
+  if(S.credits<order.cost){S.invMsgs.push({role:"assistant",cls:"fail",content:"Not enough credits to order this test."});render();return;}
+  S.credits=Math.max(0,S.credits-order.cost);
+  if(!S.ordered.includes(id))S.ordered.push(id);
+  // No-gate path: management/consult items release directly
+  if(!order.gate){
+    S.results.push({id:order.id,result:order.result});
+    S.invMsgs.push({role:"assistant",cls:"result",isHtml:true,content:`<strong>${order.name}</strong> (minus ${order.cost} credits)<br><br><strong>OUTCOME:</strong><br><br>${order.result.replace(/\n/g,'<br>')}`});
+    saveState();render();scrollEl("inv-ci");return;
+  }
+  // Gated path: shuffle once per gate, persist
+  const shuffled=shuffleGateOptions(order.gate);
+  S.gateActive={orderId:id,order,day,shuffled};
+  const optHtml=shuffled.opts.map(o=>`<span style="display:block;margin:6px 0;padding:6px 0;border-bottom:1px solid rgba(20,41,64,.08)">${o}</span>`).join("");
+  S.invMsgs.push({role:"assistant",cls:"gate",isHtml:true,content:`<strong>Order:</strong> ${order.name} (minus ${order.cost} credits)<br><br><strong>ANATOMY GATE QUESTION</strong><br><br>${shuffled.q}<br><br>${optHtml}<br>Type the letter of your answer: <strong>A, B, C, or D</strong>`});
+  saveState();render();scrollEl("inv-ci");
+}
+
+function sendInv(){
+  const inp=document.getElementById("invi");
+  if(!inp||!inp.value.trim())return;
+  const txt=inp.value.trim();inp.value="";
+  S.invMsgs.push({role:"user",content:txt});
+  if(S.gateActive){
+    const letter=txt.trim().toUpperCase().charAt(0);
+    if(!["A","B","C","D"].includes(letter)){S.invMsgs.push({role:"assistant",cls:"gate",content:"Please type just the letter of your answer: A, B, C, or D."});render();scrollEl("inv-ci");return;}
+    const{order,shuffled}=S.gateActive;
+    if(letter===shuffled.correct){
+      S.results.push({id:order.id,result:order.result});
+      S.gateActive=null;
+      S.invMsgs.push({role:"assistant",cls:"result",isHtml:true,content:`<strong>CORRECT. ${letter} is right.</strong><br><br><strong>Explanation:</strong> ${shuffled.exp}<br><br><strong>RESULT:</strong><br><br>${order.result.replace(/\n/g,'<br>')}`});
+    } else {
+      S.retries++; S.credits=Math.max(0,S.credits-15);
+      S.invMsgs.push({role:"assistant",cls:"fail",isHtml:true,content:`<strong>Incorrect.</strong> ${letter} is not right. (minus 15 credits)<br><br>Think about the anatomy. Type A, B, C, or D to retry.`});
+    }
+    saveState();render();scrollEl("inv-ci");return;
+  }
+  S.invMsgs.push({role:"assistant",content:"Click a test on the left panel to order it and receive a gate question."});
+  render();scrollEl("inv-ci");
+}
+
+function renderSubmit(){
+  // Shuffle differential options once per session so the correct answer is not
+  // always in the same dropdown position. Persist the shuffle in S.
+  if(!S.diffOrder||S.diffOrder.length!==(CASE.differentials||[]).length){
+    const n=(CASE.differentials||[]).length;
+    const arr=Array.from({length:n},(_,i)=>i);
+    for(let i=arr.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+    S.diffOrder=arr;
+    saveState();
+  }
+  const orderedDiffs=S.diffOrder.map(i=>CASE.differentials[i]);
+  const optHtml=orderedDiffs.map(d=>`<option value="${d.label.replace(/"/g,'&quot;')}" ${S.diagText===d.label?'selected':''}>${d.label}</option>`).join("");
+  document.getElementById("app").innerHTML=`
+<div class="card" style="border-top:4px solid var(--ok);max-width:660px;margin:0 auto">
+  <div class="sl" style="margin-bottom:.5rem">Submit final diagnosis, Week 8</div>
+  <h1 style="margin-bottom:.4rem">${CASE.patient.name}, ${CASE.patient.age}y</h1>
+  <p style="margin-bottom:1rem;font-size:15.5px">Credits remaining: ${S.credits}/200 . Tests ordered: ${S.ordered.length} . Days unlocked: ${S.daysUnlocked}/3 . Gate retries: ${S.retries}</p>
+  <div class="note">Your submission is private. Choose your best diagnosis from the list of candidates you researched in pre-work, then defend it with anatomical reasoning. The reveal code is given after Thursday TBL.</div>
+  <div style="margin-bottom:1rem">
+    <div class="sl">What is your final diagnosis?</div>
+    <select id="sd" style="width:100%;font-family:var(--body);font-size:16px;padding:10px 12px;border:1px solid var(--divider);border-radius:var(--rs);background:var(--white);color:var(--ink);line-height:1.55">
+      <option value="">-- select one --</option>
+      ${optHtml}
+    </select>
+  </div>
+  <div style="margin-bottom:1.4rem">
+    <div class="sl">Defend your selection (3-5 sentences)</div>
+    <p style="font-size:14.5px;color:var(--ink-soft);margin-bottom:8px;line-height:1.55">Use the foundational neuroanatomy you have learned this week. Where exactly is the dysfunction (which structures of the CNS, which parts of the ventricular system, which meningeal layer)? Trace the normal path of CSF and explain where the breakdown is in this patient. Why is this communicating rather than obstructive hydrocephalus? Which periventricular structures explain why gait, cognition, and bladder are all affected?</p>
+    <textarea id="sr" rows="6" placeholder="Anchor your reasoning in CNS regions, ventricular flow, CSF production and reabsorption, the meninges, and the periventricular tracts that explain Hakim triad.">${S.rationaleText}</textarea>
+  </div>
+  <div class="fb"><button onclick="S.phase='investigate';render()">Back</button><button class="bt" onclick="doSubmit()">Submit diagnosis</button></div>
+</div>`;
+}
+async function doSubmit(){
+  const sd=document.getElementById("sd"),sr=document.getElementById("sr");
+  if(!sd||!sd.value){alert("Please select a diagnosis from the dropdown.");return;}
+  if(!sr||!sr.value.trim()){alert("Please defend your diagnosis in the rationale box.");return;}
+  S.diagText=sd.value;S.rationaleText=sr.value.trim();
+  const sc=calcScores();S.scores=sc;
+  await submitToForm(sc);
+  S.phase="submitted";saveState();render();
+}
+
+function renderSubmitted(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="text-align:center;padding:2.5rem 2rem;border-top:4px solid var(--ok);max-width:560px;margin:0 auto">
+  <div style="font-size:44px;margin-bottom:1rem;font-family:var(--display);font-style:italic;color:var(--ok)">Submitted</div>
+  <h1 style="color:var(--ok);margin-bottom:.75rem">Week 8 Diagnosis Submitted</h1>
+  <p style="max-width:440px;margin:0 auto 1.5rem">Recorded privately, ${S.studentName}. Present your data and reasoning in Thursday TBL. Do not reveal your diagnosis to other teams beforehand.</p>
+  <div class="note" style="text-align:left;max-width:480px;margin:0 auto 1.5rem;font-size:14.5px">
+    <strong>Next steps</strong><br>
+    1. Defend your diagnosis at Thursday TBL (iRAT to tRAT to application).<br>
+    2. After TBL, your instructor will give the reveal code.<br>
+    3. Enter it below to see the correct diagnosis, your full score, and the anatomical explanation.
+  </div>
+  <div style="max-width:380px;margin:0 auto">
+    <div class="sl" style="margin-bottom:8px">Reveal code (given after Thursday TBL)</div>
+    <input type="text" id="uki" placeholder="Enter reveal code..." style="margin-bottom:10px;font-size:17px;letter-spacing:.14em;text-align:center;text-transform:uppercase" onkeydown="if(event.key==='Enter')tryReveal()">
+    <div id="ukerr" style="color:var(--terra);font-size:14px;margin-bottom:8px;display:none">Incorrect. Wait for your instructor after Thursday TBL.</div>
+    <button class="bb" onclick="tryReveal()" style="width:100%;font-size:15px;padding:14px">Reveal diagnosis &amp; scores</button>
+  </div>
+</div>`;
+}
+function tryReveal(){
+  const inp=document.getElementById("uki");
+  if(!inp||!inp.value.trim())return;
+  if(inp.value.trim().toUpperCase()!==REVEAL_CODE.toUpperCase()){document.getElementById("ukerr").style.display="block";inp.value="";return;}
+  S.phase="reveal";saveState();render();
+}
+
+function renderReveal(){
+  const sc=S.scores||calcScores();
+  const fb=generateFeedback(sc);
+  function scCls(e,m){return e>=m*.8?"full":e>=m*.4?"part":"zero";}
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-ok">Week 8 Complete</span></div>
+  <button onclick="fullReset()">Restart Week 8</button>
+</div>
+<div class="card" style="border-top:4px solid var(--navy);margin-bottom:1rem">
+  <div class="sl" style="margin-bottom:8px">Confirmed diagnosis</div>
+  <h1 style="font-size:24px;margin-bottom:8px;color:var(--navy)">Idiopathic Normal Pressure Hydrocephalus (NPH), with positive extended tap test, candidate for ventriculoperitoneal shunt</h1>
+  <p style="font-size:15.5px;margin-bottom:0;color:var(--ink-soft)">Communicating hydrocephalus with the classic Hakim's triad of gait apraxia, subcortical cognitive impairment, and urinary urge incontinence. Ventriculomegaly is disproportionate to cortical atrophy on imaging (Evans index 0.36, DESH pattern), opening pressure is normal at 14 cm H2O, and symptoms reversibly improve after large-volume CSF drainage. Most importantly, the absence of obstructing lesion within the ventricular system makes this COMMUNICATING hydrocephalus.</p>
+</div>
+<div class="card">
+  <h2>Why this diagnosis (anatomical reasoning)</h2>
+  <div class="reveal-text">PATHOPHYSIOLOGY (where CSF goes, and where it gets stuck):
+
+1. CSF PRODUCTION: CSF is produced primarily by the CHOROID PLEXUS in the lateral, third, and fourth ventricles. Production is around 500 mL per day; total CSF volume is only ~150 mL, so it turns over multiple times daily. Production rate stays roughly constant in NPH; the problem is downstream.
+
+2. CSF FLOW PATH: Lateral ventricles -> interventricular foramen of Monro -> third ventricle -> cerebral aqueduct (through the midbrain) -> fourth ventricle -> median (Magendie) and lateral (Luschka) apertures -> subarachnoid space at the base of the brain -> circulates over the cerebral convexities -> reabsorbed at arachnoid granulations into the dural venous sinuses (especially the superior sagittal sinus).
+
+3. WHERE NPH BREAKS THE CIRCUIT: In NPH, the breakdown is at the END of the path. Reabsorption at the arachnoid granulations is impaired, OR the bulk flow over the cerebral convexities is disrupted. Because the breakdown is downstream of the ventricles AND the ventricular system is patent, this is COMMUNICATING (not obstructive) hydrocephalus. The cisternogram demonstrates this: tracer reaches the ventricles by reflux and persists there because it cannot be reabsorbed at the convexities. Imaging shows tight high-convexity sulci (where CSF is failing to drain) plus widened Sylvian fissures (the DESH pattern).
+
+4. WHY 'NORMAL PRESSURE': The opening pressure on LP is normal because the system reaches a new steady state. CSF pressure can be intermittently elevated (especially overnight) and the ventricles dilate to accommodate the chronic accumulation. The TRANSMURAL pressure gradient acting on the periventricular tissue stretches it, producing the white matter compression that drives symptoms. So normal pressure does not mean normal mechanics.
+
+5. WHY THE TRIAD (Hakim's triad: GAIT, COGNITION, URINARY):
+   - The PERIVENTRICULAR WHITE MATTER tracts most affected by ventricular expansion are those running closest to the lateral ventricles. These include corticospinal fibers serving the LEGS (which run medially in the corona radiata and internal capsule) more than the arms. This explains the LOWER-BODY-PREDOMINANT gait impairment with preserved upper extremity function.
+   - The same medial periventricular white matter contains FRONTAL-SUBCORTICAL CIRCUITS that drive executive function, attention, and processing speed. Disruption produces the SUBCORTICAL pattern of cognitive impairment seen in NPH (slow thinking, impaired recall, executive dysfunction, with relatively preserved language and visuospatial function). This is distinct from the cortical pattern of Alzheimer's.
+   - The same area carries DESCENDING CORTICAL INHIBITION of the SACRAL PARASYMPATHETIC bladder reflex (S2 to S4). When this inhibition is disrupted, the bladder loses its cortical brake and detrusor overactivity emerges (urge incontinence). The autonomic outflow itself is structurally intact, just disinhibited.
+
+6. WHY THE TAP TEST WORKS: Removing CSF temporarily reverses the transmural pressure on periventricular structures, allowing improvement in all three symptoms. The magnitude and duration of improvement after a tap predicts how well a permanent ventriculoperitoneal shunt will work.
+
+WHY THE OTHER DIFFERENTIALS ARE EXCLUDED (anatomic reasoning):
+
+  - Alzheimer's disease: cortical atrophy is PROPORTIONAL to ventricular dilation (ex-vacuo dilation). Margaret has DISPROPORTIONATELY enlarged ventricles with relatively preserved cortex. Cognitive pattern is also wrong: Alzheimer's shows aphasia, anomia, and visuospatial deficits early; Margaret has subcortical pattern.
+  - Vascular dementia: requires evidence of strategic infarcts or extensive white matter disease. CTA and MRI show no significant vascular pathology.
+  - Parkinson disease: rest tremor, asymmetric onset, rigidity, response to levodopa. Margaret has none of these. Her gait is magnetic (apraxic), not parkinsonian (festinating, asymmetric).
+  - Lewy body dementia: visual hallucinations, REM sleep disorder, fluctuating cognition. None present.
+  - Chronic subdural hematoma: extra-axial collection on imaging. Not present.
+  - Cervical spondylotic myelopathy: hyperreflexia, sensory level, upper extremity weakness/clumsiness. Reflexes and sensation normal here.
+  - Obstructive (non-communicating) hydrocephalus: requires aqueductal stenosis or mass blocking ventricular flow. MRI shows patent aqueduct and the cisternogram demonstrates a communicating pattern.
+  - B12 deficiency / subacute combined degeneration: sensory ataxia, distal neuropathy, anemia. Not present in Margaret's exam or labs.
+  - Idiopathic detrusor overactivity / overactive bladder syndrome: would explain ONLY the urinary symptoms. The student should be able to articulate why "just overactive bladder" cannot explain Margaret's full picture: it does not produce gait apraxia, it does not produce subcortical cognitive impairment, and it does not show ventriculomegaly on imaging. Urinary urgency in NPH comes from loss of cortical inhibition over an otherwise-normal sacral parasympathetic micturition reflex; the bladder anatomy itself is intact.
+
+CLINICAL TIMING PEARL (when to think NPH vs Alzheimer disease):
+NPH typically presents in the 60s and 70s, often at an age similar to or earlier than typical late-onset Alzheimer disease. In a patient under 75 presenting with cognitive change PLUS gait disturbance OR urinary incontinence, NPH belongs on the differential BEFORE settling on Alzheimer. The combination of subcortical (not cortical) cognitive pattern plus gait apraxia plus urinary urgency, especially when imaging shows ventriculomegaly disproportionate to cortical atrophy, is the signature. Missing this distinction matters because NPH is the only treatable (with VP shunt) and partially-reversible cause of dementia in this age group, whereas the rest are progressive.
+
+KEY TEACHING ANCHORS (Week 8):
+
+CNS gross anatomy:
+  - Cerebrum: four lobes (frontal, parietal, temporal, occipital), separated by central sulcus (frontal-parietal), lateral sulcus (frontal/parietal-temporal), and parieto-occipital sulcus. Two hemispheres separated by longitudinal fissure (containing falx cerebri).
+  - Cerebellum: midline vermis + two hemispheres + three peduncles (superior, middle, inferior), in the posterior cranial fossa.
+  - Brainstem (top to bottom): midbrain (CN III, IV; cerebral aqueduct), pons (CN V, VI, VII, VIII), medulla (CN IX, X, XI, XII; cardiorespiratory nuclei).
+  - Diencephalon: thalamus (sensory relay), hypothalamus (autonomic + endocrine), epithalamus (pineal), subthalamus.
+
+Ventricular system:
+  - Two lateral ventricles -> interventricular foramen of Monro -> third ventricle -> cerebral aqueduct of Sylvius (in midbrain) -> fourth ventricle -> median aperture of Magendie + lateral apertures of Luschka -> subarachnoid space.
+  - Choroid plexus produces CSF in all four ventricles.
+  - Arachnoid granulations reabsorb CSF into dural venous sinuses.
+
+Meninges (outside in): dura mater (with periosteal and meningeal layers; dural reflections including falx cerebri and tentorium cerebelli; venous sinuses between layers) -> subdural space (potential) -> arachnoid mater -> subarachnoid space (CSF + major vessels) -> pia mater (adherent to brain).
+
+Spinal cord: gray matter (anterior + posterior horns; lateral horns at thoracolumbar) and white matter; ends at L1-L2 in adults (conus medullaris); cauda equina (lumbosacral roots) below; filum terminale anchors the cord to the coccyx; LP at L3-L4 or L4-L5 enters lumbar cistern of subarachnoid space.
+
+Cranial nerves: 12 pairs, mnemonic 'On Old Olympus' Towering Tops, A Finn And German Viewed Some Hops' (Olfactory, Optic, Oculomotor, Trochlear, Trigeminal, Abducens, Facial, Vestibulocochlear, Glossopharyngeal, Vagus, Spinal accessory, Hypoglossal). Some Say Money Matters But My Brother Says Big Brains Matter More (sensory/motor/both).
+
+Circle of Willis: anterior cerebral arteries (joined by anterior communicating); internal carotid arteries; middle cerebral arteries; posterior communicating arteries (connecting ICA to PCA on each side); posterior cerebral arteries (from basilar); basilar (from two vertebrals); vertebral arteries (from subclavians).
+
+Autonomic outflow: sympathetic = thoracolumbar (T1 to L2/L3) via paravertebral chain; parasympathetic = craniosacral (CN III, VII, IX, X plus S2 to S4 pelvic splanchnics).</div>
+</div>
+<div class="card">
+  <h2>Your score</h2>
+  <div class="score-row"><span>Diagnostic accuracy</span><span class="sv ${scCls(sc.diag,35)}">${sc.diag}/35</span></div>
+  <div class="score-row"><span>Data efficiency (credits remaining)</span><span class="sv ${scCls(sc.eff,10)}">${sc.eff}/10</span></div>
+  <div class="score-row"><span>High-yield test selection</span><span class="sv ${scCls(sc.hy,15)}">${sc.hy}/15</span></div>
+  <div class="score-row"><span>Test ordering sequence</span><span class="sv ${scCls(sc.seq,5)}">${sc.seq}/5</span></div>
+  <div class="score-row"><span>Interview quality (topic coverage)</span><span class="sv ${scCls(sc.interview,10)}">${sc.interview}/10</span></div>
+  <div class="score-row"><span>Gate question performance</span><span class="sv ${scCls(sc.gate,5)}">${sc.gate}/5</span></div>
+  <div class="score-row"><span>Completion bonus</span><span class="sv ${scCls(sc.complete,5)}">${sc.complete}/5</span></div>
+  <div class="score-row" style="margin-top:8px;border-top:2px solid var(--navy);padding-top:12px"><span style="font-weight:700;font-size:17px">Total</span><span class="sv full" style="font-size:19px">${sc.total}/${sc.max}</span></div>
+</div>
+<div class="card" style="border-top:4px solid var(--ok);background:var(--cream-warm)">
+  <h2>What you did well</h2>
+  ${fb.wins.length>0?`<ul style="margin:0;padding-left:20px;line-height:1.85">${fb.wins.map(w=>`<li style="margin-bottom:8px">${w}</li>`).join("")}</ul>`:`<p style="color:var(--ink-soft)">No notable strengths to call out yet, this case can be done again with the Restart button to build them.</p>`}
+</div>
+${fb.opps.length>0?`<div class="card" style="border-top:4px solid var(--terra);background:var(--cream-warm)">
+  <h2>What would have scored more points</h2>
+  <ul style="margin:0;padding-left:20px;line-height:1.85">${fb.opps.map(o=>`<li style="margin-bottom:8px">${o}</li>`).join("")}</ul>
+</div>`:""}
+<div class="card" style="border-top:4px solid var(--gold)">
+  <h2>Your submission</h2>
+  <div class="sl">Your diagnosis</div>
+  <p style="margin-bottom:14px;color:var(--ink)">${S.diagText||"(not submitted)"}</p>
+  <div class="sl">Your rationale</div>
+  <p style="white-space:pre-wrap;color:var(--ink)">${S.rationaleText||"(not submitted)"}</p>
+</div>`;
+}
+
+/* HELPERS */
+function scrollEl(id){setTimeout(()=>{const e=document.getElementById(id);if(e)e.scrollTop=e.scrollHeight;},20);}
+
+/* COPY / SCREENSHOT PROTECTION */
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>{const t=e.target;if(t.tagName==='INPUT'||t.tagName==='TEXTAREA')return;e.preventDefault();});
+document.addEventListener('copy',e=>{e.preventDefault();try{e.clipboardData.setData('text/plain','Copying is disabled in this exam environment.');}catch(_){}});
+document.addEventListener('cut',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=(e.key||'').toLowerCase();
+  const ctrl=e.ctrlKey||e.metaKey;
+  if(ctrl&&['c','x','s','p','u','a'].includes(k)){const t=e.target;if(t.tagName==='INPUT'||t.tagName==='TEXTAREA')return;e.preventDefault();}
+  if(k==='f12'||(e.ctrlKey&&e.shiftKey&&['i','j','c'].includes(k))||(e.metaKey&&e.altKey&&['i','j','c'].includes(k))){e.preventDefault();}
+  if(ctrl&&e.shiftKey&&k==='s'){e.preventDefault();}
+});
+
+/* INIT */
+render();
+
+/* IFRAME HEIGHT SENDER */
+(function(){
+  const FRAME_ID='bio004-w8-margaret-sim';
+  function sendHeight(){try{const h=document.documentElement.scrollHeight;if(window.parent&&window.parent!==window)window.parent.postMessage({type:'iframeHeight',id:FRAME_ID,height:h},'*');}catch(e){}}
+  window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);
+  if('ResizeObserver' in window){new ResizeObserver(sendHeight).observe(document.body);}
+  setTimeout(sendHeight,200);setTimeout(sendHeight,800);setTimeout(sendHeight,2000);
+})();
+</script>
+</body>
+</html>
