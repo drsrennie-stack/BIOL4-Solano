@@ -3,1894 +3,962 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BIO 004 Human Anatomy, Summer 2026, Syllabus, Dr. Sharilyn Rennie</title>
-<meta name="description" content="Course syllabus for BIO 004 Human Anatomy, Summer 2026 8-week intensive at Solano Community College, taught by Dr. Sharilyn Rennie.">
+<title>Clinical Reasoning Simulator, Week 1, BIO 004</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="description" content="Week 1 clinical reasoning case - integumentary system. Educational simulation only.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy: #142940;
-  --navy-deep: #0A1A2A;
-  --terra: #7C2018;
-  --terra-soft: #9A3A2E;
-  --gold: #C9A961;
-  --gold-soft: #DCC289;
-  --ink: #0A1A2A;
-  --ink-soft: #3D4F5A;
-  --divider: #BFC8CD;
-  --divider-light: #D8DEE2;
-  --cream: #FAF7F2;
-  --cream-warm: #F5F2EC;
-  --white: #FFFFFF;
-  --focus: #142940;
+:root{
+  --navy:#142940; --navy-deep:#0A1A2A; --navy-bg:#E8EDF3; --navy-bd:#B8C5D5;
+  --terra:#7C2018; --terra-bg:#F5E5E2; --terra-bd:#E5BFB8;
+  --gold:#C9A961; --gold-bg:#F8F1E0; --gold-bd:#E5D4A6;
+  --ok:#2E5A3F; --ok-bg:#E5F0E8; --ok-bd:#B8D4C2;
+  --warn:#7A5800; --warn-bg:#FAF1D8; --warn-bd:#E8D49B;
+  
+  --ink:#0A1A2A; --ink-soft:#3D4F5A; --ink-mute:#4A5965;
+  --divider:#BFC8CD; --divider-light:#D8DEE2;
+  --cream:#FAF7F2; --cream-warm:#F5F2EC; --cream-deep:#EEEAE0; --white:#FFFFFF;
+  --r:8px; --rs:5px;
+  --display:'Lora',Georgia,serif;
+  --sans:'Plus Jakarta Sans',Arial,sans-serif;
+  --body:'DM Sans',Arial,sans-serif;
+  --mono:'SF Mono',Monaco,'Courier New',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+*:not(input):not(textarea){user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms!important}}
+@media print{body{display:none!important}}
+body{font-family:var(--body);background:var(--white);color:var(--ink);min-height:100vh;font-size:17px;padding-bottom:80px;-webkit-font-smoothing:antialiased;line-height:1.6}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:1.25rem 1rem;position:relative;z-index:2}
 
-  /* Subtle lift, never bookend */
-  --lift-1: 0 1px 2px rgba(20, 41, 64, 0.05), 0 1px 3px rgba(20, 41, 64, 0.04);
-  --lift-2: 0 2px 4px rgba(20, 41, 64, 0.06), 0 4px 12px rgba(20, 41, 64, 0.06);
-  --lift-3: 0 4px 8px rgba(20, 41, 64, 0.07), 0 8px 24px rgba(20, 41, 64, 0.08);
-}
+/* Watermark */
+.watermark{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:1;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.watermark-text{font-family:var(--sans);font-weight:700;font-size:72px;color:var(--navy);opacity:.05;transform:rotate(-30deg);white-space:nowrap;letter-spacing:.05em;text-align:center;line-height:1.2}
 
-*, *::before, *::after { box-sizing: border-box; }
+h1{font-family:var(--sans);font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1.2}
+h2{font-family:var(--sans);font-size:20px;font-weight:700;color:var(--navy);margin-bottom:.5rem;letter-spacing:-.01em}
+p{font-size:16.5px;color:var(--ink-soft);line-height:1.65}
 
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+button{font-family:var(--sans);font-size:15px;font-weight:600;padding:10px 20px;border:1px solid var(--divider);border-radius:var(--rs);background:var(--white);color:var(--ink);cursor:pointer;transition:all .15s}
+button:hover:not(:disabled){background:var(--cream-warm);border-color:var(--ink-soft)}
+button:disabled{opacity:.4;cursor:default}
+button.bb{background:var(--navy);color:var(--white);border-color:var(--navy)}
+button.bb:hover:not(:disabled){background:var(--navy-deep)}
+button.bt{background:var(--ok);color:var(--white);border-color:var(--ok)}
+button.bt:hover:not(:disabled){background:#1F4530}
+button.bg{background:var(--gold);color:var(--navy-deep);border-color:var(--gold)}
+button.bg:hover:not(:disabled){background:#B89545}
 
-body {
-  margin: 0;
-  font-family: 'DM Sans', Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--ink);
-  background: var(--white);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
+input[type=text],input[type=password],textarea{font-family:var(--body);font-size:17px;border:1px solid var(--divider);border-radius:var(--rs);padding:10px 12px;width:100%;background:var(--white);color:var(--ink);line-height:1.55;resize:vertical}
+input:focus,textarea:focus{outline:3px solid var(--gold);outline-offset:0;border-color:var(--navy)}
 
-/* Skip link */
-.skip-link {
-  position: absolute;
-  top: -100px;
-  left: 12px;
-  background: var(--navy);
-  color: var(--cream);
-  padding: 12px 18px;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: 600;
-  z-index: 1000;
-}
-.skip-link:focus { top: 12px; }
+.card{background:var(--white);border:1px solid var(--divider-light);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;box-shadow:0 1px 2px rgba(20,41,64,.05),0 1px 3px rgba(20,41,64,.04)}
+.badge{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:700;padding:5px 13px;border-radius:13px;letter-spacing:.06em;text-transform:uppercase}
+.b-navy{background:var(--navy-bg);color:var(--navy);border:1px solid var(--navy-bd)}
+.b-terra{background:var(--terra-bg);color:var(--terra);border:1px solid var(--terra-bd)}
+.b-gold{background:var(--gold-bg);color:var(--warn);border:1px solid var(--gold-bd)}
+.b-ok{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+.b-reveal{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
 
-:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
+.sl{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.sep{border:none;border-top:1px solid var(--divider-light);margin:1rem 0}
+.flex{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fb{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.g2{display:grid;grid-template-columns:300px 1fr;gap:1rem}
+@media(max-width:760px){.g2{grid-template-columns:1fr}}
 
-/* Top bar */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: var(--navy);
-  color: var(--cream);
-  border-bottom: 2px solid var(--gold);
-}
-.topbar-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-.topbar-title {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.01em;
-  color: var(--cream);
-}
-.topbar-title small {
-  display: block;
-  font-weight: 400;
-  font-size: 0.78rem;
-  color: var(--gold-soft);
-  margin-top: 2px;
-  letter-spacing: 0.02em;
-}
-.topbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.topbar-btn {
-  background: transparent;
-  color: var(--cream);
-  border: 1px solid rgba(220, 194, 137, 0.4);
-  padding: 8px 14px;
-  border-radius: 4px;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 0.82rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
-}
-.topbar-btn:hover {
-  background: rgba(201, 169, 97, 0.12);
-  border-color: var(--gold);
-  color: var(--gold-soft);
-}
-.topbar-btn.primary {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: var(--navy-deep);
-  font-weight: 600;
-}
-.topbar-btn.primary:hover {
-  background: var(--gold-soft);
-  border-color: var(--gold-soft);
-  color: var(--navy-deep);
-}
+/* Credit bar */
+.cbar{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:10px 14px;display:flex;align-items:center;gap:14px;margin-bottom:.875rem}
+.cnum{font-family:var(--display);font-style:italic;font-weight:600;font-size:42px;color:var(--navy);line-height:1}
+.clabel{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--warn);letter-spacing:.04em;text-transform:uppercase}
+.csub{font-size:15px;color:var(--ink-soft);line-height:1.55;margin-top:6px;font-weight:500}
+.pb{height:6px;background:var(--cream-deep);border-radius:3px;overflow:hidden;margin-top:5px}
+.pf{height:100%;border-radius:3px;background:var(--gold);transition:width .3s}
+.pf.low{background:var(--terra)} .pf.mid{background:var(--gold)}
 
-/* Layout */
-.layout {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 48px;
-  padding: 32px 24px 80px;
-}
-@media (max-width: 880px) {
-  .layout { grid-template-columns: 1fr; gap: 0; padding: 16px; }
-}
+/* Day tabs */
+.day-tabs{display:flex;gap:0;border:1px solid var(--divider);border-radius:var(--rs);overflow:hidden;margin-bottom:.875rem;background:var(--cream-warm)}
+.day-tab{flex:1;padding:14px 8px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--ink-soft);text-align:center;transition:all .15s;border-right:1px solid var(--divider);line-height:1.3}
+.day-tab:last-child{border-right:none}
+.day-tab.active{background:var(--white);color:var(--navy)}
+.day-tab.locked{color:var(--ink-mute);cursor:default}
+.day-tab.unlocked{color:var(--ok)}
 
-/* Sidebar nav */
-.sidenav {
-  position: sticky;
-  top: 80px;
-  align-self: start;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
-  padding-right: 8px;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-}
-@media (max-width: 880px) {
-  .sidenav {
-    position: static;
-    max-height: none;
-    margin-bottom: 24px;
-    padding: 18px 20px;
-    background: var(--cream-warm);
-    border-radius: 6px;
-    box-shadow: var(--lift-1);
-  }
-}
-.sidenav-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--terra);
-  margin: 0 0 12px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--gold);
-}
-.sidenav ul { list-style: none; padding: 0; margin: 0; }
-.sidenav li { margin: 0; }
-.sidenav a {
-  display: block;
-  padding: 7px 12px;
-  color: var(--ink);
-  text-decoration: none;
-  font-size: 0.88rem;
-  font-weight: 500;
-  border-left: 2px solid transparent;
-  border-radius: 0 3px 3px 0;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
-}
-.sidenav a:hover {
-  background: var(--cream-warm);
-  border-left-color: var(--gold);
-  color: var(--navy);
-}
-.sidenav a.is-active {
-  background: var(--cream-warm);
-  border-left-color: var(--terra);
-  color: var(--navy);
-  font-weight: 600;
-}
+/* Unlock bar */
+.unlock-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);margin-bottom:.875rem;flex-wrap:wrap}
+.unlock-bar input{flex:1;min-width:140px;padding:11px 14px;font-size:16px;letter-spacing:.08em;text-transform:uppercase}
 
-/* Main content */
-main { min-width: 0; }
+/* Items */
+.fi{padding:13px 15px;border-radius:var(--rs);border:1px solid var(--divider-light);margin-bottom:7px;cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:space-between;font-size:15.5px;font-weight:500}
+.fi:hover{background:var(--ok-bg);border-color:var(--ok-bd)}
+.fi.got{background:var(--ok-bg);border-color:var(--ok-bd)}
+.oc{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 7px;padding-left:2px}
+.oi{padding:13px 15px;border-radius:var(--rs);border:1px solid var(--divider-light);margin-bottom:7px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .12s;font-size:15.5px;font-weight:500}
+.oi:hover:not(.done){background:var(--navy-bg);border-color:var(--navy-bd)}
+.oi.done{background:var(--ok-bg);border-color:var(--ok-bd);cursor:default}
 
-/* Hero */
-.hero {
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
-  color: var(--cream);
-  border-radius: 8px;
-  padding: 44px 40px;
-  margin-bottom: 36px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--lift-2);
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 280px;
-  height: 280px;
-  background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -120px;
-  left: -80px;
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(124, 32, 24, 0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero > * { position: relative; }
-.hero-eyebrow {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin: 0 0 14px;
-}
-.hero h1 {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-style: normal;
-  font-weight: 800;
-  font-size: 2.7rem;
-  line-height: 1.05;
-  margin: 0 0 12px;
-  color: var(--white);
-  letter-spacing: -0.02em;
-}
-.hero-subtitle {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  color: rgba(250, 247, 242, 0.88);
-  margin: 0 0 28px;
-  max-width: 60ch;
-}
-.hero-meta {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 18px 32px;
-  padding-top: 22px;
-  border-top: 1px solid rgba(201, 169, 97, 0.35);
-  margin: 0;
-}
-.hero-meta > div { margin: 0; }
-.hero-meta dt {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 5px;
-}
-.hero-meta dd {
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--white);
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  line-height: 1.45;
-}
+/* Chat */
+.chatbox{border:1px solid var(--divider-light);border-radius:var(--r);overflow:hidden;background:var(--white)}
+.ci{padding:.875rem;overflow-y:auto;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.msg{max-width:78%}
+.msg.user{align-self:flex-end}
+.msg.assistant{align-self:flex-start}
+.ml{font-family:var(--sans);font-size:14.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.msg.user .ml{text-align:right}
+.mb{padding:16px 20px;border-radius:var(--r);font-size:18px;line-height:1.65}
+.msg.user .mb{background:var(--navy-bg);border:1px solid var(--navy-bd);border-bottom-right-radius:3px;color:var(--navy)}
+.msg.assistant .mb{background:var(--cream-warm);border:1px solid var(--divider-light);border-bottom-left-radius:3px}
+.msg.assistant.gate .mb{background:var(--gold-bg);border-color:var(--gold-bd)}
+.msg.assistant.result .mb{background:var(--ok-bg);border-color:var(--ok-bd)}
+.msg.assistant.fail .mb{background:var(--terra-bg);border-color:var(--terra-bd);color:var(--terra)}
+.msg.assistant.patient .mb{background:var(--cream-warm);border-color:var(--terra-bd);border-left:4px solid var(--terra);font-family:var(--display);font-style:italic;color:var(--terra)}
+.msg.assistant.unlock .mb{background:var(--ok-bg);border-color:var(--ok-bd)}
+.ir{display:flex;gap:6px;padding:8px 10px;border-top:1px solid var(--divider-light);align-items:flex-end}
+.ir textarea{flex:1;min-height:38px;max-height:80px;resize:none}
 
-/* Sections */
-section {
-  margin-bottom: 44px;
-  scroll-margin-top: 80px;
-}
-section h2 {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-weight: 700;
-  font-size: 1.6rem;
-  color: var(--navy);
-  margin: 0 0 4px;
-  letter-spacing: -0.01em;
-}
-.section-rule {
-  height: 3px;
-  width: 56px;
-  background: var(--gold);
-  margin: 8px 0 24px;
-  border-radius: 2px;
-}
-section h3 {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--terra);
-  margin: 26px 0 10px;
-  letter-spacing: 0;
-}
-section h4 {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-weight: 700;
-  font-size: 0.98rem;
-  color: var(--navy);
-  margin: 18px 0 6px;
-}
-section p { margin: 0 0 14px; }
+/* Result cards */
+.rc{background:var(--ok-bg);border:1px solid var(--ok-bd);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap;font-family:var(--mono)}
+.rl{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--ok);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.fc{background:var(--cream-warm);border:1px solid var(--divider-light);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap}
+.fl{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.ar{background:var(--terra-bg);border:1px solid var(--terra-bd);border-left:4px solid var(--terra);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap;font-family:var(--mono)}
+.al{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
 
-/* Cards: white, lifted, never book-end */
-.card {
-  background: var(--white);
-  border: 1px solid var(--divider-light);
-  border-radius: 6px;
-  padding: 24px 26px;
-  margin: 18px 0;
-  box-shadow: var(--lift-1);
-}
-.card-accent {
-  border-left: 4px solid var(--gold);
-}
-.card-warn {
-  border-left: 4px solid var(--terra);
-}
+/* Topic pills */
+.tpill{font-family:var(--sans);font-size:14.5px;padding:6px 14px;border-radius:14px;font-weight:600}
+.tpill.hit{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+.tpill.miss{background:var(--cream-deep);color:var(--ink-mute);border:1px solid var(--divider-light)}
 
-.callout {
-  background: var(--white);
-  border: 1px solid var(--divider-light);
-  border-left: 4px solid var(--navy);
-  padding: 16px 20px;
-  margin: 18px 0;
-  border-radius: 0 6px 6px 0;
-  box-shadow: var(--lift-1);
-}
-.callout strong {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  color: var(--navy);
-}
-.callout-terra { border-left-color: var(--terra); }
-.callout-terra strong { color: var(--terra); }
-.callout-gold { border-left-color: var(--gold); }
-.callout-gold strong { color: var(--terra); }
+/* Score row */
+.score-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--divider-light);font-size:16px}
+.score-row:last-child{border-bottom:none}
+.sv{font-family:var(--mono);font-weight:700}
+.sv.full{color:var(--ok)} .sv.part{color:var(--warn)} .sv.zero{color:var(--terra)}
+.reveal-text{background:var(--cream-warm);border:1px solid var(--divider-light);border-radius:var(--rs);padding:18px 22px;font-size:15.5px;line-height:1.85;white-space:pre-wrap;max-height:560px;overflow-y:auto}
+.istep{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--divider-light);font-size:16px;line-height:1.7}
+.istep:last-child{border-bottom:none}
+.inum{width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--white);font-family:var(--sans);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 
-/* Tables */
-.table-wrap {
-  overflow-x: auto;
-  margin: 18px 0;
-  background: var(--white);
-  border-radius: 6px;
-  box-shadow: var(--lift-1);
-  border: 1px solid var(--divider-light);
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.92rem;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-}
-th, td {
-  padding: 13px 16px;
-  text-align: left;
-  border-bottom: 1px solid var(--divider-light);
-  vertical-align: top;
-}
-th {
-  background: var(--navy);
-  color: var(--cream);
-  font-weight: 700;
-  font-size: 0.76rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-bottom: 2px solid var(--gold);
-}
-tbody tr:nth-child(even) { background: var(--cream-warm); }
-tbody tr:hover { background: rgba(201, 169, 97, 0.10); }
-tbody tr:last-child td { border-bottom: none; }
+.note{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:15px 20px;font-size:15.5px;color:var(--warn);line-height:1.7;margin-bottom:1rem;font-weight:500}
+.alert-terra{background:var(--terra-bg);border:1px solid var(--terra-bd);border-left:4px solid var(--terra);border-radius:var(--rs);padding:15px 20px;font-size:16px;color:var(--terra);line-height:1.65;margin-bottom:1rem;font-weight:500}
 
-/* Lists */
-ul, ol { margin: 8px 0 14px; padding-left: 22px; }
-li { margin-bottom: 6px; }
-li::marker { color: var(--gold); }
+.dots{display:inline-flex;gap:4px;padding:5px 0;align-items:center}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--ink-mute);animation:bop 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s} .dot:nth-child(3){animation-delay:.4s}
+@keyframes bop{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
 
-/* Definition lists */
-.def-grid {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 12px 28px;
-  margin: 14px 0;
-  font-size: 0.95rem;
-  background: var(--white);
-  border: 1px solid var(--divider-light);
-  border-radius: 6px;
-  padding: 22px 26px;
-  box-shadow: var(--lift-1);
-}
-@media (max-width: 600px) {
-  .def-grid { grid-template-columns: 1fr; gap: 4px 0; padding: 18px 20px; }
-  .def-grid dt { margin-top: 10px; }
-  .def-grid dt:first-child { margin-top: 0; }
-}
-.def-grid dt {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-weight: 700;
-  color: var(--navy);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.def-grid dd { margin: 0; color: var(--ink); }
-
-/* Collapsible */
-details {
-  background: var(--white);
-  border: 1px solid var(--divider-light);
-  border-radius: 6px;
-  margin: 12px 0;
-  box-shadow: var(--lift-1);
-  transition: box-shadow 0.15s;
-}
-details[open] { box-shadow: var(--lift-2); }
-details summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 16px 22px;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--navy);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 6px;
-  transition: background 0.15s;
-}
-details summary::-webkit-details-marker { display: none; }
-details summary:hover { background: var(--cream-warm); }
-details summary::after {
-  content: '+';
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: var(--gold);
-  transition: transform 0.2s;
-  margin-left: 16px;
-  line-height: 1;
-}
-details[open] summary::after { content: '−'; color: var(--terra); }
-details .details-body {
-  padding: 4px 22px 22px;
-  border-top: 1px solid var(--divider-light);
-  color: var(--ink);
-}
-details[open] summary { border-radius: 6px 6px 0 0; }
-
-/* Schedule cards */
-.week-card {
-  display: grid;
-  grid-template-columns: 84px 1fr;
-  gap: 20px;
-  padding: 20px 24px;
-  margin-bottom: 14px;
-  background: var(--white);
-  border: 1px solid var(--divider-light);
-  border-radius: 6px;
-  box-shadow: var(--lift-1);
-  transition: box-shadow 0.18s, transform 0.18s;
-}
-.week-card:hover {
-  box-shadow: var(--lift-2);
-  transform: translateY(-1px);
-}
-.week-card.is-current {
-  border-left: 4px solid var(--terra);
-  background: linear-gradient(to right, rgba(124, 32, 24, 0.04), var(--white) 30%);
-}
-.week-num {
-  font-family: 'Lora', Georgia, serif;
-  font-style: italic;
-  font-weight: 600;
-  color: var(--navy);
-  border-right: 1px solid var(--divider-light);
-  padding-right: 16px;
-}
-.week-num-big {
-  display: block;
-  font-size: 2.6rem;
-  line-height: 1;
-}
-.week-num-label {
-  display: block;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-style: normal;
-  font-size: 0.7rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-top: 6px;
-  font-weight: 700;
-}
-.week-content h3 {
-  margin: 0 0 4px;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 1.05rem;
-  color: var(--navy);
-}
-.week-dates {
-  font-size: 0.82rem;
-  color: var(--ink-soft);
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  margin-bottom: 10px;
-}
-.week-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 12px;
-}
-.tag {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  border: 1px solid transparent;
-}
-.tag-tbl {
-  background: var(--cream-warm);
-  color: var(--navy);
-  border-color: var(--divider);
-}
-.tag-exam {
-  background: rgba(201, 169, 97, 0.18);
-  color: var(--terra);
-  border-color: rgba(201, 169, 97, 0.5);
-}
-.tag-cum {
-  background: var(--terra);
-  color: var(--cream);
-  border-color: var(--terra);
-}
-
-/* Grade calculator */
-.calc {
-  background: var(--white);
-  border: 1px solid var(--divider-light);
-  border-radius: 8px;
-  padding: 28px 30px;
-  margin: 22px 0;
-  box-shadow: var(--lift-2);
-  position: relative;
-}
-.calc::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(to right, var(--navy), var(--gold), var(--terra));
-  border-radius: 8px 8px 0 0;
-}
-.calc-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
-}
-.calc-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--navy);
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-}
-.calc h3 { margin: 0; color: var(--navy); }
-.calc-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 18px;
-  margin-top: 12px;
-}
-.calc-field label {
-  display: block;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 6px;
-}
-.calc-field input {
-  width: 100%;
-  padding: 11px 14px;
-  border: 1px solid var(--divider);
-  border-radius: 4px;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 0.95rem;
-  background: var(--cream);
-  color: var(--ink);
-  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
-}
-.calc-field input:focus {
-  border-color: var(--navy);
-  background: var(--white);
-  outline: 3px solid rgba(201, 169, 97, 0.4);
-  outline-offset: 0;
-}
-.calc-field-hint {
-  font-size: 0.74rem;
-  color: var(--ink-soft);
-  margin-top: 4px;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-}
-.calc-result {
-  margin-top: 24px;
-  padding: 20px 22px;
-  background: var(--cream-warm);
-  border-radius: 6px;
-  border: 1px solid var(--divider-light);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 14px;
-}
-.calc-result-label {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--terra);
-  margin-bottom: 4px;
-}
-.calc-result-value {
-  font-family: 'Lora', Georgia, serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: 1.7rem;
-  color: var(--navy);
-}
-.calc-result-grade {
-  display: inline-block;
-  padding: 4px 16px;
-  border-radius: 4px;
-  background: var(--navy);
-  color: var(--white);
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-style: normal;
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-left: 4px;
-  border: 1px solid var(--gold);
-}
-
-/* Grade scale cells */
-.grade-scale {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-  margin: 18px 0;
-}
-@media (max-width: 600px) {
-  .grade-scale { grid-template-columns: repeat(3, 1fr); }
-}
-.grade-cell {
-  background: var(--white);
-  border: 1px solid var(--divider-light);
-  border-radius: 6px;
-  padding: 16px 12px;
-  text-align: center;
-  box-shadow: var(--lift-1);
-  transition: box-shadow 0.15s, transform 0.15s;
-}
-.grade-cell:hover {
-  box-shadow: var(--lift-2);
-  transform: translateY(-1px);
-}
-.grade-cell-letter {
-  font-family: 'Lora', Georgia, serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: 1.8rem;
-  color: var(--navy);
-  display: block;
-  line-height: 1;
-}
-.grade-cell-range {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--ink-soft);
-  margin-top: 8px;
-  letter-spacing: 0.02em;
-}
-
-/* DOK chart */
-.dok-table {
-  background: var(--white);
-  border: 1px solid var(--divider-light);
-  border-radius: 6px;
-  overflow: hidden;
-  margin: 16px 0;
-  box-shadow: var(--lift-1);
-}
-.dok-row {
-  display: grid;
-  grid-template-columns: 80px 150px 1fr 90px;
-  gap: 16px;
-  align-items: center;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--divider-light);
-}
-.dok-row:last-child { border-bottom: none; }
-.dok-row:nth-child(odd):not(:first-child) { background: var(--cream-warm); }
-.dok-row:first-child {
-  background: var(--navy);
-  color: var(--cream);
-  font-weight: 700;
-  font-size: 0.76rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-bottom: 2px solid var(--gold);
-}
-@media (max-width: 720px) {
-  .dok-row { grid-template-columns: 1fr; gap: 4px; padding: 14px 18px; }
-  .dok-row:first-child { display: none; }
-  .dok-row span:nth-child(1)::before { content: 'Level: '; font-weight: 700; color: var(--terra); }
-  .dok-row span:nth-child(2)::before { content: 'Type: '; font-weight: 700; color: var(--terra); }
-  .dok-row span:nth-child(3)::before { content: 'Use: '; font-weight: 700; color: var(--terra); }
-  .dok-row span:nth-child(4)::before { content: 'Weight: '; font-weight: 700; color: var(--terra); }
-}
-
-/* Footer */
-footer {
-  max-width: 1200px;
-  margin: 40px auto 0;
-  padding: 36px 24px 60px;
-  border-top: 1px solid var(--divider-light);
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-  text-align: center;
-  position: relative;
-}
-footer::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: var(--gold);
-  border-radius: 2px;
-}
-footer p { margin: 4px 0; }
-footer strong { color: var(--navy); font-weight: 700; }
-
-/* Print styles */
-@media print {
-  .topbar, .sidenav, .calc { display: none; }
-  .layout { grid-template-columns: 1fr; padding: 0; }
-  body { font-size: 11pt; background: white; }
-  .hero {
-    background: white !important;
-    color: var(--ink) !important;
-    border: 2px solid var(--navy);
-    box-shadow: none;
-  }
-  .hero::before, .hero::after { display: none; }
-  .hero h1, .hero-eyebrow { color: var(--navy) !important; }
-  .hero-subtitle, .hero-meta dt, .hero-meta dd { color: var(--ink) !important; }
-  .hero-eyebrow { color: var(--terra) !important; }
-  .hero-meta dt { color: var(--navy) !important; }
-  details { break-inside: avoid; box-shadow: none; }
-  details:not([open]) { page-break-inside: avoid; }
-  details summary::after { display: none; }
-  details[open] summary { background: var(--cream-warm); }
-  section { page-break-inside: avoid; }
-  .week-card, .card, .grade-cell, .calc, .def-grid, .table-wrap { box-shadow: none; }
-  a { color: var(--ink); text-decoration: underline; }
-}
-
-/* Inline emphasis */
-.eyebrow {
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--terra);
-  margin: 0 0 6px;
-}
-
-a.inline-link {
-  color: var(--terra);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-  font-weight: 500;
-}
-a.inline-link:hover { color: var(--navy); }
-
-strong, b { font-weight: 700; color: var(--navy); }
-em, i { font-style: italic; color: var(--ink); }
-
-/* Utility */
-.mt-0 { margin-top: 0; }
-.mb-0 { margin-bottom: 0; }
-.text-muted { color: var(--ink-soft); }
-.text-terra { color: var(--terra); }
-.text-navy { color: var(--navy); }
-.weight-pct {
-  font-weight: 700;
-  color: var(--terra);
-  text-align: right;
-}
+/* Disclaimer */
+.disclaimer{position:fixed;bottom:0;left:0;right:0;background:var(--gold-bg);border-top:1px solid var(--gold-bd);padding:11px 16px;font-family:var(--sans);font-size:14px;color:var(--warn);text-align:center;z-index:9999;font-weight:500}
 </style>
 </head>
 <body>
+<div class="watermark"><div class="watermark-text" id="wmt">BIO 004 ,  Confidential</div></div>
+<div class="wrap"><div id="app"></div></div>
+<div class="disclaimer">⚕ Educational simulation only. All patients and clinical scenarios are entirely fictional and created for learning purposes. Not medical advice.</div>
+<script>
+/* ────────── COURSE / DAY / REVEAL CODES ────────── */
+const COURSE_PW = "DERMIS";       // Initial access (instructor announces in Monday class)
+const REVEAL_CODE = "CLEAVE";      // After Thursday TBL
+const FORM_URL = "";               // Optional Google Form POST endpoint
+const FORM_FIELDS = {name:"entry.1",diag:"entry.2",rationale:"entry.3",credits:"entry.4",total:"entry.5"};
 
-<a class="skip-link" href="#main-content">Skip to main content</a>
+/* ────────── THE CASE ────────── */
+const CASE = {
+  id:"BIO004-W1-PATEL", title:"Week 1 ,  Jordan Patel",
+  system:"Integumentary System & Tissue Foundations",
+  patient:{name:"Jordan Patel", age:24, gender:"Female"},
+  cc:"I'm in a lot of pain and something is wrong with my skin",
+  dayCodes:{2:"NIKOLSKY", 3:"SCORTEN"},
+  highYield:["nikolsky","biopsy","cbc_d1","scorten"],
 
-<div class="topbar" role="banner">
-  <div class="topbar-inner">
-    <div class="topbar-title">
-      BIO 004, Human Anatomy
-      <small>Summer 2026, 8-Week Intensive, Solano Community College</small>
-    </div>
-    <div class="topbar-actions">
-      <button class="topbar-btn" type="button" id="expand-all" aria-label="Expand all collapsible sections">Expand all</button>
-      <button class="topbar-btn" type="button" id="collapse-all" aria-label="Collapse all collapsible sections">Collapse all</button>
-      <button class="topbar-btn primary" type="button" id="print-btn" aria-label="Print this syllabus">Print</button>
-    </div>
+  /* INTERVIEW ,  keyword-matched patient responses */
+  interviewResponses:[
+    /* === DRUG NAME (specific) === */
+    {keys:["bactrim","sulfameth","trimethoprim","tmp-smx","tmp/smx","sulfonamide","sulfa drug"],
+     r:"Yes, that is it. The pharmacy called it Bactrim. The label says sulfamethoxazole-trimethoprim."},
+    {keys:["what is the name","whats the name","name of the antibiotic","name of the drug","name of the medication","what is it called","whats it called","what antibiotic","which antibiotic","what kind of antibiotic"],
+     r:"Bactrim. I have the bottle in my bag if you want to see it."},
+    /* === WHY PRESCRIBED === */
+    {keys:["what was it for","what is it for","why prescribed","what prescribed for","why are you on","why did you start","why are you taking","what is the antibiotic for","what is the medication for","prescribed for"],
+     r:"For a UTI my doctor diagnosed about 10 days ago."},
+    /* === DURATION === */
+    {keys:["how long have you been taking","how long have you been on","how long on it","how many days have you","when did you start taking","when did you start the antibiotic","when did you begin taking","how many days ago did you start"],
+     r:"Nine days ago. I have one pill left in the bottle."},
+    /* === UTI / urinary === */
+    {keys:["uti","urinary tract","bladder infection","kidney infection"],
+     r:"I had one my doctor treated about 10 days ago. The burning when I peed cleared up after the first few days."},
+    /* === MEDICATION (general) ,  answers without giving the name or purpose === */
+    {keys:["new medication","new prescription","new med","recent medication","start anything new","just started taking","new drug"],
+     r:"Yes, I started one antibiotic about 9 days ago. Nothing else has changed."},
+    {keys:["any medication","other medication","other med","what medications","what meds","take any med","take any medic","any prescription","taking any","taking anything","on any pill","any pills","any drugs"],
+     r:"Just one antibiotic I started about 9 days ago. No other prescriptions, no supplements, no vitamins, no birth control."},
+    {keys:["antibiotic"],
+     r:"Yes, I am on one. I started it about 9 days ago."},
+    /* === ONSET (each event answered separately) === */
+    {keys:["when did the rash","when did the spots","when did the skin","when did your skin","when did the blister","skin started","rash start","rash begin","spots start","spots appear","when did the lesions"],
+     r:"Yesterday morning. A burning red patch came up on my upper chest. By last night it was spreading."},
+    {keys:["when did your eyes","when did the eye","eyes start","eye symptoms start"],
+     r:"Two days ago. They felt gritty first. Last night light started hurting."},
+    {keys:["when did your mouth","when did the mouth","mouth start","when did the lip"],
+     r:"Two days ago. The inside of my lips started peeling first, then the sores came."},
+    {keys:["when did the throat","when did your throat","when did sore throat","throat start"],
+     r:"Four days ago. That was the first thing I noticed."},
+    {keys:["when did the fever","when did you get a fever","when did your fever","when did the temperature","fever start"],
+     r:"Four days ago. It was around 101. Today it spiked to 103."},
+    {keys:["when did this all start","when did your symptoms start","when did this begin","first symptom","earliest symptom","how long ago did this start","how long have you had","when did everything start","when did you first feel"],
+     r:"About four days ago I started feeling off. Flu-ish. The skin and eye stuff is more recent."},
+    {keys:["timeline","sequence of symptoms","order of symptoms","what came first","chronology","progression of symptom"],
+     r:"Sore throat and feeling flu-ish four days ago. Eyes and mouth two days ago. Skin yesterday morning. Blisters today."},
+    /* === SKIN CHARACTER === */
+    {keys:["where did the rash","where did the spots","where started","where on your body","what part of your body","distribution","location of the rash"],
+     r:"Started on my upper chest. Now my face, neck, both upper arms. It is spreading downward."},
+    {keys:["what does the rash feel","describe the pain","skin pain","painful skin","how does the rash feel","painful rash","describe the rash pain","sunburn"],
+     r:"Burning, like a sunburn but stabbing. Way worse than it looks. Touching anything to it is excruciating."},
+    {keys:["blister","bullae","peel","slough","skin coming off","skin sloughing"],
+     r:"Yes. Some clear blisters today. The skin literally peels off when I scratch it."},
+    {keys:["look like","appearance of the rash","what does it look like","describe the rash"],
+     r:"Red spots, some with darker centers like a target. A few have turned into clear blisters with fluid inside."},
+    /* === EYES === */
+    {keys:["eye","vision","light bother","photophob","conjunctiv","red eye","eye discharge","eye symptoms"],
+     r:"They feel like there is sand in them. Bright light is unbearable. Yellowish discharge in the morning."},
+    /* === MOUTH === */
+    {keys:["mouth","oral","lip","tongue","swallow","eating","mouth pain","mouth sore"],
+     r:"Full of painful sores. I cannot really eat. Drinking water hurts. The inside of my lips is peeling and bleeds when I touch it."},
+    {keys:["throat","sore throat"],
+     r:"Sore. It started four days ago. Not as bad as the mouth feels now."},
+    /* === GENITAL === */
+    {keys:["genital","painful urination","burning when","dysuria","urethra"],
+     r:"Some burning, raw feeling. I have not looked closely. I just want to lie still."},
+    /* === HISTORY === */
+    {keys:["allerg","drug allergy","reaction to medication","reaction to a drug","intolerance"],
+     r:"No known drug allergies. I took amoxicillin once as a kid. Nothing happened. Nothing like this has ever happened to me before."},
+    {keys:["past medical","medical history","chronic condition","prior illness","other condition","previous diagnos","health condition","other illness"],
+     r:"Healthy. No chronic conditions. Wisdom teeth out at 18, that is it."},
+    {keys:["family","mother","father","parent","sibling","relative","heredit","genetic"],
+     r:"Mom has Hashimoto thyroiditis. Dad is healthy. No skin diseases or blistering disorders that I know of."},
+    /* === SOCIAL === */
+    {keys:["smoke","tobacco","cigarette","vape"],
+     r:"I do not smoke."},
+    {keys:["alcohol","drink","wine","beer","liquor"],
+     r:"Glass of wine on weekends, that is all."},
+    {keys:["recreational","illicit","marijuana","weed","cannabis","substance use","other substance"],
+     r:"None. Just the occasional wine."},
+    {keys:["sex","sexual","partner","std","sti","hiv test","stds","hiv"],
+     r:"One partner, monogamous for 14 months. We use condoms. STI panel six months ago, all negative including HIV."},
+    {keys:["travel","trip","abroad","vacation","out of state","traveled"],
+     r:"None. I have not left the state in over a year."},
+    {keys:["sun","tanning","outside","sunburn","outdoor"],
+     r:"No sun exposure. It is November. I have been studying indoors."},
+    {keys:["sick contact","exposure to anyone","sick person","anyone sick","sick around","contact with someone","sick exposure"],
+     r:"My roommate had a cold last week. Nothing else."},
+    {keys:["work","job","occupation","school","study","student","what do you do","major"],
+     r:"Junior in nursing school. Just had a hard exam week."},
+    /* === CONSTITUTIONAL === */
+    {keys:["fever","temperature","chill","sweat","hot","feverish"],
+     r:"Yes. About 101 starting four days ago. Today it spiked to 103. Alternating chills and sweats."},
+    {keys:["nausea","vomit","stomach","appetite","food intake","throwing up"],
+     r:"Some nausea. I have not vomited. I cannot eat because of my mouth."},
+    {keys:["headache","head pain","head ache"],
+     r:"Mild. The skin pain dwarfs everything else."},
+    {keys:["body ache","muscle pain","joint pain","arthralgia","myalgia","achy","aching"],
+     r:"My whole body has ached since this started four days ago."},
+    {keys:["sleep","tired","fatigue","exhaust"],
+     r:"I have not slept properly in over a day. The pain wakes me up."},
+    {keys:["weight","losing weight"],
+     r:"Lost about three pounds. I cannot really eat."},
+    {keys:["scared","worried","afraid","anxious","panic"],
+     r:"Yes. I am very scared. My mom is driving here from Sacramento."},
+  ],
+  interviewTopics:{
+    medication:{label:"Medications",pattern:/medication|drug|pill|antibiotic|bactrim|tmp|sulfa|prescription/i},
+    onset:{label:"Onset/timeline",pattern:/when|start|onset|begin|first|ago|fever/i},
+    skin:{label:"Skin/rash",pattern:/rash|blister|skin|spot|peel|pain|spread/i},
+    mucous:{label:"Mucous membranes",pattern:/eye|mouth|oral|lip|throat|conjunctiv|genital/i},
+    history:{label:"History",pattern:/allerg|family|pmh|past medical|history|condition/i},
+    social:{label:"Social hx",pattern:/work|school|smoke|drink|sexual|partner|travel/i},
+  },
+
+  /* FREE BEDSIDE DATA */
+  free:{
+    vitals:{icon:"📊",label:"Vital signs",result:"T: 39.0°C (102.2°F)\nHR: 122 bpm  ↑ tachycardic\nBP: 102/64 mmHg\nRR: 22 /min\nSpO₂: 96% on room air\nPain: 9/10 (skin and mouth)\nWt: 56 kg  Ht: 168 cm  BMI: 19.8"},
+    general:{icon:"👤",label:"General appearance",result:"Ill-appearing young adult, in obvious distress. Photophobic, eyes squinting. Quiet, speaking in short sentences due to oral pain. No respiratory distress at rest. Skin diffusely flushed; visible target-like and dusky lesions on face, neck, anterior chest, and upper arms. A&O ×3."},
+    skin:{icon:"🩹",label:"Skin examination",result:"DISTRIBUTION: Face (forehead, cheeks), anterior neck, upper chest, both upper extremities. Sparing of palms, soles, scalp.\n\nLESIONS: Erythematous macules with central duskiness (atypical target lesions). Several flaccid bullae on chest with serous fluid. Sloughing skin in confluent sheets along sternum and right shoulder.\n\nESTIMATED BSA DETACHED OR DETACHABLE: ~7%\n\nSURROUNDING NORMAL-APPEARING SKIN: Dusky, dull-pink, exquisitely tender to light touch.\n\nNAILS, HAIR: Normal."},
+    mucous:{icon:"👄",label:"Mucous membrane exam",result:"EYES: Bilateral conjunctivitis with copious mucopurulent discharge. Conjunctival erosions visible on lid eversion. Photophobia. No corneal opacity yet.\n\nMOUTH: Diffuse erosions on lips, buccal mucosa, hard palate, tongue. Hemorrhagic crusting on lower lip. Drooling ,  patient unable to swallow saliva comfortably.\n\nGENITAL/URETHRAL: Patient reports burning. Exam deferred to specialist.\n\nNARES: Mild crusting at vestibule bilaterally."},
+    neuro:{icon:"🧠",label:"Neuro screen",result:"Alert, oriented ×3. CN II-XII intact (CN II evaluation limited by photophobia). Sensory and motor exam grossly normal. No meningeal signs. No focal deficits. Mental status appropriate to severe pain and distress."},
+    pulm:{icon:"🫁",label:"Pulmonary exam",result:"Lungs clear bilaterally. No crackles, wheeze, rhonchi. Mucous membrane involvement does not appear to extend below the larynx based on phonation and respiratory effort. SpO₂ 96% on room air."},
+    cardiac:{icon:"🫀",label:"Cardiac auscultation",result:"Sinus tachycardia at 122. Soft, regular S1/S2. No murmur, rub, or gallop. Capillary refill 3 sec ,  borderline. Pulses 2+ bilaterally."},
+    abd:{icon:"🤲",label:"Abdomen",result:"Soft, non-distended. No rebound, no guarding. Bowel sounds normal. Mild diffuse tenderness without localization. No hepatosplenomegaly. No skin involvement on abdomen at this time."},
+  },
+
+  /* DAYS */
+  days:{
+    1:{
+      label:"Day 1 ,  Monday: Initial encounter",
+      note:"Today's pre-work covers anatomical position, body regions, directional terms, and body planes. Each test you order requires a gate question that applies that terminology to Jordan's case. Order tests deliberately, credits do not refund.",
+      autoReveal:null,
+      orders:[
+        {id:"cbc_d1",cat:"Hematology",name:"CBC with differential",cost:15,
+          result:"WBC: 14.2 × 10⁹/L  ↑\nNEUT %: 78%  ↑\nLYMPH %: 6%  ↓ (lymphopenia)\nEOSINOPHIL %: 3% (normal)\nHGB: 13.4 g/dL\nHCT: 40.1%\nPLATELETS: 215 × 10⁹/L\n\nSummary: Leukocytosis with neutrophil predominance, marked lymphopenia. No eosinophilia (less typical for DRESS).",
+          gate:{q:"The medical assistant will draw blood from Jordan's left arm at the antecubital fossa (just inside the bend of her elbow). Her rash extends from the shoulder down toward the elbow but spares the venipuncture site. Which body region term describes the area of the upper limb between the shoulder and the elbow?",
+            opts:[
+              "A) Brachial region",
+              "B) Antebrachial region",
+              "C) Carpal region",
+              "D) Crural region"],
+            correct:"A",exp:"A: The brachial region is the upper arm, between shoulder and elbow. B: antebrachial = forearm (elbow to wrist). C: carpal = wrist. D: crural = leg (lower limb, knee to ankle). Body region terms let clinicians document precisely where findings are located, especially for widespread skin diseases."}},
+        {id:"cmp_d1",cat:"Chemistry",name:"Comprehensive metabolic panel",cost:15,
+          result:"Na: 138  K: 4.0  Cl: 100  HCO₃: 22  BUN: 28 ↑  Cr: 1.4 ↑\nGlucose: 96\nCa: 9.2  Albumin: 3.4 ↓\nAST: 32  ALT: 38  ALP: 92  T.bili: 0.8\n\nSummary: Mild AKI (Cr 1.4 from baseline ~0.7). Hypoalbuminemia. LFTs normal ,  argues against DRESS (which typically has transaminitis).",
+          gate:{q:"Jordan's lab values reflect water and protein loss across her damaged skin. The skin sits on top of underlying muscle. Using directional terminology, which term describes the position of the skin RELATIVE TO the muscle beneath it?",
+            opts:[
+              "A) Superficial",
+              "B) Deep",
+              "C) Proximal",
+              "D) Distal"],
+            correct:"A",exp:"A: Superficial means closer to the surface of the body. The skin is superficial to muscle. B: deep means farther from the surface. C: proximal means closer to the trunk or origin (used for limb structures). D: distal means farther from the trunk (also used for limbs). Directional terms come in opposite pairs, and you must choose the right pair for the comparison being made."}},
+        {id:"nikolsky",cat:"Bedside",name:"Bedside Nikolsky sign assessment",cost:5,
+          result:"NIKOLSKY SIGN: POSITIVE.\n\nLight tangential pressure on the dusky-but-intact skin adjacent to a target lesion produces lateral sliding and shearing of the epidermis from the underlying dermis.\n\nASBOE-HANSEN SIGN: POSITIVE.\nPressure on an existing bulla extends it laterally into adjacent normal-appearing skin.\n\nINTERPRETATION: Both signs indicate loss of cohesion AT or NEAR the dermal-epidermal junction. Strongly suggestive of full-thickness epidermal injury with subepidermal cleavage.",
+          gate:{q:"The Nikolsky test was performed on Jordan's ANTERIOR chest, near the sternum. In standard anatomical position, the anterior surface of the body is also called the:",
+            opts:[
+              "A) Ventral surface",
+              "B) Dorsal surface",
+              "C) Cephalic surface",
+              "D) Caudal surface"],
+            correct:"A",exp:"A: Anterior and ventral are paired terms for the front of the body in humans. B: posterior and dorsal refer to the back. C: cephalic means toward the head. D: caudal means toward the tail or feet. \"Anterior chest\" and \"ventral chest\" describe the same surface, two terms for the same place."}},
+        {id:"swab_d1",cat:"Microbiology",name:"Skin swab and bacterial culture",cost:15,
+          result:"GRAM STAIN: No organisms seen.\nBACTERIAL CULTURE (preliminary, 24 hr): No growth.\nFINAL (48-72 hr): Pending.\n\nSummary: No bacterial superinfection at presentation. Argues against staphylococcal scalded skin syndrome (SSSS) and bacterial impetigo as primary cause.",
+          gate:{q:"Imagine extending the idea of a microscope cross-section to the whole body. Which body plane divides the body vertically into RIGHT and LEFT portions?",
+            opts:[
+              "A) Sagittal plane",
+              "B) Frontal (coronal) plane",
+              "C) Transverse plane",
+              "D) Oblique plane"],
+            correct:"A",exp:"A: A sagittal plane is a vertical plane that divides the body into right and left portions. A midsagittal plane runs exactly down the midline. B: the frontal (coronal) plane divides the body into anterior and posterior portions. C: the transverse plane divides the body into superior and inferior portions. D: an oblique plane is at any angle other than the standard three. These reference planes let anatomists describe internal structures consistently across patients."}},
+        {id:"biopsy",cat:"Pathology",name:"Skin punch biopsy (sent to path, results Day 2)",cost:30,
+          result:"Specimen sent to pathology.\nFrozen section attempted; full results expected in 24 hours.\n\nPRELIMINARY GROSS: 4-mm punch from edge of bullous lesion, anterior chest. Shipped on ice.",
+          gate:{q:"Jordan has erosions on the inside of her CHEEKS and rash on her FOREHEAD. Which pair of body region terms correctly matches each anatomic location?",
+            opts:[
+              "A) Buccal region = cheek; Frontal region = forehead",
+              "B) Buccal region = forehead; Frontal region = cheek",
+              "C) Mental region = cheek; Occipital region = forehead",
+              "D) Cervical region = cheek; Lumbar region = forehead"],
+            correct:"A",exp:"A: Buccal = cheek (think \"buccal mucosa,\" the inside of the cheek). Frontal = forehead (named for the underlying frontal bone of the skull). B reverses the pair. C: mental = chin, occipital = back of head. D: cervical = neck, lumbar = lower back. Regional terms let you document widespread findings in lesion-by-lesion specificity."}},
+      ]
+    },
+    2:{
+      label:"Day 2 ,  Tuesday: Lab follow-up",
+      note:"Code from Monday class unlocks today. Today's pre-work covers body cavities and abdominal regions/quadrants, today's gate questions apply that terminology to the case. Biopsy results have auto-revealed. Use today to narrow your differential, your team will need to defend a #1 choice on Thursday.",
+      autoReveal:{label:"PATHOLOGY: Skin biopsy result",result:"PUNCH BIOPSY, ANTERIOR CHEST EDGE OF BULLA:\n\n• Full-thickness epidermal necrosis. All keratinocyte layers (basale through corneum) show pyknotic, apoptotic nuclei.\n\n• Subepidermal cleavage: separation between the necrotic epidermis and intact dermis at the dermal-epidermal junction.\n\n• Sparse perivascular lymphocytic infiltrate in the upper dermis (predominantly CD8+).\n\n• No eosinophilia. No neutrophilic abscesses. No subcorneal pustules.\n\n• DIRECT IMMUNOFLUORESCENCE: Negative (no IgG, IgA, or C3 deposition along basement membrane or within epidermis).\n\nINTERPRETATION: Findings classic for SJS/TEN spectrum. Negative DIF excludes pemphigus and pemphigoid."},
+      orders:[
+        {id:"cbc_d2",cat:"Hematology",name:"Repeat CBC with differential",cost:10,
+          result:"WBC: 16.8 × 10⁹/L  ↑\nNEUT %: 82%  ↑\nLYMPH %: 4%  ↓↓ (worsening lymphopenia)\nEOSINOPHIL %: 2%\nHGB: 12.0 g/dL  ↓\nHCT: 36%\nPLATELETS: 188 × 10⁹/L\n\nSummary: Worsening lymphopenia. New mild anemia (likely dilutional/hemoconcentration shift after fluid resuscitation overnight).",
+          gate:{q:"Adult red bone marrow (where blood cells are made) is concentrated in the AXIAL skeleton, including the sternum and the ribs. The sternum and ribs form the wall of which body cavity?",
+            opts:[
+              "A) Thoracic cavity",
+              "B) Abdominal cavity",
+              "C) Pelvic cavity",
+              "D) Cranial cavity"],
+            correct:"A",exp:"A: The thoracic cavity is enclosed anteriorly by the sternum and laterally/posteriorly by the ribs and vertebrae. Inside it sit the lungs (in pleural cavities) and the heart (in the pericardial cavity within the mediastinum). B: the abdominal cavity is below the diaphragm. C: the pelvic cavity sits below the abdominal cavity. D: the cranial cavity houses the brain inside the skull."}},
+        {id:"ldh",cat:"Chemistry",name:"LDH",cost:10,
+          result:"LDH: 458 U/L  ↑↑ (normal 140-280)\n\nSummary: Markedly elevated. Reflects widespread cellular destruction (apoptotic keratinocytes release intracellular contents).",
+          gate:{q:"LDH released from dying skin cells travels via blood through the heart and is then circulated everywhere. Where exactly does the heart sit in the body cavity system?",
+            opts:[
+              "A) Within the mediastinum, a subdivision of the thoracic cavity",
+              "B) Within the pleural cavity, beside the lungs",
+              "C) Within the abdominal cavity, just above the liver",
+              "D) Within the pericardial cavity, which lies in the abdomen"],
+            correct:"A",exp:"A: The mediastinum is the central compartment of the thoracic cavity, between the two pleural cavities. It contains the heart (in its pericardial sac), the great vessels, the trachea, and the esophagus. B: the pleural cavities house the lungs, not the heart. C: the heart is not in the abdominal cavity. D: the pericardial cavity does exist but it sits inside the mediastinum (in the chest), not in the abdomen."}},
+        {id:"hsv_pcr",cat:"Microbiology",name:"HSV PCR (skin and oral)",cost:25,
+          result:"HSV-1 PCR (oral lesion): NEGATIVE\nHSV-2 PCR (skin lesion): NEGATIVE\nVZV PCR: NEGATIVE\n\nSummary: Excludes erythema multiforme major (HSV-triggered) as cause of mucocutaneous involvement.",
+          gate:{q:"Jordan's painful conjunctivitis affects both eyes. The eyes are housed in bony cavities of the skull called the orbits. The orbits sit in the same bony region of the skull as which other major body cavity?",
+            opts:[
+              "A) The cranial cavity (which houses the brain)",
+              "B) The thoracic cavity",
+              "C) The abdominal cavity",
+              "D) The vertebral canal"],
+            correct:"A",exp:"A: The orbits are bony cavities in the skull that protect the eyes. They sit just anterior and inferior to the cranial cavity proper, which houses the brain. Both are formed by cranial bones. B, C, and D are all distant body cavities. Knowing where structures sit in body cavities helps you anticipate which other systems are nearby and could be affected."}},
+        {id:"hiv_d2",cat:"Serology",name:"HIV antibody/antigen",cost:20,
+          result:"HIV 1/2 Ab/Ag combo: NEGATIVE\n\nSummary: Excludes HIV. Important because HIV substantially increases SJS/TEN risk to TMP-SMX (~100x baseline).",
+          gate:{q:"The spleen is a major lymphoid organ that filters blood for pathogens. In the four-quadrant scheme of the abdomen, the spleen is located in which quadrant?",
+            opts:[
+              "A) Left upper quadrant (LUQ)",
+              "B) Right upper quadrant (RUQ)",
+              "C) Left lower quadrant (LLQ)",
+              "D) Right lower quadrant (RLQ)"],
+            correct:"A",exp:"A: The spleen sits in the LUQ, posterior and lateral to the stomach. B: the RUQ contains the liver and gallbladder. C: the LLQ contains parts of the small intestine and the descending/sigmoid colon. D: the RLQ contains the appendix. Knowing the four quadrants is the standard first step when describing abdominal pain or palpating organs."}},
+        {id:"mycoplasma",cat:"Serology",name:"Mycoplasma pneumoniae IgM",cost:20,
+          result:"Mycoplasma pneumoniae IgM: NEGATIVE\nMycoplasma IgG: NEGATIVE\n\nSummary: Excludes Mycoplasma-induced rash and mucositis (MIRM), which can mimic SJS in younger patients without skin involvement disproportionate to mucous membranes.",
+          gate:{q:"Mycoplasma pneumoniae infects the lungs. Each lung sits in its own cavity lined by membranes that produce lubricating fluid. What are these cavities called, and which larger body cavity contains them?",
+            opts:[
+              "A) Pleural cavities, within the thoracic cavity",
+              "B) Pericardial cavities, within the abdominal cavity",
+              "C) Peritoneal cavities, within the pelvic cavity",
+              "D) Synovial cavities, within the cranial cavity"],
+            correct:"A",exp:"A: Each lung sits in its own pleural cavity, lined by visceral pleura (on the lung) and parietal pleura (on the body wall). Both pleural cavities are subdivisions of the thoracic cavity (the third subdivision is the mediastinum). B: the pericardial cavity houses the heart and is in the mediastinum, not the abdomen. C: the peritoneal cavity is the abdominal cavity around digestive organs. D: synovial cavities are joint spaces."}},
+      ]
+    },
+    3:{
+      label:"Day 3 ,  Wednesday: Course assessment",
+      note:"Code from Tuesday class unlocks today. Today's pre-work covers cell structure and the four primary tissue types (epithelial, connective, muscle, nervous), today's gates apply that terminology to the case. Patient has progressed overnight. Submit your final diagnosis any time after today's data is in.",
+      autoReveal:{label:"OVERNIGHT UPDATE: Patient course",result:"OVERNIGHT (Tuesday → Wednesday morning):\n\n• BSA detached or detachable: 12% (was 7% at admission, 9% Tuesday). Now in the SJS/TEN OVERLAP range (10-30% BSA).\n\n• New erythema and dusky patches on lower abdomen, thighs, and back. Bullae forming on right thigh.\n\n• Mouth and eye involvement WORSE: corneal staining shows superficial epithelial defects, urgent ophthalmology consult placed.\n\n• Urine output: 0.5 mL/kg/hr (low). Cr now 1.8 (was 1.4). Na trending up to 142.\n\n• T 39.4°C. HR 134. BP 96/58. RR 24.\n\n• TMP-SMX confirmed STOPPED at admission. No new medications added.\n\n• Patient awake, alert, in severe pain. Consenting to plans."},
+      orders:[
+        {id:"cmp_d3",cat:"Chemistry",name:"Repeat CMP",cost:10,
+          result:"Na: 142 (up from 138)\nK: 3.7  Cl: 104  HCO₃: 20\nBUN: 38 ↑↑  Cr: 1.8 ↑↑\nAlbumin: 2.8 ↓↓ (was 3.4)\nLFTs unchanged.\n\nSummary: Worsening prerenal AKI from skin barrier loss + insensible losses + decreased intake. Hypoalbuminemia worsening (third-spacing into damaged skin).",
+          gate:{q:"Jordan's worsening AKI reflects damage to nephrons in the kidneys. The kidney filters blood across a thin layer of cells lining the inside of capillaries. Which of the four primary tissue types lines the inside of blood vessels and forms the filtering layer of the glomerulus?",
+            opts:[
+              "A) Epithelial tissue",
+              "B) Connective tissue",
+              "C) Muscle tissue",
+              "D) Nervous tissue"],
+            correct:"A",exp:"A: Epithelial tissue lines all body surfaces, including the inside of blood vessels (where it is called endothelium) and the filtering capsule of the kidney glomerulus. B: connective tissue supports and connects (bone, cartilage, blood, fat). C: muscle tissue contracts. D: nervous tissue conducts electrical signals. The four primary tissue types are epithelial, connective, muscle, and nervous, and every organ contains a combination of them."}},
+        {id:"scorten",cat:"Bedside",name:"SCORTEN calculation",cost:10,
+          result:"SCORTEN at presentation:\n• Age ≥40: NO (Jordan is 24) ,  0\n• Malignancy: NO ,  0\n• HR ≥120: YES ,  1\n• Initial BSA detached >10%: YES (now 12%) ,  1\n• Serum urea (BUN) >28 mg/dL: YES (38) ,  1\n• Bicarbonate <20 mEq/L: NO (20) ,  0\n• Glucose >252: NO ,  0\n\nSCORTEN: 3\n\nMortality estimate at SCORTEN 3: ~35%.\n\nClinical implication: Burn unit transfer, aggressive supportive care, ophthalmology, urology consults.",
+          gate:{q:"SCORTEN includes BSA detached. The epidermis (the layer that is sloughing off Jordan's body) is composed of which specific tissue type?",
+            opts:[
+              "A) Stratified squamous epithelium (keratinized)",
+              "B) Simple squamous epithelium",
+              "C) Dense irregular connective tissue",
+              "D) Smooth muscle tissue"],
+            correct:"A",exp:"A: The epidermis is keratinized stratified squamous epithelium. \"Stratified\" means multiple layers, \"squamous\" means flat surface cells, \"keratinized\" means filled with the protein keratin (waterproofing). This structure is built for mechanical protection and water resistance. B: simple squamous epithelium is one cell layer thick, used for diffusion (alveoli, glomerulus). C: dense irregular connective tissue is in the dermis below. D: smooth muscle is in blood vessels and hollow organs, not the skin's surface layer."}},
+        {id:"lactate",cat:"Chemistry",name:"Lactate",cost:10,
+          result:"Lactate: 2.4 mmol/L  ↑ (normal <2.0)\n\nSummary: Mildly elevated. Reflects tissue hypoperfusion and high anaerobic metabolism in damaged skin. Not at sepsis threshold yet but trending the wrong direction.",
+          gate:{q:"The dermis (just below the epidermis) supports the skin and contains the blood vessels that deliver glucose to keratinocytes. Which of the four primary tissue types forms the bulk of the dermis?",
+            opts:[
+              "A) Connective tissue (specifically dense irregular connective tissue)",
+              "B) Epithelial tissue",
+              "C) Muscle tissue",
+              "D) Nervous tissue"],
+            correct:"A",exp:"A: The dermis is connective tissue, specifically dense irregular connective tissue (collagen fibers running in many directions to resist stress from any angle). It contains blood vessels, nerves, hair follicles, sweat glands, and sensory receptors. B: the epidermis above is epithelial. C: smooth muscle exists within hair follicles (arrector pili) but is not what makes up the bulk of the dermis. D: nervous tissue sends signals; specialized sensory receptors live in the dermis but are not the bulk tissue."}},
+        {id:"procal",cat:"Chemistry",name:"Procalcitonin",cost:15,
+          result:"Procalcitonin: 0.12 ng/mL (normal <0.5)\n\nSummary: Not suggestive of bacterial sepsis at this time. Continue daily monitoring ,  risk of secondary bacterial infection through denuded skin is HIGH.",
+          gate:{q:"With infection risk high, Jordan's blood is sampled to monitor for bacteria. Although blood appears liquid, it is classified as which of the four primary tissue types?",
+            opts:[
+              "A) Connective tissue (with a fluid extracellular matrix called plasma)",
+              "B) Epithelial tissue",
+              "C) Muscle tissue",
+              "D) Nervous tissue"],
+            correct:"A",exp:"A: Blood is connective tissue. All connective tissues consist of cells embedded in an extracellular matrix; in blood, the matrix is fluid (plasma). The cells (red blood cells, white blood cells, platelets) are the formed elements. The \"connective\" function is that blood transports oxygen, nutrients, hormones, and waste between body regions. B: epithelial tissue lines surfaces. The walls of blood vessels have epithelial linings (endothelium), but the blood itself is not epithelial. C and D have very different cell shapes and functions."}},
+      ]
+    }
+  }
+};
+
+/* ────────── STATE ────────── */
+const STORAGE_KEY = "bio004-w1-jordan-state-v1";
+let S = loadState() || newState();
+
+function newState(){return{
+  phase:"key",
+  studentName:"",
+  currentDay:1, daysUnlocked:1,
+  credits:200, maxCredits:200,
+  freeObtained:[], ordered:[], results:[], autoRevealed:[],
+  iMsgs:[], interviewCount:0, maxInterview:10, iTopicHit:{},
+  invMsgs:[], gateActive:null, retries:0,
+  diagText:"", rationaleText:"",
+  scores:null,
+};}
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(S));}catch(e){}}
+function loadState(){try{const v=localStorage.getItem(STORAGE_KEY);return v?JSON.parse(v):null;}catch(e){return null;}}
+function fullReset(){if(confirm("Reset Week 1 simulation? All progress will be lost.")){localStorage.removeItem(STORAGE_KEY);S=newState();render();}}
+
+/* ────────── INTERVIEW MATCH ────────── */
+const STOPWORDS=new Set(['the','a','an','is','are','was','were','be','been','being','have','has','had','do','does','did','my','your','his','her','its','our','their','you','he','she','we','they','this','that','these','those','can','could','would','should','will','shall','may','might','to','for','of','in','on','at','by','with','about','from','tell','please','say','give','let','know','want','any','some','what','which','who','whom','where','when','why','how']);
+function stem(w){
+  const tries=[['ies','y'],['ied','y'],['ing',''],['ed',''],['es',''],['ly',''],['s','']];
+  for(const[sfx,rep] of tries){
+    if(w.endsWith(sfx)){
+      const result=w.slice(0,w.length-sfx.length)+rep;
+      if(result.length>=3)return result;
+    }
+  }
+  return w;
+}
+function tokenize(s){
+  return s.toLowerCase()
+    .replace(/[^a-z0-9 ]/g,' ')
+    .split(/\s+/)
+    .filter(w=>w.length>=3 && !STOPWORDS.has(w))
+    .map(stem)
+    .filter(w=>w.length>=3);
+}
+function matchInterview(text){
+  // Update topic hits regardless of response found
+  for(const[topic,info] of Object.entries(CASE.interviewTopics)){
+    if(info.pattern.test(text)) S.iTopicHit[topic]=true;
+  }
+  const t=text.toLowerCase();
+  const queryTokens=new Set(tokenize(text));
+  if(queryTokens.size===0){
+    return "Could you tell me more, in a complete sentence? I want to give you accurate information.";
+  }
+  let bestScore=0, bestResponse=null;
+  for(const{keys,r} of CASE.interviewResponses){
+    for(const k of keys){
+      // Direct substring match wins instantly
+      if(t.includes(k.toLowerCase())){return r;}
+      const keyTokens=tokenize(k);
+      if(keyTokens.length===0)continue;
+      // Token overlap with query
+      let matched=0;
+      for(const kt of keyTokens){
+        if(queryTokens.has(kt))matched++;
+      }
+      const score=matched/keyTokens.length;
+      // Also bonus: how much of the query is "explained" by this key
+      const querySize=queryTokens.size;
+      const queryCoverage=querySize>0?matched/querySize:0;
+      // Combined score weights key coverage more (tells if key is relevant)
+      // and query coverage less (tells if response addresses the question)
+      const combined=score*0.7 + queryCoverage*0.3;
+      if(combined>bestScore){bestScore=combined;bestResponse=r;}
+    }
+  }
+  // Threshold: at least 40% of a key's content tokens must overlap (or higher combined score)
+  if(bestScore>=0.4)return bestResponse;
+  return "I am not sure what you are asking. Could you rephrase that as a clinical question? You could ask about my symptoms, when things started, my medications, my history, or anything else.";
+}
+
+/* ────────── SCORING ────────── */
+function calcScores(){
+  const max={diag:35, eff:20, interview:15, gate:10, complete:5}, total_max=85;
+  // Diagnostic accuracy: keyword match in diagText + rationale
+  const diagPattern=/stevens.?johnson|toxic epidermal|TEN|SJS/i;
+  const rationalePatterns=[/brachial|antebrachial|buccal|frontal|cervical|pectoral|sternal|trunk/i,/epitheli|stratified squamous|connective tissue|simple squamous/i,/cavity|thoracic|abdominal|pleural|cranial/i,/anterior|posterior|superficial|deep|superior|inferior|distribution/i,/bactrim|sulfa|sulfameth|sulfonamide|antibiotic/i];
+  let diagPts=diagPattern.test(S.diagText)?20:0;
+  diagPts+=rationalePatterns.filter(p=>p.test(S.rationaleText)).length*3;
+  diagPts=Math.min(diagPts,max.diag);
+  // Efficiency
+  const effPts=Math.round((S.credits/S.maxCredits)*max.eff);
+  // Interview
+  const topicCount=Object.keys(CASE.interviewTopics).length;
+  const hits=Object.values(S.iTopicHit).filter(v=>v).length;
+  const intPts=Math.round((hits/topicCount)*max.interview);
+  // Gate
+  const gatePts=Math.max(0,max.gate-(S.retries*2));
+  // Complete bonus
+  const completePts=S.daysUnlocked>=3?max.complete:0;
+  return{diag:diagPts,eff:effPts,interview:intPts,gate:gatePts,complete:completePts,total:diagPts+effPts+intPts+gatePts+completePts,max:total_max};
+}
+
+async function submitToForm(sc){
+  if(!FORM_URL)return;
+  const d=new FormData();
+  d.append(FORM_FIELDS.name,S.studentName);d.append(FORM_FIELDS.diag,S.diagText);
+  d.append(FORM_FIELDS.rationale,S.rationaleText);d.append(FORM_FIELDS.credits,String(S.credits));
+  d.append(FORM_FIELDS.total,String(sc.total));
+  try{await fetch(FORM_URL,{method:"POST",mode:"no-cors",body:d});}catch(e){}
+}
+
+/* ────────── UNLOCK ────────── */
+function tryUnlockDay(){
+  const inp=document.getElementById("day-unlock-inp");
+  if(!inp)return;
+  const val=inp.value.trim().toUpperCase();
+  for(const[day,code] of Object.entries(CASE.dayCodes)){
+    const d=parseInt(day);
+    if(val===code.toUpperCase()&&d>S.daysUnlocked){
+      S.daysUnlocked=d; S.currentDay=d;
+      const dayData=CASE.days[d];
+      if(dayData.autoReveal&&!S.autoRevealed.includes(d)) S.autoRevealed.push(d);
+      inp.value="";
+      S.invMsgs.push({role:"assistant",cls:"unlock",content:`🔓 Day ${d} unlocked ,  ${dayData.label}${dayData.autoReveal?'\n\n'+dayData.autoReveal.label+' has been added to your results panel.':''}`});
+      saveState(); render(); scrollEl("inv-ci"); return;
+    }
+  }
+  if(val){inp.value="";S.invMsgs.push({role:"assistant",cls:"fail",content:"Incorrect unlock code. Wait for your instructor to announce it at the end of class."});render();scrollEl("inv-ci");}
+}
+
+/* ────────── RENDER ROUTER ────────── */
+function render(){
+  saveState();
+  const watermark=document.getElementById("wmt");
+  if(watermark&&S.studentName) watermark.textContent=`${S.studentName} · BIO 004 · Week 1`;
+  const p=S.phase;
+  if(p==="key") renderKey();
+  else if(p==="instructions") renderInstructions();
+  else if(p==="intro") renderIntro();
+  else if(p==="interview") renderInterview();
+  else if(p==="investigate") renderInvestigate();
+  else if(p==="submit") renderSubmit();
+  else if(p==="submitted") renderSubmitted();
+  else if(p==="reveal") renderReveal();
+}
+
+function renderKey(){
+  document.getElementById("app").innerHTML=`
+<div style="max-width:440px;margin:4rem auto;padding:0 1rem;text-align:center">
+  <div style="font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:.6rem">BIO 004 · Clinical Reasoning</div>
+  <div style="width:48px;height:3px;background:var(--gold);margin:0 auto 1.4rem;border-radius:2px"></div>
+  <h1 style="font-size:34px;margin-bottom:.4rem">Week 1, Jordan Patel</h1>
+  <p style="margin-bottom:.4rem;font-size:16px;color:var(--ink-soft)">Integumentary System &amp; Tissue Foundations</p>
+  <p style="margin-bottom:1.8rem;font-size:14px;color:var(--ink-mute)">Single file · 3 days · One credit bank · Code-locked progression</p>
+  <div class="card" style="text-align:left">
+    <div class="sl">Your name (required for tracking)</div>
+    <input type="text" id="ki-name" placeholder="First and last name" style="margin-bottom:14px" value="${S.studentName||''}">
+    <div class="sl">Course access code (instructor announces in Monday class)</div>
+    <input type="password" id="ki" placeholder="Enter code…" style="margin-bottom:10px;letter-spacing:.14em;font-size:17px;text-align:center;text-transform:uppercase" onkeydown="if(event.key==='Enter')subKey()">
+    <div id="kerr" style="color:var(--terra);font-size:14px;margin-bottom:8px;display:none">Incorrect. Check with your instructor.</div>
+    <button class="bb" onclick="subKey()" style="width:100%;font-size:15px;padding:14px">Enter →</button>
+  </div>
+  <p style="margin-top:1rem;font-size:13px;color:var(--ink-mute);font-style:italic">By entering, you confirm this material is for your educational use only. Do not screenshot, share, or redistribute.</p>
+</div>`;
+  setTimeout(()=>{const i=document.getElementById("ki-name")||document.getElementById("ki");if(i)i.focus();},80);
+}
+function subKey(){
+  const ni=document.getElementById("ki-name");const i=document.getElementById("ki");
+  if(!i)return;
+  if(!ni.value.trim()){alert("Please enter your name.");ni.focus();return;}
+  if(i.value.trim().toUpperCase()===COURSE_PW.toUpperCase()){
+    S.studentName=ni.value.trim(); S.phase="instructions"; render();
+  } else {document.getElementById("kerr").style.display="block";i.value="";i.focus();}
+}
+
+function renderInstructions(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="border-top:4px solid var(--navy);max-width:720px;margin:0 auto">
+  <div style="text-align:center;margin-bottom:1.5rem">
+    <div class="sl" style="margin-bottom:8px">${CASE.system}</div>
+    <h1 style="margin-bottom:.4rem">Week 1, ${CASE.patient.name}</h1>
+    <p style="font-size:16px">Clinical Reasoning Simulation · 3-day case · One credit bank</p>
+  </div>
+  <div class="alert-terra"><strong>Welcome, ${S.studentName}.</strong> This case unfolds across Monday, Tuesday, and Wednesday class sessions. Day 2 and Day 3 unlock with codes your instructor announces at the beginning of each class, attendance is how you get the code. Use Thursday TBL to defend your final diagnosis.</div>
+  <h2>How it works</h2>
+  <div style="margin-bottom:1.4rem">
+    <div class="istep"><div class="inum">1</div><div><strong>Interview your patient (10 questions).</strong> Free. Ask about symptoms, medications, history. Interview is open all week.</div></div>
+    <div class="istep"><div class="inum">2</div><div><strong>Free bedside data is always available.</strong> Vitals, exam findings, mucous membrane assessment, no credits.</div></div>
+    <div class="istep"><div class="inum">3</div><div><strong>Order tests with your 200-credit bank.</strong> Credits do not reset between days. Irrelevant tests still cost credits. Unused credits boost your efficiency score.</div></div>
+    <div class="istep"><div class="inum">4</div><div><strong>Answer an anatomy gate question for every test.</strong> Right → result released. Wrong → 15-credit retry penalty.</div></div>
+    <div class="istep"><div class="inum">5</div><div><strong>Day 2 (Tuesday) unlocks with a code your instructor announces at the beginning of Tuesday class.</strong> Day 3 (Wednesday) unlocks with a code announced at the beginning of Wednesday class. You must be in class to get the code.</div></div>
+    <div class="istep"><div class="inum">6</div><div><strong>Submit your final diagnosis any time after Day 3 unlocks.</strong> Submission is private until reveal.</div></div>
+    <div class="istep"><div class="inum">7</div><div><strong>After Thursday TBL, enter the reveal code from your instructor.</strong> See the correct diagnosis, full rationale, and your week-long score.</div></div>
+  </div>
+  <div class="sep"></div>
+  <h2>Scoring (85 points)</h2>
+  <div style="font-size:14.5px;line-height:1.9;color:var(--ink-soft)">
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Diagnostic accuracy (final dx + anatomical rationale)</span><span style="font-weight:700">35 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Data efficiency (credits remaining of 200)</span><span style="font-weight:700">20 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Interview quality (6 topic areas covered)</span><span style="font-weight:700">15 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Gate question performance (−2 per retry)</span><span style="font-weight:700">10 pts</span></div>
+    <div class="fb" style="padding:4px 0"><span>Bonus, completed through Day 3</span><span style="font-weight:700">5 pts</span></div>
+  </div>
+  <div class="sep"></div>
+  <div style="text-align:center"><button class="bb" onclick="S.phase='intro';render()" style="font-size:16px;padding:16px 56px">Meet your patient →</button></div>
+</div>`;
+}
+
+function renderIntro(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="text-align:center;padding:2.5rem 2rem;border-top:4px solid var(--navy);max-width:560px;margin:0 auto">
+  <div class="sl" style="margin-bottom:1rem">Your patient ,  Week 1, Day 1 (Monday)</div>
+  <div style="width:84px;height:84px;border-radius:50%;background:var(--navy-bg);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:28px;font-weight:700;margin:0 auto 1.2rem">JP</div>
+  <h1 style="font-size:36px;margin-bottom:.4rem;font-family:var(--display);font-style:italic;font-weight:600">${CASE.patient.name}</h1>
+  <p style="font-size:18px;color:var(--ink-soft);margin-bottom:.4rem">${CASE.patient.age} years old · ${CASE.patient.gender}</p>
+  <div style="background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:14px 22px;display:inline-block;margin:1.4rem 0">
+    <div class="sl" style="margin-bottom:6px">Chief complaint</div>
+    <p style="font-size:17px;color:var(--navy);font-weight:600;font-family:var(--display);font-style:italic">${CASE.cc}</p>
+  </div>
+  <p style="max-width:440px;margin:0 auto 1.8rem;font-size:15px">You have <strong>10 interview questions</strong> with Jordan available across the entire week. Spend them carefully.</p>
+  <button class="bb" onclick="S.phase='interview';render()" style="font-size:16px;padding:16px 42px">Begin patient interview →</button>
+</div>`;
+}
+
+function renderInterview(){
+  const rem=S.maxInterview-S.interviewCount;
+  const done=rem<=0;
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-navy">Patient Interview</span> <strong style="margin-left:8px;font-family:var(--display);font-style:italic">${CASE.patient.name}</strong></div>
+  <button class="${done?'bt':'bb'}" onclick="S.phase='investigate';render()">${done?'Interview complete ,  investigate →':'Skip to investigation →'}</button>
+</div>
+<div style="background:var(--navy-bg);border:1px solid var(--navy-bd);border-radius:var(--rs);padding:11px 14px;display:flex;align-items:center;gap:14px;margin-bottom:.875rem;flex-wrap:wrap">
+  <div style="font-family:var(--display);font-style:italic;font-weight:600;font-size:46px;color:var(--navy);line-height:1">${rem}</div>
+  <div style="flex:1;min-width:160px"><div style="font-family:var(--sans);font-size:15.5px;font-weight:700;color:var(--navy);letter-spacing:.04em;text-transform:uppercase">Questions remaining (carry across all 3 days)</div><div style="font-size:15px;color:var(--ink-soft);margin-top:5px">Interview closes permanently when all 10 are used.</div></div>
+  <div style="display:flex;gap:5px;flex-wrap:wrap">
+    ${Object.entries(CASE.interviewTopics).map(([k,t])=>`<span class="tpill ${S.iTopicHit[k]?'hit':'miss'}">${t.label}</span>`).join("")}
   </div>
 </div>
-
-<div class="layout">
-
-  <nav class="sidenav" aria-label="Syllabus sections">
-    <p class="sidenav-label">On this page</p>
-    <ul>
-      <li><a href="#overview">Course overview</a></li>
-      <li><a href="#instructor">Instructor &amp; contact</a></li>
-      <li><a href="#description">Course description</a></li>
-      <li><a href="#outcomes">Learning outcomes</a></li>
-      <li><a href="#materials">Course materials</a></li>
-      <li><a href="#workload">Course workload</a></li>
-      <li><a href="#attendance">Attendance policy</a></li>
-      <li><a href="#grading">Grading &amp; assessments</a></li>
-      <li><a href="#calculator">Grade calculator</a></li>
-      <li><a href="#assessments">Assessment details</a></li>
-      <li><a href="#scholar">Scholar points</a></li>
-      <li><a href="#schedule">8-week schedule</a></li>
-      <li><a href="#integrity">Academic integrity</a></li>
-      <li><a href="#ai-policy">AI policy</a></li>
-      <li><a href="#digital-devices">Digital device policy</a></li>
-      <li><a href="#teams">Working with your team</a></li>
-      <li><a href="#dates">Critical dates</a></li>
-      <li><a href="#accommodations">Accommodations</a></li>
-      <li><a href="#tips">Tips for success</a></li>
-    </ul>
-  </nav>
-
-  <main id="main-content">
-
-    <header class="hero">
-      <p class="hero-eyebrow">Solano Community College, Summer 2026</p>
-      <h1>Human Anatomy</h1>
-      <p class="hero-subtitle">An 8-week intensive study of the structural organization of the human body, from cellular to organismal level.</p>
-      <dl class="hero-meta">
-        <div>
-          <dt>Course</dt>
-          <dd>BIO 004, Section 0, 5 units</dd>
-        </div>
-        <div>
-          <dt>CRN</dt>
-          <dd>60099</dd>
-        </div>
-        <div>
-          <dt>Term</dt>
-          <dd>Summer 2026, 202660</dd>
-        </div>
-        <div>
-          <dt>Dates</dt>
-          <dd>June 15 to August 7, 2026</dd>
-        </div>
-        <div>
-          <dt>Lecture</dt>
-          <dd>M, T, W, Th, 10:00 to 11:20 AM, Fairfield Campus, Science Bldg, Room 2702</dd>
-        </div>
-        <div>
-          <dt>Lab</dt>
-          <dd>M, T, W, Th, 11:30 AM to 2:35 PM, Fairfield Campus, Science Bldg, Room 2736</dd>
-        </div>
-      </dl>
-    </header>
-
-    <section id="overview">
-      <h2>Course at a Glance</h2>
-      <div class="section-rule"></div>
-      <div class="card card-accent">
-        <p style="margin: 0 0 12px;"><strong>This is an 8-week summer intensive.</strong> The course covers the same content, depth, and rigor as the 16-week semester format, compressed into half the time. Each class day represents roughly two days of regular semester instruction. Plan accordingly.</p>
-        <p style="margin: 0;">Class meets <strong>four days per week</strong> (Monday through Thursday), with both lecture and lab on the same day. Plan on approximately <strong>20 hours per week of outside-class study</strong> to maintain pace, more if you are aiming for an A.</p>
-      </div>
-
-      <h3>The summer compact</h3>
-      <p>Because of the compressed pace, three things matter more than usual:</p>
-      <ol>
-        <li><strong>Show up prepared.</strong> Pre-work is the foundation of TBL, and TBL is 40% of your grade. Walking in unprepared will cost you points immediately, before you even sit down.</li>
-        <li><strong>Don't fall behind.</strong> You cannot catch up in this course the way you might in a regular semester. One missed day is roughly two missed days of content.</li>
-        <li><strong>Use lab time well.</strong> Lab is your structured, forward-moving study time. Treat it as study time, not social time.</li>
-      </ol>
-    </section>
-
-    <section id="instructor">
-      <h2>Instructor &amp; Contact</h2>
-      <div class="section-rule"></div>
-      <dl class="def-grid">
-        <dt>Instructor</dt>
-        <dd>Dr. Sharilyn Rennie, Adjunct Professor of Biology</dd>
-        <dt>Email</dt>
-        <dd>Use the Canvas Inbox or email <a class="inline-link" href="mailto:sharilyn.rennie@solano.edu" target="_top">sharilyn.rennie@solano.edu</a> at any time. Response within 48 to 72 hours.</dd>
-        <dt>Canvas board</dt>
-        <dd>Post a question to Dr. Rennie's Virtual Office. Reply within 48 to 72 hours.</dd>
-        <dt>Office hours</dt>
-        <dd>By appointment, scheduled before class on Monday and Wednesday. Please confirm via Canvas message.</dd>
-      </dl>
-    </section>
-
-    <section id="description">
-      <h2>Course Description</h2>
-      <div class="section-rule"></div>
-      <p>A study of the structural organization of the human body, from cellular to organismal level. Throughout the course, various types of instruction are used, including microscopic investigation of prepared slides of tissues and organs, gross (macroscopic) anatomical dissection, and examination of prosected human material.</p>
-      <p><strong>Hours:</strong> 48 to 54 lecture, 96 to 108 lab. This course is primarily intended for nursing, allied health, kinesiology, and other health-related majors. (Formerly BIO 006.)</p>
-
-      <h3>Prerequisites &amp; advisories</h3>
-      <ul>
-        <li><strong>Prerequisites:</strong> None</li>
-        <li><strong>Co-requisites:</strong> None</li>
-        <li><strong>Advisories:</strong> SCC minimum Math and English standards</li>
-        <li><strong>Recommended:</strong> Satisfactory completion of BIO 16 (Introduction to Human Biology) and BIO 16L (Human Biology Laboratory) is strongly recommended but not required.</li>
-      </ul>
-    </section>
-
-    <section id="outcomes">
-      <h2>Student Learning Outcomes</h2>
-      <div class="section-rule"></div>
-      <p>Upon successful completion of the course, students should be able to:</p>
-      <ol>
-        <li>Identify and distinguish tissues based on currently recognized criteria.</li>
-        <li>Describe the basic microscopic and gross anatomy of the major systems of the human body.</li>
-        <li>Identify, in the laboratory, major microscopic and gross structures of the major systems of the human body.</li>
-      </ol>
-    </section>
-
-    <section id="materials">
-      <h2>Course Materials &amp; Technology</h2>
-      <div class="section-rule"></div>
-
-      <h3>Textbook, recommended (not required)</h3>
-      <p><strong>No textbook is required for this course.</strong> You may use any of the following resources, listed in order of cost. Pick what works for your budget and learning style.</p>
-      <ol>
-        <li><strong>OpenStax <em>Anatomy and Physiology</em>, 2nd Edition</strong> (recommended): Free, peer-reviewed, available online and as a free PDF at openstax.org. This covers the anatomy material in our course and is the most accessible option.</li>
-        <li><strong>A used copy of Marieb, Brady, and Mallatt, <em>Human Anatomy</em>, 9th Edition</strong>. ISBN-13: 9780135240601. Look for used copies online or at the SCC Bookstore (phone: 707-864-7111).</li>
-        <li><strong>A used copy of Marieb's two-semester <em>Human Anatomy and Physiology</em></strong> textbook. Any recent edition will cover the anatomy content for this course.</li>
-      </ol>
-      <p>Mastering A&amp;P access is <strong>optional</strong> and is not required for any graded course component.</p>
-
-      <h3>Lab supplies, needed by week 3</h3>
-      <ul>
-        <li>Non-latex nitrile gloves (share a box within your group to reduce cost)</li>
-        <li>Lab coat (required), to be stored in the lab through the end of the term, cannot be shared with chemistry</li>
-      </ul>
-      <div class="callout callout-terra">
-        <strong>Heads up:</strong> The 8-week pace means you need lab supplies on hand by <strong>week 3</strong>, not week 6. Plan to order or pick up supplies during week 1 or 2.
-      </div>
-
-      <h3>Optional materials</h3>
-      <ul>
-        <li>Krieger, P. A. (2021). <em>A Visual Analogy Guide to Human Anatomy</em> (5th ed.). Morton Publishing. (Workbook)</li>
-        <li>Malakhova, Chinn, Krabbenhoft, &amp; Smith (2022). <em>A Photographic Atlas for Anatomy &amp; Physiology</em> (2nd ed.). Pearson.</li>
-        <li>Complete Anatomy by 3B Medical (App)</li>
-      </ul>
-
-      <h3>Required technology</h3>
-      <p>To be successful in this course, students must have access to the following:</p>
-      <ul>
-        <li><strong>Tablet, laptop, or desktop computer</strong> capable of running multiple browser tabs, streaming videos, and using PDF editing or scanning tools. Recommended minimum: 8 GB RAM and at least 10 GB available storage.</li>
-        <li><strong>Reliable internet connection</strong> for accessing Canvas, instructional videos, and submitting work on time.</li>
-        <li><strong>Printer and scanner</strong>, or a scanning app like Adobe Scan or CamScanner, for legible handwritten work.</li>
-        <li><strong>Camera-enabled device</strong> for capturing clear images of models, lab work, or assignment pages.</li>
-        <li><strong>PDF conversion tool</strong>. All scanned or photographed assignments must be submitted as PDFs through Canvas.</li>
-      </ul>
-      <p class="text-muted" style="font-size: 0.9rem;"><strong>Important:</strong> You are responsible for ensuring your devices meet these requirements. Inadequate technology access may result in missed deadlines and academic penalties unless prior arrangements are made.</p>
-    </section>
-
-    <section id="workload">
-      <h2>Course Workload Expectations</h2>
-      <div class="section-rule"></div>
-      <p>This is a 5-unit course (3 lecture units, 2 lab units) delivered in 8 weeks. Per the Carnegie Unit standard (2 hours of outside study per credit hour per week), applied to <strong>both lecture and lab credits</strong> because anatomy lab is memorization-intensive study (atlas drilling, structure identification, lab practical preparation) rather than wet-lab experimentation that completes itself in the lab session, plan on approximately <strong>20 hours per week of outside-class study</strong> to maintain pace at a passing-grade level (C). Students aiming for higher grades typically invest 25 or more hours per week, depending on prior exposure to the material, study skills, and preparation.</p>
-      <p>Be realistic about your current commitments. Consider your other courses, employment, and personal responsibilities, and evaluate where additional study time could realistically come from without making changes that could negatively affect your overall well-being.</p>
-      <div class="callout">
-        <strong>If your schedule does not allow for this level of sustained effort,</strong> the 8-week intensive may not be the right fit this term. Proceeding carefully through foundational courses is often more beneficial than rushing. Repeating this course or physiology due to insufficient preparation creates greater delays in your academic progress than planning a manageable schedule from the outset.
-      </div>
-
-      <h3>Homework &amp; success strategy</h3>
-      <p>Homework is recommended, not always required or graded. It is designed to reinforce your learning and improve exam performance.</p>
-      <p><strong>Prioritize:</strong> high lab exam scores, strong TBL performance, and consistent end-of-day lab quiz performance. Homework is minimal and intentionally structured to support mastery, not to pad your grade.</p>
-      <ul>
-        <li><strong>Pros:</strong> Fewer mandatory tasks let you focus on high-impact studying. Missing a non-graded assignment will not significantly hurt your grade.</li>
-        <li><strong>Cons:</strong> If you are used to earning points from low-effort tasks, that strategy will not work here. Your competence is measured directly through assessments and TBL.</li>
-      </ul>
-      <p><strong>Bottom line:</strong> There are no shortcuts. Focus on learning the material deeply, performing well on exams and team work, and becoming truly competent in the content.</p>
-    </section>
-
-    <section id="attendance">
-      <h2>Attendance Policy</h2>
-      <div class="section-rule"></div>
-      <p>In an 8-week intensive course, consistent attendance is not just encouraged, it is essential. The cumulative nature of anatomy makes it extremely difficult for even the strongest students to recover after missing more than one day. Missing one class day in summer is roughly equivalent to missing two days in a regular semester.</p>
-
-      <h3>Course requirements</h3>
-      <ul>
-        <li>You must be present every class for the <strong>first week</strong>. Any absence during week 1, your seat will be given to the next student on the waitlist and you will be dropped.</li>
-        <li>Log in to Canvas <strong>at least three times each week</strong> to check announcements, assignments, and discussions. Set up notifications, at minimum for announcements. Set up the Canvas app. You are responsible for anything posted there.</li>
-        <li>If you encounter technical difficulties, report them immediately to IT or Canvas support.</li>
-      </ul>
-
-      <h3>If you miss class</h3>
-      <ul>
-        <li>You may miss <strong>a maximum of 3 classes the entire term</strong> (excused or unexcused). On the 3rd absence, I receive the right to drop you from the course.</li>
-        <li>You must be present for <strong>90% of lab and lecture</strong> to count as attendance. Leaving 20 minutes early or arriving 20 minutes late counts as an absence.</li>
-        <li><strong>Missed activities cannot be made up.</strong> If you are absent, you will not have the opportunity to make up any in-class assignments, team-based learning activities, or exams. No exceptions.</li>
-        <li>Missed classes are treated uniformly. There are no excused absences. If you are having a difficult day and need time away, you are not required to justify your absence. Likewise, if you miss class for any other reason, no explanation is necessary, and no exceptions will be made. Regardless of the reason, missing class means missing instruction, practice, and experiential learning. Absences negatively affect your understanding, your performance on missed material, and ultimately your course grade.</li>
-        <li>In healthcare programs, including nursing, respiratory therapy, and radiologic sciences, students are required to complete a minimum number of laboratory and instructional hours. More than three absences violates these program requirements and renders a student ineligible to continue. This policy is non-negotiable and aligned with professional and accreditation standards.</li>
-        <li><strong>Doors will be locked once a lab exam starts.</strong> If you are late to the exam, you will not be able to enter the classroom.</li>
-      </ul>
-
-      <h3>Engagement</h3>
-      <ul>
-        <li>You will be placed on a team that should remain the same for the duration of the term. I reserve the right to move you to a different team if needed, but will try not to.</li>
-        <li>Active participation in discussions, group activities, and forums is required. Your grade depends on both your individual prep and your ability to contribute to a team.</li>
-        <li>Complete all pre-work and come prepared so everyone can benefit from your contribution.</li>
-      </ul>
-
-      <h3>Assignments</h3>
-      <ul>
-        <li>All graded assignments must be completed and submitted by their posted deadlines. <strong>Late submissions and make-up assignments are not accepted.</strong></li>
-        <li>Most assignments are released at the start of each module and due on the day of the corresponding assessment. Delaying work until the last minute risks technical issues and incomplete submissions. Begin assignments early.</li>
-        <li>Many assignments are recommended but not graded. They are designed to support mastery. Choosing not to complete them may affect your level of understanding and your performance, even though they do not directly count toward your grade.</li>
-        <li><strong>This is a mastery-based course.</strong> Simply attending class or completing assignments does not guarantee success. Strong performance requires active engagement and demonstrated understanding. Minor assignments cannot compensate for poor performance on exams or TBL.</li>
-        <li>Work collaboratively during designated group activities. Respect diverse viewpoints and contribute equally.</li>
-      </ul>
-
-      <h3>Dropping the class</h3>
-      <p>It is ultimately your responsibility to drop this class if you decide not to attend. Take full responsibility if you wish to drop or withdraw. <strong>Do not assume I will take care of it for you</strong>, irrespective of the instructor's prerogative to drop a student for absences. Failure to formally take care of this can lead to an unfortunate and unnecessary "F" grade. If you choose to take a "W" instead of an "F," ensure you drop the course.</p>
-    </section>
-
-    <section id="grading">
-      <h2>Grading Structure</h2>
-      <div class="section-rule"></div>
-
-      <p>Your grade is based on three components:</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Component</th>
-              <th>Detail</th>
-              <th style="text-align: right;">Weight</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Team-Based Learning (TBL)</strong></td>
-              <td>8 TBLs total (one per week). <strong>Lowest score dropped at end of term.</strong> Use them or skip wisely, you only get one drop.</td>
-              <td class="weight-pct">40%</td>
-            </tr>
-            <tr>
-              <td><strong>Lab Practical Exams</strong></td>
-              <td>7 lab exams: 6 module exams plus 1 cumulative lab exam at the end of the term.</td>
-              <td class="weight-pct">50%</td>
-            </tr>
-            <tr>
-              <td><strong>End-of-Day Lab Quizzes</strong></td>
-              <td>Community accountability format: one randomly selected student answers a single question for the whole class. Everyone earns the same score.</td>
-              <td class="weight-pct">10%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout callout-gold">
-        <strong>Note:</strong> This summer format does not include separate lecture exams. The TBL system, with its iRAT and tRAT structure, serves as the assessment of lecture material. Application of clinical reasoning is built directly into the TBL workflow.
-      </div>
-
-      <h3>Grading scale</h3>
-      <div class="grade-scale" role="presentation">
-        <div class="grade-cell">
-          <span class="grade-cell-letter">A</span>
-          <span class="grade-cell-range">89.5 to 100%</span>
-        </div>
-        <div class="grade-cell">
-          <span class="grade-cell-letter">B</span>
-          <span class="grade-cell-range">79.5 to 89.4%</span>
-        </div>
-        <div class="grade-cell">
-          <span class="grade-cell-letter">C</span>
-          <span class="grade-cell-range">69.5 to 79.4%</span>
-        </div>
-        <div class="grade-cell">
-          <span class="grade-cell-letter">D</span>
-          <span class="grade-cell-range">59.5 to 69.4%</span>
-        </div>
-        <div class="grade-cell">
-          <span class="grade-cell-letter">F</span>
-          <span class="grade-cell-range">0 to 59.4%</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="calculator">
-      <h2>Grade Calculator</h2>
-      <div class="section-rule"></div>
-      <p>Estimate your current standing in the course. All averages should be entered as percentages out of 100. Leave fields blank to exclude them.</p>
-
-      <div class="calc">
-        <div class="calc-header">
-          <div class="calc-icon" aria-hidden="true">%</div>
-          <h3>Current standing estimator</h3>
-        </div>
-
-        <div class="calc-grid">
-          <div class="calc-field">
-            <label for="tbl-avg">TBL average (40%)</label>
-            <input type="number" id="tbl-avg" min="0" max="100" step="0.1" placeholder="e.g., 84" inputmode="decimal" aria-describedby="tbl-hint">
-            <div class="calc-field-hint" id="tbl-hint">Average of your 7 best TBLs after the drop</div>
-          </div>
-          <div class="calc-field">
-            <label for="lab-avg">Lab exam average (50%)</label>
-            <input type="number" id="lab-avg" min="0" max="100" step="0.1" placeholder="e.g., 78" inputmode="decimal" aria-describedby="lab-hint">
-            <div class="calc-field-hint" id="lab-hint">Average across the lab exams you have taken so far</div>
-          </div>
-          <div class="calc-field">
-            <label for="quiz-avg">Lab quiz average (10%)</label>
-            <input type="number" id="quiz-avg" min="0" max="100" step="0.1" placeholder="e.g., 90" inputmode="decimal" aria-describedby="quiz-hint">
-            <div class="calc-field-hint" id="quiz-hint">Average across all completed end-of-day lab quizzes</div>
-          </div>
-        </div>
-
-        <div class="calc-result" role="status" aria-live="polite" aria-atomic="true">
-          <div>
-            <div class="calc-result-label">Weighted total</div>
-            <div class="calc-result-value" id="result-pct">--</div>
-          </div>
-          <div>
-            <div class="calc-result-label">Letter grade</div>
-            <div class="calc-result-value">
-              <span class="calc-result-grade" id="result-letter">--</span>
-            </div>
-          </div>
-        </div>
-        <p class="text-muted" style="font-size: 0.82rem; margin-top: 16px; margin-bottom: 0;">This calculator is a personal estimation tool. Your official grade is recorded in Canvas.</p>
-      </div>
-    </section>
-
-    <section id="assessments">
-      <h2>Assessment Details</h2>
-      <div class="section-rule"></div>
-
-      <details>
-        <summary>Team-Based Learning (TBL)</summary>
-        <div class="details-body">
-          <p>TBL assessments link course material to clinical problems and concepts. They encourage consistent preparation and active engagement with problem-based learning. Each TBL focuses on a clinical case that integrates the anatomy of the week.</p>
-
-          <h4>Each TBL has two graded components</h4>
-          <ul>
-            <li><strong>iRAT</strong> (Individual Readiness Assessment Test): a 10 to 15 question individual quiz assessing basic preparation. <em>Weighted 3x.</em></li>
-            <li><strong>tRAT</strong> (Team Readiness Assessment Test): the same quiz, taken with your team. <em>Weighted 1x.</em></li>
-          </ul>
-          <p>Following the tRAT, students work collaboratively on problem-solving and application questions. Discussion is strongly encouraged. These application questions are not graded, in order to encourage open discussion. However, every student is expected to understand and be able to explain the rationale for application answers if called upon.</p>
-
-          <h4>Scoring</h4>
-          <ul>
-            <li>Each quiz is 10 points.</li>
-            <li>iRAT: 10 points x 3 = 30 points</li>
-            <li>tRAT: 10 points x 1 = 10 points</li>
-            <li><strong>Total possible per TBL: 40 points</strong></li>
-          </ul>
-
-          <h4>Example</h4>
-          <ul>
-            <li>iRAT: 7 of 10 = 21 points</li>
-            <li>tRAT: 9 of 10 = 9 points</li>
-            <li>Total: 30 of 40 = 75%</li>
-          </ul>
-
-          <p>This weighting heavily emphasizes individual performance to encourage personal preparation rather than reliance on team members. The iRAT alone accounts for 75% of your TBL grade. Most teams score 90% or higher on the tRAT, so your individual iRAT scores largely determine your final TBL outcome.</p>
-
-          <div class="callout callout-terra">
-            <strong>TBL assessments cannot be made up. No exceptions.</strong> The lowest TBL score will be dropped at the end of the term. Use this drop wisely.
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Lab Practical Exams</summary>
-        <div class="details-body">
-          <p>There are 7 lab practical exams: 6 module exams plus 1 cumulative lab exam at the end of the term. Exams consist of short answer and fill-in-the-blank questions, in which you will identify anatomy from microscope slides, pictures, charts, anatomical models, and human dissections.</p>
-
-          <h4>Format</h4>
-          <ul>
-            <li>Approximately 50 to 60 questions per exam</li>
-            <li>You rotate through stations on a timer</li>
-            <li>Each station has 2 questions</li>
-            <li>You have <strong>90 seconds per station</strong></li>
-            <li>Remain at each station until told to move</li>
-          </ul>
-
-          <h4>Exam conduct</h4>
-          <ul>
-            <li><strong>Spelling counts.</strong> Bring your favorite pen(s). Pencils are not permitted.</li>
-            <li>Do <strong>not</strong> look around the room or at other stations while at your station.</li>
-            <li>Fold your paper in half so your answers are covered. Look at the wall or the table.</li>
-            <li>Failure to comply will result in collection of your exam, graded as is.</li>
-            <li><strong>No makeup lab practicals will be given.</strong></li>
-          </ul>
-        </div>
-      </details>
-
-      <details>
-        <summary>Cumulative Lab Exam</summary>
-        <div class="details-body">
-          <p>During the final week of the term, you will complete one cumulative lab exam, which counts as your seventh lab exam grade.</p>
-
-          <h4>Partial grade improvement</h4>
-          <p>The cumulative exam provides an opportunity for partial grade improvement on previous module lab exams. If your score on the cumulative is higher than your score on a prior module lab exam, I will apply <strong>50% of the improvement</strong> to the corresponding earlier exam. The original exam grade is not replaced.</p>
-
-          <h4>Example</h4>
-          <p>If you earned a 40% on Lab Exam 1 and an 80% on the cumulative lab exam, the improvement is 40 percentage points. Half of that improvement (20 points) is added to your original score, raising it to 60%.</p>
-
-          <p>The cumulative exam includes equal representation of material from each module and is comprehensive. This structure is intentional and is designed to ensure continued engagement with all course content.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>End-of-Day Lab Quizzes</summary>
-        <div class="details-body">
-          <p>End-of-day lab quizzes use a <strong>community accountability format</strong>. The mechanism is intentionally designed to make lab time a real collaborative work session, not parallel solo study.</p>
-
-          <h4>How it works</h4>
-          <ul>
-            <li>At the end of nearly every lab session, I ask <strong>one person in one randomly selected group</strong> a single quiz question covering material from that day's lab period.</li>
-            <li><strong>The entire class earns the same score</strong> based on that one student's answer. Each quiz is worth 3 points.</li>
-            <li>You do not know in advance who will be called on or which group will be selected.</li>
-          </ul>
-
-          <h4>What this means for you</h4>
-          <p>Your lab quiz grade depends on the readiness of every student in the room, not just yourself. If everyone uses lab time well, the selected student knows the answer and the class earns full credit. If any student has not engaged with the material, that student could be the one called on, and the whole class loses points.</p>
-
-          <div class="callout callout-terra">
-            <strong>Show up for each other. Put the work in during lab.</strong> Help your group members understand the material as you go. This mechanism rewards collective preparation and penalizes isolated effort. Lab time is collaborative time by design.
-          </div>
-
-          <h4>Attendance and scoring</h4>
-          <ul>
-            <li>Students present during a lab quiz earn the class score for that quiz.</li>
-            <li>Students absent during a lab quiz earn a zero for that quiz, per the no-makeup attendance policy.</li>
-            <li>There are no dropped lab quiz scores at the end of the term.</li>
-          </ul>
-        </div>
-      </details>
-
-      <details>
-        <summary>Depth of Knowledge (DOK) levels</summary>
-        <div class="details-body">
-          <p>My goal is to help you learn anatomy in a way that prepares you for real-world healthcare applications, not just memorization. Exam and assignment questions are structured using different Depth of Knowledge levels. Most assessment questions will be DOK 2 and DOK 3.</p>
-
-          <div class="dok-table">
-            <div class="dok-row">
-              <span>Level</span>
-              <span>Type</span>
-              <span>How you will use it</span>
-              <span>Weight</span>
-            </div>
-            <div class="dok-row">
-              <span><strong>DOK 1</strong></span>
-              <span>Basic recall</span>
-              <span>Naming structures, defining terms, simple labeling. Helpful for learning the material early on.</span>
-              <span>~10%</span>
-            </div>
-            <div class="dok-row">
-              <span><strong>DOK 2</strong></span>
-              <span>Skills &amp; concepts</span>
-              <span>Applying knowledge to identify relationships, structures in context, or interpreting images.</span>
-              <span>~40 to 50%</span>
-            </div>
-            <div class="dok-row">
-              <span><strong>DOK 3</strong></span>
-              <span>Strategic thinking</span>
-              <span>Solving clinical problems, justifying answers, predicting the impact of injuries. Requires explanation and reasoning.</span>
-              <span>~40 to 50%</span>
-            </div>
-            <div class="dok-row">
-              <span><strong>DOK 4</strong></span>
-              <span>Extended thinking</span>
-              <span>Optional in this course. Used in bonus, advanced, or optional integrative projects across systems.</span>
-              <span>~0 to 10%</span>
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Make-up &amp; late work policy</summary>
-        <div class="details-body">
-          <ul>
-            <li>You must complete all quizzes, discussion boards, exams, lab reports, and other assignments by the scheduled due date.</li>
-            <li><strong>There are no make-ups, no late work accepted.</strong></li>
-            <li>All in-class assessments must be completed in person. If you are absent, you earn a zero. No make-ups, no exceptions.</li>
-            <li>Lab quizzes follow the community accountability format described above and are unannounced. The key: do not miss class.</li>
-          </ul>
-        </div>
-      </details>
-    </section>
-
-    <section id="scholar">
-      <h2>Scholar Points (Up to 3.0% Bonus)</h2>
-      <div class="section-rule"></div>
-      <p>Scholar Points are an academic incentive designed to reward proactive learning behaviors and academic competence. These points are not extra credit for missed work. They are a structured way to recognize consistent effort and performance across the term.</p>
-
-      <h3>How to earn Scholar Points</h3>
-      <p>The 3.0% bonus has two requirements. <strong>The 1% academic performance bump is only awarded when paired with completed tutoring hours.</strong> Strong grades alone do not earn the bump. Tutoring is the gateway.</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Requirement</th>
-              <th>Details</th>
-              <th>Bonus</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Tutoring engagement</td>
-              <td>Complete <strong>18 verified hours</strong> of tutoring, study sessions, or academic support across the 8-week term. Use approved on-campus tutors. Hours must be documented and verifiable.</td>
-              <td>2.0%</td>
-            </tr>
-            <tr>
-              <td>Academic performance <em>(only when paired with tutoring)</em></td>
-              <td>Maintain an average of <strong>80% or higher</strong> across lab exams, lab quizzes, and TBL activities. This bump is only awarded if you also complete the 18 tutoring hours above.</td>
-              <td>1.0%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Tutoring guidelines</h3>
-      <ul>
-        <li>Use on-campus tutoring with an approved embedded tutor. I will provide names of students who have taken this class and would be especially useful.</li>
-        <li>Hours must be logged and verifiable. I will total them at the end of the term.</li>
-        <li>Target: <strong>3 hours per week for at least 6 weeks</strong>, totaling 18 hours.</li>
-        <li>You may attend more than 3 hours in a given week, but I will count <strong>a maximum of 3 hours per week</strong> toward the 18 hour requirement. This ensures tutoring is spread across at least 6 weeks rather than crammed into the last two.</li>
-      </ul>
-
-      <h3>Additional bonus points</h3>
-      <p>In addition to the 3.0% scholar bonus, you may earn up to <strong>25 additional scholar points</strong> added to your final point total. These come from two self-directed sources:</p>
-      <ol>
-        <li><strong>End-of-day lab challenge questions:</strong> 1 point per correct answer. These help offset a bad night, but cannot replace a missed lab. You are still allowed only 3 absences before being dropped.</li>
-        <li><strong>Community Rounds participation:</strong> Host or attend peer-led review sessions (see below for the mechanism).</li>
-      </ol>
-      <p>The 25 point cap applies across both sources combined.</p>
-
-      <div class="callout callout-terra">
-        <strong>No additional extra credit will be given in this course.</strong> Scholar Points are your only path to any extra credit. <strong>Please do not ask. No exceptions.</strong>
-      </div>
-
-      <h3>Community Rounds, peer-led learning</h3>
-      <p>Community Rounds are student-organized review sessions that you run for each other outside of class time. Examples: a peer-led Zoom session drilling spiral lab ID, a Saturday Kahoot game covering recent module content, a small study circle working through TBL prep together. The goal is to build the kind of mutual support that healthcare programs depend on, while reinforcing material through teaching and active recall.</p>
-
-      <div class="callout callout-gold">
-        <strong>This is fully peer-organized.</strong> I do not schedule, host, or attend these sessions. Students design them, invite each other, and run them. The Canvas "Community Rounds" discussion thread is the central record.
-      </div>
-
-      <h4>How it works</h4>
-      <ul>
-        <li><strong>Hosting:</strong> Post your session in the Canvas "Community Rounds" thread at least 24 hours in advance, with the date, format (Zoom, Kahoot, in-person), topic, and how to join.</li>
-        <li><strong>After hosting:</strong> Reply to your own announcement post with a short session log: who attended (names or count), what was covered, and any resource link (Kahoot code, slide link, etc.).</li>
-        <li><strong>Attending:</strong> Reply in the announcement thread after the session: "Attended on [date]. One thing I'll remember: [one sentence]."</li>
-        <li>Sessions must be open to the class (posted to the thread). Private group sessions do not qualify.</li>
-      </ul>
-
-      <h4>Points</h4>
-      <ul>
-        <li><strong>Hosting a Community Round:</strong> 3 points per session</li>
-        <li><strong>Attending a Community Round:</strong> 1 point per session</li>
-        <li>Counted toward the 25 point supplemental pool described above.</li>
-      </ul>
-
-      <p>The Canvas thread is the artifact. I review it at the end of the term and total the points. No separate forms, no logs to submit. Run sessions, post in the thread, get credit.</p>
-
-      <div class="callout">
-        <strong>Important notes.</strong> Scholar Points are not retroactive and cannot replace missed assignments or exams. They are earned through both intentional effort and sustained academic performance. The maximum bonus is 3.0%, applied at the end of the term. You will see it reflected in your final grade, but it will not show on Canvas.
-      </div>
-    </section>
-
-    <section id="schedule">
-      <h2>8-Week Schedule</h2>
-      <div class="section-rule"></div>
-      <p>The course is divided into 8 weeks. Each week pairs a clinical TBL case with the corresponding system. Lab practical exams take place on <strong>Thursdays</strong>. The schedule below is the planned structure and may be adjusted with advance notice.</p>
-
-      <div class="callout callout-gold">
-        <strong>Reading the schedule.</strong> The "TBL case" is the clinical anchor for that week's content. The "Lab Exam" listed for a given week tests the previous week's lab content (one week behind to allow time for study). The cumulative exam in week 8 covers all systems studied across the term.
-      </div>
-
-      <div id="schedule-list">
-
-        <article class="week-card" data-week="1" data-start="2026-06-15" data-end="2026-06-18">
-          <div class="week-num">
-            <span class="week-num-big">1</span>
-            <span class="week-num-label">Week</span>
-          </div>
-          <div class="week-content">
-            <h3>Body organization, cells, tissues, integumentary</h3>
-            <p class="week-dates">June 15 to 18, 2026, M, T, W, Th</p>
-            <p class="mb-0">Course orientation, anatomical terminology, microscopy intro, the four tissue types, integumentary system anatomy. The integumentary system is your introduction to identifying structures clinically.</p>
-            <div class="week-tags">
-              <span class="tag tag-tbl">TBL 1, Stevens-Johnson Syndrome / Toxic Epidermal Necrolysis</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="week-card" data-week="2" data-start="2026-06-22" data-end="2026-06-25">
-          <div class="week-num">
-            <span class="week-num-big">2</span>
-            <span class="week-num-label">Week</span>
-          </div>
-          <div class="week-content">
-            <h3>Skeletal system</h3>
-            <p class="week-dates">June 22 to 25, 2026, M, T, W, Th</p>
-            <p class="mb-0">Bone tissue, axial skeleton, appendicular skeleton, joints. Lab focus on bone identification and joint articulation.</p>
-            <div class="week-tags">
-              <span class="tag tag-tbl">TBL 2, Osteogenesis Imperfecta</span>
-              <span class="tag tag-exam">Lab Exam 1, Cells, Tissues, Integumentary</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="week-card" data-week="3" data-start="2026-06-29" data-end="2026-07-02">
-          <div class="week-num">
-            <span class="week-num-big">3</span>
-            <span class="week-num-label">Week</span>
-          </div>
-          <div class="week-content">
-            <h3>Muscular system</h3>
-            <p class="week-dates">June 29 to July 2, 2026, M, T, W, Th</p>
-            <p class="mb-0">Muscle tissue types, skeletal muscle anatomy, the neuromuscular junction, major muscle groups. Lab includes NMJ drawing and muscle origin/insertion identification.</p>
-            <div class="week-tags">
-              <span class="tag tag-tbl">TBL 3, Marfan Syndrome</span>
-              <span class="tag tag-exam">Lab Exam 2, Skeletal</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="week-card" data-week="4" data-start="2026-07-06" data-end="2026-07-09">
-          <div class="week-num">
-            <span class="week-num-big">4</span>
-            <span class="week-num-label">Week</span>
-          </div>
-          <div class="week-content">
-            <h3>Nervous system &amp; special senses</h3>
-            <p class="week-dates">July 6 to 9, 2026, M, T, W, Th</p>
-            <p class="mb-0">Central and peripheral nervous system, brain anatomy, cranial nerves, special senses (eye, ear).</p>
-            <div class="week-tags">
-              <span class="tag tag-tbl">TBL 4, Normal Pressure Hydrocephalus</span>
-              <span class="tag tag-exam">Lab Exam 3, Muscular</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="week-card" data-week="5" data-start="2026-07-13" data-end="2026-07-16">
-          <div class="week-num">
-            <span class="week-num-big">5</span>
-            <span class="week-num-label">Week</span>
-          </div>
-          <div class="week-content">
-            <h3>Cardiovascular system, heart &amp; blood</h3>
-            <p class="week-dates">July 13 to 16, 2026, M, T, W, Th</p>
-            <p class="mb-0">Heart anatomy, cardiac chambers and valves, conduction system, blood components.</p>
-            <div class="week-tags">
-              <span class="tag tag-tbl">TBL 5, Tetralogy of Fallot</span>
-              <span class="tag tag-exam">Lab Exam 4, Nervous System &amp; Special Senses</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="week-card" data-week="6" data-start="2026-07-20" data-end="2026-07-23">
-          <div class="week-num">
-            <span class="week-num-big">6</span>
-            <span class="week-num-label">Week</span>
-          </div>
-          <div class="week-content">
-            <h3>Vessels, lymphatic, respiratory</h3>
-            <p class="week-dates">July 20 to 23, 2026, M, T, W, Th</p>
-            <p class="mb-0">Major arteries and veins, lymphatic anatomy, respiratory system gross anatomy and histology.</p>
-            <div class="week-tags">
-              <span class="tag tag-tbl">TBL 6, Sickle Cell Disease</span>
-              <span class="tag tag-exam">Lab Exam 5, Heart &amp; Blood</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="week-card" data-week="7" data-start="2026-07-27" data-end="2026-07-30">
-          <div class="week-num">
-            <span class="week-num-big">7</span>
-            <span class="week-num-label">Week</span>
-          </div>
-          <div class="week-content">
-            <h3>Digestive &amp; urinary systems</h3>
-            <p class="week-dates">July 27 to 30, 2026, M, T, W, Th</p>
-            <p class="mb-0">GI tract anatomy from mouth to anus, accessory digestive organs, kidney and urinary tract anatomy.</p>
-            <div class="week-tags">
-              <span class="tag tag-tbl">TBL 7, Hirschsprung Disease</span>
-              <span class="tag tag-exam">Lab Exam 6, Vessels, Lymphatic, Respiratory</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="week-card" data-week="8" data-start="2026-08-03" data-end="2026-08-06">
-          <div class="week-num">
-            <span class="week-num-big">8</span>
-            <span class="week-num-label">Week</span>
-          </div>
-          <div class="week-content">
-            <h3>Reproductive &amp; endocrine, cumulative review</h3>
-            <p class="week-dates">August 3 to 6, 2026, M, T, W, Th</p>
-            <p class="mb-0">Male and female reproductive anatomy, endocrine glands, cumulative review of all systems studied.</p>
-            <div class="week-tags">
-              <span class="tag tag-tbl">TBL 8, Polycystic Kidney Disease</span>
-              <span class="tag tag-cum">Lab Exam 7, Cumulative, all systems</span>
-            </div>
-          </div>
-        </article>
-
-      </div>
-
-      <div class="callout" style="margin-top: 24px;">
-        <strong>Schedule changes.</strong> We will follow this schedule, but occasionally a change may make sense, such as a shifted exam time, an extended due date, or adjusted point values. If you miss a class meeting, check with classmates for any announcements. Exam dates are unlikely to change unless there are extenuating circumstances.
-      </div>
-    </section>
-
-    <section id="integrity">
-      <h2>Academic Integrity</h2>
-      <div class="section-rule"></div>
-      <p>Academic dishonesty, cheating, and plagiarism will not be tolerated. Such activities will result in at least an "F" (0 points) on the work in question and may result in an "F" for the course. All such activities will be reported to the V.P. of Student Services for disciplinary action.</p>
-      <ul>
-        <li>Complete your own work.</li>
-        <li>Cite sources and references according to MLA or APA format.</li>
-        <li>If you need assistance with citing your sources, please ask for help.</li>
-        <li>Do not cheat or participate in academic dishonesty. All suspected violations will be subject to a zero on the assignment and the appropriate disciplinary action.</li>
-        <li>Reference your Student Handbook for your Rights and Responsibilities.</li>
-        <li>Any violation of academic integrity will result in a zero on the exam or assignment.</li>
-      </ul>
-    </section>
-
-    <section id="ai-policy">
-      <h2>AI Policy</h2>
-      <div class="section-rule"></div>
-      <p>The World Economic Forum defines generative AI as "a category of artificial intelligence (AI) algorithms that generate new outputs based on the data they have been trained on. Unlike traditional AI systems that are designed to recognize patterns and make predictions, generative AI creates new content in the form of images, text, audio, and more." I may use AI detection tools to screen student work in this class. Please discuss any questions or concerns about these tools with me.</p>
-
-      <h3>When AI is allowed</h3>
-      <p>You will be taught some powerful ways to use AI to your advantage in this course. There will be occasional assignments that you can complete using AI. They will be designated as such in the assignment title or details. You may use AI to help with tutoring yourself or creating study sheets, and I highly recommend you do so.</p>
-
-      <h3>When AI is not allowed</h3>
-      <ul>
-        <li>You may <strong>not</strong> turn in any graded assignment after having used AI (or Grammarly) unless the assignment is designated as AI-allowed.</li>
-        <li>You may <strong>only</strong> use AI for AI-designated graded assignments and anything else that is not graded.</li>
-        <li>You may <strong>not</strong> use AI for exams or graded portions of TBL.</li>
-        <li>Any plagiarism or AI-detection rating on graded assignments above <strong>25%</strong> will earn an automatic zero.</li>
-        <li>If you are unsure whether a tool or website is a generative AI tool, or whether it is permitted on a specific assignment, contact me for clarification before submitting your work.</li>
-      </ul>
-      <p>See the AI Honor Contract for additional requirements.</p>
-    </section>
-
-    <section id="digital-devices">
-      <h2>Digital Device Policy</h2>
-      <div class="section-rule"></div>
-      <p>The use of digital devices in the anatomy laboratory is strictly regulated due to ethical, legal, and professional obligations associated with working with human cadavers. To protect donor dignity, privacy, and institutional compliance, unauthorized use of phones, cameras, smart devices, or recording technology is prohibited in the lab at all times.</p>
-
-      <p>All students are required to read, sign, and comply with the full Digital Device Policy as a condition of enrollment. You will be held fully accountable to the terms outlined in the signed policy. Violations may result in immediate removal from the course and further disciplinary action.</p>
-
-      <p>This policy is non-negotiable and reflects standards expected in clinical, educational, and professional healthcare environments where confidentiality and ethical conduct are mandatory.</p>
-
-      <p>Students under the age of 18 must sign the policy, and a parent or legal guardian must also sign before the student is permitted to participate in laboratory activities.</p>
-    </section>
-
-    <section id="teams">
-      <h2>Working with Your Team</h2>
-      <div class="section-rule"></div>
-      <p>Team-Based Learning depends on your ability to communicate regularly with your group outside of class. Establishing clear communication early helps you stay organized, support each other, and succeed together.</p>
-
-      <h3>Get started</h3>
-      <ol>
-        <li><strong>Exchange contact information.</strong> Trade emails, phone numbers, and any other preferred points of contact. Be clear about the best times and days to reach you and your preferred response window.</li>
-        <li><strong>Choose a communication platform.</strong> As a team, decide how you will stay in touch. Options include Canvas messages or threads, group text or email, Discord, WhatsApp, GroupMe, or Slack. Choose one that works for everyone.</li>
-      </ol>
-      <p><strong>Confirm your team's communication platform by the end of class on the first day.</strong></p>
-
-      <h3>Respect, safety, accountability</h3>
-      <ul>
-        <li>Share contact information responsibly. Use all communication tools for class-related purposes only.</li>
-        <li>Respect your peers' time, privacy, and boundaries.</li>
-        <li>Ignoring messages is not an option. If you are part of a group, you are expected to respond to team communications in a timely and professional manner.</li>
-        <li>If you drop the course or stop participating, remove yourself from any group communication platforms out of courtesy to your team.</li>
-      </ul>
-    </section>
-
-    <section id="dates">
-      <h2>Critical Dates</h2>
-      <div class="section-rule"></div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Milestone</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>June 15, 2026</strong></td>
-              <td>Section start date, first day of class</td>
-            </tr>
-            <tr>
-              <td>June 19, 2026</td>
-              <td>Juneteenth (Friday), no class day, no impact on M-Th schedule</td>
-            </tr>
-            <tr>
-              <td>July 3, 2026</td>
-              <td>Independence Day observed (Friday), no class day, no impact on M-Th schedule</td>
-            </tr>
-            <tr>
-              <td><strong>August 3 to 6, 2026</strong></td>
-              <td>Final week, cumulative lab exam</td>
-            </tr>
-            <tr>
-              <td><strong>August 7, 2026</strong></td>
-              <td>Section end date</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p class="text-muted" style="font-size: 0.9rem;">Add, drop, and withdrawal deadlines for the summer term will be posted by the SCC Admissions Office. Confirm these dates in your Self-Service portal early in the term.</p>
-    </section>
-
-    <section id="accommodations">
-      <h2>Accommodations &amp; Inclusive Learning</h2>
-      <div class="section-rule"></div>
-      <p>Your success in this class is important to me. We all need accommodations because we all learn differently. If there are aspects of this course that prevent you from learning or that exclude you, please let me know as soon as possible. Together we will develop strategies to meet your needs and ensure that you meet the academic standards and requirements of the course. You are also encouraged to visit the Disabilities Services Program to determine how you could improve your learning. If you need official accommodations, you have a right to have these met. There is also a range of resources on campus, including the Academic Success and Tutoring Center.</p>
-
-      <h3>Accessibility Services Center</h3>
-      <p>If you have a disability and might need accommodations in this class, please contact the Disability Services Program as soon as possible to ensure that you receive the accommodations in a timely manner. You may also discuss your need for accommodations with me.</p>
-
-      <p>As part of Solano Community College, you have an important role in helping ensure your educational needs are met. The Accessibility Services Center (ASC) is here to assist you by providing appropriate accommodations, such as extra time on tests or the use of specialized technology. The appropriate accommodations will be determined as you speak with your ASC counselor.</p>
-
-      <p>You have a responsibility to inform your instructors of your approved accommodations during the first week you attend classes, and to provide the appropriate forms to arrange necessary services throughout the term. You can do this by accessing accommodations in Clockwork at <a class="inline-link" href="https://clockwork.solano.edu" target="_blank" rel="noopener">clockwork.solano.edu</a>, or with your counselor when meeting about accommodations. It is highly recommended that you make an appointment with each of your instructors to discuss your accommodations and any other disability-related concerns. Minimally, check with your instructors to make sure they received your accommodations. You are expected to meet all academic standards instructors have set, with the benefit of decided-upon accommodations.</p>
-
-      <p>The ASC office is located on the Fairfield campus in Building 400, room 407. Contact ASC at (707) 864-7136 or <a class="inline-link" href="mailto:ASC@solano.edu" target="_top">ASC@solano.edu</a>. More information at <a class="inline-link" href="https://welcome.solano.edu/asc-students/" target="_blank" rel="noopener">welcome.solano.edu/asc-students</a>.</p>
-    </section>
-
-    <section id="tips">
-      <h2>Tips for Success</h2>
-      <div class="section-rule"></div>
-      <p>Anatomy is a challenging course, and the 8-week intensive amplifies that. There is no sugar-coating it. By the end, you will be amazed at how much you have learned and how far your critical thinking and study skills have come. Expect obstacles, and know that you can overcome them with the right strategies.</p>
-
-      <h3>This is not a passive class</h3>
-      <p>To succeed, you need more than watching lectures and skimming the textbook. Passive learning is not enough, especially in summer. Students who treat anatomy like a lecture-based memorize-and-regurgitate course often find themselves surprised by exam scores that do not match their effort.</p>
-      <p><strong>The truth:</strong> Success requires active engagement, consistent effort, and strategic study methods.</p>
-
-      <h3>Build &amp; use learning tools</h3>
-      <p>Be creative. Be resourceful. Use the tools I provide and learn how to build your own. Successful students often make:</p>
-      <ul>
-        <li>Color-coded diagrams</li>
-        <li>Concept maps</li>
-        <li>Flashcards and apps like Anki</li>
-        <li>Study sheets that compare and contrast structures or processes</li>
-        <li>Self-quizzes or practice questions they design themselves</li>
-      </ul>
-
-      <h3>The secret sauce: less prep, more recall</h3>
-      <p>Memorization matters in anatomy, but visuals matter too. Recall is the goal. Too many students spend 90% of their study time preparing (retyping notes, organizing folders, rewatching lectures) and only 10% testing themselves.</p>
-      <div class="callout callout-gold">
-        <strong>Recommended rule:</strong> 20% prep, 80% active recall. If your study time is not giving you the grades you expect, examine how you are spending that time. Quantity matters, but quality matters more.
-      </div>
-
-      <h3>Learn how to learn</h3>
-      <p>If you are struggling, do not just try harder, try smarter. Use the learning resources posted in Canvas. Explore how successful learners study when the material is fast-paced and high-stakes. That is a skill that will serve you in this course and in every professional program that follows.</p>
-
-      <h3>Attitude &amp; accountability</h3>
-      <p>A positive, respectful attitude goes a long way. Avoid complaining about the class, the professor, the material, or your group. It erodes morale, yours and others'.</p>
-      <ul>
-        <li>Stay solution-focused.</li>
-        <li>Be respectful of your peers' time and contributions.</li>
-        <li>Carry your weight in group activities.</li>
-        <li>Support one another, and expect the same in return.</li>
-        <li>Stop negative, unproductive talk when you hear it.</li>
-      </ul>
-      <p>You will spend the next 8 weeks learning together. Treat each other like teammates, because that is what you are.</p>
-
-      <h3>Your grade does not define your worth</h3>
-      <p>Let me be clear: your grade is feedback, not a verdict. It is one data point in your journey, not the sum of who you are. If you fall short of your expectations, do not give up. Adjust your approach, ask for help, and try again.</p>
-      <p>Comparison is the enemy of progress. Focus on your growth.</p>
-      <p style="font-style: italic; font-family: 'Lora', Georgia, serif; font-size: 1.08rem; color: var(--terra); margin-top: 18px;">You belong here. Keep showing up, and keep going. I am here to support you. Your crew is here for you too.</p>
-    </section>
-
-  </main>
+<div class="chatbox">
+  <div class="ci" id="ci" style="height:440px">
+    ${S.iMsgs.length===0?`<div class="msg assistant patient"><div class="ml">${CASE.patient.name}</div><div class="mb">Thank you for seeing me. The pain is unbearable. What do you need to know?</div></div>`:""}
+    ${S.iMsgs.map(m=>`<div class="msg ${m.role} ${m.role==='assistant'?'patient':''}"><div class="ml">${m.role==='user'?'You':CASE.patient.name}</div><div class="mb">${m.content}</div></div>`).join("")}
+    ${done&&S.iMsgs.length>0?`<div class="msg assistant"><div class="mb" style="background:var(--gold-bg);border-color:var(--gold-bd);color:var(--warn)">You have used all 10 questions. The interview is now closed.</div></div>`:""}
+  </div>
+  ${!done?`<div class="ir"><textarea id="qi" rows="2" placeholder="Ask Jordan anything…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendInterview();}"></textarea><button onclick="sendInterview()">Ask →</button></div>`:`<div style="padding:12px;border-top:1px solid var(--divider-light);text-align:center"><button class="bt" onclick="S.phase='investigate';render()" style="width:100%">Interview complete ,  begin investigation →</button></div>`}
+</div>`;
+  scrollEl("ci");
+}
+function sendInterview(){
+  if(S.interviewCount>=S.maxInterview)return;
+  const inp=document.getElementById("qi");
+  if(!inp||!inp.value.trim())return;
+  const txt=inp.value.trim();inp.value="";
+  S.iMsgs.push({role:"user",content:txt});
+  S.interviewCount++;
+  S.iMsgs.push({role:"assistant",content:matchInterview(txt)});
+  saveState();render();scrollEl("ci");
+}
+
+function renderInvestigate(){
+  const pct=Math.max(0,(S.credits/S.maxCredits)*100);
+  const pcls=pct<25?"low":pct<50?"mid":"";
+  const dayData=CASE.days[S.currentDay];
+  const cats=[...new Set(dayData.orders.map(o=>o.cat))];
+
+  const tabHtml=Object.keys(CASE.days).map(d=>{
+    const di=parseInt(d);
+    const unlocked=di<=S.daysUnlocked;
+    const active=di===S.currentDay;
+    const dayLabel=CASE.days[di].label.split(", ")[0].trim();
+    return`<button class="day-tab ${active?'active':unlocked?'unlocked':'locked'}" onclick="${unlocked?`switchDay(${di})`:'void(0)'}">${dayLabel}${!unlocked?' 🔒':''}</button>`;
+  }).join("");
+
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-navy">Week 1 Investigation</span> <strong style="margin-left:8px;font-family:var(--display);font-style:italic">${CASE.patient.name}, ${CASE.patient.age}y ${CASE.patient.gender}</strong></div>
+  <div class="flex">
+    <button onclick="S.phase='interview';render()" style="font-size:15px">← Interview (${S.maxInterview-S.interviewCount} left)</button>
+    ${S.daysUnlocked>=3?`<button class="bt" onclick="S.phase='submit';render()" style="font-size:15px">Submit final diagnosis →</button>`:""}
+  </div>
 </div>
+<div class="cbar">
+  <div class="cnum">${S.credits}</div>
+  <div style="flex:1"><div class="clabel">Credits ,  carry across all 3 days</div><div class="csub">All tests cost credits. Wrong gate retries cost 15 each. Unused credits = higher efficiency score.</div><div class="pb"><div class="pf ${pcls}" style="width:${pct}%"></div></div></div>
+</div>
+<div class="day-tabs">${tabHtml}</div>
+<div class="unlock-bar">
+  <span style="font-family:var(--sans);font-size:15px;font-weight:700;color:var(--warn);letter-spacing:.04em;text-transform:uppercase">🔓 Day unlock code</span>
+  <input id="day-unlock-inp" type="text" placeholder="Enter code from instructor…" onkeydown="if(event.key==='Enter')tryUnlockDay()">
+  <button onclick="tryUnlockDay()" class="bg" style="padding:10px 20px;font-size:15px">Unlock →</button>
+</div>
+<div style="background:var(--navy-bg);border:1px solid var(--navy-bd);border-radius:var(--rs);padding:16px 20px;margin-bottom:.875rem;font-size:16px;color:var(--navy);line-height:1.7">${dayData.note}</div>
+<div class="g2">
+  <div>
+    <div class="card" style="padding:1rem">
+      <div class="sl" style="margin-bottom:8px">Free bedside data ,  always available</div>
+      ${Object.entries(CASE.free).map(([k,v])=>`<div class="fi ${S.freeObtained.includes(k)?'got':''}" onclick="getFree('${k}')">
+        <span>${v.icon} ${v.label}</span>
+        <span class="badge ${S.freeObtained.includes(k)?'b-ok':'b-navy'}" style="font-size:13px;letter-spacing:.04em">${S.freeObtained.includes(k)?'✓ viewed':'free'}</span>
+      </div>`).join("")}
+    </div>
+    ${dayData.orders.length>0?`<div class="card" style="padding:1rem">
+      <div class="sl" style="margin-bottom:6px">Day ${S.currentDay} orders (credits + gate)</div>
+      ${cats.map(cat=>`<div class="oc">${cat}</div>${dayData.orders.filter(o=>o.cat===cat).map(o=>{const done=!!S.results.find(r=>r.id===o.id);return`<div class="oi ${done?'done':''}" onclick="${done?'':"orderTest('"+o.id+"',"+S.currentDay+")"}"><span>${o.name}</span><span style="font-size:14.5px;font-weight:700;color:${done?'var(--ok)':'var(--terra)'}">${done?'✓ done':'−'+o.cost+' cr'}</span></div>`;}).join("")}`).join("")}
+    </div>`:`<div class="card" style="padding:1rem;text-align:center"><p style="color:var(--ink-soft);font-size:15px">No additional tests on this day.</p></div>`}
+  </div>
+  <div>
+    <div class="card" style="padding:1rem;margin-bottom:.75rem;max-height:300px;overflow-y:auto">
+      <div class="sl" style="margin-bottom:8px">All results ,  running total (${S.results.length} ordered · ${S.freeObtained.length} free · ${S.autoRevealed.length} day reveals)</div>
+      ${S.freeObtained.length===0&&S.results.length===0&&S.autoRevealed.length===0?`<p style="color:var(--ink-soft);font-size:15px">No data yet. Click items to the left to begin.</p>`:""}
+      ${S.freeObtained.map(k=>`<div class="fc"><div class="fl">${CASE.free[k].icon} ${CASE.free[k].label}</div>${CASE.free[k].result}</div>`).join("")}
+      ${S.autoRevealed.map(d=>{const ar=CASE.days[d].autoReveal;return`<div class="ar"><div class="al">${ar.label}</div>${ar.result}</div>`;}).join("")}
+      ${S.results.map(r=>{const order=Object.values(CASE.days).flatMap(d=>d.orders).find(o=>o.id===r.id);return`<div class="rc"><div class="rl">✓ ${order?.name||r.id}</div>${r.result}</div>`;}).join("")}
+    </div>
+    <div class="chatbox">
+      <div class="ci" id="inv-ci" style="height:340px">
+        ${S.invMsgs.length===0?`<div class="msg assistant"><div class="ml">Clinical Facilitator</div><div class="mb">Click a test on the left to order it. You will receive a DOK 2-3 anatomy gate question before each result is released. Day unlock codes appear after your instructor announces them.</div></div>`:""}
+        ${S.invMsgs.map(m=>`<div class="msg ${m.role} ${m.cls||''}"><div class="ml">${m.role==='user'?'You':'Clinical Facilitator'}</div><div class="mb">${m.isHtml?m.content:m.content.replace(/\n/g,'<br>')}</div></div>`).join("")}
+      </div>
+      <div class="ir"><textarea id="invi" rows="2" placeholder="Type A, B, C, or D to answer gate question…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendInv();}"></textarea><button onclick="sendInv()">Send →</button></div>
+    </div>
+  </div>
+</div>`;
+  scrollEl("inv-ci");
+}
 
-<footer>
-  <p><strong>BIO 004 Human Anatomy, Summer 2026, Solano Community College</strong></p>
-  <p>Dr. Sharilyn Rennie, sharilyn.rennie@solano.edu</p>
-  <p>This syllabus is a guide. Course details may be updated with advance notice via Canvas Announcements.</p>
-</footer>
+function switchDay(d){S.currentDay=d;saveState();render();}
+function getFree(k){if(!S.freeObtained.includes(k)){S.freeObtained.push(k);saveState();}render();}
 
-<script>
-(function() {
-  'use strict';
+function orderTest(id,day){
+  if(S.results.find(r=>r.id===id))return;
+  const order=CASE.days[day].orders.find(o=>o.id===id);
+  if(!order)return;
+  if(S.credits<order.cost){S.invMsgs.push({role:"assistant",cls:"fail",content:"Not enough credits to order this test."});render();return;}
+  S.credits=Math.max(0,S.credits-order.cost);
+  if(!S.ordered.includes(id))S.ordered.push(id);
+  S.gateActive={orderId:id,order,day};
+  const g=order.gate;
+  const optHtml=g.opts.map(o=>`<span style="display:block;margin:6px 0;padding:6px 0;border-bottom:1px solid rgba(20,41,64,.08)">${o}</span>`).join("");
+  S.invMsgs.push({role:"assistant",cls:"gate",isHtml:true,content:`<strong>Order:</strong> ${order.name} (−${order.cost} credits)<br><br><strong>⚑ ANATOMY GATE QUESTION (DOK 2-3)</strong><br><br>${g.q}<br><br>${optHtml}<br>Type the letter of your answer: <strong>A, B, C, or D</strong>`});
+  saveState();render();scrollEl("inv-ci");
+}
 
-  var printBtn = document.getElementById('print-btn');
-  if (printBtn) {
-    printBtn.addEventListener('click', function() { window.print(); });
-  }
-
-  var expandBtn = document.getElementById('expand-all');
-  var collapseBtn = document.getElementById('collapse-all');
-  if (expandBtn) {
-    expandBtn.addEventListener('click', function() {
-      document.querySelectorAll('details').forEach(function(d) { d.open = true; });
-    });
-  }
-  if (collapseBtn) {
-    collapseBtn.addEventListener('click', function() {
-      document.querySelectorAll('details').forEach(function(d) { d.open = false; });
-    });
-  }
-
-  var sections = document.querySelectorAll('main section[id]');
-  var navLinks = document.querySelectorAll('.sidenav a');
-  var linkMap = {};
-  navLinks.forEach(function(a) {
-    var href = a.getAttribute('href');
-    if (href && href.indexOf('#') === 0) {
-      linkMap[href.slice(1)] = a;
+function sendInv(){
+  const inp=document.getElementById("invi");
+  if(!inp||!inp.value.trim())return;
+  const txt=inp.value.trim();inp.value="";
+  S.invMsgs.push({role:"user",content:txt});
+  if(S.gateActive){
+    const letter=txt.trim().toUpperCase().charAt(0);
+    if(!["A","B","C","D"].includes(letter)){S.invMsgs.push({role:"assistant",cls:"gate",content:"Please type just the letter of your answer: A, B, C, or D."});render();scrollEl("inv-ci");return;}
+    const{order}=S.gateActive;const g=order.gate;
+    if(letter===g.correct){
+      S.results.push({id:order.id,result:order.result});
+      S.gateActive=null;
+      S.invMsgs.push({role:"assistant",cls:"result",isHtml:true,content:`<strong>✓ CORRECT ,  ${letter} is right.</strong><br><br><strong>Explanation:</strong> ${g.exp}<br><br><strong>RESULT:</strong><br><br>${order.result.replace(/\n/g,'<br>')}`});
+    } else {
+      S.retries++; S.credits=Math.max(0,S.credits-15);
+      S.invMsgs.push({role:"assistant",cls:"fail",isHtml:true,content:`<strong>✗ Incorrect.</strong> ${letter} is not right. (−15 credits)<br><br>Think about the anatomy. Type A, B, C, or D to retry.`});
     }
-  });
-
-  if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        var id = entry.target.id;
-        var link = linkMap[id];
-        if (!link) return;
-        if (entry.isIntersecting) {
-          navLinks.forEach(function(l) { l.classList.remove('is-active'); });
-          link.classList.add('is-active');
-        }
-      });
-    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
-    sections.forEach(function(s) { observer.observe(s); });
+    saveState();render();scrollEl("inv-ci");return;
   }
+  S.invMsgs.push({role:"assistant",content:"Click a test on the left panel to order it and receive a gate question."});
+  render();scrollEl("inv-ci");
+}
 
-  function highlightCurrentWeek() {
-    var today = new Date();
-    today.setHours(0, 0, 0, 0);
-    var cards = document.querySelectorAll('.week-card');
-    cards.forEach(function(card) {
-      var start = new Date(card.dataset.start);
-      var end = new Date(card.dataset.end);
-      end.setHours(23, 59, 59, 999);
-      if (today >= start && today <= end) {
-        card.classList.add('is-current');
-        card.setAttribute('aria-current', 'true');
-      }
-    });
-  }
-  highlightCurrentWeek();
+function renderSubmit(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="border-top:4px solid var(--ok);max-width:660px;margin:0 auto">
+  <div class="sl" style="margin-bottom:.5rem">Submit final diagnosis ,  Week 1</div>
+  <h1 style="margin-bottom:.4rem">${CASE.patient.name}, ${CASE.patient.age}y</h1>
+  <p style="margin-bottom:1rem;font-size:15.5px">Credits remaining: ${S.credits}/200 · Tests ordered: ${S.ordered.length} · Days unlocked: ${S.daysUnlocked}/3 · Gate retries: ${S.retries}</p>
+  <div class="note">Your submission is private. Submit your best diagnosis based on all data collected. The reveal code is given after Thursday TBL.</div>
+  <div style="margin-bottom:1rem"><div class="sl">Final diagnosis</div><input type="text" id="sd" placeholder="e.g. Stevens-Johnson Syndrome / TEN overlap, drug-induced (TMP-SMX)" value="${S.diagText}" style="font-size:16px"></div>
+  <div style="margin-bottom:1.4rem"><div class="sl">Anatomical rationale (3-5 sentences). Use the foundational anatomy terminology you have learned this week. Where on the body is the rash distributed, use body region terms. Which tissue types are involved (the epidermis is what kind of epithelium, the dermis is what kind of tissue, the blood is what kind of tissue)? How does the medication relate to the timing? How might loss of skin function affect other body cavities or organ systems?</div><textarea id="sr" rows="6" placeholder="Connect the medication, the timing, and the anatomical findings. Use body region terms to describe the distribution. Use tissue type terms to describe what is damaged. Note which body cavities or systems are showing systemic effects.">${S.rationaleText}</textarea></div>
+  <div class="fb"><button onclick="S.phase='investigate';render()">← Back</button><button class="bt" onclick="doSubmit()">Submit diagnosis →</button></div>
+</div>`;
+}
+async function doSubmit(){
+  const sd=document.getElementById("sd"),sr=document.getElementById("sr");
+  if(!sd?.value.trim()||!sr?.value.trim()){alert("Please complete both fields.");return;}
+  S.diagText=sd.value.trim();S.rationaleText=sr.value.trim();
+  const sc=calcScores();S.scores=sc;
+  await submitToForm(sc);
+  S.phase="submitted";saveState();render();
+}
 
-  var tblInput = document.getElementById('tbl-avg');
-  var labInput = document.getElementById('lab-avg');
-  var quizInput = document.getElementById('quiz-avg');
-  var resultPct = document.getElementById('result-pct');
-  var resultLetter = document.getElementById('result-letter');
+function renderSubmitted(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="text-align:center;padding:2.5rem 2rem;border-top:4px solid var(--ok);max-width:560px;margin:0 auto">
+  <div style="font-size:48px;margin-bottom:1rem">✓</div>
+  <h1 style="color:var(--ok);margin-bottom:.75rem">Week 1 Diagnosis Submitted</h1>
+  <p style="max-width:440px;margin:0 auto 1.5rem">Recorded privately, ${S.studentName}. Present your data and reasoning in Thursday TBL ,  do not reveal your diagnosis to other teams beforehand.</p>
+  <div class="note" style="text-align:left;max-width:480px;margin:0 auto 1.5rem;font-size:14.5px">
+    <strong>Next steps</strong><br>
+    1. Defend your diagnosis at Thursday TBL (iRAT → tRAT → application).<br>
+    2. After TBL, your instructor will give the reveal code.<br>
+    3. Enter it below to see the correct diagnosis, your full score, and the anatomical explanation.
+  </div>
+  <div style="max-width:380px;margin:0 auto">
+    <div class="sl" style="margin-bottom:8px">Reveal code (given after Thursday TBL)</div>
+    <input type="text" id="uki" placeholder="Enter reveal code…" style="margin-bottom:10px;font-size:17px;letter-spacing:.14em;text-align:center;text-transform:uppercase" onkeydown="if(event.key==='Enter')tryReveal()">
+    <div id="ukerr" style="color:var(--terra);font-size:14px;margin-bottom:8px;display:none">Incorrect. Wait for your instructor after Thursday TBL.</div>
+    <button class="bb" onclick="tryReveal()" style="width:100%;font-size:15px;padding:14px">Reveal diagnosis &amp; scores →</button>
+  </div>
+</div>`;
+}
+function tryReveal(){
+  const inp=document.getElementById("uki");
+  if(!inp||!inp.value.trim())return;
+  if(inp.value.trim().toUpperCase()!==REVEAL_CODE.toUpperCase()){document.getElementById("ukerr").style.display="block";inp.value="";return;}
+  S.phase="reveal";saveState();render();
+}
 
-  function clampNum(v) {
-    if (v === '' || v === null || v === undefined) return null;
-    var n = parseFloat(v);
-    if (isNaN(n)) return null;
-    if (n < 0) return 0;
-    if (n > 100) return 100;
-    return n;
-  }
+function renderReveal(){
+  const sc=S.scores||calcScores();
+  function scCls(e,m){return e>=m*.8?"full":e>=m*.4?"part":"zero";}
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-ok">Week 1 Complete</span></div>
+  <button onclick="fullReset()">Restart Week 1</button>
+</div>
+<div class="card" style="border-top:4px solid var(--navy);margin-bottom:1rem">
+  <div class="sl" style="margin-bottom:8px">Confirmed diagnosis</div>
+  <h1 style="font-size:24px;margin-bottom:8px;color:var(--navy)">Stevens-Johnson Syndrome / Toxic Epidermal Necrolysis (SJS/TEN) overlap, TMP-SMX-induced</h1>
+  <p style="font-size:15.5px;margin-bottom:0;color:var(--ink-soft)">Drug-induced, T-cell-mediated full-thickness epidermal necrosis with subepidermal cleavage at the dermal-epidermal junction. BSA detached 12% on Wednesday placed Jordan in the SJS-TEN OVERLAP range (10-30%). Trigger: TMP-SMX (Bactrim), latency 9 days from drug initiation to mucocutaneous onset.</p>
+</div>
+<div class="card">
+  <h2>Why this diagnosis (anatomical reasoning)</h2>
+  <div class="reveal-text">PATHOPHYSIOLOGY (drug → death of keratinocytes → barrier loss):
 
-  function letterFor(pct) {
-    if (pct >= 89.5) return 'A';
-    if (pct >= 79.5) return 'B';
-    if (pct >= 69.5) return 'C';
-    if (pct >= 59.5) return 'D';
-    return 'F';
-  }
+1. EXPOSURE: Jordan started TMP-SMX (sulfamethoxazole) for UTI. Sulfonamides are the most common antibiotic trigger of SJS/TEN, with peak onset 4-28 days after first exposure.
 
-  function recalc() {
-    var weights = { tbl: 40, lab: 50, quiz: 10 };
-    var values = {
-      tbl: clampNum(tblInput.value),
-      lab: clampNum(labInput.value),
-      quiz: clampNum(quizInput.value)
-    };
-    var totalWeight = 0;
-    var weightedSum = 0;
-    Object.keys(values).forEach(function(k) {
-      if (values[k] !== null) {
-        weightedSum += values[k] * weights[k];
-        totalWeight += weights[k];
-      }
-    });
-    if (totalWeight === 0) {
-      resultPct.textContent = '--';
-      resultLetter.textContent = '--';
-      return;
-    }
-    var pct = weightedSum / totalWeight;
-    resultPct.textContent = pct.toFixed(1) + '%';
-    resultLetter.textContent = letterFor(pct);
-  }
+2. IMMUNE ACTIVATION: The drug or its metabolite acts as a hapten that modifies self-peptides. In genetically susceptible individuals (HLA-B*1502 in some Asian populations; HLA-A*3101 with carbamazepine; HLA-B*5701 with abacavir), CD8+ T-cells in dermal capillaries become activated against drug-modified keratinocyte antigens.
 
-  [tblInput, labInput, quizInput].forEach(function(el) {
-    if (el) el.addEventListener('input', recalc);
-  });
-  recalc();
+3. KERATINOCYTE APOPTOSIS: Activated CD8+ T-cells migrate to the epidermis and induce widespread keratinocyte apoptosis via Fas-FasL, perforin/granzyme, and especially granulysin. Apoptosis spreads from basal layer upward through ALL FIVE EPIDERMAL LAYERS:
+   • stratum corneum (corneocytes already dead but barrier disrupted)
+   • stratum lucidum (palms/soles, present here in face/chest only as thinner)
+   • stratum granulosum (lamellar bodies releasing lipid lost)
+   • stratum spinosum (Langerhans cells lost, desmosomes break down)
+   • stratum basale (basal keratinocytes apoptose, no replenishment)
 
-  function sendHeight() {
-    try {
-      var height = document.documentElement.scrollHeight;
-      var id = window.frameElement ? window.frameElement.id : '';
-      window.parent.postMessage({ type: 'iframeHeight', id: id, height: height }, '*');
-    } catch (e) { /* ignore cross-origin errors when not embedded */ }
-  }
-  window.addEventListener('load', sendHeight);
-  window.addEventListener('resize', sendHeight);
-  if ('ResizeObserver' in window) {
-    var ro = new ResizeObserver(sendHeight);
-    ro.observe(document.body);
-  }
-  document.querySelectorAll('details').forEach(function(d) {
-    d.addEventListener('toggle', sendHeight);
-  });
+4. SUBEPIDERMAL CLEAVAGE: Once the entire epidermis is necrotic, it sheets away from the dermis at the dermal-epidermal junction (DEJ, the basement membrane). This is the histologic hallmark seen on biopsy: full-thickness epidermal necrosis with separation at the DEJ. NIKOLSKY SIGN POSITIVE because the dead epidermis has no cohesion to the dermis below.
+
+5. SYSTEMIC SEQUELAE FROM BARRIER LOSS:
+   • Transepidermal water loss → hypovolemia → prerenal AKI (Cr 0.7→1.8) → SCORTEN points
+   • Albumin loss into damaged dermis → hypoalbuminemia (3.4→2.8)
+   • Loss of antimicrobial peptides + commensal flora + acid mantle → high sepsis risk (procalcitonin trending up)
+   • Lactate elevation → tissue hypoperfusion + glycolysis in dying skin
+   • Mucous membrane involvement (eyes, mouth, urethra) because mucous membranes share the same stratified epithelium and are also targets
+
+DIFFERENTIAL DIAGNOSTIC ANATOMY (why each is ruled out):
+
+• Staphylococcal scalded skin syndrome (SSSS): cleavage at stratum granulosum (intraepidermal, very superficial) ,  biopsy shows full-thickness necrosis, ruled out.
+
+• Pemphigus vulgaris: suprabasal intraepidermal cleavage (above basale, due to anti-desmoglein-3) ,  biopsy shows DEJ split + negative DIF, ruled out.
+
+• Bullous pemphigoid: subepidermal cleavage but with eosinophilic infiltrate and IgG/C3 along BMZ on DIF ,  DIF negative, ruled out.
+
+• Erythema multiforme: typically post-HSV, partial-thickness damage, acral target lesions, limited mucosal involvement ,  HSV PCR negative, distribution truncal, full-thickness necrosis, ruled out.
+
+• Mycoplasma-induced rash and mucositis (MIRM): mucositis-dominant with sparse skin lesions ,  Jordan has BOTH severe mucositis AND extensive skin necrosis, ruled out by Mycoplasma serology and biopsy.
+
+KEY TEACHING ANCHORS (Week 1, Module 1):
+• Five epidermal layers, top down: corneum / lucidum (thick skin only) / granulosum / spinosum / basale.
+• Each layer's cells: corneocytes (anucleate, lipid-embedded) / keratohyalin granule cells / Langerhans cells in spinosum / mitotic basal cells / Merkel cells at base.
+• DEJ structure: hemidesmosomes anchor basal keratinocytes to laminin-332 in lamina lucida; type IV collagen forms lamina densa; type VII collagen anchors to dermis.
+• Cleavage plane diagnosis: where the split occurs tells you what disease this is.</div>
+</div>
+<div class="card">
+  <h2>Your score</h2>
+  <div class="score-row"><span>Diagnostic accuracy</span><span class="sv ${scCls(sc.diag,35)}">${sc.diag}/35</span></div>
+  <div class="score-row"><span>Data efficiency (credits remaining)</span><span class="sv ${scCls(sc.eff,20)}">${sc.eff}/20</span></div>
+  <div class="score-row"><span>Interview quality (topic coverage)</span><span class="sv ${scCls(sc.interview,15)}">${sc.interview}/15</span></div>
+  <div class="score-row"><span>Gate question performance</span><span class="sv ${scCls(sc.gate,10)}">${sc.gate}/10</span></div>
+  <div class="score-row"><span>Completion bonus</span><span class="sv ${scCls(sc.complete,5)}">${sc.complete}/5</span></div>
+  <div class="score-row" style="margin-top:8px;border-top:2px solid var(--navy);padding-top:12px"><span style="font-weight:700;font-size:17px">Total</span><span class="sv full" style="font-size:19px">${sc.total}/${sc.max}</span></div>
+</div>
+<div class="card" style="border-top:4px solid var(--gold)">
+  <h2>Your submission</h2>
+  <div class="sl">Your diagnosis</div>
+  <p style="margin-bottom:14px;color:var(--ink)">${S.diagText||"(not submitted)"}</p>
+  <div class="sl">Your rationale</div>
+  <p style="white-space:pre-wrap;color:var(--ink)">${S.rationaleText||"(not submitted)"}</p>
+</div>`;
+}
+
+/* ────────── HELPERS ────────── */
+function scrollEl(id){setTimeout(()=>{const e=document.getElementById(id);if(e)e.scrollTop=e.scrollHeight;},20);}
+
+/* ────────── COPY / SCREENSHOT PROTECTION ────────── */
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>{const t=e.target;if(t.tagName==='INPUT'||t.tagName==='TEXTAREA')return;e.preventDefault();});
+document.addEventListener('copy',e=>{e.preventDefault();try{e.clipboardData.setData('text/plain','Copying is disabled in this exam environment.');}catch(_){}});
+document.addEventListener('cut',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=(e.key||'').toLowerCase();
+  const ctrl=e.ctrlKey||e.metaKey;
+  if(ctrl&&['c','x','s','p','u','a'].includes(k)){const t=e.target;if(t.tagName==='INPUT'||t.tagName==='TEXTAREA')return;e.preventDefault();}
+  if(k==='f12'||(e.ctrlKey&&e.shiftKey&&['i','j','c'].includes(k))||(e.metaKey&&e.altKey&&['i','j','c'].includes(k))){e.preventDefault();}
+  if(ctrl&&e.shiftKey&&k==='s'){e.preventDefault();}
+});
+
+/* ────────── INIT ────────── */
+render();
+
+/* ────────── IFRAME HEIGHT SENDER ────────── */
+(function(){
+  const FRAME_ID='bio004-w1-jordan-sim';
+  function sendHeight(){try{const h=document.documentElement.scrollHeight;if(window.parent&&window.parent!==window)window.parent.postMessage({type:'iframeHeight',id:FRAME_ID,height:h},'*');}catch(e){}}
+  window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);
+  if('ResizeObserver' in window){new ResizeObserver(sendHeight).observe(document.body);}
+  setTimeout(sendHeight,200);setTimeout(sendHeight,800);setTimeout(sendHeight,2000);
 })();
 </script>
-
 </body>
 </html>
