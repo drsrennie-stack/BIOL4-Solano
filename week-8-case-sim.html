@@ -200,14 +200,13 @@ const CASE = {
 
   /* INTERVIEW (handled by API persona) */
   interviewTopics:{
-    onset:{label:"Onset/progression",pattern:/when|start|onset|begin|first|ago|month|year|gradual|sudden|progress|worsen/i},
-    gait:{label:"Gait/falls",pattern:/walk|gait|fall|leg|step|stuck|shuffle|balance|stand|stair|magnet/i},
-    cognition:{label:"Cognition",pattern:/memory|forget|confus|think|word|name|recall|attention|sharp|cognitive|mental/i},
-    urinary:{label:"Urinary",pattern:/urin|bladder|inconti|accident|wet|toilet|bathroom|leak|urgen/i},
-    pmh:{label:"PMH/meds",pattern:/medical|history|prior|previous|condition|hypertens|cholesterol|medication|allerg|surger|diabet/i},
-    family:{label:"Family hx",pattern:/family|mother|father|parent|sister|brother|relative|alzheim|dementia|stroke|parkinson/i},
-    social:{label:"Social/function",pattern:/work|retire|live|alone|smoke|drink|alcohol|drive|garden|active|mood|hobby|exercise/i},
-    acute:{label:"Acute neuro",pattern:/headache|head pain|nausea|vomit|vision|blurry|double|dizzy|weak|numb|tremor|facial|seizure|trauma/i},
+    cc:{label:"Chief complaint",pattern:/symptom|fall|walk|gait|leg|step|stuck|shuffle|balance|stair|memory|forget|confus|think|word|recall|attention|urin|bladder|inconti|accident|wet|toilet|bathroom|leak|urgen|pain|hurt|wrong|off/i},
+    hpi:{label:"History of present illness",pattern:/when|start|onset|begin|first|ago|month|year|gradual|sudden|progress|worsen|earl|timeline|long have|how long/i},
+    pmh:{label:"Past medical history",pattern:/medical|history|prior|previous|condition|hypertens|cholesterol|surger|diabet|hospital|diagnos/i},
+    meds:{label:"Medications and allergies",pattern:/medication|drug|pill|prescription|allerg|supplement|vitamin|dose|taking|on any/i},
+    family:{label:"Family history",pattern:/family|mother|father|parent|sister|brother|relative|alzheim|dementia|stroke|parkinson|inherit|genetic/i},
+    social:{label:"Social history",pattern:/work|retire|live|alone|smoke|drink|alcohol|tobacco|drive|garden|active|mood|hobby|exercise|substance|sleep/i},
+    ros:{label:"Review of systems",pattern:/headache|head pain|nausea|vomit|vision|blurry|double|dizzy|weak|numb|tremor|facial|seizure|chest|breath|skin|fever|cough/i},
   },
 
   /* FREE BEDSIDE DATA */
@@ -402,6 +401,7 @@ function newState(){return{
   iMsgs:[], interviewCount:0, maxInterview:10, iTopicHit:{}, iPending:false,
   invMsgs:[], gateActive:null, retries:0,
   tMsgs:[], tPending:false, tutorOpen:false, tCount:0,
+  empathyHits:0,
   diffOrder:null,
   diagText:"", rationaleText:"",
   scores:null,
@@ -704,6 +704,12 @@ function calcScores(){
   const gatePts=Math.max(0,max.gate-(S.retries));
   const completePts=S.daysUnlocked>=3?max.complete:0;
 
+  // Hidden empathy bonus: up to 5 extra credit points beyond the 85 max,
+  // earned for compassionate phrasing in the interview. Students do not see
+  // this scored during play. It only appears in the reveal feedback.
+  const empathyHits=S.empathyHits||0;
+  const empathyBonus=Math.min(5,Math.floor(empathyHits/2));
+
   const idToName=id=>{
     for(const d of [1,2,3]){
       const o=CASE.days[d].orders.find(x=>x.id===id);
@@ -715,7 +721,8 @@ function calcScores(){
   return{
     diag:diagPts,eff:effPts,hy:hyPts,seq:seqPts,
     interview:intPts,gate:gatePts,complete:completePts,
-    total:diagPts+effPts+hyPts+seqPts+intPts+gatePts+completePts,
+    empathy:empathyBonus,empathyHits:empathyHits,
+    total:diagPts+effPts+hyPts+seqPts+intPts+gatePts+completePts+empathyBonus,
     max:total_max,
     detail:{
       diagCorrect,diagSelected:S.diagText||"(none)",
@@ -787,6 +794,12 @@ function generateFeedback(sc){
     wins.push("<strong>Strong data efficiency.</strong> You finished with " + d.creditsLeft + " of " + d.creditsMax + " credits remaining.");
   }else if(d.creditsLeft<d.creditsMax*0.2){
     opps.push("<strong>Data efficiency.</strong> You finished with " + d.creditsLeft + " of " + d.creditsMax + " credits remaining. Some tests on your list may have been redundant or non-contributory; aim to order with a working hypothesis in mind.");
+  }
+  // Hidden empathy bonus, reveal it now
+  if(sc.empathy>0){
+    wins.push("<strong>Bonus: compassionate bedside manner.</strong> You used empathic, patient-centered phrasing in " + sc.empathyHits + " of your interview questions, which earned " + sc.empathy + " hidden bonus point" + (sc.empathy===1?"":"s") + " (added to your total beyond 85). This is a hidden category meant to recognize the difference between an interrogator and a clinician.");
+  }else{
+    opps.push("<strong>Bedside manner (hidden bonus opportunity).</strong> Your interview questions were clinical and efficient, which is fine, but a patient-centered tone (asking how they are feeling, acknowledging fear, checking in about support, taking a moment) is part of clinical practice. There is a hidden 0 to 5 bonus available for compassionate phrasing on every case.");
   }
   // Completion
   if(d.daysReached>=3){
@@ -942,7 +955,7 @@ function renderInterview(){
 </div>
 <div class="chatbox">
   <div class="ci" id="ci" style="height:440px">
-    ${S.iMsgs.length===0?`<div class="msg assistant patient"><div class="ml">${CASE.patient.name}</div><div class="mb">Thanks for seeing me. My ankle is killing me. What do you need to know?</div></div>`:""}
+    ${S.iMsgs.length===0?`<div class="msg assistant patient"><div class="ml">${CASE.patient.name}</div><div class="mb">Thank you for seeing me, doctor. What would you like to know?</div></div>`:""}
     ${S.iMsgs.map(m=>`<div class="msg ${m.role} ${m.role==='assistant'?'patient':''}"><div class="ml">${m.role==='user'?'You':CASE.patient.name}</div><div class="mb">${m.content}</div></div>`).join("")}
     ${S.iPending?`<div class="msg assistant patient"><div class="ml">${CASE.patient.name}</div><div class="mb"><span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div></div>`:""}
     ${done&&S.iMsgs.length>0&&!S.iPending?`<div class="msg assistant"><div class="mb" style="background:var(--gold-bg);border-color:var(--gold-bd);color:var(--warn)">You have used all 10 questions. The interview is now closed.</div></div>`:""}
@@ -951,6 +964,8 @@ function renderInterview(){
 </div>`;
   scrollEl("ci");
 }
+const EMPATHY_PATTERN=/how (are|do|have|is) you|how (are|do) you (feel|doing)|are you (ok|okay|comfortable|alright|scared|worried|nervous|anxious|frightened|afraid|in pain)|i.?m sorry|that (must|sounds) (be|sound) (hard|scary|tough|difficult|frightening|painful)|do you have (someone|family|support)|is (someone|anyone|family) (with|here) (you|for you)|what (are|is) you (worried|concerned|scared|afraid)|anything (else )?(you.?re|you) (worried|concerned|scared|afraid) about|take your time|i understand|we.?ll take (good )?care|that.?s a lot|how have you been|tell me how you.?re feeling|what matters (most|to you)|how can (we|i) help|i hear you/i;
+
 async function sendInterview(){
   if(S.interviewCount>=S.maxInterview)return;
   if(S.iPending)return;
@@ -963,6 +978,8 @@ async function sendInterview(){
   }
   S.iMsgs.push({role:"user",content:txt});
   S.interviewCount++;
+  // Hidden empathy bonus tracker (not displayed during play)
+  if(typeof EMPATHY_PATTERN!=="undefined"&&EMPATHY_PATTERN.test(txt)){S.empathyHits=(S.empathyHits||0)+1;}
   S.iPending=true;
   saveState();render();scrollEl("ci");
   // Build messages array from full conversation history (already includes the new user msg)
@@ -1281,7 +1298,8 @@ Autonomic outflow: sympathetic = thoracolumbar (T1 to L2/L3) via paravertebral c
   <div class="score-row"><span>Interview quality (topic coverage)</span><span class="sv ${scCls(sc.interview,10)}">${sc.interview}/10</span></div>
   <div class="score-row"><span>Gate question performance</span><span class="sv ${scCls(sc.gate,5)}">${sc.gate}/5</span></div>
   <div class="score-row"><span>Completion bonus</span><span class="sv ${scCls(sc.complete,5)}">${sc.complete}/5</span></div>
-  <div class="score-row" style="margin-top:8px;border-top:2px solid var(--navy);padding-top:12px"><span style="font-weight:700;font-size:17px">Total</span><span class="sv full" style="font-size:19px">${sc.total}/${sc.max}</span></div>
+  ${sc.empathy>0?`<div class="score-row"><span>Bonus: compassionate bedside manner (hidden category)</span><span class="sv full">+${sc.empathy}</span></div>`:""}
+  <div class="score-row" style="margin-top:8px;border-top:2px solid var(--navy);padding-top:12px"><span style="font-weight:700;font-size:17px">Total</span><span class="sv full" style="font-size:19px">${sc.total}/${sc.max}${sc.empathy>0?` (+${sc.empathy} bonus)`:""}</span></div>
 </div>
 <div class="card" style="border-top:4px solid var(--ok);background:var(--cream-warm)">
   <h2>What you did well</h2>
