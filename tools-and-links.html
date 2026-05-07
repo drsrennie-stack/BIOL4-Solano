@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Course Tools and Links, BIO 004, Summer 2026</title>
+<meta name="description" content="Hub page with all course tools, links, and downloads for BIO 004 Human Anatomy, Summer 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C; --navy-deep: #15262F; --terra: #7C2018; --gold: #C9A961; --gold-soft: #DCC289;
+  --ink: #15262F; --ink-soft: #3D4F5A; --divider: #BFC8CD; --divider-light: #D8DEE2;
+  --cream: #FAF7F2; --cream-warm: #F5F2EC; --white: #FFFFFF;
+  --lift-1: 0 1px 2px rgba(30, 61, 76, 0.05), 0 1px 3px rgba(30, 61, 76, 0.04);
+  --lift-2: 0 2px 4px rgba(30, 61, 76, 0.06), 0 4px 12px rgba(30, 61, 76, 0.06);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0.01ms !important; } }
+body { margin: 0; font-family: 'DM Sans', Arial, sans-serif; font-size: 16px; line-height: 1.65; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+.skip-link { position: absolute; top: -100px; left: 12px; background: var(--navy); color: var(--cream); padding: 12px 18px; text-decoration: none; border-radius: 4px; font-weight: 600; z-index: 1000; }
+.skip-link:focus { top: 12px; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+.wrap { max-width: 940px; margin: 0 auto; padding: 24px 24px 60px; }
+.hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--cream); border-radius: 8px; padding: 36px 36px 32px; margin-bottom: 32px; position: relative; overflow: hidden; box-shadow: var(--lift-2); }
+.hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%); pointer-events: none; }
+.hero > * { position: relative; }
+.hero-eyebrow { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px; }
+.hero h1 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 800; font-size: 2.1rem; line-height: 1.1; margin: 0 0 10px; color: var(--white); letter-spacing: -0.02em; }
+.hero-subtitle { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1rem; color: rgba(250, 247, 242, 0.88); margin: 0; max-width: 65ch; }
+section { margin-bottom: 36px; }
+section h2 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.45rem; color: var(--navy); margin: 0 0 4px; }
+.section-rule { height: 3px; width: 48px; background: var(--gold); margin: 8px 0 20px; border-radius: 2px; }
+section h3 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--terra); margin: 22px 0 8px; }
+section p { margin: 0 0 14px; }
+.callout { background: var(--white); border: 1px solid var(--divider-light); border-left: 4px solid var(--navy); padding: 16px 20px; margin: 18px 0; border-radius: 0 6px 6px 0; box-shadow: var(--lift-1); }
+.callout strong { font-family: 'Plus Jakarta Sans', Arial, sans-serif; color: var(--navy); }
+.callout-gold { border-left-color: var(--gold); } .callout-gold strong { color: var(--terra); }
+.tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 16px 0; }
+.tool { background: var(--white); border: 1px solid var(--divider-light); border-radius: 6px; padding: 18px 20px; box-shadow: var(--lift-1); border-top: 4px solid var(--gold); transition: box-shadow 0.15s, transform 0.15s; }
+.tool:hover { box-shadow: var(--lift-2); transform: translateY(-1px); }
+.tool h4 { margin: 0 0 6px; color: var(--navy); font-size: 1rem; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; }
+.tool p { margin: 0 0 10px; font-size: 0.9rem; color: var(--ink); }
+.tool a { display: inline-block; padding: 6px 12px; background: var(--navy); color: var(--white); text-decoration: none; border-radius: 4px; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.82rem; font-weight: 600; transition: background 0.15s; }
+.tool a:hover { background: var(--terra); color: var(--white); }
+.tool.canvas-page { border-top-color: var(--terra); }
+.tool.external { border-top-color: var(--gold); }
+.tool.support { border-top-color: var(--navy); }
+ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--gold); }
+strong, b { font-weight: 700; color: var(--navy); }
+em, i { font-style: italic; color: var(--ink); }
+a.inline-link { color: var(--terra); text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
+a.inline-link:hover { color: var(--navy); }
+footer { margin-top: 40px; padding: 28px 24px 0; border-top: 1px solid var(--divider-light); font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.85rem; color: var(--ink-soft); text-align: center; position: relative; }
+footer::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--gold); border-radius: 2px; }
+footer p { margin: 4px 0; }
+footer strong { color: var(--navy); font-weight: 700; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="wrap">
+
+<header class="hero">
+  <p class="hero-eyebrow">BIO 004, Course Hub</p>
+  <h1>All Course Tools and Links</h1>
+  <p class="hero-subtitle">Everything you need for the course in one place. Bookmark this page.</p>
+</header>
+
+<main id="main">
+
+<section>
+  <h2>Course pages (Canvas)</h2>
+  <div class="section-rule"></div>
+  <p>The full set of orientation and reference pages for this course. Each is also accessible from your Canvas Modules.</p>
+
+  <div class="tool-grid">
+    <div class="tool canvas-page">
+      <h4>Welcome + how this course works</h4>
+      <p>The headline orientation page. TBL flipped, no concept lectures, what to expect.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/welcome.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>How This Course Works</h4>
+      <p>The weekly rhythm, day-by-day breakdown, four anchor activities.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/how-this-course-works.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>Your TBL team and study groups</h4>
+      <p>Three layers of community, team formation, communication norms.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/tbl-team.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>Schedule</h4>
+      <p>Week-by-week schedule with TBL cases and lab exam dates.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/schedule.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>Grading and Assessments</h4>
+      <p>Grading structure, scale, all assessment details, and grade calculator.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/grading.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>Course Materials</h4>
+      <p>Textbook options (OpenStax recommended), lab supplies, technology requirements.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/materials.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>Communication and Office Hours</h4>
+      <p>How to reach Dr. Rennie, response times, which channel for what.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/communication.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>Academic Policies and Integrity</h4>
+      <p>Integrity, AI policy, make-up policy, attendance consequences.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/policies.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>Accessibility and Accommodation</h4>
+      <p>ASC contact, registration steps, working with accommodations.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/accessibility.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>Lab Safety and Procedures</h4>
+      <p>PPE, hand hygiene, emergency procedures, donor respect.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/lab-safety.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>Digital Device Policy</h4>
+      <p>The no-phones-in-lab rule, the why, and the consequences.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/digital-device-policy.html" target="_top">Open</a>
+    </div>
+    <div class="tool canvas-page">
+      <h4>Guide to Using Digital Atlas</h4>
+      <p>How to use the digital atlas tools effectively for active recall.</p>
+      <a href="https://drsrennie-stack.github.io/BIOL4-Solano/atlas-guide.html" target="_top">Open</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Study tools</h2>
+  <div class="section-rule"></div>
+  <p>Custom interactive tools I have built for this course, hosted at <a class="inline-link" href="https://drsrennie-stack.github.io" target="_blank" rel="noopener">drsrennie-stack.github.io</a>. Specific links for each will be posted in Canvas as the relevant week approaches.</p>
+
+  <div class="tool-grid">
+    <div class="tool external">
+      <h4>Digital atlas</h4>
+      <p>Curated anatomy reference materials, in active development. Linked weekly in Canvas.</p>
+    </div>
+    <div class="tool external">
+      <h4>Concept viewers</h4>
+      <p>Spaced repetition tools for key topics. Released as the relevant week begins.</p>
+    </div>
+    <div class="tool external">
+      <h4>Practice question generators</h4>
+      <p>DOK-leveled practice questions to test your understanding. Optional but recommended.</p>
+    </div>
+    <div class="tool external">
+      <h4>Lab ID drilling tools</h4>
+      <p>Web-based active recall drills for structure identification.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>External resources</h2>
+  <div class="section-rule"></div>
+
+  <div class="tool-grid">
+    <div class="tool external">
+      <h4>OpenStax Anatomy and Physiology, 2e</h4>
+      <p>Free, peer-reviewed online textbook. The recommended textbook option.</p>
+      <a href="https://openstax.org/details/books/anatomy-and-physiology-2e" target="_blank" rel="noopener">Open book page</a>
+    </div>
+    <div class="tool external">
+      <h4>Solano College Bookstore</h4>
+      <p>For purchasing used textbooks, lab supplies, or other course materials.</p>
+      <a href="https://www.bkstr.com/solanostore/home" target="_blank" rel="noopener">Visit bookstore</a>
+    </div>
+    <div class="tool external">
+      <h4>Canvas (course site)</h4>
+      <p>The main hub for announcements, modules, assignments, grades, and the Canvas Inbox for messaging me.</p>
+      <a href="https://solano.instructure.com" target="_blank" rel="noopener">solano.instructure.com</a>
+    </div>
+    <div class="tool external">
+      <h4>SCC Self-Service portal</h4>
+      <p>For checking enrollment, dropping courses, and managing registration.</p>
+      <a href="https://welcome.solano.edu" target="_blank" rel="noopener">welcome.solano.edu</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Support resources</h2>
+  <div class="section-rule"></div>
+
+  <div class="tool-grid">
+    <div class="tool support">
+      <h4>Accessibility Services Center (ASC)</h4>
+      <p>Building 400, Room 407, Fairfield campus. (707) 864-7136 or ASC@solano.edu.</p>
+      <a href="https://welcome.solano.edu/asc-students/" target="_blank" rel="noopener">ASC info</a>
+    </div>
+    <div class="tool support">
+      <h4>Clockwork (accommodations portal)</h4>
+      <p>For sending and managing your approved accommodations.</p>
+      <a href="https://clockwork.solano.edu" target="_blank" rel="noopener">clockwork.solano.edu</a>
+    </div>
+    <div class="tool support">
+      <h4>Academic Success and Tutoring Center</h4>
+      <p>On-campus tutoring resources, including embedded tutors for this course.</p>
+      <a href="https://welcome.solano.edu" target="_blank" rel="noopener">SCC support</a>
+    </div>
+    <div class="tool support">
+      <h4>Canvas Support</h4>
+      <p>For technical issues with Canvas (login, assignments, video playback, etc.).</p>
+      <a href="https://community.canvaslms.com/t5/Student-Guide/tkb-p/student" target="_blank" rel="noopener">Canvas help</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Direct contact</h2>
+  <div class="section-rule"></div>
+  <div class="callout">
+    <p style="margin: 0;"><strong>Dr. Sharilyn Rennie</strong><br>Email: <a class="inline-link" href="mailto:sharilyn.rennie@solano.edu" target="_top">sharilyn.rennie@solano.edu</a><br>Preferred channel: Canvas Inbox<br>Response time: 48 to 72 hours on weekdays</p>
+  </div>
+</section>
+
+<section>
+  <h2>Bookmark suggestions</h2>
+  <div class="section-rule"></div>
+  <p>Worth bookmarking on your phone or laptop for fast access during the term:</p>
+  <ul>
+    <li>This page (course tools hub)</li>
+    <li>Schedule</li>
+    <li>How This Course Works</li>
+    <li>Grading and Assessments</li>
+    <li>OpenStax Anatomy and Physiology</li>
+    <li>Canvas Inbox</li>
+  </ul>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p><strong>BIO 004 Human Anatomy, Summer 2026, Solano Community College</strong></p>
+  <p>Dr. Sharilyn Rennie</p>
+</footer>
+
+<script>
+(function() {
+  function sendHeight() { try { var h = document.documentElement.scrollHeight; var id = window.frameElement ? window.frameElement.id : ''; window.parent.postMessage({ type: 'iframeHeight', id: id, height: h }, '*'); } catch (e) {} }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) { new ResizeObserver(sendHeight).observe(document.body); }
+})();
+</script>
+
+</body>
+</html>

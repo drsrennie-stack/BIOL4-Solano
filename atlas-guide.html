@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide to Using Digital Atlas, BIO 004, Summer 2026</title>
+<meta name="description" content="How to use Dr. Rennie's digital atlas effectively for foundation research, lab review, and exam prep in BIO 004 Human Anatomy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C; --navy-deep: #15262F; --terra: #7C2018; --gold: #C9A961; --gold-soft: #DCC289;
+  --ink: #15262F; --ink-soft: #3D4F5A; --divider: #BFC8CD; --divider-light: #D8DEE2;
+  --cream: #FAF7F2; --cream-warm: #F5F2EC; --white: #FFFFFF;
+  --lift-1: 0 1px 2px rgba(30, 61, 76, 0.05), 0 1px 3px rgba(30, 61, 76, 0.04);
+  --lift-2: 0 2px 4px rgba(30, 61, 76, 0.06), 0 4px 12px rgba(30, 61, 76, 0.06);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0.01ms !important; } }
+body { margin: 0; font-family: 'DM Sans', Arial, sans-serif; font-size: 16px; line-height: 1.65; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+.skip-link { position: absolute; top: -100px; left: 12px; background: var(--navy); color: var(--cream); padding: 12px 18px; text-decoration: none; border-radius: 4px; font-weight: 600; z-index: 1000; }
+.skip-link:focus { top: 12px; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 24px 24px 60px; }
+.hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--cream); border-radius: 8px; padding: 36px 36px 32px; margin-bottom: 32px; position: relative; overflow: hidden; box-shadow: var(--lift-2); }
+.hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%); pointer-events: none; }
+.hero > * { position: relative; }
+.hero-eyebrow { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px; }
+.hero h1 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 800; font-size: 2.1rem; line-height: 1.1; margin: 0 0 10px; color: var(--white); letter-spacing: -0.02em; }
+.hero-subtitle { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1rem; color: rgba(250, 247, 242, 0.88); margin: 0; max-width: 65ch; }
+section { margin-bottom: 36px; }
+section h2 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.45rem; color: var(--navy); margin: 0 0 4px; }
+.section-rule { height: 3px; width: 48px; background: var(--gold); margin: 8px 0 20px; border-radius: 2px; }
+section h3 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--terra); margin: 22px 0 8px; }
+section h4 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--navy); margin: 16px 0 6px; }
+section p { margin: 0 0 14px; }
+.callout { background: var(--white); border: 1px solid var(--divider-light); border-left: 4px solid var(--navy); padding: 16px 20px; margin: 18px 0; border-radius: 0 6px 6px 0; box-shadow: var(--lift-1); }
+.callout strong { font-family: 'Plus Jakarta Sans', Arial, sans-serif; color: var(--navy); }
+.callout-terra { border-left-color: var(--terra); } .callout-terra strong { color: var(--terra); }
+.callout-gold { border-left-color: var(--gold); } .callout-gold strong { color: var(--terra); }
+.use-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0; }
+.use-card { background: var(--white); border: 1px solid var(--divider-light); border-radius: 6px; padding: 20px 22px; box-shadow: var(--lift-1); border-top: 4px solid var(--gold); }
+.use-card h4 { margin: 0 0 8px; color: var(--navy); }
+.use-card p { font-size: 0.93rem; margin-bottom: 0; }
+.steps { counter-reset: step; padding: 0; list-style: none; margin: 18px 0; }
+.steps > li { counter-increment: step; position: relative; padding: 16px 22px 16px 60px; background: var(--white); border: 1px solid var(--divider-light); border-radius: 6px; margin-bottom: 10px; box-shadow: var(--lift-1); }
+.steps > li::before { content: counter(step); position: absolute; left: 16px; top: 16px; width: 30px; height: 30px; border-radius: 50%; background: var(--navy); color: var(--white); font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 0.88rem; }
+.steps h4 { margin: 0 0 4px; color: var(--navy); font-size: 0.98rem; }
+.steps p { margin: 0; font-size: 0.92rem; }
+ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--gold); }
+strong, b { font-weight: 700; color: var(--navy); }
+em, i { font-style: italic; color: var(--ink); }
+a.inline-link { color: var(--terra); text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
+a.inline-link:hover { color: var(--navy); }
+footer { margin-top: 40px; padding: 28px 24px 0; border-top: 1px solid var(--divider-light); font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.85rem; color: var(--ink-soft); text-align: center; position: relative; }
+footer::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--gold); border-radius: 2px; }
+footer p { margin: 4px 0; }
+footer strong { color: var(--navy); font-weight: 700; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="wrap">
+
+<header class="hero">
+  <p class="hero-eyebrow">BIO 004, Course Reference</p>
+  <h1>Guide to Using the Digital Atlas</h1>
+  <p class="hero-subtitle">How to use the digital atlas materials I provide to actually learn anatomy, not just look at it.</p>
+</header>
+
+<main id="main">
+
+<section>
+  <h2>What the digital atlas is</h2>
+  <div class="section-rule"></div>
+  <p>The digital atlas is a curated set of anatomy reference materials I am building specifically for this course. It includes labeled images, interactive structure viewers, and topic-organized reference pages designed to align with the weekly research workbook and lab content.</p>
+
+  <p>The atlas is hosted at <a class="inline-link" href="https://drsrennie-stack.github.io" target="_blank" rel="noopener">drsrennie-stack.github.io</a> and accessed through links posted in Canvas each week.</p>
+
+  <div class="callout callout-gold">
+    <strong>The atlas is in active development.</strong> Some sections may be incomplete or updated mid-term. Always use the link posted in the current week's Canvas module rather than bookmarking deeper pages, since structure may shift as the atlas matures.
+  </div>
+</section>
+
+<section>
+  <h2>Three ways to use the atlas</h2>
+  <div class="section-rule"></div>
+
+  <div class="use-grid">
+    <div class="use-card">
+      <h4>1. Foundation research</h4>
+      <p>While completing Section A of your weekly workbook, use the atlas to locate and identify each structure listed. Write the answer in your own words from what you observe in the atlas, your textbook, and lecture videos.</p>
+    </div>
+    <div class="use-card">
+      <h4>2. Spiral lab review</h4>
+      <p>Each evening, drill the day's structures using the atlas. Cover the labels, point to the structure, name it. Reverse: cover the image, recite the structures from memory.</p>
+    </div>
+    <div class="use-card">
+      <h4>3. Exam prep on weekends</h4>
+      <p>Saturday and Sunday before each Monday lab exam, run station-style practice using the atlas under time pressure. 90 seconds per structure, just like the real exam.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>How to use the atlas for active recall</h2>
+  <div class="section-rule"></div>
+  <p>The single biggest mistake students make with any atlas (paper or digital) is to <strong>look at it passively</strong>. They flip through pages, recognize structures, feel comfortable, and assume they know the material. Recognition is not recall. The lab exam asks you to recall.</p>
+
+  <ol class="steps">
+    <li>
+      <h4>Open the atlas page for the topic you are studying</h4>
+      <p>Pick one image or one labeled diagram. Just one. Resist the urge to scroll.</p>
+    </li>
+    <li>
+      <h4>Cover the labels (in your head or with a sticky note over the screen)</h4>
+      <p>You should see the image or diagram with no labels visible. The structures are there, but unnamed.</p>
+    </li>
+    <li>
+      <h4>Point to a structure and say the name out loud</h4>
+      <p>Out loud is important. Saying it forces commitment. "I think this is the brachialis." Say it.</p>
+    </li>
+    <li>
+      <h4>Uncover the labels and check</h4>
+      <p>Right or wrong? Make a mental tally.</p>
+    </li>
+    <li>
+      <h4>Repeat for every structure on that page</h4>
+      <p>Then move to the next page. Do not move on until you can name 80% of the structures on the page without the labels.</p>
+    </li>
+  </ol>
+
+  <div class="callout callout-terra">
+    <strong>The 90-second drill.</strong> Once you can name structures with the labels covered, time yourself. 90 seconds per page. This simulates the lab practical exam timing. If you can identify structures fast enough at home, you will identify them on exam day.
+  </div>
+</section>
+
+<section>
+  <h2>Combining the atlas with your workbook</h2>
+  <div class="section-rule"></div>
+  <p>Your weekly research workbook is the structure for what to study. The atlas is the visual reference for that structure. They work as a pair.</p>
+
+  <h3>Workflow</h3>
+  <ol>
+    <li>Open the workbook for the current week.</li>
+    <li>Read the first Section A module (e.g., "A1. Pericardium and heart walls").</li>
+    <li>Open the atlas to the corresponding section.</li>
+    <li>For each question in the workbook, find the answer in the atlas (and your textbook or lecture videos).</li>
+    <li>Write the answer in your own words on the workbook line. Do not copy verbatim. The act of paraphrasing is part of the learning.</li>
+    <li>Once the workbook section is complete, run the active recall drill on the atlas page.</li>
+    <li>Move to the next module.</li>
+  </ol>
+
+  <p>This back-and-forth between workbook (questions, scaffolded learning) and atlas (visual reference, active recall) is the engine of foundation research.</p>
+</section>
+
+<section>
+  <h2>What the atlas is not</h2>
+  <div class="section-rule"></div>
+  <ul>
+    <li><strong>Not a textbook replacement.</strong> The atlas is reference, not instruction. Use it alongside OpenStax, Marieb, or your chosen textbook.</li>
+    <li><strong>Not a substitute for lab work.</strong> You still need to identify structures in person on models, slides, and prosected material. The atlas builds the mental library; lab is where you verify and lock it in.</li>
+    <li><strong>Not for passive scrolling.</strong> If you find yourself scrolling without doing active recall, close it. Open the workbook instead.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Mobile and offline use</h2>
+  <div class="section-rule"></div>
+  <p>The atlas is web-based, so you can access it on any device with a browser, phone, tablet, or laptop. Note:</p>
+  <ul>
+    <li><strong>You cannot use the atlas in lab</strong> (per the Digital Device Policy, no phones in lab).</li>
+    <li><strong>Offline access</strong> is limited. You can save individual atlas pages as PDF for offline reference, but not the full atlas. Consider printing a few key pages if you study in low-connectivity areas.</li>
+    <li><strong>Mobile screens</strong> work, but a tablet or laptop is more effective for the active recall drill since you can see the full image clearly.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Reporting issues with the atlas</h2>
+  <div class="section-rule"></div>
+  <p>Because the atlas is in active development, you may encounter:</p>
+  <ul>
+    <li>Missing pages for upcoming topics (these will be added as we approach those weeks)</li>
+    <li>Incorrect labels or unclear images</li>
+    <li>Broken links between atlas sections</li>
+  </ul>
+  <p>If you find any of the above, send me a Canvas Inbox message with the page name and a brief description. I will fix it. Helping me improve the atlas is itself a small act of community building, and I genuinely appreciate it.</p>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p><strong>BIO 004 Human Anatomy, Summer 2026, Solano Community College</strong></p>
+  <p>Dr. Sharilyn Rennie</p>
+</footer>
+
+<script>
+(function() {
+  function sendHeight() { try { var h = document.documentElement.scrollHeight; var id = window.frameElement ? window.frameElement.id : ''; window.parent.postMessage({ type: 'iframeHeight', id: id, height: h }, '*'); } catch (e) {} }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) { new ResizeObserver(sendHeight).observe(document.body); }
+})();
+</script>
+
+</body>
+</html>

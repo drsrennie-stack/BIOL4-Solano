@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessibility and Accommodation, BIO 004, Summer 2026</title>
+<meta name="description" content="Accessibility services and accommodation process for BIO 004 Human Anatomy, Summer 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C; --navy-deep: #15262F; --terra: #7C2018; --gold: #C9A961; --gold-soft: #DCC289;
+  --ink: #15262F; --ink-soft: #3D4F5A; --divider: #BFC8CD; --divider-light: #D8DEE2;
+  --cream: #FAF7F2; --cream-warm: #F5F2EC; --white: #FFFFFF;
+  --lift-1: 0 1px 2px rgba(30, 61, 76, 0.05), 0 1px 3px rgba(30, 61, 76, 0.04);
+  --lift-2: 0 2px 4px rgba(30, 61, 76, 0.06), 0 4px 12px rgba(30, 61, 76, 0.06);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0.01ms !important; } }
+body { margin: 0; font-family: 'DM Sans', Arial, sans-serif; font-size: 16px; line-height: 1.65; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+.skip-link { position: absolute; top: -100px; left: 12px; background: var(--navy); color: var(--cream); padding: 12px 18px; text-decoration: none; border-radius: 4px; font-weight: 600; z-index: 1000; }
+.skip-link:focus { top: 12px; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 24px 24px 60px; }
+.hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--cream); border-radius: 8px; padding: 36px 36px 32px; margin-bottom: 32px; position: relative; overflow: hidden; box-shadow: var(--lift-2); }
+.hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%); pointer-events: none; }
+.hero > * { position: relative; }
+.hero-eyebrow { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px; }
+.hero h1 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 800; font-size: 2.1rem; line-height: 1.1; margin: 0 0 10px; color: var(--white); letter-spacing: -0.02em; }
+.hero-subtitle { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1rem; color: rgba(250, 247, 242, 0.88); margin: 0; max-width: 65ch; }
+section { margin-bottom: 36px; }
+section h2 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.45rem; color: var(--navy); margin: 0 0 4px; }
+.section-rule { height: 3px; width: 48px; background: var(--gold); margin: 8px 0 20px; border-radius: 2px; }
+section h3 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--terra); margin: 22px 0 8px; }
+section h4 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--navy); margin: 16px 0 6px; }
+section p { margin: 0 0 14px; }
+.callout { background: var(--white); border: 1px solid var(--divider-light); border-left: 4px solid var(--navy); padding: 16px 20px; margin: 18px 0; border-radius: 0 6px 6px 0; box-shadow: var(--lift-1); }
+.callout strong { font-family: 'Plus Jakarta Sans', Arial, sans-serif; color: var(--navy); }
+.callout-terra { border-left-color: var(--terra); } .callout-terra strong { color: var(--terra); }
+.callout-gold { border-left-color: var(--gold); } .callout-gold strong { color: var(--terra); }
+.def-grid { display: grid; grid-template-columns: 200px 1fr; gap: 12px 28px; margin: 14px 0; font-size: 0.95rem; background: var(--white); border: 1px solid var(--divider-light); border-radius: 6px; padding: 22px 26px; box-shadow: var(--lift-1); }
+@media (max-width: 600px) { .def-grid { grid-template-columns: 1fr; gap: 4px 0; padding: 18px 20px; } .def-grid dt { margin-top: 10px; } .def-grid dt:first-child { margin-top: 0; } }
+.def-grid dt { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; color: var(--terra); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.def-grid dd { margin: 0; color: var(--ink); }
+.steps { counter-reset: step; padding: 0; list-style: none; margin: 18px 0; }
+.steps > li { counter-increment: step; position: relative; padding: 16px 22px 16px 60px; background: var(--white); border: 1px solid var(--divider-light); border-radius: 6px; margin-bottom: 10px; box-shadow: var(--lift-1); }
+.steps > li::before { content: counter(step); position: absolute; left: 16px; top: 16px; width: 30px; height: 30px; border-radius: 50%; background: var(--navy); color: var(--white); font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 0.88rem; }
+.steps h4 { margin: 0 0 4px; color: var(--navy); font-size: 0.98rem; }
+.steps p { margin: 0; font-size: 0.92rem; }
+ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--gold); }
+strong, b { font-weight: 700; color: var(--navy); }
+em, i { font-style: italic; color: var(--ink); }
+a.inline-link { color: var(--terra); text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
+a.inline-link:hover { color: var(--navy); }
+footer { margin-top: 40px; padding: 28px 24px 0; border-top: 1px solid var(--divider-light); font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.85rem; color: var(--ink-soft); text-align: center; position: relative; }
+footer::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--gold); border-radius: 2px; }
+footer p { margin: 4px 0; }
+footer strong { color: var(--navy); font-weight: 700; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="wrap">
+
+<header class="hero">
+  <p class="hero-eyebrow">BIO 004, Course Reference</p>
+  <h1>Accessibility and Accommodation</h1>
+  <p class="hero-subtitle">Your success in this class is important to me. We all need accommodations because we all learn differently.</p>
+</header>
+
+<main id="main">
+
+<section>
+  <h2>Inclusive learning environment</h2>
+  <div class="section-rule"></div>
+  <p>This course is designed to be welcoming to, accessible to, and usable by everyone, including students who are English-language learners, have a variety of learning styles, have disabilities, or are new to hybrid learning.</p>
+
+  <p>If there are aspects of this course that prevent you from learning or that exclude you, <strong>please let me know as soon as possible</strong>. Together we will develop strategies to meet your needs and ensure that you meet the academic standards and requirements of the course.</p>
+
+  <p>Let me also know of changes I can make so that the course is more welcoming to, accessible to, or usable by other students who take it in the future.</p>
+</section>
+
+<section>
+  <h2>Accessibility Services Center (ASC)</h2>
+  <div class="section-rule"></div>
+  <p>Solano Community College's Accessibility Services Center (ASC) provides appropriate accommodations such as extra time on tests or use of specialized technology. Appropriate accommodations are determined as you speak with your ASC counselor.</p>
+
+  <dl class="def-grid">
+    <dt>Office location</dt>
+    <dd>Fairfield campus, Building 400, Room 407</dd>
+    <dt>Phone</dt>
+    <dd>(707) 864-7136</dd>
+    <dt>Email</dt>
+    <dd><a class="inline-link" href="mailto:ASC@solano.edu" target="_top">ASC@solano.edu</a></dd>
+    <dt>Online portal</dt>
+    <dd><a class="inline-link" href="https://clockwork.solano.edu" target="_blank" rel="noopener">clockwork.solano.edu</a></dd>
+    <dt>More information</dt>
+    <dd><a class="inline-link" href="https://welcome.solano.edu/asc-students/" target="_blank" rel="noopener">welcome.solano.edu/asc-students</a></dd>
+  </dl>
+</section>
+
+<section>
+  <h2>How to set up accommodations</h2>
+  <div class="section-rule"></div>
+  <ol class="steps">
+    <li>
+      <h4>Contact ASC as early as possible</h4>
+      <p>If you have a disability and might need accommodations in this class, contact the Disability Services Program <strong>as soon as possible</strong> to ensure timely accommodations.</p>
+    </li>
+    <li>
+      <h4>Meet with your ASC counselor</h4>
+      <p>Discuss your needs. They will determine the appropriate accommodations and provide official documentation.</p>
+    </li>
+    <li>
+      <h4>Inform me during the first week of class</h4>
+      <p>You have a responsibility to inform your instructors of your approved accommodations during the first week you attend classes. Provide the appropriate forms to arrange necessary services (testing accommodations, etc.) throughout the term.</p>
+    </li>
+    <li>
+      <h4>Send accommodations through Clockwork or in person</h4>
+      <p>Access accommodations in Clockwork at <a class="inline-link" href="https://clockwork.solano.edu" target="_blank" rel="noopener">clockwork.solano.edu</a>, or with your counselor when meeting about accommodations.</p>
+    </li>
+    <li>
+      <h4>Confirm I received them</h4>
+      <p>Make an appointment with me (Canvas Inbox is fastest) to confirm I have your accommodations on file and to discuss any logistics. Minimally, check with me to make sure I received them.</p>
+    </li>
+  </ol>
+
+  <div class="callout callout-gold">
+    <strong>Why timing matters in an 8-week intensive.</strong> The compressed timeline means that delays in setting up accommodations cost you proportionally more. A two-week delay in a 16-week course is a small fraction of the term. In a summer intensive, two weeks is a quarter of the course. Get this set up in week 1.
+  </div>
+</section>
+
+<section>
+  <h2>You can also discuss with me directly</h2>
+  <div class="section-rule"></div>
+  <p>You may also discuss your need for accommodations with me directly through Canvas Inbox or in office hours. I work with whatever ASC has approved.</p>
+
+  <p>You are expected to meet all academic standards I have set, with the benefit of decided-upon accommodations.</p>
+
+  <p>If you encounter a required element or resource in the course that is not accessible to you, let me know immediately so I can address it.</p>
+</section>
+
+<section>
+  <h2>Course materials accessibility</h2>
+  <div class="section-rule"></div>
+  <p>Canvas pages, the syllabus, schedule, and supplementary HTML pages built for this course are designed to meet WCAG 2.2 AA standards:</p>
+  <ul>
+    <li>Semantic HTML with proper heading hierarchy</li>
+    <li>Sufficient color contrast (4.5:1 for normal text, 3:1 for large or UI elements)</li>
+    <li>Visible focus indicators on interactive elements</li>
+    <li>Skip links and proper landmark structure for screen readers</li>
+    <li>Reduced-motion preferences respected (animations disabled if you have prefers-reduced-motion enabled)</li>
+    <li>Lecture videos with captions</li>
+  </ul>
+  <p>If anything in the course materials is not accessible to you, contact me. I will fix it.</p>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p><strong>BIO 004 Human Anatomy, Summer 2026, Solano Community College</strong></p>
+  <p>Dr. Sharilyn Rennie</p>
+</footer>
+
+<script>
+(function() {
+  function sendHeight() { try { var h = document.documentElement.scrollHeight; var id = window.frameElement ? window.frameElement.id : ''; window.parent.postMessage({ type: 'iframeHeight', id: id, height: h }, '*'); } catch (e) {} }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) { new ResizeObserver(sendHeight).observe(document.body); }
+})();
+</script>
+
+</body>
+</html>

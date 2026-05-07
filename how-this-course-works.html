@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How This Course Works, BIO 004, Summer 2026</title>
+<meta name="description" content="The weekly and daily operational rhythm of BIO 004 Human Anatomy, Summer 2026 8-week intensive at Solano Community College.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C;
+  --navy-deep: #15262F;
+  --terra: #7C2018;
+  --terra-soft: #9A3A2E;
+  --gold: #C9A961;
+  --gold-soft: #DCC289;
+  --ink: #15262F;
+  --ink-soft: #3D4F5A;
+  --divider: #BFC8CD;
+  --divider-light: #D8DEE2;
+  --cream: #FAF7F2;
+  --cream-warm: #F5F2EC;
+  --white: #FFFFFF;
+  --lift-1: 0 1px 2px rgba(30, 61, 76, 0.05), 0 1px 3px rgba(30, 61, 76, 0.04);
+  --lift-2: 0 2px 4px rgba(30, 61, 76, 0.06), 0 4px 12px rgba(30, 61, 76, 0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.skip-link {
+  position: absolute; top: -100px; left: 12px;
+  background: var(--navy); color: var(--cream);
+  padding: 12px 18px; text-decoration: none;
+  border-radius: 4px; font-weight: 600; z-index: 1000;
+}
+.skip-link:focus { top: 12px; }
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px; border-radius: 2px;
+}
+
+.wrap {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 24px 24px 60px;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--cream);
+  border-radius: 8px;
+  padding: 36px 36px 32px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--lift-2);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 240px; height: 240px;
+  background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero > * { position: relative; }
+.hero-eyebrow {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin: 0 0 12px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 800; font-size: 2.1rem;
+  line-height: 1.1; margin: 0 0 10px;
+  color: var(--white); letter-spacing: -0.02em;
+}
+.hero-subtitle {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 1rem; font-weight: 400;
+  color: rgba(250, 247, 242, 0.88);
+  margin: 0; max-width: 65ch;
+}
+
+/* Sections */
+section { margin-bottom: 36px; }
+section h2 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700; font-size: 1.45rem;
+  color: var(--navy); margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+.section-rule {
+  height: 3px; width: 48px;
+  background: var(--gold);
+  margin: 8px 0 20px; border-radius: 2px;
+}
+section h3 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700; font-size: 1.05rem;
+  color: var(--terra); margin: 22px 0 8px;
+}
+section h4 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+  color: var(--navy); margin: 16px 0 6px;
+}
+section p { margin: 0 0 14px; }
+
+/* Cards & callouts */
+.card {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 22px 24px;
+  margin: 18px 0;
+  box-shadow: var(--lift-1);
+}
+.card-accent { border-left: 4px solid var(--gold); }
+
+.callout {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-left: 4px solid var(--navy);
+  padding: 16px 20px;
+  margin: 18px 0;
+  border-radius: 0 6px 6px 0;
+  box-shadow: var(--lift-1);
+}
+.callout strong {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  color: var(--navy);
+}
+.callout-terra { border-left-color: var(--terra); }
+.callout-terra strong { color: var(--terra); }
+.callout-gold { border-left-color: var(--gold); }
+.callout-gold strong { color: var(--terra); }
+
+/* Day-by-day */
+.day-card {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 20px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  box-shadow: var(--lift-1);
+}
+@media (max-width: 600px) {
+  .day-card { grid-template-columns: 1fr; gap: 8px; }
+}
+.day-label {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  border-right: 1px solid var(--divider-light);
+  padding-right: 16px;
+}
+@media (max-width: 600px) {
+  .day-label { border-right: none; border-bottom: 1px solid var(--divider-light); padding-bottom: 8px; }
+}
+.day-name {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.day-tag {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.day-tag-class {
+  background: rgba(201, 169, 97, 0.18);
+  color: var(--terra);
+  border: 1px solid rgba(201, 169, 97, 0.5);
+}
+.day-tag-rest {
+  background: var(--cream-warm);
+  color: var(--navy);
+  border: 1px solid var(--divider);
+}
+.day-tag-prep {
+  background: var(--navy);
+  color: var(--white);
+  border: 1px solid var(--navy);
+}
+.day-content h4 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: var(--navy);
+}
+.day-content p { margin: 0 0 8px; font-size: 0.93rem; }
+.day-content ul { margin: 4px 0 0; padding-left: 20px; }
+.day-content li { font-size: 0.92rem; margin-bottom: 4px; }
+
+/* Anchor cards */
+.anchors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+.anchor {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 20px 22px;
+  box-shadow: var(--lift-1);
+  border-top: 4px solid var(--gold);
+}
+.anchor h4 {
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 1rem;
+}
+.anchor p { margin: 0; font-size: 0.9rem; }
+
+/* Section-A through F mini-list */
+.workbook-sections {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px 18px;
+  margin: 16px 0;
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 22px 26px;
+  box-shadow: var(--lift-1);
+  font-size: 0.93rem;
+}
+.workbook-sections dt {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  color: var(--terra);
+  letter-spacing: 0.04em;
+}
+.workbook-sections dd { margin: 0; color: var(--ink); }
+
+/* Lists */
+ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--gold); }
+
+strong, b { font-weight: 700; color: var(--navy); }
+em, i { font-style: italic; color: var(--ink); }
+
+a.inline-link {
+  color: var(--terra);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: 500;
+}
+a.inline-link:hover { color: var(--navy); }
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  padding: 28px 24px 0;
+  border-top: 1px solid var(--divider-light);
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-align: center;
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  width: 60px; height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+footer p { margin: 4px 0; }
+footer strong { color: var(--navy); font-weight: 700; }
+
+@media print {
+  .hero { background: white !important; color: var(--ink) !important; border: 2px solid var(--navy); box-shadow: none; }
+  .hero::before { display: none; }
+  .hero h1, .hero-eyebrow, .hero-subtitle { color: var(--ink) !important; }
+  .hero-eyebrow { color: var(--terra) !important; }
+  .card, .callout, .day-card, .anchor, .workbook-sections { box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="hero-eyebrow">BIO 004 Operating Manual</p>
+    <h1>How This Course Works</h1>
+    <p class="hero-subtitle">The weekly rhythm of an 8-week TBL flipped intensive. Read this once carefully, then refer back to it whenever you feel disoriented in the term.</p>
+  </header>
+
+  <main id="main">
+
+    <section>
+      <h2>The four anchors</h2>
+      <div class="section-rule"></div>
+      <p>Every week of this course rotates around the same four anchor activities. Once you understand these four, the daily rhythm is just the sequence in which they happen.</p>
+
+      <div class="anchors">
+        <div class="anchor">
+          <h4>Research workbook</h4>
+          <p>Your weekly scaffold. You complete foundation anatomy research and differential research throughout the week. This is where most of your concept learning lives.</p>
+        </div>
+        <div class="anchor">
+          <h4>Team-Based Learning</h4>
+          <p>Thursday morning. iRAT (individual quiz), tRAT (team quiz), case clue reveal, and application discussion with your team.</p>
+        </div>
+        <div class="anchor">
+          <h4>Lab work</h4>
+          <p>Every class day. Structure identification, microscopy, dissection, and station-based practice. Lab is your structured, forward-moving study time.</p>
+        </div>
+        <div class="anchor">
+          <h4>End-of-day lab quiz</h4>
+          <p>Community accountability format. One person from one randomly selected group answers a question, the whole class earns the score.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>The weekly rhythm</h2>
+      <div class="section-rule"></div>
+      <p>This is what each week of the term looks like, hour by hour. The class meets four days per week, Monday through Thursday. Friday is required rest.</p>
+
+      <article class="day-card">
+        <div class="day-label">
+          <span class="day-name">Sun</span>
+          <span class="day-tag day-tag-prep">Prep</span>
+        </div>
+        <div class="day-content">
+          <h4>Prime the week</h4>
+          <p>Print or open this week's research workbook. Watch any assigned lecture videos for Monday's content. Begin foundation anatomy research (Section A modules) and a first pass at differential research (Section B). Light review of Saturday's weak spots from the prior week.</p>
+        </div>
+      </article>
+
+      <article class="day-card">
+        <div class="day-label">
+          <span class="day-name">Mon</span>
+          <span class="day-tag day-tag-class">Class day</span>
+        </div>
+        <div class="day-content">
+          <h4>Lab exam morning, then case opens</h4>
+          <ul>
+            <li>Lab Exam covering the prior week's content (first 50 minutes of lab)</li>
+            <li>Lecture context for the new week</li>
+            <li>Case clue 1 released live in class, you record it in your workbook (Section C)</li>
+            <li>Lab work on the new week's structures</li>
+            <li>End-of-day lab quiz</li>
+          </ul>
+          <p style="margin-top: 8px; font-style: italic;">Evening: nightly synthesis (Section D), prep tomorrow's lab.</p>
+        </div>
+      </article>
+
+      <article class="day-card">
+        <div class="day-label">
+          <span class="day-name">Tue</span>
+          <span class="day-tag day-tag-class">Class day</span>
+        </div>
+        <div class="day-content">
+          <h4>Build the picture</h4>
+          <ul>
+            <li>Lecture context, case clue 2 released live, recorded in workbook</li>
+            <li>Lab work continues, more structures, dissection or models</li>
+            <li>End-of-day lab quiz</li>
+          </ul>
+          <p style="margin-top: 8px; font-style: italic;">Evening: more foundation research, synthesis, lab prep for Wednesday.</p>
+        </div>
+      </article>
+
+      <article class="day-card">
+        <div class="day-label">
+          <span class="day-name">Wed</span>
+          <span class="day-tag day-tag-class">Class day</span>
+        </div>
+        <div class="day-content">
+          <h4>Final clue, narrow the differential</h4>
+          <ul>
+            <li>Lecture context, case clue 3 released live, recorded in workbook</li>
+            <li>Lab work, structures and integration</li>
+            <li>End-of-day lab quiz</li>
+          </ul>
+          <p style="margin-top: 8px; font-style: italic;">Evening: complete differential research, prepare for Thursday TBL. By tonight your workbook should be substantially complete.</p>
+        </div>
+      </article>
+
+      <article class="day-card">
+        <div class="day-label">
+          <span class="day-name">Thu</span>
+          <span class="day-tag day-tag-class">TBL day</span>
+        </div>
+        <div class="day-content">
+          <h4>TBL morning, case reveal, application</h4>
+          <ul>
+            <li>iRAT, individual readiness assessment</li>
+            <li>tRAT, team takes the same quiz together</li>
+            <li>Thursday morning case clue reveal</li>
+            <li>Application questions worked through with your team (ungraded but discussed)</li>
+            <li>Lab work for the rest of the day</li>
+            <li>End-of-day lab quiz</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="day-card">
+        <div class="day-label">
+          <span class="day-name">Fri</span>
+          <span class="day-tag day-tag-rest">Rest day</span>
+        </div>
+        <div class="day-content">
+          <h4>Rest. Take the day off.</h4>
+          <p>Sleep is consolidation. The cognitive science is unambiguous on this. <strong>No studying on Friday.</strong> Your brain is moving short-term memory into long-term storage, and that process needs time and rest. Pushing through Friday gives you diminishing returns and worse exam performance.</p>
+        </div>
+      </article>
+
+      <article class="day-card">
+        <div class="day-label">
+          <span class="day-name">Sat</span>
+          <span class="day-tag day-tag-prep">Lab exam prep</span>
+        </div>
+        <div class="day-content">
+          <h4>Self-test for Monday's lab exam</h4>
+          <p>Self-test routines: cover Section A answers and recall them, cover muscle origin/insertion/action columns, atlas drilling under time pressure, spiral review of earlier weeks. Track your weak spots. Whatever you cannot recall by Saturday afternoon goes on a focused list for Sunday review.</p>
+        </div>
+      </article>
+
+      <article class="day-card">
+        <div class="day-label">
+          <span class="day-name">Sun</span>
+          <span class="day-tag day-tag-prep">Prep next week</span>
+        </div>
+        <div class="day-content">
+          <h4>Light review and prime next week</h4>
+          <p>Final pass on Saturday's weak spots, light recall practice. Print or open next week's workbook. Sleep early. Monday is a lab exam morning; you want to be rested.</p>
+        </div>
+      </article>
+
+      <div class="callout callout-gold">
+        <strong>The cycle is the curriculum.</strong> If you follow this rhythm consistently for 8 weeks, you will earn a strong grade. If you compress the work into the last day or two before each assessment, the system will surface that gap quickly and the grade will reflect it.
+      </div>
+    </section>
+
+    <section>
+      <h2>How the research workbook fits</h2>
+      <div class="section-rule"></div>
+      <p>Each week you receive a research workbook. It is the central scaffold for the week's learning. The workbook has six sections, each with a specific role:</p>
+
+      <dl class="workbook-sections">
+        <dt>Section A</dt>
+        <dd>Foundation anatomy research. Numbered question modules covering each curriculum learning objective. You answer in your own words from your atlas, textbook, and lecture videos. This is the bulk of your weekly work.</dd>
+
+        <dt>Section B</dt>
+        <dd>Differential research. Five to seven options for the week's case, listed by name only. You research each one and write your own discriminators. This is preparation for Thursday's case reveal.</dd>
+
+        <dt>Section C</dt>
+        <dd>Live case clue tracker. Blank fields where you record the case clues released in class Monday through Wednesday plus the Thursday morning reveal.</dd>
+
+        <dt>Section D</dt>
+        <dd>Nightly synthesis. Each evening you tie together the day's anatomy with the day's case clue and prep tomorrow's lab.</dd>
+
+        <dt>Section E</dt>
+        <dd>Thursday TBL preparation checklist. What to bring, what to expect.</dd>
+
+        <dt>Section F</dt>
+        <dd>Weekend lab exam prep and transition to next week.</dd>
+      </dl>
+
+      <p>You do not memorize the workbook. You complete it as a research artifact. The act of researching, naming, locating, and committing to an answer is the learning.</p>
+    </section>
+
+    <section>
+      <h2>How TBL works</h2>
+      <div class="section-rule"></div>
+      <p>Thursday morning, before lab, you complete TBL with your assigned team. Each TBL has two graded components:</p>
+
+      <ul>
+        <li><strong>iRAT</strong> (individual): you take a 10 to 15 question quiz on your own. Weighted 3x.</li>
+        <li><strong>tRAT</strong> (team): your team takes the same quiz together, discussing each answer. Weighted 1x.</li>
+      </ul>
+
+      <p>After the tRAT, you and your team work through clinical application questions and the Thursday morning case reveal. Application questions are ungraded but you are expected to understand the rationale if called on.</p>
+
+      <p>The 3x weighting on iRAT is intentional: your individual preparation is what matters most. A strong team will not save an unprepared individual. Show up ready.</p>
+
+      <div class="callout">
+        <strong>Drop policy.</strong> Across the 8 TBLs in the term, your lowest score is dropped. You only get one drop. Use it for a genuine emergency, not a casually missed prep day.
+      </div>
+    </section>
+
+    <section>
+      <h2>How lab works</h2>
+      <div class="section-rule"></div>
+      <p>Lab runs every class day from 11:30 AM to 2:35 PM. You rotate through stations, work with models, slides, and prosected material, and drill structure identification with your group.</p>
+
+      <p>Lab is structured, forward-moving study time. It is intentionally designed to provide hands-on time during class hours so that you are not entirely dependent on after-class study. Use the time well: work with focus, drill structures, ask questions, and test each other.</p>
+
+      <p>If lab time is not used productively, I will impose a more structured rotation format with required tasks. The flexibility you have during lab depends on the engagement and accountability you demonstrate.</p>
+
+      <h3>End-of-day lab quizzes</h3>
+      <p>At the end of nearly every lab session, I ask one person in one randomly selected group a single question covering the day's lab content. The entire class earns the same score based on that one student's answer. Each quiz is worth 3 points.</p>
+      <p>This format intentionally creates peer accountability. If everyone uses lab time well, the selected student knows the answer and the class earns the points. If anyone has not engaged, that student could be the one called on, and the class loses points together.</p>
+    </section>
+
+    <section>
+      <h2>How exams work</h2>
+      <div class="section-rule"></div>
+      <p>There are seven lab practical exams across the term: six module exams plus one cumulative exam at the end.</p>
+
+      <ul>
+        <li>Module lab exams happen <strong>Monday mornings</strong> (covering the prior week's content with 20% spiral review of earlier weeks).</li>
+        <li>The cumulative exam happens Thursday afternoon of week 8.</li>
+        <li>Each exam is 50 minutes, 25 stations, 2 questions per station.</li>
+        <li>You rotate through stations on a timer, 90 seconds per station.</li>
+        <li>No make-ups. Doors lock once the exam begins.</li>
+      </ul>
+
+      <p>The cumulative exam offers partial grade improvement on prior module exams: if you score higher on the cumulative than on a prior module exam, 50% of the improvement is added to your earlier score. The original score is not replaced.</p>
+    </section>
+
+    <section>
+      <h2>What this looks like across 8 weeks</h2>
+      <div class="section-rule"></div>
+      <p>Eight weeks. Eight TBL cases. Seven lab practical exams. The same rhythm every week, with content scaling from cells and tissues in week 1 to integrated body systems by week 8.</p>
+
+      <p>The full week-by-week schedule is in the syllabus. Each week pairs a clinical case with the system you are studying:</p>
+
+      <ol>
+        <li>Body organization, cells, tissues, integumentary, with Stevens-Johnson Syndrome / TEN</li>
+        <li>Skeletal system, with Osteogenesis Imperfecta</li>
+        <li>Muscular system, with Marfan Syndrome</li>
+        <li>Nervous system and special senses, with Normal Pressure Hydrocephalus</li>
+        <li>Cardiovascular system, heart and blood, with Tetralogy of Fallot</li>
+        <li>Vessels, lymphatic, respiratory, with Sickle Cell Disease</li>
+        <li>Digestive and urinary systems, with Hirschsprung Disease</li>
+        <li>Reproductive and endocrine plus cumulative review, with Polycystic Kidney Disease</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Where to get help</h2>
+      <div class="section-rule"></div>
+      <ul>
+        <li><strong>Canvas Inbox or email</strong> Dr. Rennie at sharilyn.rennie@solano.edu, response within 48 to 72 hours.</li>
+        <li><strong>Your TBL team</strong> is your first line of support. Use your team chat.</li>
+        <li><strong>On-campus tutoring</strong> with embedded tutors. Names provided week 1.</li>
+        <li><strong>Office hours</strong> by appointment.</li>
+        <li><strong>Community Rounds</strong>, peer-led review sessions. Self-organized and posted in the Canvas thread.</li>
+      </ul>
+    </section>
+
+    <div class="callout callout-terra" style="margin-top: 36px;">
+      <strong>Bookmark this page.</strong> If you are ever lost in the week, come back here. The rhythm is the cure for the disorientation of an intensive course.
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <p><strong>BIO 004 Human Anatomy, Summer 2026, Solano Community College</strong></p>
+  <p>Dr. Sharilyn Rennie</p>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+  function sendHeight() {
+    try {
+      var height = document.documentElement.scrollHeight;
+      var id = window.frameElement ? window.frameElement.id : '';
+      window.parent.postMessage({ type: 'iframeHeight', id: id, height: height }, '*');
+    } catch (e) { /* ignore */ }
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(sendHeight);
+    ro.observe(document.body);
+  }
+})();
+</script>
+
+</body>
+</html>

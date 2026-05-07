@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your TBL Team and Study Groups, BIO 004, Summer 2026</title>
+<meta name="description" content="How TBL teams are assigned and how to use outside-of-class study groups and Community Rounds in BIO 004 Human Anatomy, Summer 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C;
+  --navy-deep: #15262F;
+  --terra: #7C2018;
+  --terra-soft: #9A3A2E;
+  --gold: #C9A961;
+  --gold-soft: #DCC289;
+  --ink: #15262F;
+  --ink-soft: #3D4F5A;
+  --divider: #BFC8CD;
+  --divider-light: #D8DEE2;
+  --cream: #FAF7F2;
+  --cream-warm: #F5F2EC;
+  --white: #FFFFFF;
+  --lift-1: 0 1px 2px rgba(30, 61, 76, 0.05), 0 1px 3px rgba(30, 61, 76, 0.04);
+  --lift-2: 0 2px 4px rgba(30, 61, 76, 0.06), 0 4px 12px rgba(30, 61, 76, 0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.skip-link {
+  position: absolute; top: -100px; left: 12px;
+  background: var(--navy); color: var(--cream);
+  padding: 12px 18px; text-decoration: none;
+  border-radius: 4px; font-weight: 600; z-index: 1000;
+}
+.skip-link:focus { top: 12px; }
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px; border-radius: 2px;
+}
+
+.wrap {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 24px 24px 60px;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--cream);
+  border-radius: 8px;
+  padding: 36px 36px 32px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--lift-2);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 240px; height: 240px;
+  background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero > * { position: relative; }
+.hero-eyebrow {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin: 0 0 12px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 800; font-size: 2.1rem;
+  line-height: 1.1; margin: 0 0 10px;
+  color: var(--white); letter-spacing: -0.02em;
+}
+.hero-subtitle {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 1rem; font-weight: 400;
+  color: rgba(250, 247, 242, 0.88);
+  margin: 0; max-width: 65ch;
+}
+
+/* Sections */
+section { margin-bottom: 36px; }
+section h2 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700; font-size: 1.45rem;
+  color: var(--navy); margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+.section-rule {
+  height: 3px; width: 48px;
+  background: var(--gold);
+  margin: 8px 0 20px; border-radius: 2px;
+}
+section h3 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700; font-size: 1.05rem;
+  color: var(--terra); margin: 22px 0 8px;
+}
+section h4 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+  color: var(--navy); margin: 16px 0 6px;
+}
+section p { margin: 0 0 14px; }
+
+/* Cards & callouts */
+.card {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 22px 24px;
+  margin: 18px 0;
+  box-shadow: var(--lift-1);
+}
+.card-accent { border-left: 4px solid var(--gold); }
+
+.callout {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-left: 4px solid var(--navy);
+  padding: 16px 20px;
+  margin: 18px 0;
+  border-radius: 0 6px 6px 0;
+  box-shadow: var(--lift-1);
+}
+.callout strong {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  color: var(--navy);
+}
+.callout-terra { border-left-color: var(--terra); }
+.callout-terra strong { color: var(--terra); }
+.callout-gold { border-left-color: var(--gold); }
+.callout-gold strong { color: var(--terra); }
+
+/* Three layers cards */
+.layers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.layer {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 8px;
+  padding: 22px 24px;
+  box-shadow: var(--lift-1);
+  position: relative;
+  border-top: 5px solid var(--gold);
+}
+.layer-1 { border-top-color: var(--terra); }
+.layer-2 { border-top-color: var(--gold); }
+.layer-3 { border-top-color: var(--navy); }
+.layer-eyebrow {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 6px;
+}
+.layer h3 {
+  margin: 0 0 10px;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 1.1rem;
+  color: var(--navy);
+}
+.layer-1 h3 { color: var(--terra); }
+.layer-3 h3 { color: var(--navy); }
+.layer p { font-size: 0.93rem; margin-bottom: 10px; }
+.layer ul { padding-left: 18px; margin: 8px 0 0; }
+.layer li { font-size: 0.88rem; margin-bottom: 4px; }
+
+/* Definition list */
+.def-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 12px 24px;
+  margin: 14px 0;
+  font-size: 0.95rem;
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 22px 26px;
+  box-shadow: var(--lift-1);
+}
+@media (max-width: 600px) {
+  .def-grid { grid-template-columns: 1fr; gap: 4px 0; padding: 18px 20px; }
+  .def-grid dt { margin-top: 10px; }
+  .def-grid dt:first-child { margin-top: 0; }
+}
+.def-grid dt {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  color: var(--terra);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.def-grid dd { margin: 0; color: var(--ink); }
+
+/* Step list */
+.steps { counter-reset: step; padding: 0; list-style: none; margin: 18px 0; }
+.steps > li {
+  counter-increment: step;
+  position: relative;
+  padding: 16px 22px 16px 60px;
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: var(--lift-1);
+}
+.steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+}
+.steps h4 { margin: 0 0 4px; color: var(--navy); font-size: 0.98rem; }
+.steps p { margin: 0; font-size: 0.92rem; }
+
+/* Ideas grid for study group activities */
+.ideas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.idea {
+  background: var(--cream-warm);
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+.idea h4 {
+  margin: 0 0 6px;
+  font-size: 0.92rem;
+  color: var(--navy);
+}
+.idea p { margin: 0; font-size: 0.86rem; }
+
+/* Lists */
+ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--gold); }
+
+strong, b { font-weight: 700; color: var(--navy); }
+em, i { font-style: italic; color: var(--ink); }
+
+a.inline-link {
+  color: var(--terra);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: 500;
+}
+a.inline-link:hover { color: var(--navy); }
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  padding: 28px 24px 0;
+  border-top: 1px solid var(--divider-light);
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-align: center;
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  width: 60px; height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+footer p { margin: 4px 0; }
+footer strong { color: var(--navy); font-weight: 700; }
+
+@media print {
+  .hero { background: white !important; color: var(--ink) !important; border: 2px solid var(--navy); box-shadow: none; }
+  .hero::before { display: none; }
+  .hero h1, .hero-eyebrow, .hero-subtitle { color: var(--ink) !important; }
+  .hero-eyebrow { color: var(--terra) !important; }
+  .card, .callout, .layer, .def-grid, .steps > li, .idea { box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="hero-eyebrow">Building your learning community</p>
+    <h1>Your TBL Team and Study Groups</h1>
+    <p class="hero-subtitle">There are three layers of peer learning in this course. Knowing how they work, and how they connect, will save you a lot of effort and a lot of grief.</p>
+  </header>
+
+  <main id="main">
+
+    <section>
+      <h2>Three layers of community</h2>
+      <div class="section-rule"></div>
+      <p>This course intentionally builds three layers of peer support, each with a different purpose. Use all three.</p>
+
+      <div class="layers">
+        <div class="layer layer-1">
+          <p class="layer-eyebrow">Layer 1, assigned</p>
+          <h3>Your TBL team</h3>
+          <p>5 to 7 students. Same team for the full 8 weeks. You are graded together on the tRAT and discuss application questions together. This is your home base.</p>
+          <ul>
+            <li>Assigned by Dr. Rennie week 1</li>
+            <li>Stable across the term</li>
+            <li>Graded as a unit on tRAT</li>
+          </ul>
+        </div>
+        <div class="layer layer-2">
+          <p class="layer-eyebrow">Layer 2, voluntary</p>
+          <h3>Outside-of-class study groups</h3>
+          <p>You form these. Can include your TBL team or be entirely different. Meet outside class hours to drill structures, run cases, and prep for lab exams. Not graded.</p>
+          <ul>
+            <li>You choose who and when</li>
+            <li>Meet anywhere, any platform</li>
+            <li>Pure learning support</li>
+          </ul>
+        </div>
+        <div class="layer layer-3">
+          <p class="layer-eyebrow">Layer 3, peer-led</p>
+          <h3>Community Rounds</h3>
+          <p>Class-wide review sessions you organize for each other. Open invitation, posted in Canvas. Hosting and attending earn Scholar Points.</p>
+          <ul>
+            <li>Whole class, open invite</li>
+            <li>Self-organized, self-reported</li>
+            <li>Bonus points pathway</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Your TBL team, the basics</h2>
+      <div class="section-rule"></div>
+
+      <dl class="def-grid">
+        <dt>How teams are formed</dt>
+        <dd>I assign teams during week 1 based on a brief survey on background, schedule, and prior coursework. The goal is balanced teams with varied strengths. You do not pick your team.</dd>
+
+        <dt>How long teams last</dt>
+        <dd>The full 8 weeks. I rarely move students between teams, and only if there is a serious reason. Plan to invest in your team for the duration.</dd>
+
+        <dt>What is graded together</dt>
+        <dd>The tRAT (10% of each TBL grade). Application questions during TBL are not graded but everyone is expected to participate and be able to explain the rationale.</dd>
+
+        <dt>What is graded individually</dt>
+        <dd>The iRAT (75% of each TBL grade), all lab practical exams, and your individual contribution to outside-class prep. Your individual preparation matters most.</dd>
+
+        <dt>Communication expectations</dt>
+        <dd>Respond to team messages within 24 hours. Use the comms platform you agree on. If you go silent, your team suffers and so does your tRAT.</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Setting up your team's communication on day one</h2>
+      <div class="section-rule"></div>
+      <p>You will meet your team during week 1. <strong>By the end of class on day one, your team must agree on a communication platform and exchange contact info.</strong> This is not optional.</p>
+
+      <ol class="steps">
+        <li>
+          <h4>Exchange contact information</h4>
+          <p>Email, phone numbers (if comfortable), and any other preferred point of contact. Share your typical availability so teammates know when you are reachable.</p>
+        </li>
+        <li>
+          <h4>Choose one communication platform</h4>
+          <p>Options: Canvas messages, group text, Discord, WhatsApp, GroupMe, Slack, or other. Pick one that works for everyone, including teammates without smartphones or with limited data plans. Use just one platform to avoid scattered conversations.</p>
+        </li>
+        <li>
+          <h4>Confirm response expectations</h4>
+          <p>The standing rule is 24-hour response. Each team can adjust this within reason (faster if everyone agrees, never slower). Set expectations for evenings and weekends explicitly.</p>
+        </li>
+        <li>
+          <h4>Designate roles loosely</h4>
+          <p>Optional but useful: who keeps track of upcoming due dates, who organizes group study time, who checks in on quiet teammates. Roles can rotate.</p>
+        </li>
+      </ol>
+
+      <div class="callout">
+        <strong>Privacy and respect.</strong> Share contact info responsibly. Use all communication tools for class purposes only. Respect each other's time, privacy, and boundaries. If you drop the course or stop participating, remove yourself from the group communication out of courtesy.
+      </div>
+    </section>
+
+    <section>
+      <h2>Outside-of-class study groups</h2>
+      <div class="section-rule"></div>
+      <p>Your TBL team is your assigned group. <strong>Study groups are different.</strong> You form study groups voluntarily, with whoever you want, to meet outside of class hours and reinforce material.</p>
+
+      <p>Study groups can be:</p>
+      <ul>
+        <li>Your full TBL team meeting outside class</li>
+        <li>A subset of your TBL team</li>
+        <li>Students from other TBL teams entirely</li>
+        <li>You and one study buddy</li>
+      </ul>
+
+      <p>There is no enforced format. There is no grade attached. The point is to leverage active recall and peer teaching, both of which beat solo re-reading.</p>
+
+      <h3>What to actually do in a study group</h3>
+      <p>The mistake is meeting up and then individually quietly studying in the same room. That is not a study group, that is a co-working space. To get the benefit of the group, do things you cannot do alone:</p>
+
+      <div class="ideas">
+        <div class="idea">
+          <h4>Lab ID drilling</h4>
+          <p>Cover a structure name, point to the structure on a model or atlas, peer says the name. Reverse roles. Race the clock.</p>
+        </div>
+        <div class="idea">
+          <h4>Teach-back</h4>
+          <p>Each person picks one concept and teaches it to the group for 5 minutes. The act of teaching exposes the gaps in your own understanding.</p>
+        </div>
+        <div class="idea">
+          <h4>Differential debate</h4>
+          <p>Take this week's case differential options. Each person argues for a different option. The group has to pick the winner based on anatomic discriminators.</p>
+        </div>
+        <div class="idea">
+          <h4>Workbook walkthrough</h4>
+          <p>Compare answers in your research workbooks. Where do they differ? What did you each find that the others missed?</p>
+        </div>
+        <div class="idea">
+          <h4>Spiral review quiz</h4>
+          <p>Make 10 questions covering material from earlier weeks. Quiz each other. Spiral review is what makes structures stick.</p>
+        </div>
+        <div class="idea">
+          <h4>Practical run-through</h4>
+          <p>Set up a station-based practice exam in someone's apartment using printed images or models. Time it. Score each other.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Community Rounds, the third layer</h2>
+      <div class="section-rule"></div>
+      <p>Community Rounds are peer-led review sessions open to the whole class. They are not your TBL team and not your private study group, they are the broader class community helping each other.</p>
+
+      <p>Examples of Community Rounds:</p>
+      <ul>
+        <li>A Saturday Kahoot game covering this week's structures, hosted by one student, open to anyone in the class</li>
+        <li>A Sunday evening Zoom session running spiral lab ID drills</li>
+        <li>An in-person meet-up in the SCC library to walk through a tough TBL case together</li>
+      </ul>
+
+      <p>Community Rounds are <strong>self-organized and self-reported</strong>. I do not schedule, host, or monitor them. You post your session in the Canvas "Community Rounds" discussion thread, attendees reply with a one-sentence reflection, and the thread itself becomes the artifact.</p>
+
+      <h4>Scholar Points for Community Rounds</h4>
+      <ul>
+        <li>Hosting a Community Round: 3 points per session</li>
+        <li>Attending a Community Round: 1 point per session</li>
+        <li>Counted toward the 25 supplemental Scholar Points pool described in the syllabus.</li>
+      </ul>
+
+      <div class="callout callout-gold">
+        <strong>Why this exists.</strong> Healthcare careers run on community. You will work in primary care teams, broader unit teams, and inter-professional collaboratives. Building the muscle of organizing peer learning now is itself a clinical skill. Community Rounds is your training ground.
+      </div>
+    </section>
+
+    <section>
+      <h2>When teams do not work</h2>
+      <div class="section-rule"></div>
+      <p>Sometimes teams struggle. The most common patterns:</p>
+
+      <ul>
+        <li><strong>One teammate goes silent.</strong> They miss messages, miss class, do not contribute to tRAT. Reach out kindly first. If the silence continues, let me know.</li>
+        <li><strong>One teammate dominates.</strong> They speak over others, refuse to consider alternative answers, or position themselves as the "right" voice. Address it directly with them, then with me if it continues.</li>
+        <li><strong>Personality friction.</strong> You disagree on study style or pace. Negotiate a working agreement. You do not have to be friends. You do have to function professionally as a team.</li>
+        <li><strong>Schedule mismatch.</strong> Some teammates can only meet evenings, others only mornings. Use asynchronous communication (the team chat) for most things, schedule rare synchronous meetings around shared availability.</li>
+      </ul>
+
+      <h4>Bring it to me before it escalates</h4>
+      <p>If your team genuinely is not working, contact me through Canvas or email. Do not wait until the situation has festered for three weeks. Early intervention is far easier than late repair.</p>
+    </section>
+
+    <section>
+      <h2>The big picture</h2>
+      <div class="section-rule"></div>
+      <p>You are not just learning anatomy. You are learning to function as a healthcare professional, which means you are learning to work in teams under time pressure with imperfect information. The TBL structure is intentionally designed to mirror that.</p>
+
+      <p>By week 8, you will know:</p>
+      <ul>
+        <li>How to prepare independently and contribute strongly to a team discussion</li>
+        <li>How to negotiate disagreement with peers professionally</li>
+        <li>How to organize peer learning for yourself when no instructor is in the room</li>
+        <li>How to teach a concept clearly enough that another person understands it</li>
+        <li>How to ask for help before a problem becomes a crisis</li>
+      </ul>
+
+      <p>These skills travel. They will serve you in nursing program clinicals, in board prep, in a hospital nurses' station, and in every team you join after this course is over.</p>
+
+      <div class="callout callout-terra">
+        <strong>Show up for each other.</strong> The course is built on the assumption that you will. Hold up your end, and your team and your class will hold up theirs.
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <p><strong>BIO 004 Human Anatomy, Summer 2026, Solano Community College</strong></p>
+  <p>Dr. Sharilyn Rennie</p>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+  function sendHeight() {
+    try {
+      var height = document.documentElement.scrollHeight;
+      var id = window.frameElement ? window.frameElement.id : '';
+      window.parent.postMessage({ type: 'iframeHeight', id: id, height: height }, '*');
+    } catch (e) { /* ignore */ }
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(sendHeight);
+    ro.observe(document.body);
+  }
+})();
+</script>
+
+</body>
+</html>

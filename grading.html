@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grading and Assessments, BIO 004, Summer 2026</title>
+<meta name="description" content="Grading structure, assessment types, and grade calculator for BIO 004 Human Anatomy, Summer 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C; --navy-deep: #15262F; --terra: #7C2018; --terra-soft: #9A3A2E;
+  --gold: #C9A961; --gold-soft: #DCC289; --ink: #15262F; --ink-soft: #3D4F5A;
+  --divider: #BFC8CD; --divider-light: #D8DEE2; --cream: #FAF7F2; --cream-warm: #F5F2EC;
+  --white: #FFFFFF;
+  --lift-1: 0 1px 2px rgba(30, 61, 76, 0.05), 0 1px 3px rgba(30, 61, 76, 0.04);
+  --lift-2: 0 2px 4px rgba(30, 61, 76, 0.06), 0 4px 12px rgba(30, 61, 76, 0.06);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0.01ms !important; } }
+body { margin: 0; font-family: 'DM Sans', Arial, sans-serif; font-size: 16px; line-height: 1.65; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+.skip-link { position: absolute; top: -100px; left: 12px; background: var(--navy); color: var(--cream); padding: 12px 18px; text-decoration: none; border-radius: 4px; font-weight: 600; z-index: 1000; }
+.skip-link:focus { top: 12px; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+.wrap { max-width: 940px; margin: 0 auto; padding: 24px 24px 60px; }
+.hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--cream); border-radius: 8px; padding: 36px 36px 32px; margin-bottom: 32px; position: relative; overflow: hidden; box-shadow: var(--lift-2); }
+.hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%); pointer-events: none; }
+.hero > * { position: relative; }
+.hero-eyebrow { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px; }
+.hero h1 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 800; font-size: 2.1rem; line-height: 1.1; margin: 0 0 10px; color: var(--white); letter-spacing: -0.02em; }
+.hero-subtitle { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1rem; color: rgba(250, 247, 242, 0.88); margin: 0; max-width: 65ch; }
+section { margin-bottom: 36px; }
+section h2 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.45rem; color: var(--navy); margin: 0 0 4px; letter-spacing: -0.01em; }
+.section-rule { height: 3px; width: 48px; background: var(--gold); margin: 8px 0 20px; border-radius: 2px; }
+section h3 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--terra); margin: 22px 0 8px; }
+section h4 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--navy); margin: 16px 0 6px; }
+section p { margin: 0 0 14px; }
+.card { background: var(--white); border: 1px solid var(--divider-light); border-radius: 6px; padding: 22px 24px; margin: 18px 0; box-shadow: var(--lift-1); }
+.card-accent { border-left: 4px solid var(--gold); }
+.callout { background: var(--white); border: 1px solid var(--divider-light); border-left: 4px solid var(--navy); padding: 16px 20px; margin: 18px 0; border-radius: 0 6px 6px 0; box-shadow: var(--lift-1); }
+.callout strong { font-family: 'Plus Jakarta Sans', Arial, sans-serif; color: var(--navy); }
+.callout-terra { border-left-color: var(--terra); } .callout-terra strong { color: var(--terra); }
+.callout-gold { border-left-color: var(--gold); } .callout-gold strong { color: var(--terra); }
+.table-wrap { overflow-x: auto; margin: 18px 0; background: var(--white); border-radius: 6px; box-shadow: var(--lift-1); border: 1px solid var(--divider-light); }
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; font-family: 'Plus Jakarta Sans', Arial, sans-serif; }
+th, td { padding: 13px 16px; text-align: left; border-bottom: 1px solid var(--divider-light); vertical-align: top; }
+th { background: var(--navy); color: var(--cream); font-weight: 700; font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 2px solid var(--gold); }
+tbody tr:nth-child(even) { background: var(--cream-warm); }
+tbody tr:last-child td { border-bottom: none; }
+ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--gold); }
+strong, b { font-weight: 700; color: var(--navy); }
+em, i { font-style: italic; color: var(--ink); }
+a.inline-link { color: var(--terra); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; font-weight: 500; }
+a.inline-link:hover { color: var(--navy); }
+.weight-pct { font-weight: 700; color: var(--terra); text-align: right; }
+.grade-scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 18px 0; }
+@media (max-width: 600px) { .grade-scale { grid-template-columns: repeat(3, 1fr); } }
+.grade-cell { background: var(--white); border: 1px solid var(--divider-light); border-radius: 6px; padding: 16px 12px; text-align: center; box-shadow: var(--lift-1); }
+.grade-cell-letter { font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.8rem; color: var(--navy); display: block; line-height: 1; }
+.grade-cell-range { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.78rem; color: var(--ink-soft); margin-top: 8px; }
+details { background: var(--white); border: 1px solid var(--divider-light); border-radius: 6px; margin: 12px 0; box-shadow: var(--lift-1); }
+details[open] { box-shadow: var(--lift-2); }
+details summary { list-style: none; cursor: pointer; padding: 16px 22px; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 600; font-size: 1rem; color: var(--navy); display: flex; justify-content: space-between; align-items: center; border-radius: 6px; }
+details summary::-webkit-details-marker { display: none; }
+details summary:hover { background: var(--cream-warm); }
+details summary::after { content: '+'; font-size: 1.5rem; color: var(--gold); margin-left: 16px; line-height: 1; }
+details[open] summary::after { content: '-'; color: var(--terra); }
+details .details-body { padding: 4px 22px 22px; border-top: 1px solid var(--divider-light); }
+.calc { background: var(--white); border: 1px solid var(--divider-light); border-radius: 8px; padding: 28px 30px; margin: 22px 0; box-shadow: var(--lift-2); position: relative; }
+.calc::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(to right, var(--navy), var(--gold), var(--terra)); border-radius: 8px 8px 0 0; }
+.calc-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.calc-icon { width: 38px; height: 38px; border-radius: 50%; background: var(--navy); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.05rem; }
+.calc h3 { margin: 0; color: var(--navy); }
+.calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin-top: 12px; }
+.calc-field label { display: block; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.82rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+.calc-field input { width: 100%; padding: 11px 14px; border: 1px solid var(--divider); border-radius: 4px; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.95rem; background: var(--cream); color: var(--ink); transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
+.calc-field input:focus { border-color: var(--navy); background: var(--white); outline: 3px solid rgba(201, 169, 97, 0.4); }
+.calc-field-hint { font-size: 0.74rem; color: var(--ink-soft); margin-top: 4px; font-family: 'Plus Jakarta Sans', Arial, sans-serif; }
+.calc-result { margin-top: 24px; padding: 20px 22px; background: var(--cream-warm); border-radius: 6px; border: 1px solid var(--divider-light); display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
+.calc-result-label { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terra); margin-bottom: 4px; }
+.calc-result-value { font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.7rem; color: var(--navy); }
+.calc-result-grade { display: inline-block; padding: 4px 16px; border-radius: 4px; background: var(--navy); color: var(--white); font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-style: normal; font-size: 1.3rem; font-weight: 700; margin-left: 4px; border: 1px solid var(--gold); }
+footer { margin-top: 40px; padding: 28px 24px 0; border-top: 1px solid var(--divider-light); font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.85rem; color: var(--ink-soft); text-align: center; position: relative; }
+footer::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--gold); border-radius: 2px; }
+footer p { margin: 4px 0; }
+footer strong { color: var(--navy); font-weight: 700; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="wrap">
+
+<header class="hero">
+  <p class="hero-eyebrow">BIO 004, Course Reference</p>
+  <h1>Grading and Assessments</h1>
+  <p class="hero-subtitle">Everything you need to know about how your grade is calculated, what each assessment looks like, and how the components fit together.</p>
+</header>
+
+<main id="main">
+
+<section>
+  <h2>Grading structure</h2>
+  <div class="section-rule"></div>
+  <p>Your grade is based on three components:</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Component</th><th>Detail</th><th style="text-align:right;">Weight</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Team-Based Learning (TBL)</strong></td><td>8 TBLs total, one per week. Lowest score dropped at end of term. You only get one drop. Use it wisely.</td><td class="weight-pct">40%</td></tr>
+        <tr><td><strong>Lab Practical Exams</strong></td><td>7 lab exams: 6 module exams plus 1 cumulative lab exam at the end of the term.</td><td class="weight-pct">50%</td></tr>
+        <tr><td><strong>End-of-Day Lab Quizzes</strong></td><td>Community accountability format: one randomly selected student answers a single question for the whole class. Everyone earns the same score.</td><td class="weight-pct">10%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout callout-gold">
+    <strong>No separate lecture exams.</strong> The TBL system, with iRAT and tRAT, serves as the assessment of lecture material. Application of clinical reasoning is built directly into the TBL workflow.
+  </div>
+</section>
+
+<section>
+  <h2>Grading scale</h2>
+  <div class="section-rule"></div>
+  <div class="grade-scale">
+    <div class="grade-cell"><span class="grade-cell-letter">A</span><span class="grade-cell-range">89.5 to 100%</span></div>
+    <div class="grade-cell"><span class="grade-cell-letter">B</span><span class="grade-cell-range">79.5 to 89.4%</span></div>
+    <div class="grade-cell"><span class="grade-cell-letter">C</span><span class="grade-cell-range">69.5 to 79.4%</span></div>
+    <div class="grade-cell"><span class="grade-cell-letter">D</span><span class="grade-cell-range">59.5 to 69.4%</span></div>
+    <div class="grade-cell"><span class="grade-cell-letter">F</span><span class="grade-cell-range">0 to 59.4%</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Grade calculator</h2>
+  <div class="section-rule"></div>
+  <p>Estimate your current standing in the course. Enter averages as percentages out of 100. Leave fields blank to exclude them.</p>
+  <div class="calc">
+    <div class="calc-header"><div class="calc-icon" aria-hidden="true">%</div><h3>Current standing estimator</h3></div>
+    <div class="calc-grid">
+      <div class="calc-field"><label for="tbl-avg">TBL average (40%)</label><input type="number" id="tbl-avg" min="0" max="100" step="0.1" placeholder="e.g., 84" inputmode="decimal"><div class="calc-field-hint">Average of your 7 best TBLs after the drop</div></div>
+      <div class="calc-field"><label for="lab-avg">Lab exam average (50%)</label><input type="number" id="lab-avg" min="0" max="100" step="0.1" placeholder="e.g., 78" inputmode="decimal"><div class="calc-field-hint">Average across the lab exams you have taken so far</div></div>
+      <div class="calc-field"><label for="quiz-avg">Lab quiz average (10%)</label><input type="number" id="quiz-avg" min="0" max="100" step="0.1" placeholder="e.g., 90" inputmode="decimal"><div class="calc-field-hint">Average across all completed end-of-day lab quizzes</div></div>
+    </div>
+    <div class="calc-result" role="status" aria-live="polite" aria-atomic="true">
+      <div><div class="calc-result-label">Weighted total</div><div class="calc-result-value" id="result-pct">--</div></div>
+      <div><div class="calc-result-label">Letter grade</div><div class="calc-result-value"><span class="calc-result-grade" id="result-letter">--</span></div></div>
+    </div>
+    <p style="font-size: 0.82rem; color: var(--ink-soft); margin-top: 16px; margin-bottom: 0;">This calculator is a personal estimation tool. Your official grade is recorded in Canvas.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Assessment details</h2>
+  <div class="section-rule"></div>
+
+  <details>
+    <summary>Team-Based Learning (TBL)</summary>
+    <div class="details-body">
+      <p>Each TBL has two graded components:</p>
+      <ul>
+        <li><strong>iRAT</strong> (individual): a 10 to 15 question quiz on your own. <em>Weighted 3x = 30 points.</em></li>
+        <li><strong>tRAT</strong> (team): the same quiz, taken with your team. <em>Weighted 1x = 10 points.</em></li>
+      </ul>
+      <p><strong>Total per TBL: 40 points.</strong> The iRAT alone accounts for 75% of your TBL grade. Most teams score 90% or higher on the tRAT, so your individual iRAT scores largely determine your final TBL outcome.</p>
+      <p>After the tRAT, you and your team work through clinical application questions and the Thursday morning case reveal. Application questions are ungraded but you are expected to understand the rationale if called on.</p>
+      <div class="callout callout-terra"><strong>No make-ups. No exceptions.</strong> Lowest TBL score is dropped at the end of the term. Use it wisely.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Lab practical exams</summary>
+    <div class="details-body">
+      <p>Seven lab practical exams: six module exams plus one cumulative lab exam at the end of the term. Module exams happen Monday mornings, covering the prior week's content with 20% spiral review.</p>
+      <h4>Format</h4>
+      <ul>
+        <li>50 minutes, 25 stations, 2 questions per station = 50 questions</li>
+        <li>90 seconds per station</li>
+        <li>You rotate through stations on a timer</li>
+        <li>Identify anatomy from microscope slides, pictures, charts, models, and prosected material</li>
+        <li>Spelling counts. Bring your favorite pen(s). Pencils not permitted.</li>
+      </ul>
+      <h4>Conduct</h4>
+      <ul>
+        <li>Doors lock when the exam begins. Late arrival means you cannot enter.</li>
+        <li>Do not look around the room or at other stations while at your station. Fold your paper to cover your answers.</li>
+        <li>Failure to comply will result in collection of your exam, graded as is.</li>
+        <li>No make-ups.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Cumulative lab exam (week 8, Thursday afternoon)</summary>
+    <div class="details-body">
+      <p>The cumulative exam counts as your seventh lab exam grade and includes equal representation of material from each module.</p>
+      <h4>Partial grade improvement</h4>
+      <p>If your score on the cumulative exam is higher than your score on a prior module exam, 50% of the improvement is added to your earlier score. The original is not replaced.</p>
+      <p><strong>Example:</strong> 40% on Lab Exam 1 and 80% on the cumulative = 40 percentage point improvement. Half of that (20 pts) added back to Exam 1 raises it to 60%.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>End-of-day lab quizzes (community accountability)</summary>
+    <div class="details-body">
+      <p>At the end of nearly every lab session, I ask <strong>one person in one randomly selected group</strong> a single question. The entire class earns the same score based on that one student's answer. Each quiz is 3 points.</p>
+      <p>This format is intentional. Your lab quiz grade depends on the readiness of every student in the room, not just yourself. Show up for each other. Put the work in during lab.</p>
+      <ul>
+        <li>Students present earn the class score for that quiz.</li>
+        <li>Students absent earn a zero (no make-ups, per the attendance policy).</li>
+        <li>No dropped lab quiz scores at the end of the term.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Depth of Knowledge (DOK) levels</summary>
+    <div class="details-body">
+      <p>Most assessment questions are DOK 2 and DOK 3. Questions are designed to prepare you for healthcare applications, not just memorization.</p>
+      <ul>
+        <li><strong>DOK 1, basic recall</strong> (~10%): naming structures, defining terms.</li>
+        <li><strong>DOK 2, skills and concepts</strong> (~40 to 50%): applying knowledge, identifying relationships, interpreting images.</li>
+        <li><strong>DOK 3, strategic thinking</strong> (~40 to 50%): solving clinical problems, justifying answers, predicting impact.</li>
+        <li><strong>DOK 4, extended thinking</strong> (~0 to 10%): bonus or optional integrative work.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Make-up and late work policy</summary>
+    <div class="details-body">
+      <ul>
+        <li>All quizzes, exams, lab reports, and assignments are due by the scheduled date.</li>
+        <li><strong>No make-ups, no late work accepted.</strong></li>
+        <li>All in-class assessments must be completed in person. If absent, you earn a zero.</li>
+        <li>The key: do not miss class.</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<section>
+  <h2>Scholar Points (up to 3.0% bonus)</h2>
+  <div class="section-rule"></div>
+  <p>Scholar Points reward proactive learning and academic competence. The 3.0% bonus has two requirements. The 1% academic performance bump is only awarded when paired with completed tutoring hours.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Requirement</th><th>Details</th><th>Bonus</th></tr></thead>
+      <tbody>
+        <tr><td>Tutoring engagement</td><td>18 verified hours of approved on-campus tutoring across the term. Maximum 3 hours per week counted, ensuring tutoring is spread across at least 6 weeks.</td><td>2.0%</td></tr>
+        <tr><td>Academic performance <em>(only with tutoring)</em></td><td>Maintain an average of 80% or higher across lab exams, lab quizzes, and TBL activities. Only awarded if you also complete the 18 tutoring hours.</td><td>1.0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>You may also earn up to 25 supplemental Scholar Points from end-of-day lab challenge questions and Community Rounds participation. See the syllabus for full mechanics.</p>
+  <div class="callout callout-terra">
+    <strong>No additional extra credit will be given in this course.</strong> Scholar Points are your only path to any extra credit. <strong>Please do not ask. No exceptions.</strong>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p><strong>BIO 004 Human Anatomy, Summer 2026, Solano Community College</strong></p>
+  <p>Dr. Sharilyn Rennie</p>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+  var tblInput = document.getElementById('tbl-avg');
+  var labInput = document.getElementById('lab-avg');
+  var quizInput = document.getElementById('quiz-avg');
+  var resultPct = document.getElementById('result-pct');
+  var resultLetter = document.getElementById('result-letter');
+  function clampNum(v) { if (v === '' || v == null) return null; var n = parseFloat(v); if (isNaN(n)) return null; if (n < 0) return 0; if (n > 100) return 100; return n; }
+  function letterFor(pct) { if (pct >= 89.5) return 'A'; if (pct >= 79.5) return 'B'; if (pct >= 69.5) return 'C'; if (pct >= 59.5) return 'D'; return 'F'; }
+  function recalc() {
+    var weights = { tbl: 40, lab: 50, quiz: 10 };
+    var values = { tbl: clampNum(tblInput.value), lab: clampNum(labInput.value), quiz: clampNum(quizInput.value) };
+    var totalWeight = 0, weightedSum = 0;
+    Object.keys(values).forEach(function(k) { if (values[k] !== null) { weightedSum += values[k] * weights[k]; totalWeight += weights[k]; } });
+    if (totalWeight === 0) { resultPct.textContent = '--'; resultLetter.textContent = '--'; return; }
+    var pct = weightedSum / totalWeight;
+    resultPct.textContent = pct.toFixed(1) + '%';
+    resultLetter.textContent = letterFor(pct);
+  }
+  [tblInput, labInput, quizInput].forEach(function(el) { if (el) el.addEventListener('input', recalc); });
+  recalc();
+  function sendHeight() { try { var height = document.documentElement.scrollHeight; var id = window.frameElement ? window.frameElement.id : ''; window.parent.postMessage({ type: 'iframeHeight', id: id, height: height }, '*'); } catch (e) {} }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) { new ResizeObserver(sendHeight).observe(document.body); }
+  document.querySelectorAll('details').forEach(function(d) { d.addEventListener('toggle', sendHeight); });
+})();
+</script>
+
+</body>
+</html>
