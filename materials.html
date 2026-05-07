@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Materials, BIO 004, Summer 2026</title>
+<meta name="description" content="Required and optional materials for BIO 004 Human Anatomy, Summer 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #142940; --navy-deep: #0A1A2A; --terra: #7C2018; --gold: #C9A961; --gold-soft: #DCC289;
+  --ink: #0A1A2A; --ink-soft: #3D4F5A; --divider: #BFC8CD; --divider-light: #D8DEE2;
+  --cream: #FAF7F2; --cream-warm: #F5F2EC; --white: #FFFFFF;
+  --lift-1: 0 1px 2px rgba(20, 41, 64, 0.05), 0 1px 3px rgba(20, 41, 64, 0.04);
+  --lift-2: 0 2px 4px rgba(20, 41, 64, 0.06), 0 4px 12px rgba(20, 41, 64, 0.06);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0.01ms !important; } }
+body { margin: 0; font-family: 'DM Sans', Arial, sans-serif; font-size: 16px; line-height: 1.65; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+.skip-link { position: absolute; top: -100px; left: 12px; background: var(--navy); color: var(--cream); padding: 12px 18px; text-decoration: none; border-radius: 4px; font-weight: 600; z-index: 1000; }
+.skip-link:focus { top: 12px; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 24px 24px 60px; }
+.hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--cream); border-radius: 8px; padding: 36px 36px 32px; margin-bottom: 32px; position: relative; overflow: hidden; box-shadow: var(--lift-2); }
+.hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%); pointer-events: none; }
+.hero > * { position: relative; }
+.hero-eyebrow { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px; }
+.hero h1 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 800; font-size: 2.1rem; line-height: 1.1; margin: 0 0 10px; color: var(--white); letter-spacing: -0.02em; }
+.hero-subtitle { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1rem; color: rgba(250, 247, 242, 0.88); margin: 0; max-width: 65ch; }
+section { margin-bottom: 36px; }
+section h2 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.45rem; color: var(--navy); margin: 0 0 4px; }
+.section-rule { height: 3px; width: 48px; background: var(--gold); margin: 8px 0 20px; border-radius: 2px; }
+section h3 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--terra); margin: 22px 0 8px; }
+section h4 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--navy); margin: 16px 0 6px; }
+section p { margin: 0 0 14px; }
+.callout { background: var(--white); border: 1px solid var(--divider-light); border-left: 4px solid var(--navy); padding: 16px 20px; margin: 18px 0; border-radius: 0 6px 6px 0; box-shadow: var(--lift-1); }
+.callout strong { font-family: 'Plus Jakarta Sans', Arial, sans-serif; color: var(--navy); }
+.callout-terra { border-left-color: var(--terra); } .callout-terra strong { color: var(--terra); }
+.callout-gold { border-left-color: var(--gold); } .callout-gold strong { color: var(--terra); }
+.option-card { background: var(--white); border: 1px solid var(--divider-light); border-radius: 6px; padding: 22px 26px; margin: 14px 0; box-shadow: var(--lift-1); position: relative; }
+.option-card.recommended { border-left: 4px solid var(--gold); }
+.option-card.recommended::after { content: 'Recommended'; position: absolute; top: 18px; right: 22px; background: var(--gold); color: var(--navy-deep); font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 12px; }
+.option-card h4 { margin-top: 0; }
+.option-card p:last-child { margin-bottom: 0; }
+ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--gold); }
+strong, b { font-weight: 700; color: var(--navy); }
+em, i { font-style: italic; color: var(--ink); }
+a.inline-link { color: var(--terra); text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
+a.inline-link:hover { color: var(--navy); }
+footer { margin-top: 40px; padding: 28px 24px 0; border-top: 1px solid var(--divider-light); font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 0.85rem; color: var(--ink-soft); text-align: center; position: relative; }
+footer::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--gold); border-radius: 2px; }
+footer p { margin: 4px 0; }
+footer strong { color: var(--navy); font-weight: 700; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="wrap">
+
+<header class="hero">
+  <p class="hero-eyebrow">BIO 004, Course Reference</p>
+  <h1>Course Materials</h1>
+  <p class="hero-subtitle">What you need (and what you do not need) to succeed in this course. Listed in order of priority.</p>
+</header>
+
+<main id="main">
+
+<section>
+  <h2>Textbook (recommended, not required)</h2>
+  <div class="section-rule"></div>
+  <p><strong>No textbook is required for this course.</strong> Pick the option that fits your budget and learning style. All three cover the anatomy material we will study.</p>
+
+  <div class="option-card recommended">
+    <h4>OpenStax Anatomy and Physiology, 2nd Edition</h4>
+    <p><strong>Cost: Free.</strong> Peer-reviewed, available online and as a free PDF at <a class="inline-link" href="https://openstax.org/details/books/anatomy-and-physiology-2e" target="_blank" rel="noopener">openstax.org/details/books/anatomy-and-physiology-2e</a>. The most accessible option, and sufficient for the course.</p>
+  </div>
+
+  <div class="option-card">
+    <h4>Marieb, Brady, and Mallatt, <em>Human Anatomy</em>, 9th Edition</h4>
+    <p>ISBN-13: 9780135240601. Used copies available online. This is the dedicated anatomy textbook (no physiology).</p>
+  </div>
+
+  <div class="option-card">
+    <h4>Marieb, <em>Human Anatomy and Physiology</em>, two-semester edition</h4>
+    <p>Any recent edition will cover the anatomy content for this course. If you already own this from another class or a friend, it works.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Mastering A&amp;P access is optional.</strong> It is not required for any graded course component. Do not buy it just because it shows up bundled with the textbook.
+  </div>
+</section>
+
+<section>
+  <h2>Lab supplies (needed by week 3)</h2>
+  <div class="section-rule"></div>
+  <ul>
+    <li><strong>Non-latex nitrile gloves.</strong> Share a box with your group to reduce cost.</li>
+    <li><strong>Lab coat (required).</strong> Stored in the lab through the end of the term. Cannot be shared with chemistry. You will need your own.</li>
+  </ul>
+  <div class="callout callout-terra">
+    <strong>Heads up:</strong> The 8-week pace means you need lab supplies on hand by <strong>week 3</strong>, not week 6. Plan to order or pick up supplies during week 1 or 2.
+  </div>
+</section>
+
+<section>
+  <h2>Required technology</h2>
+  <div class="section-rule"></div>
+  <p>To be successful in this course, you must have access to the following:</p>
+  <ul>
+    <li><strong>Tablet, laptop, or desktop computer</strong> capable of running multiple browser tabs, streaming videos, and using PDF editing or scanning tools. Recommended minimum: 8 GB RAM, 10 GB available storage.</li>
+    <li><strong>Reliable internet connection</strong> for Canvas, lecture videos, and assignment submissions.</li>
+    <li><strong>Printer and scanner</strong>, or a scanning app (Adobe Scan, CamScanner) for legible handwritten work.</li>
+    <li><strong>Camera-enabled device</strong> for capturing clear images of models, lab work, or assignment pages.</li>
+    <li><strong>PDF conversion tool.</strong> All scanned or photographed assignments must be submitted as PDFs through Canvas.</li>
+  </ul>
+  <p style="font-size: 0.92rem; color: var(--ink-soft);"><strong>Important:</strong> You are responsible for ensuring your devices meet these requirements. Inadequate technology access may result in missed deadlines and academic penalties unless prior arrangements are made.</p>
+</section>
+
+<section>
+  <h2>Optional supplementary materials</h2>
+  <div class="section-rule"></div>
+  <p>These are optional but useful for some students:</p>
+  <ul>
+    <li>Krieger, P. A. (2021). <em>A Visual Analogy Guide to Human Anatomy</em> (5th ed.). Morton Publishing. (Workbook with mnemonics)</li>
+    <li>Malakhova, Chinn, Krabbenhoft, &amp; Smith (2022). <em>A Photographic Atlas for Anatomy &amp; Physiology</em> (2nd ed.). Pearson.</li>
+    <li>Complete Anatomy by 3B Medical (App, paid)</li>
+  </ul>
+</section>
+
+<section>
+  <h2>What I provide</h2>
+  <div class="section-rule"></div>
+  <ul>
+    <li>Weekly research workbooks (downloadable from Canvas each week)</li>
+    <li>Lecture videos for foundation content</li>
+    <li>Custom digital atlas materials (in development, see Guide to Using Digital Atlas)</li>
+    <li>TBL case materials</li>
+    <li>Lab worksheets and master structure lists</li>
+    <li>Practice questions and study tools at <a class="inline-link" href="https://drsrennie-stack.github.io" target="_blank" rel="noopener">drsrennie-stack.github.io</a></li>
+  </ul>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p><strong>BIO 004 Human Anatomy, Summer 2026, Solano Community College</strong></p>
+  <p>Dr. Sharilyn Rennie</p>
+</footer>
+
+<script>
+(function() {
+  function sendHeight() { try { var h = document.documentElement.scrollHeight; var id = window.frameElement ? window.frameElement.id : ''; window.parent.postMessage({ type: 'iframeHeight', id: id, height: h }, '*'); } catch (e) {} }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) { new ResizeObserver(sendHeight).observe(document.body); }
+})();
+</script>
+
+</body>
+</html>
