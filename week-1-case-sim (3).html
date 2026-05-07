@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinical Reasoning Simulator, Week 1, BIO 004</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="description" content="Week 1 clinical reasoning case - integumentary system. Educational simulation only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#142940; --navy-deep:#0A1A2A; --navy-bg:#E8EDF3; --navy-bd:#B8C5D5;
+  --terra:#7C2018; --terra-bg:#F5E5E2; --terra-bd:#E5BFB8;
+  --gold:#C9A961; --gold-bg:#F8F1E0; --gold-bd:#E5D4A6;
+  --ok:#2E5A3F; --ok-bg:#E5F0E8; --ok-bd:#B8D4C2;
+  --warn:#7A5800; --warn-bg:#FAF1D8; --warn-bd:#E8D49B;
+  
+  --ink:#0A1A2A; --ink-soft:#3D4F5A; --ink-mute:#4A5965;
+  --divider:#BFC8CD; --divider-light:#D8DEE2;
+  --cream:#FAF7F2; --cream-warm:#F5F2EC; --cream-deep:#EEEAE0; --white:#FFFFFF;
+  --r:8px; --rs:5px;
+  --display:'Lora',Georgia,serif;
+  --sans:'Plus Jakarta Sans',Arial,sans-serif;
+  --body:'DM Sans',Arial,sans-serif;
+  --mono:'SF Mono',Monaco,'Courier New',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+*:not(input):not(textarea){user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms!important}}
+@media print{body{display:none!important}}
+body{font-family:var(--body);background:var(--white);color:var(--ink);min-height:100vh;font-size:17px;padding-bottom:80px;-webkit-font-smoothing:antialiased;line-height:1.6}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:1.25rem 1rem;position:relative;z-index:2}
+
+/* Watermark */
+.watermark{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:1;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.watermark-text{font-family:var(--sans);font-weight:700;font-size:72px;color:var(--navy);opacity:.05;transform:rotate(-30deg);white-space:nowrap;letter-spacing:.05em;text-align:center;line-height:1.2}
+
+h1{font-family:var(--sans);font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1.2}
+h2{font-family:var(--sans);font-size:20px;font-weight:700;color:var(--navy);margin-bottom:.5rem;letter-spacing:-.01em}
+p{font-size:16.5px;color:var(--ink-soft);line-height:1.65}
+
+button{font-family:var(--sans);font-size:15px;font-weight:600;padding:10px 20px;border:1px solid var(--divider);border-radius:var(--rs);background:var(--white);color:var(--ink);cursor:pointer;transition:all .15s}
+button:hover:not(:disabled){background:var(--cream-warm);border-color:var(--ink-soft)}
+button:disabled{opacity:.4;cursor:default}
+button.bb{background:var(--navy);color:var(--white);border-color:var(--navy)}
+button.bb:hover:not(:disabled){background:var(--navy-deep)}
+button.bt{background:var(--ok);color:var(--white);border-color:var(--ok)}
+button.bt:hover:not(:disabled){background:#1F4530}
+button.bg{background:var(--gold);color:var(--navy-deep);border-color:var(--gold)}
+button.bg:hover:not(:disabled){background:#B89545}
+
+input[type=text],input[type=password],textarea{font-family:var(--body);font-size:17px;border:1px solid var(--divider);border-radius:var(--rs);padding:10px 12px;width:100%;background:var(--white);color:var(--ink);line-height:1.55;resize:vertical}
+input:focus,textarea:focus{outline:3px solid var(--gold);outline-offset:0;border-color:var(--navy)}
+
+.card{background:var(--white);border:1px solid var(--divider-light);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;box-shadow:0 1px 2px rgba(20,41,64,.05),0 1px 3px rgba(20,41,64,.04)}
+.badge{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:700;padding:5px 13px;border-radius:13px;letter-spacing:.06em;text-transform:uppercase}
+.b-navy{background:var(--navy-bg);color:var(--navy);border:1px solid var(--navy-bd)}
+.b-terra{background:var(--terra-bg);color:var(--terra);border:1px solid var(--terra-bd)}
+.b-gold{background:var(--gold-bg);color:var(--warn);border:1px solid var(--gold-bd)}
+.b-ok{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+.b-reveal{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+
+.sl{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.sep{border:none;border-top:1px solid var(--divider-light);margin:1rem 0}
+.flex{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fb{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.g2{display:grid;grid-template-columns:300px 1fr;gap:1rem}
+@media(max-width:760px){.g2{grid-template-columns:1fr}}
+
+/* Credit bar */
+.cbar{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:10px 14px;display:flex;align-items:center;gap:14px;margin-bottom:.875rem}
+.cnum{font-family:var(--display);font-style:italic;font-weight:600;font-size:42px;color:var(--navy);line-height:1}
+.clabel{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--warn);letter-spacing:.04em;text-transform:uppercase}
+.csub{font-size:15px;color:var(--ink-soft);line-height:1.55;margin-top:6px;font-weight:500}
+.pb{height:6px;background:var(--cream-deep);border-radius:3px;overflow:hidden;margin-top:5px}
+.pf{height:100%;border-radius:3px;background:var(--gold);transition:width .3s}
+.pf.low{background:var(--terra)} .pf.mid{background:var(--gold)}
+
+/* Day tabs */
+.day-tabs{display:flex;gap:0;border:1px solid var(--divider);border-radius:var(--rs);overflow:hidden;margin-bottom:.875rem;background:var(--cream-warm)}
+.day-tab{flex:1;padding:14px 8px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--ink-soft);text-align:center;transition:all .15s;border-right:1px solid var(--divider);line-height:1.3}
+.day-tab:last-child{border-right:none}
+.day-tab.active{background:var(--white);color:var(--navy)}
+.day-tab.locked{color:var(--ink-mute);cursor:default}
+.day-tab.unlocked{color:var(--ok)}
+
+/* Unlock bar */
+.unlock-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);margin-bottom:.875rem;flex-wrap:wrap}
+.unlock-bar input{flex:1;min-width:140px;padding:11px 14px;font-size:16px;letter-spacing:.08em;text-transform:uppercase}
+
+/* Items */
+.fi{padding:13px 15px;border-radius:var(--rs);border:1px solid var(--divider-light);margin-bottom:7px;cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:space-between;font-size:15.5px;font-weight:500}
+.fi:hover{background:var(--ok-bg);border-color:var(--ok-bd)}
+.fi.got{background:var(--ok-bg);border-color:var(--ok-bd)}
+.oc{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 7px;padding-left:2px}
+.oi{padding:13px 15px;border-radius:var(--rs);border:1px solid var(--divider-light);margin-bottom:7px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .12s;font-size:15.5px;font-weight:500}
+.oi:hover:not(.done){background:var(--navy-bg);border-color:var(--navy-bd)}
+.oi.done{background:var(--ok-bg);border-color:var(--ok-bd);cursor:default}
+
+/* Chat */
+.chatbox{border:1px solid var(--divider-light);border-radius:var(--r);overflow:hidden;background:var(--white)}
+.ci{padding:.875rem;overflow-y:auto;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.msg{max-width:78%}
+.msg.user{align-self:flex-end}
+.msg.assistant{align-self:flex-start}
+.ml{font-family:var(--sans);font-size:14.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.msg.user .ml{text-align:right}
+.mb{padding:16px 20px;border-radius:var(--r);font-size:18px;line-height:1.65}
+.msg.user .mb{background:var(--navy-bg);border:1px solid var(--navy-bd);border-bottom-right-radius:3px;color:var(--navy)}
+.msg.assistant .mb{background:var(--cream-warm);border:1px solid var(--divider-light);border-bottom-left-radius:3px}
+.msg.assistant.gate .mb{background:var(--gold-bg);border-color:var(--gold-bd)}
+.msg.assistant.result .mb{background:var(--ok-bg);border-color:var(--ok-bd)}
+.msg.assistant.fail .mb{background:var(--terra-bg);border-color:var(--terra-bd);color:var(--terra)}
+.msg.assistant.patient .mb{background:var(--cream-warm);border-color:var(--terra-bd);border-left:4px solid var(--terra);font-family:var(--display);font-style:italic;color:var(--terra)}
+.msg.assistant.unlock .mb{background:var(--ok-bg);border-color:var(--ok-bd)}
+.ir{display:flex;gap:6px;padding:8px 10px;border-top:1px solid var(--divider-light);align-items:flex-end}
+.ir textarea{flex:1;min-height:38px;max-height:80px;resize:none}
+
+/* Result cards */
+.rc{background:var(--ok-bg);border:1px solid var(--ok-bd);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap;font-family:var(--mono)}
+.rl{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--ok);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.fc{background:var(--cream-warm);border:1px solid var(--divider-light);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap}
+.fl{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.ar{background:var(--terra-bg);border:1px solid var(--terra-bd);border-left:4px solid var(--terra);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap;font-family:var(--mono)}
+.al{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+
+/* Topic pills */
+.tpill{font-family:var(--sans);font-size:14.5px;padding:6px 14px;border-radius:14px;font-weight:600}
+.tpill.hit{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+.tpill.miss{background:var(--cream-deep);color:var(--ink-mute);border:1px solid var(--divider-light)}
+
+/* Score row */
+.score-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--divider-light);font-size:16px}
+.score-row:last-child{border-bottom:none}
+.sv{font-family:var(--mono);font-weight:700}
+.sv.full{color:var(--ok)} .sv.part{color:var(--warn)} .sv.zero{color:var(--terra)}
+.reveal-text{background:var(--cream-warm);border:1px solid var(--divider-light);border-radius:var(--rs);padding:18px 22px;font-size:15.5px;line-height:1.85;white-space:pre-wrap;max-height:560px;overflow-y:auto}
+.istep{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--divider-light);font-size:16px;line-height:1.7}
+.istep:last-child{border-bottom:none}
+.inum{width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--white);font-family:var(--sans);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+.note{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:15px 20px;font-size:15.5px;color:var(--warn);line-height:1.7;margin-bottom:1rem;font-weight:500}
+.alert-terra{background:var(--terra-bg);border:1px solid var(--terra-bd);border-left:4px solid var(--terra);border-radius:var(--rs);padding:15px 20px;font-size:16px;color:var(--terra);line-height:1.65;margin-bottom:1rem;font-weight:500}
+
+.dots{display:inline-flex;gap:4px;padding:5px 0;align-items:center}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--ink-mute);animation:bop 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s} .dot:nth-child(3){animation-delay:.4s}
+@keyframes bop{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+
+/* Disclaimer */
+.disclaimer{position:fixed;bottom:0;left:0;right:0;background:var(--gold-bg);border-top:1px solid var(--gold-bd);padding:11px 16px;font-family:var(--sans);font-size:14px;color:var(--warn);text-align:center;z-index:9999;font-weight:500}
+</style>
+</head>
+<body>
+<div class="watermark"><div class="watermark-text" id="wmt">BIO 004 ,  Confidential</div></div>
+<div class="wrap"><div id="app"></div></div>
+<div class="disclaimer">⚕ Educational simulation only. All patients and clinical scenarios are entirely fictional and created for learning purposes. Not medical advice.</div>
+<script>
+/* ────────── COURSE / DAY / REVEAL CODES ────────── */
+const COURSE_PW = "DERMIS";       // Initial access (instructor announces in Monday class)
+const REVEAL_CODE = "CLEAVE";      // After Thursday TBL
+const FORM_URL = "";               // Optional Google Form POST endpoint
+const FORM_FIELDS = {name:"entry.1",diag:"entry.2",rationale:"entry.3",credits:"entry.4",total:"entry.5"};
+
+/* ────────── THE CASE ────────── */
+const CASE = {
+  id:"BIO004-W1-PATEL", title:"Week 1 ,  Jordan Patel",
+  system:"Integumentary System & Tissue Foundations",
+  patient:{name:"Jordan Patel", age:24, gender:"Female"},
+  cc:"Painful spreading rash, eye and mouth pain ,  started 2 days ago",
+  dayCodes:{2:"NIKOLSKY", 3:"SCORTEN"},
+  highYield:["nikolsky","biopsy","cbc_d1","scorten"],
+
+  /* INTERVIEW ,  keyword-matched patient responses */
+  interviewResponses:[
+    /* === DRUG NAME (specific) === */
+    {keys:["bactrim","sulfameth","trimethoprim","tmp-smx","tmp/smx","sulfonamide","sulfa drug"],
+     r:"Yes, that is it. The pharmacy called it Bactrim. The label says sulfamethoxazole-trimethoprim."},
+    {keys:["what is the name","whats the name","name of the antibiotic","name of the drug","name of the medication","what is it called","whats it called","what antibiotic","which antibiotic","what kind of antibiotic"],
+     r:"Bactrim. I have the bottle in my bag if you want to see it."},
+    /* === WHY PRESCRIBED === */
+    {keys:["what was it for","what is it for","why prescribed","what prescribed for","why are you on","why did you start","why are you taking","what is the antibiotic for","what is the medication for","prescribed for"],
+     r:"For a UTI my doctor diagnosed about 10 days ago."},
+    /* === DURATION === */
+    {keys:["how long have you been taking","how long have you been on","how long on it","how many days have you","when did you start taking","when did you start the antibiotic","when did you begin taking","how many days ago did you start"],
+     r:"Nine days ago. I have one pill left in the bottle."},
+    /* === UTI / urinary === */
+    {keys:["uti","urinary tract","bladder infection","kidney infection"],
+     r:"I had one my doctor treated about 10 days ago. The burning when I peed cleared up after the first few days."},
+    /* === MEDICATION (general) ,  answers without giving the name or purpose === */
+    {keys:["new medication","new prescription","new med","recent medication","start anything new","just started taking","new drug"],
+     r:"Yes, I started one antibiotic about 9 days ago. Nothing else has changed."},
+    {keys:["any medication","other medication","other med","what medications","what meds","take any med","take any medic","any prescription","taking any","taking anything","on any pill","any pills","any drugs"],
+     r:"Just one antibiotic I started about 9 days ago. No other prescriptions, no supplements, no vitamins, no birth control."},
+    {keys:["antibiotic"],
+     r:"Yes, I am on one. I started it about 9 days ago."},
+    /* === ONSET (each event answered separately) === */
+    {keys:["when did the rash","when did the spots","when did the skin","when did your skin","when did the blister","skin started","rash start","rash begin","spots start","spots appear","when did the lesions"],
+     r:"Yesterday morning. A burning red patch came up on my upper chest. By last night it was spreading."},
+    {keys:["when did your eyes","when did the eye","eyes start","eye symptoms start"],
+     r:"Two days ago. They felt gritty first. Last night light started hurting."},
+    {keys:["when did your mouth","when did the mouth","mouth start","when did the lip"],
+     r:"Two days ago. The inside of my lips started peeling first, then the sores came."},
+    {keys:["when did the throat","when did your throat","when did sore throat","throat start"],
+     r:"Four days ago. That was the first thing I noticed."},
+    {keys:["when did the fever","when did you get a fever","when did your fever","when did the temperature","fever start"],
+     r:"Four days ago. It was around 101. Today it spiked to 103."},
+    {keys:["when did this all start","when did your symptoms start","when did this begin","first symptom","earliest symptom","how long ago did this start","how long have you had","when did everything start","when did you first feel"],
+     r:"About four days ago I started feeling off. Flu-ish. The skin and eye stuff is more recent."},
+    {keys:["timeline","sequence of symptoms","order of symptoms","what came first","chronology","progression of symptom"],
+     r:"Sore throat and feeling flu-ish four days ago. Eyes and mouth two days ago. Skin yesterday morning. Blisters today."},
+    /* === SKIN CHARACTER === */
+    {keys:["where did the rash","where did the spots","where started","where on your body","what part of your body","distribution","location of the rash"],
+     r:"Started on my upper chest. Now my face, neck, both upper arms. It is spreading downward."},
+    {keys:["what does the rash feel","describe the pain","skin pain","painful skin","how does the rash feel","painful rash","describe the rash pain","sunburn"],
+     r:"Burning, like a sunburn but stabbing. Way worse than it looks. Touching anything to it is excruciating."},
+    {keys:["blister","bullae","peel","slough","skin coming off","skin sloughing"],
+     r:"Yes. Some clear blisters today. The skin literally peels off when I scratch it."},
+    {keys:["look like","appearance of the rash","what does it look like","describe the rash"],
+     r:"Red spots, some with darker centers like a target. A few have turned into clear blisters with fluid inside."},
+    /* === EYES === */
+    {keys:["eye","vision","light bother","photophob","conjunctiv","red eye","eye discharge","eye symptoms"],
+     r:"They feel like there is sand in them. Bright light is unbearable. Yellowish discharge in the morning."},
+    /* === MOUTH === */
+    {keys:["mouth","oral","lip","tongue","swallow","eating","mouth pain","mouth sore"],
+     r:"Full of painful sores. I cannot really eat. Drinking water hurts. The inside of my lips is peeling and bleeds when I touch it."},
+    {keys:["throat","sore throat"],
+     r:"Sore. It started four days ago. Not as bad as the mouth feels now."},
+    /* === GENITAL === */
+    {keys:["genital","painful urination","burning when","dysuria","urethra"],
+     r:"Some burning, raw feeling. I have not looked closely. I just want to lie still."},
+    /* === HISTORY === */
+    {keys:["allerg","drug allergy","reaction to medication","reaction to a drug","intolerance"],
+     r:"No known drug allergies. I took amoxicillin once as a kid. Nothing happened. Nothing like this has ever happened to me before."},
+    {keys:["past medical","medical history","chronic condition","prior illness","other condition","previous diagnos","health condition","other illness"],
+     r:"Healthy. No chronic conditions. Wisdom teeth out at 18, that is it."},
+    {keys:["family","mother","father","parent","sibling","relative","heredit","genetic"],
+     r:"Mom has Hashimoto thyroiditis. Dad is healthy. No skin diseases or blistering disorders that I know of."},
+    /* === SOCIAL === */
+    {keys:["smoke","tobacco","cigarette","vape"],
+     r:"I do not smoke."},
+    {keys:["alcohol","drink","wine","beer","liquor"],
+     r:"Glass of wine on weekends, that is all."},
+    {keys:["recreational","illicit","marijuana","weed","cannabis","substance use","other substance"],
+     r:"None. Just the occasional wine."},
+    {keys:["sex","sexual","partner","std","sti","hiv test","stds","hiv"],
+     r:"One partner, monogamous for 14 months. We use condoms. STI panel six months ago, all negative including HIV."},
+    {keys:["travel","trip","abroad","vacation","out of state","traveled"],
+     r:"None. I have not left the state in over a year."},
+    {keys:["sun","tanning","outside","sunburn","outdoor"],
+     r:"No sun exposure. It is November. I have been studying indoors."},
+    {keys:["sick contact","exposure to anyone","sick person","anyone sick","sick around","contact with someone","sick exposure"],
+     r:"My roommate had a cold last week. Nothing else."},
+    {keys:["work","job","occupation","school","study","student","what do you do","major"],
+     r:"Junior in nursing school. Just had a hard exam week."},
+    /* === CONSTITUTIONAL === */
+    {keys:["fever","temperature","chill","sweat","hot","feverish"],
+     r:"Yes. About 101 starting four days ago. Today it spiked to 103. Alternating chills and sweats."},
+    {keys:["nausea","vomit","stomach","appetite","food intake","throwing up"],
+     r:"Some nausea. I have not vomited. I cannot eat because of my mouth."},
+    {keys:["headache","head pain","head ache"],
+     r:"Mild. The skin pain dwarfs everything else."},
+    {keys:["body ache","muscle pain","joint pain","arthralgia","myalgia","achy","aching"],
+     r:"My whole body has ached since this started four days ago."},
+    {keys:["sleep","tired","fatigue","exhaust"],
+     r:"I have not slept properly in over a day. The pain wakes me up."},
+    {keys:["weight","losing weight"],
+     r:"Lost about three pounds. I cannot really eat."},
+    {keys:["scared","worried","afraid","anxious","panic"],
+     r:"Yes. I am very scared. My mom is driving here from Sacramento."},
+  ],
+  interviewTopics:{
+    medication:{label:"Medications",pattern:/medication|drug|pill|antibiotic|bactrim|tmp|sulfa|prescription/i},
+    onset:{label:"Onset/timeline",pattern:/when|start|onset|begin|first|ago|fever/i},
+    skin:{label:"Skin/rash",pattern:/rash|blister|skin|spot|peel|pain|spread/i},
+    mucous:{label:"Mucous membranes",pattern:/eye|mouth|oral|lip|throat|conjunctiv|genital/i},
+    history:{label:"History",pattern:/allerg|family|pmh|past medical|history|condition/i},
+    social:{label:"Social hx",pattern:/work|school|smoke|drink|sexual|partner|travel/i},
+  },
+
+  /* FREE BEDSIDE DATA */
+  free:{
+    vitals:{icon:"📊",label:"Vital signs",result:"T: 39.0°C (102.2°F)\nHR: 122 bpm  ↑ tachycardic\nBP: 102/64 mmHg\nRR: 22 /min\nSpO₂: 96% on room air\nPain: 9/10 (skin and mouth)\nWt: 56 kg  Ht: 168 cm  BMI: 19.8"},
+    general:{icon:"👤",label:"General appearance",result:"Ill-appearing young adult, in obvious distress. Photophobic, eyes squinting. Quiet, speaking in short sentences due to oral pain. No respiratory distress at rest. Skin diffusely flushed; visible target-like and dusky lesions on face, neck, anterior chest, and upper arms. A&O ×3."},
+    skin:{icon:"🩹",label:"Skin examination",result:"DISTRIBUTION: Face (forehead, cheeks), anterior neck, upper chest, both upper extremities. Sparing of palms, soles, scalp.\n\nLESIONS: Erythematous macules with central duskiness (atypical target lesions). Several flaccid bullae on chest with serous fluid. Sloughing skin in confluent sheets along sternum and right shoulder.\n\nESTIMATED BSA DETACHED OR DETACHABLE: ~7%\n\nSURROUNDING NORMAL-APPEARING SKIN: Dusky, dull-pink, exquisitely tender to light touch.\n\nNAILS, HAIR: Normal."},
+    mucous:{icon:"👄",label:"Mucous membrane exam",result:"EYES: Bilateral conjunctivitis with copious mucopurulent discharge. Conjunctival erosions visible on lid eversion. Photophobia. No corneal opacity yet.\n\nMOUTH: Diffuse erosions on lips, buccal mucosa, hard palate, tongue. Hemorrhagic crusting on lower lip. Drooling ,  patient unable to swallow saliva comfortably.\n\nGENITAL/URETHRAL: Patient reports burning. Exam deferred to specialist.\n\nNARES: Mild crusting at vestibule bilaterally."},
+    neuro:{icon:"🧠",label:"Neuro screen",result:"Alert, oriented ×3. CN II-XII intact (CN II evaluation limited by photophobia). Sensory and motor exam grossly normal. No meningeal signs. No focal deficits. Mental status appropriate to severe pain and distress."},
+    pulm:{icon:"🫁",label:"Pulmonary exam",result:"Lungs clear bilaterally. No crackles, wheeze, rhonchi. Mucous membrane involvement does not appear to extend below the larynx based on phonation and respiratory effort. SpO₂ 96% on room air."},
+    cardiac:{icon:"🫀",label:"Cardiac auscultation",result:"Sinus tachycardia at 122. Soft, regular S1/S2. No murmur, rub, or gallop. Capillary refill 3 sec ,  borderline. Pulses 2+ bilaterally."},
+    abd:{icon:"🤲",label:"Abdomen",result:"Soft, non-distended. No rebound, no guarding. Bowel sounds normal. Mild diffuse tenderness without localization. No hepatosplenomegaly. No skin involvement on abdomen at this time."},
+  },
+
+  /* DAYS */
+  days:{
+    1:{
+      label:"Day 1 ,  Monday: Initial encounter",
+      note:"Today's pre-work covers anatomical position, body regions, directional terms, and body planes. Each test you order requires a gate question that applies that terminology to Jordan's case. Order tests deliberately, credits do not refund.",
+      autoReveal:null,
+      orders:[
+        {id:"cbc_d1",cat:"Hematology",name:"CBC with differential",cost:15,
+          result:"WBC: 14.2 × 10⁹/L  ↑\nNEUT %: 78%  ↑\nLYMPH %: 6%  ↓ (lymphopenia)\nEOSINOPHIL %: 3% (normal)\nHGB: 13.4 g/dL\nHCT: 40.1%\nPLATELETS: 215 × 10⁹/L\n\nSummary: Leukocytosis with neutrophil predominance, marked lymphopenia. No eosinophilia (less typical for DRESS).",
+          gate:{q:"The medical assistant will draw blood from Jordan's left arm at the antecubital fossa (just inside the bend of her elbow). Her rash extends from the shoulder down toward the elbow but spares the venipuncture site. Which body region term describes the area of the upper limb between the shoulder and the elbow?",
+            opts:[
+              "A) Brachial region",
+              "B) Antebrachial region",
+              "C) Carpal region",
+              "D) Crural region"],
+            correct:"A",exp:"A: The brachial region is the upper arm, between shoulder and elbow. B: antebrachial = forearm (elbow to wrist). C: carpal = wrist. D: crural = leg (lower limb, knee to ankle). Body region terms let clinicians document precisely where findings are located, especially for widespread skin diseases."}},
+        {id:"cmp_d1",cat:"Chemistry",name:"Comprehensive metabolic panel",cost:15,
+          result:"Na: 138  K: 4.0  Cl: 100  HCO₃: 22  BUN: 28 ↑  Cr: 1.4 ↑\nGlucose: 96\nCa: 9.2  Albumin: 3.4 ↓\nAST: 32  ALT: 38  ALP: 92  T.bili: 0.8\n\nSummary: Mild AKI (Cr 1.4 from baseline ~0.7). Hypoalbuminemia. LFTs normal ,  argues against DRESS (which typically has transaminitis).",
+          gate:{q:"Jordan's lab values reflect water and protein loss across her damaged skin. The skin sits on top of underlying muscle. Using directional terminology, which term describes the position of the skin RELATIVE TO the muscle beneath it?",
+            opts:[
+              "A) Superficial",
+              "B) Deep",
+              "C) Proximal",
+              "D) Distal"],
+            correct:"A",exp:"A: Superficial means closer to the surface of the body. The skin is superficial to muscle. B: deep means farther from the surface. C: proximal means closer to the trunk or origin (used for limb structures). D: distal means farther from the trunk (also used for limbs). Directional terms come in opposite pairs, and you must choose the right pair for the comparison being made."}},
+        {id:"nikolsky",cat:"Bedside",name:"Bedside Nikolsky sign assessment",cost:5,
+          result:"NIKOLSKY SIGN: POSITIVE.\n\nLight tangential pressure on the dusky-but-intact skin adjacent to a target lesion produces lateral sliding and shearing of the epidermis from the underlying dermis.\n\nASBOE-HANSEN SIGN: POSITIVE.\nPressure on an existing bulla extends it laterally into adjacent normal-appearing skin.\n\nINTERPRETATION: Both signs indicate loss of cohesion AT or NEAR the dermal-epidermal junction. Strongly suggestive of full-thickness epidermal injury with subepidermal cleavage.",
+          gate:{q:"The Nikolsky test was performed on Jordan's ANTERIOR chest, near the sternum. In standard anatomical position, the anterior surface of the body is also called the:",
+            opts:[
+              "A) Ventral surface",
+              "B) Dorsal surface",
+              "C) Cephalic surface",
+              "D) Caudal surface"],
+            correct:"A",exp:"A: Anterior and ventral are paired terms for the front of the body in humans. B: posterior and dorsal refer to the back. C: cephalic means toward the head. D: caudal means toward the tail or feet. \"Anterior chest\" and \"ventral chest\" describe the same surface, two terms for the same place."}},
+        {id:"swab_d1",cat:"Microbiology",name:"Skin swab and bacterial culture",cost:15,
+          result:"GRAM STAIN: No organisms seen.\nBACTERIAL CULTURE (preliminary, 24 hr): No growth.\nFINAL (48-72 hr): Pending.\n\nSummary: No bacterial superinfection at presentation. Argues against staphylococcal scalded skin syndrome (SSSS) and bacterial impetigo as primary cause.",
+          gate:{q:"Imagine extending the idea of a microscope cross-section to the whole body. Which body plane divides the body vertically into RIGHT and LEFT portions?",
+            opts:[
+              "A) Sagittal plane",
+              "B) Frontal (coronal) plane",
+              "C) Transverse plane",
+              "D) Oblique plane"],
+            correct:"A",exp:"A: A sagittal plane is a vertical plane that divides the body into right and left portions. A midsagittal plane runs exactly down the midline. B: the frontal (coronal) plane divides the body into anterior and posterior portions. C: the transverse plane divides the body into superior and inferior portions. D: an oblique plane is at any angle other than the standard three. These reference planes let anatomists describe internal structures consistently across patients."}},
+        {id:"biopsy",cat:"Pathology",name:"Skin punch biopsy (sent to path, results Day 2)",cost:30,
+          result:"Specimen sent to pathology.\nFrozen section attempted; full results expected in 24 hours.\n\nPRELIMINARY GROSS: 4-mm punch from edge of bullous lesion, anterior chest. Shipped on ice.",
+          gate:{q:"Jordan has erosions on the inside of her CHEEKS and rash on her FOREHEAD. Which pair of body region terms correctly matches each anatomic location?",
+            opts:[
+              "A) Buccal region = cheek; Frontal region = forehead",
+              "B) Buccal region = forehead; Frontal region = cheek",
+              "C) Mental region = cheek; Occipital region = forehead",
+              "D) Cervical region = cheek; Lumbar region = forehead"],
+            correct:"A",exp:"A: Buccal = cheek (think \"buccal mucosa,\" the inside of the cheek). Frontal = forehead (named for the underlying frontal bone of the skull). B reverses the pair. C: mental = chin, occipital = back of head. D: cervical = neck, lumbar = lower back. Regional terms let you document widespread findings in lesion-by-lesion specificity."}},
+      ]
+    },
+    2:{
+      label:"Day 2 ,  Tuesday: Lab follow-up",
+      note:"Code from Monday class unlocks today. Today's pre-work covers body cavities and abdominal regions/quadrants, today's gate questions apply that terminology to the case. Biopsy results have auto-revealed. Use today to narrow your differential, your team will need to defend a #1 choice on Thursday.",
+      autoReveal:{label:"PATHOLOGY: Skin biopsy result",result:"PUNCH BIOPSY, ANTERIOR CHEST EDGE OF BULLA:\n\n• Full-thickness epidermal necrosis. All keratinocyte layers (basale through corneum) show pyknotic, apoptotic nuclei.\n\n• Subepidermal cleavage: separation between the necrotic epidermis and intact dermis at the dermal-epidermal junction.\n\n• Sparse perivascular lymphocytic infiltrate in the upper dermis (predominantly CD8+).\n\n• No eosinophilia. No neutrophilic abscesses. No subcorneal pustules.\n\n• DIRECT IMMUNOFLUORESCENCE: Negative (no IgG, IgA, or C3 deposition along basement membrane or within epidermis).\n\nINTERPRETATION: Findings classic for SJS/TEN spectrum. Negative DIF excludes pemphigus and pemphigoid."},
+      orders:[
+        {id:"cbc_d2",cat:"Hematology",name:"Repeat CBC with differential",cost:10,
+          result:"WBC: 16.8 × 10⁹/L  ↑\nNEUT %: 82%  ↑\nLYMPH %: 4%  ↓↓ (worsening lymphopenia)\nEOSINOPHIL %: 2%\nHGB: 12.0 g/dL  ↓\nHCT: 36%\nPLATELETS: 188 × 10⁹/L\n\nSummary: Worsening lymphopenia. New mild anemia (likely dilutional/hemoconcentration shift after fluid resuscitation overnight).",
+          gate:{q:"Adult red bone marrow (where blood cells are made) is concentrated in the AXIAL skeleton, including the sternum and the ribs. The sternum and ribs form the wall of which body cavity?",
+            opts:[
+              "A) Thoracic cavity",
+              "B) Abdominal cavity",
+              "C) Pelvic cavity",
+              "D) Cranial cavity"],
+            correct:"A",exp:"A: The thoracic cavity is enclosed anteriorly by the sternum and laterally/posteriorly by the ribs and vertebrae. Inside it sit the lungs (in pleural cavities) and the heart (in the pericardial cavity within the mediastinum). B: the abdominal cavity is below the diaphragm. C: the pelvic cavity sits below the abdominal cavity. D: the cranial cavity houses the brain inside the skull."}},
+        {id:"ldh",cat:"Chemistry",name:"LDH",cost:10,
+          result:"LDH: 458 U/L  ↑↑ (normal 140-280)\n\nSummary: Markedly elevated. Reflects widespread cellular destruction (apoptotic keratinocytes release intracellular contents).",
+          gate:{q:"LDH released from dying skin cells travels via blood through the heart and is then circulated everywhere. Where exactly does the heart sit in the body cavity system?",
+            opts:[
+              "A) Within the mediastinum, a subdivision of the thoracic cavity",
+              "B) Within the pleural cavity, beside the lungs",
+              "C) Within the abdominal cavity, just above the liver",
+              "D) Within the pericardial cavity, which lies in the abdomen"],
+            correct:"A",exp:"A: The mediastinum is the central compartment of the thoracic cavity, between the two pleural cavities. It contains the heart (in its pericardial sac), the great vessels, the trachea, and the esophagus. B: the pleural cavities house the lungs, not the heart. C: the heart is not in the abdominal cavity. D: the pericardial cavity does exist but it sits inside the mediastinum (in the chest), not in the abdomen."}},
+        {id:"hsv_pcr",cat:"Microbiology",name:"HSV PCR (skin and oral)",cost:25,
+          result:"HSV-1 PCR (oral lesion): NEGATIVE\nHSV-2 PCR (skin lesion): NEGATIVE\nVZV PCR: NEGATIVE\n\nSummary: Excludes erythema multiforme major (HSV-triggered) as cause of mucocutaneous involvement.",
+          gate:{q:"Jordan's painful conjunctivitis affects both eyes. The eyes are housed in bony cavities of the skull called the orbits. The orbits sit in the same bony region of the skull as which other major body cavity?",
+            opts:[
+              "A) The cranial cavity (which houses the brain)",
+              "B) The thoracic cavity",
+              "C) The abdominal cavity",
+              "D) The vertebral canal"],
+            correct:"A",exp:"A: The orbits are bony cavities in the skull that protect the eyes. They sit just anterior and inferior to the cranial cavity proper, which houses the brain. Both are formed by cranial bones. B, C, and D are all distant body cavities. Knowing where structures sit in body cavities helps you anticipate which other systems are nearby and could be affected."}},
+        {id:"hiv_d2",cat:"Serology",name:"HIV antibody/antigen",cost:20,
+          result:"HIV 1/2 Ab/Ag combo: NEGATIVE\n\nSummary: Excludes HIV. Important because HIV substantially increases SJS/TEN risk to TMP-SMX (~100x baseline).",
+          gate:{q:"The spleen is a major lymphoid organ that filters blood for pathogens. In the four-quadrant scheme of the abdomen, the spleen is located in which quadrant?",
+            opts:[
+              "A) Left upper quadrant (LUQ)",
+              "B) Right upper quadrant (RUQ)",
+              "C) Left lower quadrant (LLQ)",
+              "D) Right lower quadrant (RLQ)"],
+            correct:"A",exp:"A: The spleen sits in the LUQ, posterior and lateral to the stomach. B: the RUQ contains the liver and gallbladder. C: the LLQ contains parts of the small intestine and the descending/sigmoid colon. D: the RLQ contains the appendix. Knowing the four quadrants is the standard first step when describing abdominal pain or palpating organs."}},
+        {id:"mycoplasma",cat:"Serology",name:"Mycoplasma pneumoniae IgM",cost:20,
+          result:"Mycoplasma pneumoniae IgM: NEGATIVE\nMycoplasma IgG: NEGATIVE\n\nSummary: Excludes Mycoplasma-induced rash and mucositis (MIRM), which can mimic SJS in younger patients without skin involvement disproportionate to mucous membranes.",
+          gate:{q:"Mycoplasma pneumoniae infects the lungs. Each lung sits in its own cavity lined by membranes that produce lubricating fluid. What are these cavities called, and which larger body cavity contains them?",
+            opts:[
+              "A) Pleural cavities, within the thoracic cavity",
+              "B) Pericardial cavities, within the abdominal cavity",
+              "C) Peritoneal cavities, within the pelvic cavity",
+              "D) Synovial cavities, within the cranial cavity"],
+            correct:"A",exp:"A: Each lung sits in its own pleural cavity, lined by visceral pleura (on the lung) and parietal pleura (on the body wall). Both pleural cavities are subdivisions of the thoracic cavity (the third subdivision is the mediastinum). B: the pericardial cavity houses the heart and is in the mediastinum, not the abdomen. C: the peritoneal cavity is the abdominal cavity around digestive organs. D: synovial cavities are joint spaces."}},
+      ]
+    },
+    3:{
+      label:"Day 3 ,  Wednesday: Course assessment",
+      note:"Code from Tuesday class unlocks today. Today's pre-work covers cell structure and the four primary tissue types (epithelial, connective, muscle, nervous), today's gates apply that terminology to the case. Patient has progressed overnight. Submit your final diagnosis any time after today's data is in.",
+      autoReveal:{label:"OVERNIGHT UPDATE: Patient course",result:"OVERNIGHT (Tuesday → Wednesday morning):\n\n• BSA detached or detachable: 12% (was 7% at admission, 9% Tuesday). Now in the SJS/TEN OVERLAP range (10-30% BSA).\n\n• New erythema and dusky patches on lower abdomen, thighs, and back. Bullae forming on right thigh.\n\n• Mouth and eye involvement WORSE: corneal staining shows superficial epithelial defects, urgent ophthalmology consult placed.\n\n• Urine output: 0.5 mL/kg/hr (low). Cr now 1.8 (was 1.4). Na trending up to 142.\n\n• T 39.4°C. HR 134. BP 96/58. RR 24.\n\n• TMP-SMX confirmed STOPPED at admission. No new medications added.\n\n• Patient awake, alert, in severe pain. Consenting to plans."},
+      orders:[
+        {id:"cmp_d3",cat:"Chemistry",name:"Repeat CMP",cost:10,
+          result:"Na: 142 (up from 138)\nK: 3.7  Cl: 104  HCO₃: 20\nBUN: 38 ↑↑  Cr: 1.8 ↑↑\nAlbumin: 2.8 ↓↓ (was 3.4)\nLFTs unchanged.\n\nSummary: Worsening prerenal AKI from skin barrier loss + insensible losses + decreased intake. Hypoalbuminemia worsening (third-spacing into damaged skin).",
+          gate:{q:"Jordan's worsening AKI reflects damage to nephrons in the kidneys. The kidney filters blood across a thin layer of cells lining the inside of capillaries. Which of the four primary tissue types lines the inside of blood vessels and forms the filtering layer of the glomerulus?",
+            opts:[
+              "A) Epithelial tissue",
+              "B) Connective tissue",
+              "C) Muscle tissue",
+              "D) Nervous tissue"],
+            correct:"A",exp:"A: Epithelial tissue lines all body surfaces, including the inside of blood vessels (where it is called endothelium) and the filtering capsule of the kidney glomerulus. B: connective tissue supports and connects (bone, cartilage, blood, fat). C: muscle tissue contracts. D: nervous tissue conducts electrical signals. The four primary tissue types are epithelial, connective, muscle, and nervous, and every organ contains a combination of them."}},
+        {id:"scorten",cat:"Bedside",name:"SCORTEN calculation",cost:10,
+          result:"SCORTEN at presentation:\n• Age ≥40: NO (Jordan is 24) ,  0\n• Malignancy: NO ,  0\n• HR ≥120: YES ,  1\n• Initial BSA detached >10%: YES (now 12%) ,  1\n• Serum urea (BUN) >28 mg/dL: YES (38) ,  1\n• Bicarbonate <20 mEq/L: NO (20) ,  0\n• Glucose >252: NO ,  0\n\nSCORTEN: 3\n\nMortality estimate at SCORTEN 3: ~35%.\n\nClinical implication: Burn unit transfer, aggressive supportive care, ophthalmology, urology consults.",
+          gate:{q:"SCORTEN includes BSA detached. The epidermis (the layer that is sloughing off Jordan's body) is composed of which specific tissue type?",
+            opts:[
+              "A) Stratified squamous epithelium (keratinized)",
+              "B) Simple squamous epithelium",
+              "C) Dense irregular connective tissue",
+              "D) Smooth muscle tissue"],
+            correct:"A",exp:"A: The epidermis is keratinized stratified squamous epithelium. \"Stratified\" means multiple layers, \"squamous\" means flat surface cells, \"keratinized\" means filled with the protein keratin (waterproofing). This structure is built for mechanical protection and water resistance. B: simple squamous epithelium is one cell layer thick, used for diffusion (alveoli, glomerulus). C: dense irregular connective tissue is in the dermis below. D: smooth muscle is in blood vessels and hollow organs, not the skin's surface layer."}},
+        {id:"lactate",cat:"Chemistry",name:"Lactate",cost:10,
+          result:"Lactate: 2.4 mmol/L  ↑ (normal <2.0)\n\nSummary: Mildly elevated. Reflects tissue hypoperfusion and high anaerobic metabolism in damaged skin. Not at sepsis threshold yet but trending the wrong direction.",
+          gate:{q:"The dermis (just below the epidermis) supports the skin and contains the blood vessels that deliver glucose to keratinocytes. Which of the four primary tissue types forms the bulk of the dermis?",
+            opts:[
+              "A) Connective tissue (specifically dense irregular connective tissue)",
+              "B) Epithelial tissue",
+              "C) Muscle tissue",
+              "D) Nervous tissue"],
+            correct:"A",exp:"A: The dermis is connective tissue, specifically dense irregular connective tissue (collagen fibers running in many directions to resist stress from any angle). It contains blood vessels, nerves, hair follicles, sweat glands, and sensory receptors. B: the epidermis above is epithelial. C: smooth muscle exists within hair follicles (arrector pili) but is not what makes up the bulk of the dermis. D: nervous tissue sends signals; specialized sensory receptors live in the dermis but are not the bulk tissue."}},
+        {id:"procal",cat:"Chemistry",name:"Procalcitonin",cost:15,
+          result:"Procalcitonin: 0.12 ng/mL (normal <0.5)\n\nSummary: Not suggestive of bacterial sepsis at this time. Continue daily monitoring ,  risk of secondary bacterial infection through denuded skin is HIGH.",
+          gate:{q:"With infection risk high, Jordan's blood is sampled to monitor for bacteria. Although blood appears liquid, it is classified as which of the four primary tissue types?",
+            opts:[
+              "A) Connective tissue (with a fluid extracellular matrix called plasma)",
+              "B) Epithelial tissue",
+              "C) Muscle tissue",
+              "D) Nervous tissue"],
+            correct:"A",exp:"A: Blood is connective tissue. All connective tissues consist of cells embedded in an extracellular matrix; in blood, the matrix is fluid (plasma). The cells (red blood cells, white blood cells, platelets) are the formed elements. The \"connective\" function is that blood transports oxygen, nutrients, hormones, and waste between body regions. B: epithelial tissue lines surfaces. The walls of blood vessels have epithelial linings (endothelium), but the blood itself is not epithelial. C and D have very different cell shapes and functions."}},
+      ]
+    }
+  }
+};
+
+/* ────────── STATE ────────── */
+const STORAGE_KEY = "bio004-w1-jordan-state-v1";
+let S = loadState() || newState();
+
+function newState(){return{
+  phase:"key",
+  studentName:"",
+  currentDay:1, daysUnlocked:1,
+  credits:200, maxCredits:200,
+  freeObtained:[], ordered:[], results:[], autoRevealed:[],
+  iMsgs:[], interviewCount:0, maxInterview:10, iTopicHit:{},
+  invMsgs:[], gateActive:null, retries:0,
+  diagText:"", rationaleText:"",
+  scores:null,
+};}
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(S));}catch(e){}}
+function loadState(){try{const v=localStorage.getItem(STORAGE_KEY);return v?JSON.parse(v):null;}catch(e){return null;}}
+function fullReset(){if(confirm("Reset Week 1 simulation? All progress will be lost.")){localStorage.removeItem(STORAGE_KEY);S=newState();render();}}
+
+/* ────────── INTERVIEW MATCH ────────── */
+const STOPWORDS=new Set(['the','a','an','is','are','was','were','be','been','being','have','has','had','do','does','did','my','your','his','her','its','our','their','you','he','she','we','they','this','that','these','those','can','could','would','should','will','shall','may','might','to','for','of','in','on','at','by','with','about','from','tell','please','say','give','let','know','want','any','some','what','which','who','whom','where','when','why','how']);
+function stem(w){
+  const tries=[['ies','y'],['ied','y'],['ing',''],['ed',''],['es',''],['ly',''],['s','']];
+  for(const[sfx,rep] of tries){
+    if(w.endsWith(sfx)){
+      const result=w.slice(0,w.length-sfx.length)+rep;
+      if(result.length>=3)return result;
+    }
+  }
+  return w;
+}
+function tokenize(s){
+  return s.toLowerCase()
+    .replace(/[^a-z0-9 ]/g,' ')
+    .split(/\s+/)
+    .filter(w=>w.length>=3 && !STOPWORDS.has(w))
+    .map(stem)
+    .filter(w=>w.length>=3);
+}
+function matchInterview(text){
+  // Update topic hits regardless of response found
+  for(const[topic,info] of Object.entries(CASE.interviewTopics)){
+    if(info.pattern.test(text)) S.iTopicHit[topic]=true;
+  }
+  const t=text.toLowerCase();
+  const queryTokens=new Set(tokenize(text));
+  if(queryTokens.size===0){
+    return "Could you tell me more, in a complete sentence? I want to give you accurate information.";
+  }
+  let bestScore=0, bestResponse=null;
+  for(const{keys,r} of CASE.interviewResponses){
+    for(const k of keys){
+      // Direct substring match wins instantly
+      if(t.includes(k.toLowerCase())){return r;}
+      const keyTokens=tokenize(k);
+      if(keyTokens.length===0)continue;
+      // Token overlap with query
+      let matched=0;
+      for(const kt of keyTokens){
+        if(queryTokens.has(kt))matched++;
+      }
+      const score=matched/keyTokens.length;
+      // Also bonus: how much of the query is "explained" by this key
+      const querySize=queryTokens.size;
+      const queryCoverage=querySize>0?matched/querySize:0;
+      // Combined score weights key coverage more (tells if key is relevant)
+      // and query coverage less (tells if response addresses the question)
+      const combined=score*0.7 + queryCoverage*0.3;
+      if(combined>bestScore){bestScore=combined;bestResponse=r;}
+    }
+  }
+  // Threshold: at least 40% of a key's content tokens must overlap (or higher combined score)
+  if(bestScore>=0.4)return bestResponse;
+  return "I am not sure what you are asking. Could you rephrase that as a clinical question? You could ask about my symptoms, when things started, my medications, my history, or anything else.";
+}
+
+/* ────────── SCORING ────────── */
+function calcScores(){
+  const max={diag:35, eff:20, interview:15, gate:10, complete:5}, total_max=85;
+  // Diagnostic accuracy: keyword match in diagText + rationale
+  const diagPattern=/stevens.?johnson|toxic epidermal|TEN|SJS/i;
+  const rationalePatterns=[/brachial|antebrachial|buccal|frontal|cervical|pectoral|sternal|trunk/i,/epitheli|stratified squamous|connective tissue|simple squamous/i,/cavity|thoracic|abdominal|pleural|cranial/i,/anterior|posterior|superficial|deep|superior|inferior|distribution/i,/bactrim|sulfa|sulfameth|sulfonamide|antibiotic/i];
+  let diagPts=diagPattern.test(S.diagText)?20:0;
+  diagPts+=rationalePatterns.filter(p=>p.test(S.rationaleText)).length*3;
+  diagPts=Math.min(diagPts,max.diag);
+  // Efficiency
+  const effPts=Math.round((S.credits/S.maxCredits)*max.eff);
+  // Interview
+  const topicCount=Object.keys(CASE.interviewTopics).length;
+  const hits=Object.values(S.iTopicHit).filter(v=>v).length;
+  const intPts=Math.round((hits/topicCount)*max.interview);
+  // Gate
+  const gatePts=Math.max(0,max.gate-(S.retries*2));
+  // Complete bonus
+  const completePts=S.daysUnlocked>=3?max.complete:0;
+  return{diag:diagPts,eff:effPts,interview:intPts,gate:gatePts,complete:completePts,total:diagPts+effPts+intPts+gatePts+completePts,max:total_max};
+}
+
+async function submitToForm(sc){
+  if(!FORM_URL)return;
+  const d=new FormData();
+  d.append(FORM_FIELDS.name,S.studentName);d.append(FORM_FIELDS.diag,S.diagText);
+  d.append(FORM_FIELDS.rationale,S.rationaleText);d.append(FORM_FIELDS.credits,String(S.credits));
+  d.append(FORM_FIELDS.total,String(sc.total));
+  try{await fetch(FORM_URL,{method:"POST",mode:"no-cors",body:d});}catch(e){}
+}
+
+/* ────────── UNLOCK ────────── */
+function tryUnlockDay(){
+  const inp=document.getElementById("day-unlock-inp");
+  if(!inp)return;
+  const val=inp.value.trim().toUpperCase();
+  for(const[day,code] of Object.entries(CASE.dayCodes)){
+    const d=parseInt(day);
+    if(val===code.toUpperCase()&&d>S.daysUnlocked){
+      S.daysUnlocked=d; S.currentDay=d;
+      const dayData=CASE.days[d];
+      if(dayData.autoReveal&&!S.autoRevealed.includes(d)) S.autoRevealed.push(d);
+      inp.value="";
+      S.invMsgs.push({role:"assistant",cls:"unlock",content:`🔓 Day ${d} unlocked ,  ${dayData.label}${dayData.autoReveal?'\n\n'+dayData.autoReveal.label+' has been added to your results panel.':''}`});
+      saveState(); render(); scrollEl("inv-ci"); return;
+    }
+  }
+  if(val){inp.value="";S.invMsgs.push({role:"assistant",cls:"fail",content:"Incorrect unlock code. Wait for your instructor to announce it at the end of class."});render();scrollEl("inv-ci");}
+}
+
+/* ────────── RENDER ROUTER ────────── */
+function render(){
+  saveState();
+  const watermark=document.getElementById("wmt");
+  if(watermark&&S.studentName) watermark.textContent=`${S.studentName} · BIO 004 · Week 1`;
+  const p=S.phase;
+  if(p==="key") renderKey();
+  else if(p==="instructions") renderInstructions();
+  else if(p==="intro") renderIntro();
+  else if(p==="interview") renderInterview();
+  else if(p==="investigate") renderInvestigate();
+  else if(p==="submit") renderSubmit();
+  else if(p==="submitted") renderSubmitted();
+  else if(p==="reveal") renderReveal();
+}
+
+function renderKey(){
+  document.getElementById("app").innerHTML=`
+<div style="max-width:440px;margin:4rem auto;padding:0 1rem;text-align:center">
+  <div style="font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:.6rem">BIO 004 · Clinical Reasoning</div>
+  <div style="width:48px;height:3px;background:var(--gold);margin:0 auto 1.4rem;border-radius:2px"></div>
+  <h1 style="font-size:34px;margin-bottom:.4rem">Week 1, Jordan Patel</h1>
+  <p style="margin-bottom:.4rem;font-size:16px;color:var(--ink-soft)">Integumentary System &amp; Tissue Foundations</p>
+  <p style="margin-bottom:1.8rem;font-size:14px;color:var(--ink-mute)">Single file · 3 days · One credit bank · Code-locked progression</p>
+  <div class="card" style="text-align:left">
+    <div class="sl">Your name (required for tracking)</div>
+    <input type="text" id="ki-name" placeholder="First and last name" style="margin-bottom:14px" value="${S.studentName||''}">
+    <div class="sl">Course access code (instructor announces in Monday class)</div>
+    <input type="password" id="ki" placeholder="Enter code…" style="margin-bottom:10px;letter-spacing:.14em;font-size:17px;text-align:center;text-transform:uppercase" onkeydown="if(event.key==='Enter')subKey()">
+    <div id="kerr" style="color:var(--terra);font-size:14px;margin-bottom:8px;display:none">Incorrect. Check with your instructor.</div>
+    <button class="bb" onclick="subKey()" style="width:100%;font-size:15px;padding:14px">Enter →</button>
+  </div>
+  <p style="margin-top:1rem;font-size:13px;color:var(--ink-mute);font-style:italic">By entering, you confirm this material is for your educational use only. Do not screenshot, share, or redistribute.</p>
+</div>`;
+  setTimeout(()=>{const i=document.getElementById("ki-name")||document.getElementById("ki");if(i)i.focus();},80);
+}
+function subKey(){
+  const ni=document.getElementById("ki-name");const i=document.getElementById("ki");
+  if(!i)return;
+  if(!ni.value.trim()){alert("Please enter your name.");ni.focus();return;}
+  if(i.value.trim().toUpperCase()===COURSE_PW.toUpperCase()){
+    S.studentName=ni.value.trim(); S.phase="instructions"; render();
+  } else {document.getElementById("kerr").style.display="block";i.value="";i.focus();}
+}
+
+function renderInstructions(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="border-top:4px solid var(--navy);max-width:720px;margin:0 auto">
+  <div style="text-align:center;margin-bottom:1.5rem">
+    <div class="sl" style="margin-bottom:8px">${CASE.system}</div>
+    <h1 style="margin-bottom:.4rem">Week 1, ${CASE.patient.name}</h1>
+    <p style="font-size:16px">Clinical Reasoning Simulation · 3-day case · One credit bank</p>
+  </div>
+  <div class="alert-terra"><strong>Welcome, ${S.studentName}.</strong> This case unfolds across Monday, Tuesday, and Wednesday class sessions. Day 2 and Day 3 unlock with codes your instructor announces at the beginning of each class, attendance is how you get the code. Use Thursday TBL to defend your final diagnosis.</div>
+  <h2>How it works</h2>
+  <div style="margin-bottom:1.4rem">
+    <div class="istep"><div class="inum">1</div><div><strong>Interview your patient (10 questions).</strong> Free. Ask about symptoms, medications, history. Interview is open all week.</div></div>
+    <div class="istep"><div class="inum">2</div><div><strong>Free bedside data is always available.</strong> Vitals, exam findings, mucous membrane assessment, no credits.</div></div>
+    <div class="istep"><div class="inum">3</div><div><strong>Order tests with your 200-credit bank.</strong> Credits do not reset between days. Irrelevant tests still cost credits. Unused credits boost your efficiency score.</div></div>
+    <div class="istep"><div class="inum">4</div><div><strong>Answer an anatomy gate question for every test.</strong> Right → result released. Wrong → 15-credit retry penalty.</div></div>
+    <div class="istep"><div class="inum">5</div><div><strong>Day 2 (Tuesday) unlocks with a code your instructor announces at the beginning of Tuesday class.</strong> Day 3 (Wednesday) unlocks with a code announced at the beginning of Wednesday class. You must be in class to get the code.</div></div>
+    <div class="istep"><div class="inum">6</div><div><strong>Submit your final diagnosis any time after Day 3 unlocks.</strong> Submission is private until reveal.</div></div>
+    <div class="istep"><div class="inum">7</div><div><strong>After Thursday TBL, enter the reveal code from your instructor.</strong> See the correct diagnosis, full rationale, and your week-long score.</div></div>
+  </div>
+  <div class="sep"></div>
+  <h2>Scoring (85 points)</h2>
+  <div style="font-size:14.5px;line-height:1.9;color:var(--ink-soft)">
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Diagnostic accuracy (final dx + anatomical rationale)</span><span style="font-weight:700">35 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Data efficiency (credits remaining of 200)</span><span style="font-weight:700">20 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Interview quality (6 topic areas covered)</span><span style="font-weight:700">15 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Gate question performance (−2 per retry)</span><span style="font-weight:700">10 pts</span></div>
+    <div class="fb" style="padding:4px 0"><span>Bonus, completed through Day 3</span><span style="font-weight:700">5 pts</span></div>
+  </div>
+  <div class="sep"></div>
+  <div style="text-align:center"><button class="bb" onclick="S.phase='intro';render()" style="font-size:16px;padding:16px 56px">Meet your patient →</button></div>
+</div>`;
+}
+
+function renderIntro(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="text-align:center;padding:2.5rem 2rem;border-top:4px solid var(--navy);max-width:560px;margin:0 auto">
+  <div class="sl" style="margin-bottom:1rem">Your patient ,  Week 1, Day 1 (Monday)</div>
+  <div style="width:84px;height:84px;border-radius:50%;background:var(--navy-bg);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:28px;font-weight:700;margin:0 auto 1.2rem">JP</div>
+  <h1 style="font-size:36px;margin-bottom:.4rem;font-family:var(--display);font-style:italic;font-weight:600">${CASE.patient.name}</h1>
+  <p style="font-size:18px;color:var(--ink-soft);margin-bottom:.4rem">${CASE.patient.age} years old · ${CASE.patient.gender}</p>
+  <div style="background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:14px 22px;display:inline-block;margin:1.4rem 0">
+    <div class="sl" style="margin-bottom:6px">Chief complaint</div>
+    <p style="font-size:17px;color:var(--navy);font-weight:600;font-family:var(--display);font-style:italic">${CASE.cc}</p>
+  </div>
+  <p style="max-width:440px;margin:0 auto 1.8rem;font-size:15px">You have <strong>10 interview questions</strong> with Jordan available across the entire week. Spend them carefully.</p>
+  <button class="bb" onclick="S.phase='interview';render()" style="font-size:16px;padding:16px 42px">Begin patient interview →</button>
+</div>`;
+}
+
+function renderInterview(){
+  const rem=S.maxInterview-S.interviewCount;
+  const done=rem<=0;
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-navy">Patient Interview</span> <strong style="margin-left:8px;font-family:var(--display);font-style:italic">${CASE.patient.name}</strong></div>
+  <button class="${done?'bt':'bb'}" onclick="S.phase='investigate';render()">${done?'Interview complete ,  investigate →':'Skip to investigation →'}</button>
+</div>
+<div style="background:var(--navy-bg);border:1px solid var(--navy-bd);border-radius:var(--rs);padding:11px 14px;display:flex;align-items:center;gap:14px;margin-bottom:.875rem;flex-wrap:wrap">
+  <div style="font-family:var(--display);font-style:italic;font-weight:600;font-size:46px;color:var(--navy);line-height:1">${rem}</div>
+  <div style="flex:1;min-width:160px"><div style="font-family:var(--sans);font-size:15.5px;font-weight:700;color:var(--navy);letter-spacing:.04em;text-transform:uppercase">Questions remaining (carry across all 3 days)</div><div style="font-size:15px;color:var(--ink-soft);margin-top:5px">Interview closes permanently when all 10 are used.</div></div>
+  <div style="display:flex;gap:5px;flex-wrap:wrap">
+    ${Object.entries(CASE.interviewTopics).map(([k,t])=>`<span class="tpill ${S.iTopicHit[k]?'hit':'miss'}">${t.label}</span>`).join("")}
+  </div>
+</div>
+<div class="chatbox">
+  <div class="ci" id="ci" style="height:440px">
+    ${S.iMsgs.length===0?`<div class="msg assistant patient"><div class="ml">${CASE.patient.name}</div><div class="mb">Thank you for seeing me. The pain is unbearable. What do you need to know?</div></div>`:""}
+    ${S.iMsgs.map(m=>`<div class="msg ${m.role} ${m.role==='assistant'?'patient':''}"><div class="ml">${m.role==='user'?'You':CASE.patient.name}</div><div class="mb">${m.content}</div></div>`).join("")}
+    ${done&&S.iMsgs.length>0?`<div class="msg assistant"><div class="mb" style="background:var(--gold-bg);border-color:var(--gold-bd);color:var(--warn)">You have used all 10 questions. The interview is now closed.</div></div>`:""}
+  </div>
+  ${!done?`<div class="ir"><textarea id="qi" rows="2" placeholder="Ask Jordan anything…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendInterview();}"></textarea><button onclick="sendInterview()">Ask →</button></div>`:`<div style="padding:12px;border-top:1px solid var(--divider-light);text-align:center"><button class="bt" onclick="S.phase='investigate';render()" style="width:100%">Interview complete ,  begin investigation →</button></div>`}
+</div>`;
+  scrollEl("ci");
+}
+function sendInterview(){
+  if(S.interviewCount>=S.maxInterview)return;
+  const inp=document.getElementById("qi");
+  if(!inp||!inp.value.trim())return;
+  const txt=inp.value.trim();inp.value="";
+  S.iMsgs.push({role:"user",content:txt});
+  S.interviewCount++;
+  S.iMsgs.push({role:"assistant",content:matchInterview(txt)});
+  saveState();render();scrollEl("ci");
+}
+
+function renderInvestigate(){
+  const pct=Math.max(0,(S.credits/S.maxCredits)*100);
+  const pcls=pct<25?"low":pct<50?"mid":"";
+  const dayData=CASE.days[S.currentDay];
+  const cats=[...new Set(dayData.orders.map(o=>o.cat))];
+
+  const tabHtml=Object.keys(CASE.days).map(d=>{
+    const di=parseInt(d);
+    const unlocked=di<=S.daysUnlocked;
+    const active=di===S.currentDay;
+    const dayLabel=CASE.days[di].label.split(", ")[0].trim();
+    return`<button class="day-tab ${active?'active':unlocked?'unlocked':'locked'}" onclick="${unlocked?`switchDay(${di})`:'void(0)'}">${dayLabel}${!unlocked?' 🔒':''}</button>`;
+  }).join("");
+
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-navy">Week 1 Investigation</span> <strong style="margin-left:8px;font-family:var(--display);font-style:italic">${CASE.patient.name}, ${CASE.patient.age}y ${CASE.patient.gender}</strong></div>
+  <div class="flex">
+    <button onclick="S.phase='interview';render()" style="font-size:15px">← Interview (${S.maxInterview-S.interviewCount} left)</button>
+    ${S.daysUnlocked>=3?`<button class="bt" onclick="S.phase='submit';render()" style="font-size:15px">Submit final diagnosis →</button>`:""}
+  </div>
+</div>
+<div class="cbar">
+  <div class="cnum">${S.credits}</div>
+  <div style="flex:1"><div class="clabel">Credits ,  carry across all 3 days</div><div class="csub">All tests cost credits. Wrong gate retries cost 15 each. Unused credits = higher efficiency score.</div><div class="pb"><div class="pf ${pcls}" style="width:${pct}%"></div></div></div>
+</div>
+<div class="day-tabs">${tabHtml}</div>
+<div class="unlock-bar">
+  <span style="font-family:var(--sans);font-size:15px;font-weight:700;color:var(--warn);letter-spacing:.04em;text-transform:uppercase">🔓 Day unlock code</span>
+  <input id="day-unlock-inp" type="text" placeholder="Enter code from instructor…" onkeydown="if(event.key==='Enter')tryUnlockDay()">
+  <button onclick="tryUnlockDay()" class="bg" style="padding:10px 20px;font-size:15px">Unlock →</button>
+</div>
+<div style="background:var(--navy-bg);border:1px solid var(--navy-bd);border-radius:var(--rs);padding:16px 20px;margin-bottom:.875rem;font-size:16px;color:var(--navy);line-height:1.7">${dayData.note}</div>
+<div class="g2">
+  <div>
+    <div class="card" style="padding:1rem">
+      <div class="sl" style="margin-bottom:8px">Free bedside data ,  always available</div>
+      ${Object.entries(CASE.free).map(([k,v])=>`<div class="fi ${S.freeObtained.includes(k)?'got':''}" onclick="getFree('${k}')">
+        <span>${v.icon} ${v.label}</span>
+        <span class="badge ${S.freeObtained.includes(k)?'b-ok':'b-navy'}" style="font-size:13px;letter-spacing:.04em">${S.freeObtained.includes(k)?'✓ viewed':'free'}</span>
+      </div>`).join("")}
+    </div>
+    ${dayData.orders.length>0?`<div class="card" style="padding:1rem">
+      <div class="sl" style="margin-bottom:6px">Day ${S.currentDay} orders (credits + gate)</div>
+      ${cats.map(cat=>`<div class="oc">${cat}</div>${dayData.orders.filter(o=>o.cat===cat).map(o=>{const done=!!S.results.find(r=>r.id===o.id);return`<div class="oi ${done?'done':''}" onclick="${done?'':"orderTest('"+o.id+"',"+S.currentDay+")"}"><span>${o.name}</span><span style="font-size:14.5px;font-weight:700;color:${done?'var(--ok)':'var(--terra)'}">${done?'✓ done':'−'+o.cost+' cr'}</span></div>`;}).join("")}`).join("")}
+    </div>`:`<div class="card" style="padding:1rem;text-align:center"><p style="color:var(--ink-soft);font-size:15px">No additional tests on this day.</p></div>`}
+  </div>
+  <div>
+    <div class="card" style="padding:1rem;margin-bottom:.75rem;max-height:300px;overflow-y:auto">
+      <div class="sl" style="margin-bottom:8px">All results ,  running total (${S.results.length} ordered · ${S.freeObtained.length} free · ${S.autoRevealed.length} day reveals)</div>
+      ${S.freeObtained.length===0&&S.results.length===0&&S.autoRevealed.length===0?`<p style="color:var(--ink-soft);font-size:15px">No data yet. Click items to the left to begin.</p>`:""}
+      ${S.freeObtained.map(k=>`<div class="fc"><div class="fl">${CASE.free[k].icon} ${CASE.free[k].label}</div>${CASE.free[k].result}</div>`).join("")}
+      ${S.autoRevealed.map(d=>{const ar=CASE.days[d].autoReveal;return`<div class="ar"><div class="al">${ar.label}</div>${ar.result}</div>`;}).join("")}
+      ${S.results.map(r=>{const order=Object.values(CASE.days).flatMap(d=>d.orders).find(o=>o.id===r.id);return`<div class="rc"><div class="rl">✓ ${order?.name||r.id}</div>${r.result}</div>`;}).join("")}
+    </div>
+    <div class="chatbox">
+      <div class="ci" id="inv-ci" style="height:340px">
+        ${S.invMsgs.length===0?`<div class="msg assistant"><div class="ml">Clinical Facilitator</div><div class="mb">Click a test on the left to order it. You will receive a DOK 2-3 anatomy gate question before each result is released. Day unlock codes appear after your instructor announces them.</div></div>`:""}
+        ${S.invMsgs.map(m=>`<div class="msg ${m.role} ${m.cls||''}"><div class="ml">${m.role==='user'?'You':'Clinical Facilitator'}</div><div class="mb">${m.isHtml?m.content:m.content.replace(/\n/g,'<br>')}</div></div>`).join("")}
+      </div>
+      <div class="ir"><textarea id="invi" rows="2" placeholder="Type A, B, C, or D to answer gate question…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendInv();}"></textarea><button onclick="sendInv()">Send →</button></div>
+    </div>
+  </div>
+</div>`;
+  scrollEl("inv-ci");
+}
+
+function switchDay(d){S.currentDay=d;saveState();render();}
+function getFree(k){if(!S.freeObtained.includes(k)){S.freeObtained.push(k);saveState();}render();}
+
+function orderTest(id,day){
+  if(S.results.find(r=>r.id===id))return;
+  const order=CASE.days[day].orders.find(o=>o.id===id);
+  if(!order)return;
+  if(S.credits<order.cost){S.invMsgs.push({role:"assistant",cls:"fail",content:"Not enough credits to order this test."});render();return;}
+  S.credits=Math.max(0,S.credits-order.cost);
+  if(!S.ordered.includes(id))S.ordered.push(id);
+  S.gateActive={orderId:id,order,day};
+  const g=order.gate;
+  const optHtml=g.opts.map(o=>`<span style="display:block;margin:6px 0;padding:6px 0;border-bottom:1px solid rgba(20,41,64,.08)">${o}</span>`).join("");
+  S.invMsgs.push({role:"assistant",cls:"gate",isHtml:true,content:`<strong>Order:</strong> ${order.name} (−${order.cost} credits)<br><br><strong>⚑ ANATOMY GATE QUESTION (DOK 2-3)</strong><br><br>${g.q}<br><br>${optHtml}<br>Type the letter of your answer: <strong>A, B, C, or D</strong>`});
+  saveState();render();scrollEl("inv-ci");
+}
+
+function sendInv(){
+  const inp=document.getElementById("invi");
+  if(!inp||!inp.value.trim())return;
+  const txt=inp.value.trim();inp.value="";
+  S.invMsgs.push({role:"user",content:txt});
+  if(S.gateActive){
+    const letter=txt.trim().toUpperCase().charAt(0);
+    if(!["A","B","C","D"].includes(letter)){S.invMsgs.push({role:"assistant",cls:"gate",content:"Please type just the letter of your answer: A, B, C, or D."});render();scrollEl("inv-ci");return;}
+    const{order}=S.gateActive;const g=order.gate;
+    if(letter===g.correct){
+      S.results.push({id:order.id,result:order.result});
+      S.gateActive=null;
+      S.invMsgs.push({role:"assistant",cls:"result",isHtml:true,content:`<strong>✓ CORRECT ,  ${letter} is right.</strong><br><br><strong>Explanation:</strong> ${g.exp}<br><br><strong>RESULT:</strong><br><br>${order.result.replace(/\n/g,'<br>')}`});
+    } else {
+      S.retries++; S.credits=Math.max(0,S.credits-15);
+      S.invMsgs.push({role:"assistant",cls:"fail",isHtml:true,content:`<strong>✗ Incorrect.</strong> ${letter} is not right. (−15 credits)<br><br>Think about the anatomy. Type A, B, C, or D to retry.`});
+    }
+    saveState();render();scrollEl("inv-ci");return;
+  }
+  S.invMsgs.push({role:"assistant",content:"Click a test on the left panel to order it and receive a gate question."});
+  render();scrollEl("inv-ci");
+}
+
+function renderSubmit(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="border-top:4px solid var(--ok);max-width:660px;margin:0 auto">
+  <div class="sl" style="margin-bottom:.5rem">Submit final diagnosis ,  Week 1</div>
+  <h1 style="margin-bottom:.4rem">${CASE.patient.name}, ${CASE.patient.age}y</h1>
+  <p style="margin-bottom:1rem;font-size:15.5px">Credits remaining: ${S.credits}/200 · Tests ordered: ${S.ordered.length} · Days unlocked: ${S.daysUnlocked}/3 · Gate retries: ${S.retries}</p>
+  <div class="note">Your submission is private. Submit your best diagnosis based on all data collected. The reveal code is given after Thursday TBL.</div>
+  <div style="margin-bottom:1rem"><div class="sl">Final diagnosis</div><input type="text" id="sd" placeholder="e.g. Stevens-Johnson Syndrome / TEN overlap, drug-induced (TMP-SMX)" value="${S.diagText}" style="font-size:16px"></div>
+  <div style="margin-bottom:1.4rem"><div class="sl">Anatomical rationale (3-5 sentences). Use the foundational anatomy terminology you have learned this week. Where on the body is the rash distributed, use body region terms. Which tissue types are involved (the epidermis is what kind of epithelium, the dermis is what kind of tissue, the blood is what kind of tissue)? How does the medication relate to the timing? How might loss of skin function affect other body cavities or organ systems?</div><textarea id="sr" rows="6" placeholder="Connect the medication, the timing, and the anatomical findings. Use body region terms to describe the distribution. Use tissue type terms to describe what is damaged. Note which body cavities or systems are showing systemic effects.">${S.rationaleText}</textarea></div>
+  <div class="fb"><button onclick="S.phase='investigate';render()">← Back</button><button class="bt" onclick="doSubmit()">Submit diagnosis →</button></div>
+</div>`;
+}
+async function doSubmit(){
+  const sd=document.getElementById("sd"),sr=document.getElementById("sr");
+  if(!sd?.value.trim()||!sr?.value.trim()){alert("Please complete both fields.");return;}
+  S.diagText=sd.value.trim();S.rationaleText=sr.value.trim();
+  const sc=calcScores();S.scores=sc;
+  await submitToForm(sc);
+  S.phase="submitted";saveState();render();
+}
+
+function renderSubmitted(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="text-align:center;padding:2.5rem 2rem;border-top:4px solid var(--ok);max-width:560px;margin:0 auto">
+  <div style="font-size:48px;margin-bottom:1rem">✓</div>
+  <h1 style="color:var(--ok);margin-bottom:.75rem">Week 1 Diagnosis Submitted</h1>
+  <p style="max-width:440px;margin:0 auto 1.5rem">Recorded privately, ${S.studentName}. Present your data and reasoning in Thursday TBL ,  do not reveal your diagnosis to other teams beforehand.</p>
+  <div class="note" style="text-align:left;max-width:480px;margin:0 auto 1.5rem;font-size:14.5px">
+    <strong>Next steps</strong><br>
+    1. Defend your diagnosis at Thursday TBL (iRAT → tRAT → application).<br>
+    2. After TBL, your instructor will give the reveal code.<br>
+    3. Enter it below to see the correct diagnosis, your full score, and the anatomical explanation.
+  </div>
+  <div style="max-width:380px;margin:0 auto">
+    <div class="sl" style="margin-bottom:8px">Reveal code (given after Thursday TBL)</div>
+    <input type="text" id="uki" placeholder="Enter reveal code…" style="margin-bottom:10px;font-size:17px;letter-spacing:.14em;text-align:center;text-transform:uppercase" onkeydown="if(event.key==='Enter')tryReveal()">
+    <div id="ukerr" style="color:var(--terra);font-size:14px;margin-bottom:8px;display:none">Incorrect. Wait for your instructor after Thursday TBL.</div>
+    <button class="bb" onclick="tryReveal()" style="width:100%;font-size:15px;padding:14px">Reveal diagnosis &amp; scores →</button>
+  </div>
+</div>`;
+}
+function tryReveal(){
+  const inp=document.getElementById("uki");
+  if(!inp||!inp.value.trim())return;
+  if(inp.value.trim().toUpperCase()!==REVEAL_CODE.toUpperCase()){document.getElementById("ukerr").style.display="block";inp.value="";return;}
+  S.phase="reveal";saveState();render();
+}
+
+function renderReveal(){
+  const sc=S.scores||calcScores();
+  function scCls(e,m){return e>=m*.8?"full":e>=m*.4?"part":"zero";}
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-ok">Week 1 Complete</span></div>
+  <button onclick="fullReset()">Restart Week 1</button>
+</div>
+<div class="card" style="border-top:4px solid var(--navy);margin-bottom:1rem">
+  <div class="sl" style="margin-bottom:8px">Confirmed diagnosis</div>
+  <h1 style="font-size:24px;margin-bottom:8px;color:var(--navy)">Stevens-Johnson Syndrome / Toxic Epidermal Necrolysis (SJS/TEN) overlap, TMP-SMX-induced</h1>
+  <p style="font-size:15.5px;margin-bottom:0;color:var(--ink-soft)">Drug-induced, T-cell-mediated full-thickness epidermal necrosis with subepidermal cleavage at the dermal-epidermal junction. BSA detached 12% on Wednesday placed Jordan in the SJS-TEN OVERLAP range (10-30%). Trigger: TMP-SMX (Bactrim), latency 9 days from drug initiation to mucocutaneous onset.</p>
+</div>
+<div class="card">
+  <h2>Why this diagnosis (anatomical reasoning)</h2>
+  <div class="reveal-text">PATHOPHYSIOLOGY (drug → death of keratinocytes → barrier loss):
+
+1. EXPOSURE: Jordan started TMP-SMX (sulfamethoxazole) for UTI. Sulfonamides are the most common antibiotic trigger of SJS/TEN, with peak onset 4-28 days after first exposure.
+
+2. IMMUNE ACTIVATION: The drug or its metabolite acts as a hapten that modifies self-peptides. In genetically susceptible individuals (HLA-B*1502 in some Asian populations; HLA-A*3101 with carbamazepine; HLA-B*5701 with abacavir), CD8+ T-cells in dermal capillaries become activated against drug-modified keratinocyte antigens.
+
+3. KERATINOCYTE APOPTOSIS: Activated CD8+ T-cells migrate to the epidermis and induce widespread keratinocyte apoptosis via Fas-FasL, perforin/granzyme, and especially granulysin. Apoptosis spreads from basal layer upward through ALL FIVE EPIDERMAL LAYERS:
+   • stratum corneum (corneocytes already dead but barrier disrupted)
+   • stratum lucidum (palms/soles, present here in face/chest only as thinner)
+   • stratum granulosum (lamellar bodies releasing lipid lost)
+   • stratum spinosum (Langerhans cells lost, desmosomes break down)
+   • stratum basale (basal keratinocytes apoptose, no replenishment)
+
+4. SUBEPIDERMAL CLEAVAGE: Once the entire epidermis is necrotic, it sheets away from the dermis at the dermal-epidermal junction (DEJ, the basement membrane). This is the histologic hallmark seen on biopsy: full-thickness epidermal necrosis with separation at the DEJ. NIKOLSKY SIGN POSITIVE because the dead epidermis has no cohesion to the dermis below.
+
+5. SYSTEMIC SEQUELAE FROM BARRIER LOSS:
+   • Transepidermal water loss → hypovolemia → prerenal AKI (Cr 0.7→1.8) → SCORTEN points
+   • Albumin loss into damaged dermis → hypoalbuminemia (3.4→2.8)
+   • Loss of antimicrobial peptides + commensal flora + acid mantle → high sepsis risk (procalcitonin trending up)
+   • Lactate elevation → tissue hypoperfusion + glycolysis in dying skin
+   • Mucous membrane involvement (eyes, mouth, urethra) because mucous membranes share the same stratified epithelium and are also targets
+
+DIFFERENTIAL DIAGNOSTIC ANATOMY (why each is ruled out):
+
+• Staphylococcal scalded skin syndrome (SSSS): cleavage at stratum granulosum (intraepidermal, very superficial) ,  biopsy shows full-thickness necrosis, ruled out.
+
+• Pemphigus vulgaris: suprabasal intraepidermal cleavage (above basale, due to anti-desmoglein-3) ,  biopsy shows DEJ split + negative DIF, ruled out.
+
+• Bullous pemphigoid: subepidermal cleavage but with eosinophilic infiltrate and IgG/C3 along BMZ on DIF ,  DIF negative, ruled out.
+
+• Erythema multiforme: typically post-HSV, partial-thickness damage, acral target lesions, limited mucosal involvement ,  HSV PCR negative, distribution truncal, full-thickness necrosis, ruled out.
+
+• Mycoplasma-induced rash and mucositis (MIRM): mucositis-dominant with sparse skin lesions ,  Jordan has BOTH severe mucositis AND extensive skin necrosis, ruled out by Mycoplasma serology and biopsy.
+
+KEY TEACHING ANCHORS (Week 1, Module 1):
+• Five epidermal layers, top down: corneum / lucidum (thick skin only) / granulosum / spinosum / basale.
+• Each layer's cells: corneocytes (anucleate, lipid-embedded) / keratohyalin granule cells / Langerhans cells in spinosum / mitotic basal cells / Merkel cells at base.
+• DEJ structure: hemidesmosomes anchor basal keratinocytes to laminin-332 in lamina lucida; type IV collagen forms lamina densa; type VII collagen anchors to dermis.
+• Cleavage plane diagnosis: where the split occurs tells you what disease this is.</div>
+</div>
+<div class="card">
+  <h2>Your score</h2>
+  <div class="score-row"><span>Diagnostic accuracy</span><span class="sv ${scCls(sc.diag,35)}">${sc.diag}/35</span></div>
+  <div class="score-row"><span>Data efficiency (credits remaining)</span><span class="sv ${scCls(sc.eff,20)}">${sc.eff}/20</span></div>
+  <div class="score-row"><span>Interview quality (topic coverage)</span><span class="sv ${scCls(sc.interview,15)}">${sc.interview}/15</span></div>
+  <div class="score-row"><span>Gate question performance</span><span class="sv ${scCls(sc.gate,10)}">${sc.gate}/10</span></div>
+  <div class="score-row"><span>Completion bonus</span><span class="sv ${scCls(sc.complete,5)}">${sc.complete}/5</span></div>
+  <div class="score-row" style="margin-top:8px;border-top:2px solid var(--navy);padding-top:12px"><span style="font-weight:700;font-size:17px">Total</span><span class="sv full" style="font-size:19px">${sc.total}/${sc.max}</span></div>
+</div>
+<div class="card" style="border-top:4px solid var(--gold)">
+  <h2>Your submission</h2>
+  <div class="sl">Your diagnosis</div>
+  <p style="margin-bottom:14px;color:var(--ink)">${S.diagText||"(not submitted)"}</p>
+  <div class="sl">Your rationale</div>
+  <p style="white-space:pre-wrap;color:var(--ink)">${S.rationaleText||"(not submitted)"}</p>
+</div>`;
+}
+
+/* ────────── HELPERS ────────── */
+function scrollEl(id){setTimeout(()=>{const e=document.getElementById(id);if(e)e.scrollTop=e.scrollHeight;},20);}
+
+/* ────────── COPY / SCREENSHOT PROTECTION ────────── */
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>{const t=e.target;if(t.tagName==='INPUT'||t.tagName==='TEXTAREA')return;e.preventDefault();});
+document.addEventListener('copy',e=>{e.preventDefault();try{e.clipboardData.setData('text/plain','Copying is disabled in this exam environment.');}catch(_){}});
+document.addEventListener('cut',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=(e.key||'').toLowerCase();
+  const ctrl=e.ctrlKey||e.metaKey;
+  if(ctrl&&['c','x','s','p','u','a'].includes(k)){const t=e.target;if(t.tagName==='INPUT'||t.tagName==='TEXTAREA')return;e.preventDefault();}
+  if(k==='f12'||(e.ctrlKey&&e.shiftKey&&['i','j','c'].includes(k))||(e.metaKey&&e.altKey&&['i','j','c'].includes(k))){e.preventDefault();}
+  if(ctrl&&e.shiftKey&&k==='s'){e.preventDefault();}
+});
+
+/* ────────── INIT ────────── */
+render();
+
+/* ────────── IFRAME HEIGHT SENDER ────────── */
+(function(){
+  const FRAME_ID='bio004-w1-jordan-sim';
+  function sendHeight(){try{const h=document.documentElement.scrollHeight;if(window.parent&&window.parent!==window)window.parent.postMessage({type:'iframeHeight',id:FRAME_ID,height:h},'*');}catch(e){}}
+  window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);
+  if('ResizeObserver' in window){new ResizeObserver(sendHeight).observe(document.body);}
+  setTimeout(sendHeight,200);setTimeout(sendHeight,800);setTimeout(sendHeight,2000);
+})();
+</script>
+</body>
+</html>
