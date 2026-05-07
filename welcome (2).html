@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to BIO 004, Human Anatomy, Summer 2026</title>
+<meta name="description" content="Welcome page for BIO 004 Human Anatomy, Summer 2026 with Dr. Sharilyn Rennie. This is a TBL flipped course with no concept lectures in class.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C;
+  --navy-deep: #15262F;
+  --terra: #7C2018;
+  --terra-soft: #9A3A2E;
+  --gold: #C9A961;
+  --gold-soft: #DCC289;
+  --ink: #15262F;
+  --ink-soft: #3D4F5A;
+  --divider: #BFC8CD;
+  --divider-light: #D8DEE2;
+  --cream: #FAF7F2;
+  --cream-warm: #F5F2EC;
+  --white: #FFFFFF;
+  --lift-1: 0 1px 2px rgba(30, 61, 76, 0.05), 0 1px 3px rgba(30, 61, 76, 0.04);
+  --lift-2: 0 2px 4px rgba(30, 61, 76, 0.06), 0 4px 12px rgba(30, 61, 76, 0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  background: var(--navy);
+  color: var(--cream);
+  padding: 12px 18px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  z-index: 1000;
+}
+.skip-link:focus { top: 12px; }
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px 24px 60px;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--cream);
+  border-radius: 8px;
+  padding: 36px 36px 32px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--lift-2);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero > * { position: relative; }
+.hero-eyebrow {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 12px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 2.1rem;
+  line-height: 1.1;
+  margin: 0 0 10px;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+.hero-subtitle {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(250, 247, 242, 0.88);
+  margin: 0;
+  max-width: 60ch;
+}
+
+/* Sections */
+section { margin-bottom: 36px; }
+section h2 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.45rem;
+  color: var(--navy);
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+.section-rule {
+  height: 3px;
+  width: 48px;
+  background: var(--gold);
+  margin: 8px 0 20px;
+  border-radius: 2px;
+}
+section h3 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--terra);
+  margin: 22px 0 8px;
+}
+section h4 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy);
+  margin: 16px 0 6px;
+}
+section p { margin: 0 0 14px; }
+
+/* Cards & callouts */
+.card {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 22px 24px;
+  margin: 18px 0;
+  box-shadow: var(--lift-1);
+}
+.card-accent { border-left: 4px solid var(--gold); }
+.card-warn { border-left: 4px solid var(--terra); }
+
+.callout {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-left: 4px solid var(--navy);
+  padding: 16px 20px;
+  margin: 18px 0;
+  border-radius: 0 6px 6px 0;
+  box-shadow: var(--lift-1);
+}
+.callout strong {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  color: var(--navy);
+}
+.callout-terra { border-left-color: var(--terra); }
+.callout-terra strong { color: var(--terra); }
+.callout-gold { border-left-color: var(--gold); }
+.callout-gold strong { color: var(--terra); }
+
+/* Two-column compare */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 18px 0;
+}
+@media (max-width: 640px) { .compare { grid-template-columns: 1fr; } }
+.compare-col {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 20px 22px;
+  box-shadow: var(--lift-1);
+}
+.compare-col h4 {
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gold);
+}
+.compare-col.your-job h4 { color: var(--terra); border-bottom-color: var(--terra); }
+.compare-col ul { padding-left: 20px; margin-bottom: 0; }
+.compare-col li { margin-bottom: 8px; font-size: 0.93rem; }
+
+/* Numbered steps */
+.steps { counter-reset: step; padding: 0; list-style: none; margin: 18px 0; }
+.steps > li {
+  counter-increment: step;
+  position: relative;
+  padding: 18px 22px 18px 64px;
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  margin-bottom: 12px;
+  box-shadow: var(--lift-1);
+}
+.steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--gold);
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+.steps h4 {
+  margin: 0 0 6px;
+  color: var(--navy);
+  font-size: 1.02rem;
+}
+.steps p { margin: 0; font-size: 0.93rem; }
+
+/* Lists */
+ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--gold); }
+
+strong, b { font-weight: 700; color: var(--navy); }
+em, i { font-style: italic; color: var(--ink); }
+
+a.inline-link {
+  color: var(--terra);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: 500;
+}
+a.inline-link:hover { color: var(--navy); }
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  padding: 28px 24px 0;
+  border-top: 1px solid var(--divider-light);
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-align: center;
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+footer p { margin: 4px 0; }
+footer strong { color: var(--navy); font-weight: 700; }
+
+@media print {
+  .hero { background: white !important; color: var(--ink) !important; border: 2px solid var(--navy); box-shadow: none; }
+  .hero::before { display: none; }
+  .hero h1, .hero-eyebrow { color: var(--navy) !important; }
+  .hero-subtitle { color: var(--ink) !important; }
+  .hero-eyebrow { color: var(--terra) !important; }
+  .card, .callout, .compare-col, .steps > li { box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="hero-eyebrow">Welcome to BIO 004</p>
+    <h1>Human Anatomy, an 8-week intensive</h1>
+    <p class="hero-subtitle">Summer 2026, Solano Community College, with Dr. Sharilyn Rennie. This page explains the most important thing you need to know before day one: how this course works.</p>
+  </header>
+
+  <main id="main">
+
+    <section>
+      <h2>The headline</h2>
+      <div class="section-rule"></div>
+      <div class="card card-accent">
+        <p style="margin: 0; font-size: 1.05rem;"><strong>This is a flipped, Team-Based Learning (TBL) course. There are no concept lectures during class time.</strong> You learn the foundational anatomy on your own time through assigned videos, readings, and your weekly research workbook. Class time is for application: TBL discussion, case-based reasoning, and lab work.</p>
+      </div>
+      <p>If you have taken courses where the professor stands at the front and lectures concepts while you take notes, this course will feel different. The reason for that difference is intentional and is explained below.</p>
+    </section>
+
+    <section>
+      <h2>How learning happens here</h2>
+      <div class="section-rule"></div>
+
+      <ol class="steps">
+        <li>
+          <h4>Before class, you do the foundation work</h4>
+          <p>Watch assigned lecture videos at your own pace, read the relevant chapter or OpenStax section, and complete your weekly research workbook (foundation anatomy research). This is where the concept learning happens.</p>
+        </li>
+        <li>
+          <h4>In class, you apply what you learned</h4>
+          <p>iRAT and tRAT assess whether you came prepared. Then you and your team work through clinical case-based questions and structure identification. Lab time is structured study and dissection. In a flipped TBL course, your preparation is non-negotiable, you own your learning. My class time focuses on facilitating your clinical reasoning, guiding your lab work, and bringing expert perspective to your team's application discussions.</p>
+        </li>
+        <li>
+          <h4>After class, you synthesize and prep for the next day</h4>
+          <p>Each evening, you record what you learned, log the day's case clue, and prepare for tomorrow's lab. The weekend is for lab exam prep and rest. Sunday primes the next week.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Why we do not lecture concepts in class</h2>
+      <div class="section-rule"></div>
+      <p>Three reasons, in order of importance:</p>
+
+      <h3>1. Active learning beats passive learning</h3>
+      <p>Decades of research on TBL and active learning consistently show better mastery, retention, and clinical reasoning skills compared with traditional lecture. You will encounter this same evidence base in your nursing, RT, or allied health programs. We are using the same methodology your future programs will use.</p>
+
+      <h3>2. Video is a better delivery medium for content</h3>
+      <p>You can pause, rewind, slow down, speed up, and rewatch a video. You cannot do any of those things in a live lecture. For pure content delivery, video wins. Use it.</p>
+
+      <h3>3. Class time is too valuable for one-way information</h3>
+      <p>Class time is the only time in your week where you have a content expert (me) and a team of peers in the same room together. Spending that time on something you could have done alone is a waste of all of us. Class time is for the things you cannot do alone: case-based reasoning, dissection, structure identification under time pressure, and live debate with your team.</p>
+    </section>
+
+    <section>
+      <h2>Your job vs. my job</h2>
+      <div class="section-rule"></div>
+
+      <div class="compare">
+        <div class="compare-col your-job">
+          <h4>Your job</h4>
+          <ul>
+            <li>Show up prepared every class day</li>
+            <li>Complete your weekly research workbook before class</li>
+            <li>Watch the assigned lecture videos at your own pace</li>
+            <li>Engage actively during TBL with your team</li>
+            <li>Use lab time for active recall practice, not socializing and not zoning out on your laptop</li>
+            <li>Take rest days seriously, sleep is consolidation</li>
+            <li>Communicate with your team within 24 hours</li>
+            <li>Ask for help before you fall behind, not after</li>
+          </ul>
+        </div>
+        <div class="compare-col">
+          <h4>My job</h4>
+          <ul>
+            <li>Curate and sequence the right content for you</li>
+            <li>Provide clear, structured lecture videos</li>
+            <li>Run TBL with rigor and consistency</li>
+            <li>Bring expertise to application discussions</li>
+            <li>Design lab activities that build real skill</li>
+            <li>Assess your work fairly and quickly</li>
+            <li>Be available during office hours and via Canvas</li>
+            <li>Hold the standards healthcare programs expect</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What success looks like</h2>
+      <div class="section-rule"></div>
+      <p>You will know the course is working when:</p>
+      <ul>
+        <li>You can identify structures on a model or slide quickly and accurately, not just recognize them.</li>
+        <li>You can explain why a structure matters clinically, not just name it.</li>
+        <li>You can walk a peer through a concept clearly enough that they understand it.</li>
+        <li>You arrive to TBL feeling ready, not anxious about being called on.</li>
+        <li>You feel the work is hard but the path is clear.</li>
+      </ul>
+
+      <div class="callout callout-gold">
+        <strong>The hard truth.</strong> If you cannot or will not do the foundation work outside of class, this course will not work for you. There is no version of any anatomy course that succeeds without student preparation. The flipped TBL model is built around prepared students. Do the work, and the system carries you. Skip the work, and it will be obvious quickly, most of all to yourself.
+      </div>
+    </section>
+
+    <section>
+      <h2>What to do this week</h2>
+      <div class="section-rule"></div>
+      <ol>
+        <li><strong>Read the syllabus thoroughly.</strong> Especially the grading structure, attendance policy, and Scholar Points sections. The rules are the rules.</li>
+        <li><strong>Read "How This Course Works"</strong> to understand the daily and weekly rhythm in detail.</li>
+        <li><strong>Read "Your TBL Team and Study Groups"</strong> to understand how your team is formed and what is expected.</li>
+        <li><strong>Set up Canvas notifications</strong> at minimum for announcements. Install the Canvas app on your phone.</li>
+        <li><strong>Choose your textbook resource.</strong> OpenStax Anatomy and Physiology 2e is recommended (free at openstax.org). Used Marieb is also fine.</li>
+        <li><strong>Order lab supplies</strong> so they arrive by week 3. Non-latex nitrile gloves and a lab coat (cannot be shared with chemistry).</li>
+        <li><strong>Show up to day one ready to meet your team and confirm a communication platform.</strong></li>
+      </ol>
+
+      <div class="callout">
+        <p style="margin-top: 0;"><strong>Welcome to the course.</strong> Let me be honest with you: this is going to be a tough summer. The 8-week intensive is real work, and you should not pretend otherwise. But the course is also intentionally designed to install a natural support network around you. Your TBL team is not just a graded unit, it is a small group of people who will live, breathe, and sleep anatomy alongside you for 8 weeks. Treat each other kindly. Show up for each other. Give your teammates the chance to show up for you. By the end of the term, your team will feel like family. That is by design, not by accident.</p>
+
+        <p>Here is something that surprises students about summer intensives: many students perform better in this format than in the 16-week version of the same course. In a 16-week semester, class meets every other day, and it is easy to drift, take an evening off, and lose the thread. In an 8-week intensive, you are in class Monday through Thursday, working with your team every day, going over material in lab, and going over it again at home that night. There is no drift. You are eating, sleeping, and breathing anatomy for 8 weeks, and that intensity is exactly what makes the material stick.</p>
+
+        <p>One honest caveat. This course will demand most of your bandwidth this summer. If you are also taking other courses, be realistic about what you can carry. Even the strongest students cannot create time where there is none, and this course requires time. This is not a course you can show up to, sit in your seat, and earn an A from. That is not a thing here. Build your summer schedule around what this course actually requires, or take it in a term where you can give it the time it needs.</p>
+
+        <p style="margin-bottom: 0;"><strong>Show up, do the work, lean into your team, and enjoy the learning.</strong> I am rooting for you.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <p><strong>BIO 004 Human Anatomy, Summer 2026, Solano Community College</strong></p>
+  <p>Dr. Sharilyn Rennie</p>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+  function sendHeight() {
+    try {
+      var height = document.documentElement.scrollHeight;
+      var id = window.frameElement ? window.frameElement.id : '';
+      window.parent.postMessage({ type: 'iframeHeight', id: id, height: height }, '*');
+    } catch (e) { /* ignore */ }
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(sendHeight);
+    ro.observe(document.body);
+  }
+})();
+</script>
+
+</body>
+</html>

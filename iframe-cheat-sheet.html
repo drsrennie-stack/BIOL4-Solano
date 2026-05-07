@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iframe Cheat Sheet, Dr. Sharilyn Rennie</title>
+<meta name="description" content="Quick reference for embedding GitHub Pages tools as iframes in Kajabi, Canvas, and other platforms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1E3D4C;
+  --navy-deep: #15262F;
+  --terra: #7C2018;
+  --gold: #C9A961;
+  --gold-soft: #DCC289;
+  --ink: #15262F;
+  --ink-soft: #3D4F5A;
+  --divider: #BFC8CD;
+  --divider-light: #D8DEE2;
+  --cream: #FAF7F2;
+  --cream-warm: #F5F2EC;
+  --code-bg: #1E3D4C;
+  --code-text: #FAF7F2;
+  --code-accent: #C9A961;
+  --white: #FFFFFF;
+  --lift-1: 0 1px 2px rgba(30, 61, 76, 0.05), 0 1px 3px rgba(30, 61, 76, 0.04);
+  --lift-2: 0 2px 4px rgba(30, 61, 76, 0.06), 0 4px 12px rgba(30, 61, 76, 0.06);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+body {
+  margin: 0;
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+.skip-link {
+  position: absolute; top: -100px; left: 12px;
+  background: var(--navy); color: var(--cream);
+  padding: 12px 18px; text-decoration: none; border-radius: 4px;
+  font-weight: 600; z-index: 1000;
+}
+.skip-link:focus { top: 12px; }
+
+.topbar {
+  background: var(--navy); color: var(--cream);
+  border-bottom: 2px solid var(--gold);
+  position: sticky; top: 0; z-index: 50;
+}
+.topbar-inner {
+  max-width: 1100px; margin: 0 auto; padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.topbar-title {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+}
+.topbar-title small {
+  display: block; font-weight: 400; font-size: 0.78rem;
+  color: var(--gold-soft); margin-top: 2px;
+}
+.topbar-btn {
+  background: transparent; color: var(--cream);
+  border: 1px solid rgba(220, 194, 137, 0.4);
+  padding: 8px 14px; border-radius: 4px;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.82rem; font-weight: 500; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.topbar-btn:hover {
+  background: rgba(201, 169, 97, 0.12); border-color: var(--gold);
+}
+
+main {
+  max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--cream);
+  padding: 36px 32px;
+  border-radius: 8px;
+  margin-bottom: 28px;
+  position: relative; overflow: hidden;
+  box-shadow: var(--lift-2);
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 240px; height: 240px;
+  background: radial-gradient(circle, rgba(201, 169, 97, 0.22) 0%, transparent 70%);
+}
+.hero > * { position: relative; }
+.hero-eyebrow {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin: 0 0 12px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 800; font-size: 2.2rem;
+  margin: 0 0 8px; color: var(--white);
+  letter-spacing: -0.02em;
+}
+.hero p {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.98rem; color: rgba(250, 247, 242, 0.88);
+  margin: 0; max-width: 60ch;
+}
+
+/* Section structure */
+section {
+  margin-bottom: 36px; scroll-margin-top: 80px;
+}
+section h2 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700; font-size: 1.5rem;
+  color: var(--navy); margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+.section-rule {
+  height: 3px; width: 56px; background: var(--gold);
+  margin: 8px 0 22px; border-radius: 2px;
+}
+section h3 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700; font-size: 1.05rem;
+  color: var(--terra); margin: 22px 0 10px;
+}
+section h4 {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-weight: 700; font-size: 0.92rem;
+  color: var(--navy); margin: 16px 0 6px;
+}
+section p { margin: 0 0 12px; }
+
+/* TOC */
+.toc {
+  background: var(--cream-warm);
+  border-radius: 6px; padding: 20px 24px;
+  margin-bottom: 28px;
+}
+.toc-label {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--terra); margin: 0 0 12px;
+}
+.toc-list {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 6px 18px; list-style: none; padding: 0; margin: 0;
+}
+.toc-list a {
+  color: var(--navy); text-decoration: none;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.88rem; font-weight: 500;
+  padding: 4px 0; display: block;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.toc-list a:hover {
+  color: var(--terra); border-bottom-color: var(--gold);
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  padding: 22px 26px;
+  margin: 16px 0;
+  box-shadow: var(--lift-1);
+}
+
+.callout {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-left: 4px solid var(--navy);
+  padding: 14px 18px; margin: 16px 0;
+  border-radius: 0 6px 6px 0;
+  box-shadow: var(--lift-1);
+}
+.callout strong {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif; color: var(--navy);
+}
+.callout-terra { border-left-color: var(--terra); }
+.callout-terra strong { color: var(--terra); }
+.callout-gold { border-left-color: var(--gold); }
+.callout-gold strong { color: var(--terra); }
+
+/* Code blocks */
+.code-block {
+  background: var(--code-bg);
+  border-radius: 6px;
+  margin: 14px 0;
+  overflow: hidden;
+  box-shadow: var(--lift-1);
+  position: relative;
+}
+.code-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px;
+  background: rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid rgba(201, 169, 97, 0.22);
+}
+.code-label {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  color: var(--gold); letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.code-copy {
+  background: rgba(201, 169, 97, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(201, 169, 97, 0.35);
+  padding: 5px 12px; border-radius: 3px;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.74rem; font-weight: 600; cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.code-copy:hover { background: var(--gold); color: var(--navy-deep); }
+.code-copy.copied { background: var(--gold-soft); color: var(--navy-deep); }
+.code-block pre {
+  margin: 0; padding: 16px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem; line-height: 1.55;
+  color: var(--code-text);
+  overflow-x: auto;
+  white-space: pre;
+}
+.code-block code { font-family: inherit; }
+
+/* Inline code */
+code.inline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.86em;
+  background: var(--cream-warm);
+  border: 1px solid var(--divider-light);
+  border-radius: 3px;
+  padding: 1px 6px;
+  color: var(--terra);
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto; margin: 16px 0;
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-radius: 6px;
+  box-shadow: var(--lift-1);
+}
+table {
+  width: 100%; border-collapse: collapse;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.88rem;
+}
+th, td {
+  padding: 11px 14px; text-align: left;
+  border-bottom: 1px solid var(--divider-light);
+  vertical-align: top;
+}
+th {
+  background: var(--navy); color: var(--cream);
+  font-weight: 700; font-size: 0.74rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border-bottom: 2px solid var(--gold);
+}
+tbody tr:nth-child(even) { background: var(--cream-warm); }
+tbody tr:last-child td { border-bottom: none; }
+
+/* Decision tree */
+.decision {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+.decision-card {
+  background: var(--white);
+  border: 1px solid var(--divider-light);
+  border-top: 4px solid var(--gold);
+  border-radius: 6px;
+  padding: 18px 20px;
+  box-shadow: var(--lift-1);
+}
+.decision-card.canvas { border-top-color: var(--terra); }
+.decision-card.kajabi { border-top-color: var(--navy); }
+.decision-card.standalone { border-top-color: var(--gold); }
+.decision-card h4 { margin-top: 0; font-size: 0.98rem; }
+.decision-card p { font-size: 0.88rem; margin: 8px 0; }
+.decision-card .verdict {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.78rem; font-weight: 700;
+  margin-top: 12px; padding-top: 10px;
+  border-top: 1px solid var(--divider-light);
+  color: var(--terra); letter-spacing: 0.04em;
+}
+
+/* Lists */
+ul, ol { margin: 8px 0 14px; padding-left: 22px; }
+li { margin-bottom: 5px; }
+li::marker { color: var(--gold); }
+
+/* Strong + em */
+strong, b { font-weight: 700; color: var(--navy); }
+em, i { font-style: italic; color: var(--ink); }
+
+/* Footer */
+footer {
+  max-width: 1100px; margin: 32px auto 0;
+  padding: 28px 24px 50px;
+  border-top: 1px solid var(--divider-light);
+  text-align: center; position: relative;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-size: 0.82rem; color: var(--ink-soft);
+}
+footer::before {
+  content: ''; position: absolute; top: -1px; left: 50%;
+  transform: translateX(-50%); width: 50px; height: 3px;
+  background: var(--gold); border-radius: 2px;
+}
+footer p { margin: 3px 0; }
+
+@media print {
+  .topbar, .code-copy { display: none; }
+  body { font-size: 10pt; }
+  .hero { background: white !important; color: var(--ink) !important; border: 2px solid var(--navy); box-shadow: none; }
+  .hero::before { display: none; }
+  .hero h1, .hero p, .hero-eyebrow { color: var(--ink) !important; }
+  .hero-eyebrow { color: var(--terra) !important; }
+  .code-block { break-inside: avoid; }
+  .card, .callout, .code-block, .table-wrap, .decision-card { box-shadow: none; }
+  .code-block { background: var(--cream-warm); border: 1px solid var(--divider); }
+  .code-block pre, .code-label { color: var(--ink); }
+  .code-header { background: rgba(0,0,0,0.05); }
+  section { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-title">
+      iframe Cheat Sheet
+      <small>Kajabi, GitHub Pages, Canvas deployment reference</small>
+    </div>
+    <button class="topbar-btn" type="button" id="print-btn">Print</button>
+  </div>
+</div>
+
+<main id="main-content">
+
+  <header class="hero">
+    <p class="hero-eyebrow">Quick reference</p>
+    <h1>iframe deployment cheat sheet</h1>
+    <p>Everything you need to host on GitHub Pages and embed in Kajabi or Canvas. Includes the height-sender pattern, link rules, and decision tree for link-vs-embed.</p>
+  </header>
+
+  <div class="toc">
+    <p class="toc-label">Jump to section</p>
+    <ul class="toc-list">
+      <li><a href="#urls">GitHub Pages URLs</a></li>
+      <li><a href="#decision">Link vs embed decision</a></li>
+      <li><a href="#kajabi">Kajabi embed code</a></li>
+      <li><a href="#canvas">Canvas embed code</a></li>
+      <li><a href="#height">Height-sender pattern</a></li>
+      <li><a href="#links">Link target rules</a></li>
+      <li><a href="#problems">Problems &amp; fixes</a></li>
+      <li><a href="#checklist">Pre-flight checklist</a></li>
+    </ul>
+  </div>
+
+  <section id="urls">
+    <h2>GitHub Pages URLs</h2>
+    <div class="section-rule"></div>
+    <p>Your GitHub Pages account is at <code class="inline">drsrennie-stack.github.io</code>. Every repo with Pages enabled gets a URL of the form:</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-label">URL pattern</span>
+        <button class="code-copy" type="button">Copy</button>
+      </div>
+      <pre><code>https://drsrennie-stack.github.io/REPO-NAME/FILE.html</code></pre>
+    </div>
+
+    <h3>Real examples from your stack</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Repo</th>
+            <th>File</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BIOL4-Solano</td>
+            <td>schedule.html</td>
+            <td><code class="inline">drsrennie-stack.github.io/BIOL4-Solano/schedule.html</code></td>
+          </tr>
+          <tr>
+            <td>medmasters-respiratory</td>
+            <td>concept-viewer.html</td>
+            <td><code class="inline">drsrennie-stack.github.io/medmasters-respiratory/concept-viewer.html</code></td>
+          </tr>
+          <tr>
+            <td>nursing</td>
+            <td>nclex-generator.html</td>
+            <td><code class="inline">drsrennie-stack.github.io/nursing/nclex-generator.html</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-terra">
+      <strong>Case sensitivity matters.</strong> GitHub Pages serves file paths with the exact case used in the repo. <code class="inline">Schedule.html</code> and <code class="inline">schedule.html</code> are different files. Same for repo names.
+    </div>
+  </section>
+
+  <section id="decision">
+    <h2>Link vs Embed Decision</h2>
+    <div class="section-rule"></div>
+    <p>Before reaching for an iframe, ask whether a direct link would serve students better. Here is the quick decision matrix:</p>
+
+    <div class="decision">
+      <div class="decision-card canvas">
+        <h4>Canvas (SCC course)</h4>
+        <p>Canvas wraps content in its own UI chrome. Embedding adds a second wrapper around your tool, breaking interactivity and making the layout cramped.</p>
+        <p class="verdict">Direct link, opens in new tab</p>
+      </div>
+      <div class="decision-card kajabi">
+        <h4>Kajabi (business sites)</h4>
+        <p>Kajabi pages are designed to host embedded tools. The iframe pattern with the height-sender script gives a seamless feel, with no second scrollbar.</p>
+        <p class="verdict">Embed with height-sender</p>
+      </div>
+      <div class="decision-card standalone">
+        <h4>Sharing the URL directly</h4>
+        <p>For peer review, accreditation evidence, or anywhere the tool needs to live independently. The GitHub Pages URL is the artifact.</p>
+        <p class="verdict">Just send the link</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kajabi">
+    <h2>Kajabi Embed Code</h2>
+    <div class="section-rule"></div>
+    <p>In Kajabi, add a <strong>Custom Code</strong> block on the page or post where you want the tool to appear. Paste the code below and replace the <code class="inline">id</code> and <code class="inline">src</code> values.</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-label">Kajabi custom code block</span>
+        <button class="code-copy" type="button">Copy</button>
+      </div>
+      <pre><code>&lt;iframe
+  id="my-tool"
+  src="https://drsrennie-stack.github.io/REPO-NAME/FILE.html"
+  style="width: 100%; border: 0; min-height: 400px;"
+  loading="lazy"
+  title="Tool description for screen readers"&gt;
+&lt;/iframe&gt;
+
+&lt;script&gt;
+window.addEventListener('message', function(e) {
+  if (e.data &amp;&amp; e.data.type === 'iframeHeight' &amp;&amp; e.data.id === 'my-tool') {
+    var iframe = document.getElementById('my-tool');
+    if (iframe) iframe.style.height = e.data.height + 'px';
+  }
+});
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <h3>The two pieces</h3>
+    <ul>
+      <li><strong>The iframe tag</strong> loads your tool. The <code class="inline">id</code> must match what you target in the script. <code class="inline">loading="lazy"</code> defers loading until the iframe is near the viewport, which speeds up the page.</li>
+      <li><strong>The receiver script</strong> listens for height messages from the embedded tool and resizes the iframe to fit. Without this, you get a fixed-height iframe with internal scrollbars.</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Multiple tools on one page?</strong> Give each iframe a different <code class="inline">id</code> (like <code class="inline">tool-1</code>, <code class="inline">tool-2</code>) and duplicate the receiver script's id check for each one. Or use a single script that checks all expected ids.
+    </div>
+  </section>
+
+  <section id="canvas">
+    <h2>Canvas Embed Code (if you must)</h2>
+    <div class="section-rule"></div>
+    <p>If you need to embed a tool inside a Canvas page rather than linking out, Canvas provides an iframe option through the rich content editor. The receiver script will not run inside Canvas pages, so the height-sender will not auto-resize. Set a sensible <code class="inline">min-height</code> instead.</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-label">Canvas rich content editor, HTML view</span>
+        <button class="code-copy" type="button">Copy</button>
+      </div>
+      <pre><code>&lt;iframe
+  src="https://drsrennie-stack.github.io/REPO-NAME/FILE.html"
+  style="width: 100%; height: 800px; border: 0;"
+  title="Tool description for screen readers"
+  loading="lazy"&gt;
+&lt;/iframe&gt;</code></pre>
+    </div>
+
+    <p>To paste this in Canvas: open the rich content editor, click the <strong>HTML view</strong> button (looks like <code class="inline">&lt;/&gt;</code>), and paste the code in. Adjust the <code class="inline">height</code> value to fit your tool's typical content size.</p>
+
+    <div class="callout callout-terra">
+      <strong>Recommendation:</strong> For most Canvas use cases, link directly to the GitHub Pages URL instead. A Canvas page item can be set to "External URL" and Canvas will open it in a new tab. Cleaner UX, full viewport, no iframe quirks.
+    </div>
+  </section>
+
+  <section id="height">
+    <h2>Height-Sender Pattern</h2>
+    <div class="section-rule"></div>
+    <p>This is your standing rule for all GitHub Pages tools. The pattern has two halves: the <strong>sender</strong> lives inside your tool's HTML file, the <strong>receiver</strong> lives on the parent page (Kajabi).</p>
+
+    <h3>Sender, baked into every tool's HTML before <code class="inline">&lt;/body&gt;</code></h3>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-label">Sender (in your tool's HTML)</span>
+        <button class="code-copy" type="button">Copy</button>
+      </div>
+      <pre><code>&lt;script&gt;
+(function() {
+  function sendHeight() {
+    try {
+      var height = document.documentElement.scrollHeight;
+      var id = window.frameElement ? window.frameElement.id : '';
+      window.parent.postMessage({ type: 'iframeHeight', id: id, height: height }, '*');
+    } catch (e) { /* ignore cross-origin errors when not embedded */ }
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(sendHeight).observe(document.body);
+  }
+  document.querySelectorAll('details').forEach(function(d) {
+    d.addEventListener('toggle', sendHeight);
+  });
+})();
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <h4>What this script does</h4>
+    <ul>
+      <li>Sends the document height to the parent page on load, on resize, and whenever any element resizes (via ResizeObserver).</li>
+      <li>Also sends on toggle of any <code class="inline">&lt;details&gt;</code> element, so collapsibles auto-resize the iframe.</li>
+      <li>Uses <code class="inline">window.frameElement.id</code> to identify which iframe sent the message, so multiple iframes on one page can coexist.</li>
+      <li>Wrapped in try/catch so the script does not throw errors when the page loads outside an iframe.</li>
+    </ul>
+
+    <h3>Receiver, on the Kajabi page (already shown in the Kajabi section above)</h3>
+    <p>The receiver script reads the message and updates the iframe height. The <code class="inline">id</code> in the message must match the iframe's <code class="inline">id</code> attribute.</p>
+  </section>
+
+  <section id="links">
+    <h2>Link Target Rules</h2>
+    <div class="section-rule"></div>
+    <p>When your tool is loaded inside an iframe, links inside the tool can behave in unexpected ways. Use these target rules to keep navigation predictable.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Link type</th>
+            <th>Target attribute</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Internal anchor (#section)</td>
+            <td><em>None needed</em></td>
+            <td>Anchors scroll within the iframe, which is what you want</td>
+          </tr>
+          <tr>
+            <td>Same-domain page (your other tools)</td>
+            <td><code class="inline">target="_top"</code></td>
+            <td>Breaks out of the iframe so the new page takes the full viewport</td>
+          </tr>
+          <tr>
+            <td>External URL (someone else's site)</td>
+            <td><code class="inline">target="_blank" rel="noopener"</code></td>
+            <td>Opens in a new tab, <code class="inline">rel="noopener"</code> blocks the destination from accessing your window</td>
+          </tr>
+          <tr>
+            <td>mailto: or tel:</td>
+            <td><code class="inline">target="_top"</code></td>
+            <td>Lets the device handle the link (open email or dialer)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-label">Examples</span>
+        <button class="code-copy" type="button">Copy</button>
+      </div>
+      <pre><code>&lt;!-- Anchor scroll, no target --&gt;
+&lt;a href="#schedule"&gt;Jump to schedule&lt;/a&gt;
+
+&lt;!-- Internal page, breaks out of iframe --&gt;
+&lt;a href="/BIOL4-Solano/syllabus.html" target="_top"&gt;Course syllabus&lt;/a&gt;
+
+&lt;!-- External link, new tab --&gt;
+&lt;a href="https://openstax.org" target="_blank" rel="noopener"&gt;OpenStax&lt;/a&gt;
+
+&lt;!-- Email or phone, breaks out --&gt;
+&lt;a href="mailto:sharilyn.rennie@solano.edu" target="_top"&gt;Email me&lt;/a&gt;</code></pre>
+    </div>
+  </section>
+
+  <section id="problems">
+    <h2>Problems &amp; Fixes</h2>
+    <div class="section-rule"></div>
+
+    <h3>Iframe shows a scrollbar instead of expanding</h3>
+    <p>The receiver script is missing or has a mismatched id. Confirm:</p>
+    <ul>
+      <li>The receiver script is on the parent (Kajabi) page</li>
+      <li>The <code class="inline">id</code> on the iframe matches the id check in the script</li>
+      <li>The tool's HTML actually has the sender script before <code class="inline">&lt;/body&gt;</code></li>
+    </ul>
+
+    <h3>Internal link inside the tool stays trapped in the iframe</h3>
+    <p>Add <code class="inline">target="_top"</code> to the link. This is the most common iframe gotcha.</p>
+
+    <h3>Iframe is blocked entirely (X-Frame-Options error)</h3>
+    <p>Some sites send headers that prevent embedding. GitHub Pages does not, so your tools will always embed fine. If you are trying to embed someone else's site and getting blocked, that site is not embeddable. There is no workaround on your end.</p>
+
+    <h3>Iframe is too tall on mobile</h3>
+    <p>The sender script handles this automatically. If it is not working on mobile, check that the tool itself is responsive (uses relative widths, viewport meta tag set correctly). The iframe can only fit the content it is given.</p>
+
+    <h3>Tool loads but features (like fetch, or audio) do not work</h3>
+    <p>Some browser features are restricted in iframes by default. Add the <code class="inline">allow</code> attribute:</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-label">Granting iframe permissions</span>
+        <button class="code-copy" type="button">Copy</button>
+      </div>
+      <pre><code>&lt;iframe
+  src="..."
+  allow="autoplay; microphone; camera; clipboard-write"&gt;
+&lt;/iframe&gt;</code></pre>
+    </div>
+    <p>Only request what you actually need. Most of your tools (study guides, generators, viewers) need none of these.</p>
+
+    <h3>Updates to the tool are not showing up</h3>
+    <p>GitHub Pages caches aggressively. Two fixes:</p>
+    <ul>
+      <li>Hard refresh in the browser (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows)</li>
+      <li>Append a version query string to the iframe src: <code class="inline">file.html?v=2</code>. Update the version each time you push a meaningful change.</li>
+    </ul>
+  </section>
+
+  <section id="checklist">
+    <h2>Pre-flight Checklist</h2>
+    <div class="section-rule"></div>
+    <p>Before pushing a tool live or embedding it, run through this list:</p>
+
+    <div class="card">
+      <h4 style="margin-top: 0;">Inside the tool's HTML</h4>
+      <ul>
+        <li>Sender script is in place before <code class="inline">&lt;/body&gt;</code></li>
+        <li>All same-domain links have <code class="inline">target="_top"</code></li>
+        <li>All external links have <code class="inline">target="_blank" rel="noopener"</code></li>
+        <li>Mailto and tel links have <code class="inline">target="_top"</code></li>
+        <li>Anchor links (#section) have no target attribute</li>
+        <li>Viewport meta tag is set: <code class="inline">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></li>
+        <li>Body and main content use relative widths so the tool reflows on narrow iframes</li>
+      </ul>
+
+      <h4>On the embedding page (Kajabi)</h4>
+      <ul>
+        <li>Iframe has a unique <code class="inline">id</code></li>
+        <li>Iframe <code class="inline">src</code> uses the full GitHub Pages URL with correct case</li>
+        <li>Iframe <code class="inline">style</code> includes <code class="inline">width: 100%; border: 0;</code></li>
+        <li>Receiver script is on the same Kajabi page, with id matching the iframe</li>
+        <li>Iframe has a <code class="inline">title</code> attribute for screen readers</li>
+        <li><code class="inline">loading="lazy"</code> set if the iframe is below the fold</li>
+      </ul>
+
+      <h4>For Canvas embedding</h4>
+      <ul>
+        <li>Decide whether linking is better (usually it is)</li>
+        <li>If embedding, set an explicit <code class="inline">height</code> value (no auto-sizing in Canvas)</li>
+        <li>Test from a student account if possible, since instructor view differs</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p><strong style="color: var(--navy);">iframe Cheat Sheet</strong></p>
+  <p>Reference for Dr. Sharilyn Rennie, MedMasters Collaborative</p>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // Print
+  var printBtn = document.getElementById('print-btn');
+  if (printBtn) {
+    printBtn.addEventListener('click', function() { window.print(); });
+  }
+
+  // Copy buttons
+  document.querySelectorAll('.code-copy').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var pre = btn.closest('.code-block').querySelector('pre');
+      if (!pre) return;
+      var text = pre.textContent;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          showCopied(btn);
+        }).catch(function() {
+          fallbackCopy(text, btn);
+        });
+      } else {
+        fallbackCopy(text, btn);
+      }
+    });
+  });
+
+  function fallbackCopy(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); showCopied(btn); }
+    catch (e) { /* silent */ }
+    document.body.removeChild(ta);
+  }
+
+  function showCopied(btn) {
+    var original = btn.textContent;
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1600);
+  }
+
+  // Iframe height sender (in case this gets embedded too)
+  function sendHeight() {
+    try {
+      var height = document.documentElement.scrollHeight;
+      var id = window.frameElement ? window.frameElement.id : '';
+      window.parent.postMessage({ type: 'iframeHeight', id: id, height: height }, '*');
+    } catch (e) { /* ignore */ }
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(sendHeight).observe(document.body);
+  }
+})();
+</script>
+
+</body>
+</html>
