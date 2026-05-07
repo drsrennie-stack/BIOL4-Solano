@@ -15,9 +15,11 @@
 :root{
   --navy:#142940; --navy-deep:#0A1A2A; --navy-bg:#E8EDF3; --navy-bd:#B8C5D5;
   --terra:#7C2018; --terra-bg:#F5E5E2; --terra-bd:#E5BFB8;
-  --gold:#C9A961; --gold-bg:#F8F1E0; --gold-bd:#E5D4A6;
-  --ok:#2E5A3F; --ok-bg:#E5F0E8; --ok-bd:#B8D4C2;
-  --warn:#7A5800; --warn-bg:#FAF1D8; --warn-bd:#E8D49B;
+  /* Gold/warn states remapped to terra family for restricted palette */
+  --gold:#7C2018; --gold-bg:#F5E5E2; --gold-bd:#E5BFB8;
+  --warn:#7C2018; --warn-bg:#F5E5E2; --warn-bd:#E5BFB8;
+  /* Success states remapped to navy family */
+  --ok:#142940; --ok-bg:#E8EDF3; --ok-bd:#B8C5D5;
   
   --ink:#0A1A2A; --ink-soft:#3D4F5A; --ink-mute:#4A5965;
   --divider:#BFC8CD; --divider-light:#D8DEE2;
@@ -25,7 +27,7 @@
   --r:8px; --rs:5px;
   --display:'Lora',Georgia,serif;
   --sans:'Plus Jakarta Sans',Arial,sans-serif;
-  --body:'DM Sans',Arial,sans-serif;
+  --body:'Plus Jakarta Sans',Arial,sans-serif;
   --mono:'SF Mono',Monaco,'Courier New',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -176,6 +178,20 @@ const CASE = {
   cc:"My ankle hurts so bad I can't walk on it",
   dayCodes:{2:"TRABECULA", 3:"ENDOSTEUM"},
   highYield:["ankle_ap_d1","mortise_d1","postred_d2","headct_d3"],
+
+  /* DIFFERENTIALS, the 10 candidates students researched in pre-work */
+  differentials:[
+    {label:"Salter-Harris Type I fracture of the distal tibia",isCorrect:false},
+    {label:"Salter-Harris Type II fracture of the distal tibia",isCorrect:false},
+    {label:"Salter-Harris Type III fracture of the distal tibia (Tillaux fracture)",isCorrect:true},
+    {label:"Salter-Harris Type IV fracture of the distal tibia (triplane variant)",isCorrect:false},
+    {label:"Salter-Harris Type V crush injury of the distal tibial physis",isCorrect:false},
+    {label:"Lateral ankle sprain (high-grade ATFL injury)",isCorrect:false},
+    {label:"Lateral malleolus avulsion fracture (non-Salter-Harris)",isCorrect:false},
+    {label:"Pilon (tibial plafond) fracture",isCorrect:false},
+    {label:"Talar dome osteochondral injury",isCorrect:false},
+    {label:"Subtalar dislocation",isCorrect:false},
+  ],
 
   
   interviewTopics:{
@@ -354,6 +370,14 @@ const CASE = {
               "C) Lambdoid suture",
               "D) Frontonasal suture"],
             correct:"A",exp:"A: The CORONAL SUTURE runs in the coronal plane (side to side) across the top of the skull, joining the FRONTAL bone (anteriorly) to the two PARIETAL bones (posteriorly). B: the SAGITTAL SUTURE runs in the midline along the top of the skull, joining the two PARIETAL bones to each other. C: the LAMBDOID SUTURE joins the parietal bones to the OCCIPITAL bone at the back of the skull. D: the FRONTONASAL SUTURE joins the frontal bone to the nasal bones at the bridge of the nose. Mnemonic: the Coronal suture is at the front (think Crown), the Sagittal is the spine of the skull (sagittal arrow midline), the Lambdoid looks like the Greek letter Lambda upside-down at the back."}},
+        {id:"ortho_consult_d3",cat:"Management",name:"Pediatric orthopedic surgery consult",cost:15,
+          result:"PEDIATRIC ORTHOPEDIC SURGERY CONSULTATION\n\nThe pediatric orthopedic team reviewed Aiden's imaging and bedside exam at the request of the ED.\n\nFINDINGS COMMUNICATED BY THE CONSULTING SURGEON:\n  The fracture pattern crosses the articular surface of the distal tibia, with displacement of the antero-lateral epiphyseal fragment. Because the fracture line enters the joint, anatomical reduction is essential to minimize the risk of post-traumatic arthritis. Because the physis is involved, growth-arrest monitoring will be needed regardless of treatment choice.\n\nRECOMMENDATIONS:\n  1. Discuss closed reduction first; if articular step-off remains greater than 2 mm on post-reduction imaging, proceed to open reduction with internal fixation (ORIF).\n  2. Avoid any intervention that crosses the physis with hardware (screws should be parallel to and entirely within the epiphysis).\n  3. Plan for serial radiographs at 3, 6, 12, and 24 months to monitor for growth disturbance (Park-Harris growth arrest line, asymmetric closure of the physis, angular deformity).\n  4. Consider physeal-bar MRI at 6 months if there is any concern about premature closure on radiographs.\n\nThe family was informed and is asking about both options."},
+        {id:"closed_reduction_d3",cat:"Management",name:"Closed reduction discussion",cost:20,
+          result:"CLOSED REDUCTION DISCUSSION\n\nProcedure as it would be performed:\n  Aiden would receive conscious sedation. The orthopedic surgeon would apply traction in line with the tibia, followed by internal rotation of the foot to derotate the displaced antero-lateral fragment back toward its anatomical position. Fluoroscopy would confirm reduction in real time.\n\nANATOMICAL CONSIDERATIONS:\n  Closed reduction works only if the fragment can be coaxed back into anatomical alignment without surgical exposure. In a Salter-Harris III pattern with an articular step-off, soft tissue (including periosteum that has been folded into the fracture gap) can prevent adequate closed reduction. If post-reduction imaging shows an articular step-off greater than 2 mm, open reduction is required.\n\nSUCCESS CRITERIA:\n  Restoration of articular surface with less than 2 mm step-off; restoration of physeal alignment within 2 mm; stable fragment position on stress views.\n\nIF SUCCESSFUL: Long-leg cast in 0 to 5 degrees of plantarflexion and slight inversion for 4 weeks, then short-leg walking cast for 2 to 4 more weeks.\n\nIF UNSUCCESSFUL: Proceed to ORIF (next consultation item)."},
+        {id:"orif_d3",cat:"Management",name:"Open reduction with internal fixation (ORIF) discussion",cost:25,
+          result:"OPEN REDUCTION WITH INTERNAL FIXATION (ORIF) DISCUSSION\n\nProcedure as it would be performed:\n  Under general anesthesia, an anterior approach to the distal tibia is made. The fracture site is exposed, any interposed periosteum is removed from the fracture gap, and the antero-lateral epiphyseal fragment is reduced under direct vision. One or two cannulated screws are placed through the epiphyseal fragment, parallel to and entirely within the epiphysis (NOT crossing the physis).\n\nWHY HARDWARE PLACEMENT MATTERS:\n  Screws crossing the physis would create an iatrogenic bone bridge across the growth plate, leading to growth arrest and angular deformity. Because Aiden's medial physis is already substantially closed (he is at the end of skeletal growth at the medial physis but still open laterally), the risk of clinically significant deformity from a single small bridge is lower than in a younger child, but is still avoided when possible.\n\nWHY OPEN REDUCTION FOR SH III:\n  Anatomical restoration of the articular surface (less than 2 mm step-off) is required to minimize post-traumatic arthritis. Soft-tissue interposition often prevents adequate closed reduction. The articular surface is more reliably restored under direct vision.\n\nPOST-OP: Short-leg non-weight-bearing cast for 4 weeks, then walking cast for an additional 2 to 4 weeks. Hardware typically left in place unless symptomatic."},
+        {id:"casting_d3",cat:"Management",name:"Cast and immobilization plan (post-reduction)",cost:10,
+          result:"CASTING AND IMMOBILIZATION PLAN\n\nINITIAL CAST: Long-leg cast (above the knee) for the first 4 weeks. The reason a long-leg cast is preferred over a short-leg cast initially is to control rotation at the knee, since the mechanism of injury was a rotational stress and rotational forces transmitted through the knee can re-displace a distal tibial fragment.\n\nWEEKS 4 TO 6: Transition to a short-leg walking cast, weight-bearing as tolerated. By this point a fibrocartilaginous callus has bridged the fracture and is being replaced by woven bone (the bony callus stage).\n\nWEEKS 6 TO 8: Cast removal once radiographs show bridging trabecular bone across the fracture line. The fracture is then in the remodeling phase, where osteoclasts resorb excess woven bone and osteoblasts lay down lamellar bone aligned along stress lines.\n\nWHEN AIDEN CAN RETURN TO SOCCER:\n  Earliest 8 to 10 weeks if radiographs show good remodeling and there is no tenderness over the physis. Cleared for non-contact training first, then graded return to full play. Most pediatric SH III patients return to full activity within 3 to 4 months.\n\nMONITORING FOR GROWTH ARREST:\n  Even with anatomical reduction, approximately 5 to 10 percent of SH III distal tibia fractures develop some growth disturbance. Radiographic surveillance at 3, 6, 12, and 24 months. Park-Harris growth arrest lines are early indicators."},
       ]
     }
   }
@@ -371,6 +395,8 @@ function newState(){return{
   freeObtained:[], ordered:[], results:[], autoRevealed:[],
   iMsgs:[], interviewCount:0, maxInterview:10, iTopicHit:{}, iPending:false,
   invMsgs:[], gateActive:null, retries:0,
+  tMsgs:[], tPending:false, tutorOpen:false, tCount:0,
+  diffOrder:null,
   diagText:"", rationaleText:"",
   scores:null,
 };}
@@ -378,7 +404,12 @@ function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(S));}ca
 function loadState(){try{const v=localStorage.getItem(STORAGE_KEY);return v?JSON.parse(v):null;}catch(e){return null;}}
 function fullReset(){if(confirm("Reset Week 2 simulation? All progress will be lost.")){localStorage.removeItem(STORAGE_KEY);S=newState();render();}}
 
-/* PATIENT INTERVIEW (Anthropic API powered) */
+/* PATIENT INTERVIEW (Anthropic API powered, via Cloudflare Worker proxy) */
+
+// Replace the URL below with your deployed Cloudflare Worker URL.
+// Looks like: https://bio004-patient-proxy.YOUR-USERNAME.workers.dev
+const PROXY_URL = "https://bio004-patient-proxy.dr-srennie.workers.dev";
+
 const PATIENT_PERSONA = `You are roleplaying AIDEN OKAFOR, a 14-year-old male soccer player being interviewed in the Emergency Department by a clinical student the morning after a sports injury. Stay strictly in character.
 
 CONTEXT
@@ -452,7 +483,7 @@ Begin in character now.`;
 
 async function askPatientAPI(messages){
   try{
-    const response=await fetch("https://api.anthropic.com/v1/messages",{
+    const response=await fetch(PROXY_URL,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
@@ -478,10 +509,106 @@ async function askPatientAPI(messages){
   }
 }
 
+/* AI ANATOMY TUTOR (Anthropic API powered, separate persona)
+   The tutor explains anatomical terms, structures, and procedures.
+   It will NOT name or speculate on diagnoses, interpret case findings, or
+   answer gate-style questions. */
+const TUTOR_PERSONA = `You are an anatomy tutor for an undergraduate Human Anatomy course (BIO 004 at Solano Community College). A student is in the middle of a clinical reasoning case simulation. They may need help understanding anatomical vocabulary, anatomical structures, or general medical procedures by their anatomy. Treat this like a study group peer or a textbook glossary.
+
+WHAT YOU DO
+- Define anatomical terms (e.g., "medial," "lateral," "media," "tunica," "epiphysis").
+- Describe anatomical structures (e.g., "what is the periosteum," "what is the medullary cavity," "what does the choroid plexus do").
+- Compare related concepts (e.g., "compact bone vs spongy bone," "intramembranous vs endochondral ossification," "internal vs external fixation," "open vs closed reduction").
+- Explain procedures by their anatomy (e.g., "what does ORIF involve," "how is a long-leg cast different from a short-leg cast").
+- Keep answers under 100 words, 2 to 4 short sentences. Use clear undergraduate-level language.
+
+WHAT YOU NEVER DO
+- Do NOT name, suggest, hint at, or speculate on any patient's diagnosis.
+- Do NOT identify a specific disease as the explanation for a set of findings.
+- Do NOT answer questions framed as "given my patient has X, what is wrong with them" or "what disease causes these features."
+- Do NOT confirm or deny whether a particular diagnosis fits any case.
+- Do NOT recommend treatments specifically tailored to a presented case.
+- Do NOT solve gate questions or pick the right multiple-choice answer for the student.
+
+If the student asks about a SPECIFIC named disease (for example, "what is Stevens-Johnson syndrome," "what is normal pressure hydrocephalus," "describe Salter-Harris III"), you may give a SHORT generic textbook definition (one or two sentences) but you must end with: "I cannot say whether that fits the patient you are working on."
+
+If the question is clearly trying to get the diagnosis ("what does my patient have," "is this a Salter-Harris fracture," "is this NPH"), respond: "That is a diagnosis question I cannot answer in this case context. Try asking about the underlying anatomy or how a procedure works instead."
+
+Examples of fine questions: "what is the periosteum," "what is the difference between open and closed reduction," "what does ORIF stand for," "explain endochondral ossification," "where is the cerebral aqueduct."
+
+Examples of off-limits questions (decline): "is this a fracture," "what type of Salter-Harris is this," "given what I know, what is the diagnosis," "which differential fits best," "what should the answer to gate question be."
+
+Be warm, brief, and helpful within these limits.`;
+
+async function askTutorAPI(messages){
+  try{
+    const response=await fetch(PROXY_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:300,
+        system:TUTOR_PERSONA,
+        messages:messages
+      })
+    });
+    if(!response.ok){
+      console.error("Tutor API error",response.status);
+      return "The tutor is unavailable right now. Try again in a moment.";
+    }
+    const data=await response.json();
+    if(data.content&&Array.isArray(data.content)){
+      const text=data.content.filter(b=>b.type==="text").map(b=>b.text).join("\n").trim();
+      if(text)return text;
+    }
+    return "I am not sure how to answer that. Try rephrasing.";
+  }catch(e){
+    console.error("Tutor API exception",e);
+    return "The tutor is unavailable right now. Try again in a moment.";
+  }
+}
+
+const TUTOR_MAX = 10;
+
+async function sendTutor(){
+  const inp=document.getElementById("tinp");
+  if(!inp||!inp.value.trim()||S.tPending)return;
+  if(S.tCount>=TUTOR_MAX){
+    S.tMsgs.push({role:"assistant",content:"You have used all "+TUTOR_MAX+" tutor questions for this case. Pre-class research is the time to look up anatomical vocabulary; tutor questions are best saved for moments of confusion during the case. Use a textbook or your notes for further help on this case."});
+    saveState();render();scrollEl("t-ci");return;
+  }
+  const txt=inp.value.trim();inp.value="";
+  S.tMsgs.push({role:"user",content:txt});
+  S.tPending=true;
+  saveState();render();scrollEl("t-ci");
+  const messages=S.tMsgs.map(m=>({role:m.role,content:m.content}));
+  const reply=await askTutorAPI(messages);
+  S.tMsgs.push({role:"assistant",content:reply});
+  S.tCount++;
+  S.tPending=false;
+  saveState();render();scrollEl("t-ci");
+}
+
+function toggleTutor(){S.tutorOpen=!S.tutorOpen;saveState();render();}
+
 /* SCORING */
+const rationalePatternLabels=[
+  "Bone regions and growth plate (Salter-Harris)",
+  "Bone cells (osteoblast/cyte/clast and chondrocyte)",
+  "Spongy/trabecular bone",
+  "Compact bone microstructure (osteon, lamellae, canaliculi)",
+  "Ossification (intramembranous vs endochondral)",
+  "Fracture repair stages (callus, hematoma, woven bone, remodel)",
+  "Long bone surfaces (periosteum, endosteum, medullary cavity)",
+  "Tillaux-specific anatomy (distal tibia, articular surface)"
+];
+
 function calcScores(){
-  const max={diag:35, eff:20, interview:15, gate:10, complete:5}, total_max=85;
-  const diagPattern=/tillaux|salter.?harris.?(iii|3)|salter.?harris.?type.?3|distal tibi.?epiphys|epiphyseal fracture|salter.?harris.?type.?III/i;
+  const max={diag:35, eff:10, hy:15, seq:5, interview:10, gate:5, complete:5}, total_max=85;
+
+  const sel=(CASE.differentials||[]).find(d=>d.label===S.diagText);
+  const diagCorrect=!!(sel&&sel.isCorrect);
+  let diagPts=diagCorrect?20:0;
   const rationalePatterns=[
     /salter.?harris|physis|growth plate|epiphys|metaphys|diaphys/i,
     /osteoblast|osteocyte|osteoclast|osteoprogenitor|chondroblast|chondrocyte/i,
@@ -492,16 +619,139 @@ function calcScores(){
     /periosteum|endosteum|medullary cavity/i,
     /tillaux|distal tibi|external rotation|anterolateral|articular surface/i,
   ];
-  let diagPts=diagPattern.test(S.diagText)?20:0;
-  diagPts+=rationalePatterns.filter(p=>p.test(S.rationaleText)).length*3;
+  const hitFlags=rationalePatterns.map(p=>p.test(S.rationaleText));
+  const hitCount=hitFlags.filter(Boolean).length;
+  diagPts+=hitCount*3;
   diagPts=Math.min(diagPts,max.diag);
+
   const effPts=Math.round((S.credits/S.maxCredits)*max.eff);
-  const topicCount=Object.keys(CASE.interviewTopics).length;
-  const hits=Object.values(S.iTopicHit).filter(v=>v).length;
-  const intPts=Math.round((hits/topicCount)*max.interview);
-  const gatePts=Math.max(0,max.gate-(S.retries*2));
+
+  const hyList=(CASE.highYield||[]);
+  const hyTotal=hyList.length;
+  const orderedHY=hyList.filter(id=>S.ordered.includes(id));
+  const missedHY=hyList.filter(id=>!S.ordered.includes(id));
+  const hyPts=hyTotal>0?Math.round((orderedHY.length/hyTotal)*max.hy):0;
+
+  const dayFirst={};
+  for(const id of S.ordered){
+    for(const d of [1,2,3]){
+      if(CASE.days[d].orders.find(o=>o.id===id)){
+        if(!(d in dayFirst))dayFirst[d]=id;
+        break;
+      }
+    }
+  }
+  let seqHits=0,seqOpps=0,seqDayDetail={};
+  for(const d of [1,2,3]){
+    const dayHY=CASE.days[d].orders.filter(o=>hyList.includes(o.id)).map(o=>o.id);
+    if(dayHY.length>0&&dayFirst[d]){
+      seqOpps++;
+      const ok=dayHY.includes(dayFirst[d]);
+      if(ok)seqHits++;
+      seqDayDetail[d]={firstId:dayFirst[d],wasHY:ok,hyOptions:dayHY};
+    }
+  }
+  const seqPts=seqOpps>0?Math.round((seqHits/seqOpps)*max.seq):0;
+
+  const topicKeys=Object.keys(CASE.interviewTopics);
+  const coveredTopics=topicKeys.filter(t=>S.iTopicHit[t]);
+  const missedTopics=topicKeys.filter(t=>!S.iTopicHit[t]);
+  const intPts=Math.round((coveredTopics.length/topicKeys.length)*max.interview);
+
+  const gatePts=Math.max(0,max.gate-(S.retries));
   const completePts=S.daysUnlocked>=3?max.complete:0;
-  return{diag:diagPts,eff:effPts,interview:intPts,gate:gatePts,complete:completePts,total:diagPts+effPts+intPts+gatePts+completePts,max:total_max};
+
+  const idToName=id=>{
+    for(const d of [1,2,3]){
+      const o=CASE.days[d].orders.find(x=>x.id===id);
+      if(o)return o.name;
+    }
+    return id;
+  };
+
+  return{
+    diag:diagPts,eff:effPts,hy:hyPts,seq:seqPts,
+    interview:intPts,gate:gatePts,complete:completePts,
+    total:diagPts+effPts+hyPts+seqPts+intPts+gatePts+completePts,
+    max:total_max,
+    detail:{
+      diagCorrect,diagSelected:S.diagText||"(none)",
+      hitFlags,hitLabels:rationalePatternLabels.filter((_,i)=>hitFlags[i]),
+      missedLabels:rationalePatternLabels.filter((_,i)=>!hitFlags[i]),
+      totalPatterns:rationalePatterns.length,
+      orderedHYNames:orderedHY.map(idToName),
+      missedHYNames:missedHY.map(idToName),
+      hyTotal,
+      seqHits,seqOpps,seqDayDetail,
+      coveredTopicLabels:coveredTopics.map(t=>CASE.interviewTopics[t].label),
+      missedTopicLabels:missedTopics.map(t=>CASE.interviewTopics[t].label),
+      totalTopics:topicKeys.length,
+      retries:S.retries,
+      daysReached:S.daysUnlocked,
+      creditsLeft:S.credits,
+      creditsMax:S.maxCredits
+    }
+  };
+}
+
+function generateFeedback(sc){
+  const d=sc.detail;
+  const wins=[];
+  const opps=[];
+  // Diagnostic accuracy
+  if(d.diagCorrect){
+    wins.push("<strong>Correct diagnosis selection.</strong> You identified the case correctly from the differential list.");
+  }else{
+    opps.push("<strong>Diagnostic selection.</strong> You picked \"" + d.diagSelected + ",\" but the case findings supported a different option on your researched list. Re-examine which differential explains ALL of the patient's findings together, not just one of them.");
+  }
+  if(d.hitLabels.length>=Math.ceil(d.totalPatterns*0.7)){
+    wins.push("<strong>Strong rationale.</strong> Your written defense pulled in " + d.hitLabels.length + " of " + d.totalPatterns + " key anatomical concept areas, including: " + d.hitLabels.join("; ") + ".");
+  }else if(d.hitLabels.length>0){
+    wins.push("<strong>Rationale touched on " + d.hitLabels.length + " of " + d.totalPatterns + " concept areas:</strong> " + d.hitLabels.join("; ") + ".");
+  }
+  if(d.missedLabels.length>0&&d.hitLabels.length<d.totalPatterns){
+    opps.push("<strong>Rationale could go deeper.</strong> Concept areas your written defense did not address: " + d.missedLabels.join("; ") + ". Each one is worth 3 points if mentioned in your rationale.");
+  }
+  // High-yield
+  if(d.missedHYNames.length===0&&d.hyTotal>0){
+    wins.push("<strong>Ordered every high-yield test.</strong> All " + d.hyTotal + " indicated diagnostic anchors for this case were ordered.");
+  }else if(d.missedHYNames.length>0){
+    opps.push("<strong>High-yield tests not ordered.</strong> Without these, the case cannot be confidently locked in: " + d.missedHYNames.join("; ") + ". Each missed high-yield test costs " + Math.round(15/d.hyTotal) + " points on the high-yield score.");
+  }
+  // Sequencing
+  if(d.seqHits===d.seqOpps&&d.seqOpps>0){
+    wins.push("<strong>Excellent test sequencing.</strong> You started each day with a diagnostically-anchoring test rather than a peripheral one.");
+  }else if(d.seqOpps>0){
+    opps.push("<strong>Test ordering sequence.</strong> On " + (d.seqOpps-d.seqHits) + " of " + d.seqOpps + " days, your first order was not a high-yield test. Lead each day with the test most likely to narrow the differential.");
+  }
+  // Interview
+  if(d.coveredTopicLabels.length>=Math.ceil(d.totalTopics*0.75)){
+    wins.push("<strong>Thorough interview.</strong> You touched " + d.coveredTopicLabels.length + " of " + d.totalTopics + " topic areas: " + d.coveredTopicLabels.join("; ") + ".");
+  }else if(d.coveredTopicLabels.length>0){
+    wins.push("<strong>Interview covered " + d.coveredTopicLabels.length + " of " + d.totalTopics + " topic areas:</strong> " + d.coveredTopicLabels.join("; ") + ".");
+  }
+  if(d.missedTopicLabels.length>0&&d.coveredTopicLabels.length<d.totalTopics){
+    opps.push("<strong>Interview gaps.</strong> Topic areas you did not ask about: " + d.missedTopicLabels.join("; ") + ".");
+  }
+  // Gate accuracy
+  if(d.retries===0){
+    wins.push("<strong>Perfect gate accuracy.</strong> You answered every anatomy gate question correctly on the first try.");
+  }else if(d.retries>=3){
+    opps.push("<strong>Gate question accuracy.</strong> You used " + d.retries + " retries (each costs 15 credits and 1 gate point). The gate questions test the previous night's pre-work; review the schedule to know what to study before each class.");
+  }
+  // Efficiency
+  if(d.creditsLeft>=d.creditsMax*0.5){
+    wins.push("<strong>Strong data efficiency.</strong> You finished with " + d.creditsLeft + " of " + d.creditsMax + " credits remaining.");
+  }else if(d.creditsLeft<d.creditsMax*0.2){
+    opps.push("<strong>Data efficiency.</strong> You finished with " + d.creditsLeft + " of " + d.creditsMax + " credits remaining. Some tests on your list may have been redundant or non-contributory; aim to order with a working hypothesis in mind.");
+  }
+  // Completion
+  if(d.daysReached>=3){
+    wins.push("<strong>Reached Day 3.</strong> You unlocked and worked through all three days of the case.");
+  }else{
+    opps.push("<strong>Did not reach Day 3.</strong> The strongest tap-test evidence and the sequencing/high-yield items unique to Day 3 were not available, costing the completion bonus and limiting maximum scores.");
+  }
+  return {wins,opps};
 }
 
 async function submitToForm(sc){
@@ -554,7 +804,7 @@ function renderKey(){
   <div style="font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:.6rem">BIO 004 . Clinical Reasoning</div>
   <div style="width:48px;height:3px;background:var(--gold);margin:0 auto 1.4rem;border-radius:2px"></div>
   <h1 style="font-size:34px;margin-bottom:.4rem">Week 2, Aiden Okafor</h1>
-  <p style="margin-bottom:.4rem;font-size:16px;color:var(--ink-soft)">Skeletal System: Bone Tissue &amp; Long Bone Anatomy</p>
+  <p style="margin-bottom:.4rem;font-size:16px;color:var(--ink-soft)">${CASE.system}</p>
   <p style="margin-bottom:1.8rem;font-size:14px;color:var(--ink-mute)">Single file . 3 days . One credit bank . Code-locked progression</p>
   <div class="card" style="text-align:left">
     <div class="sl">Your name (required for tracking)</div>
@@ -600,10 +850,13 @@ function renderInstructions(){
   <h2>Scoring (85 points)</h2>
   <div style="font-size:14.5px;line-height:1.9;color:var(--ink-soft)">
     <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Diagnostic accuracy (final dx + anatomical rationale)</span><span style="font-weight:700">35 pts</span></div>
-    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Data efficiency (credits remaining of 200)</span><span style="font-weight:700">20 pts</span></div>
-    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Interview quality (7 topic areas covered)</span><span style="font-weight:700">15 pts</span></div>
-    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Gate question performance (minus 2 per retry)</span><span style="font-weight:700">10 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Data efficiency (credits remaining of 200)</span><span style="font-weight:700">10 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Ordering high-yield (indicated) tests</span><span style="font-weight:700">15 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Test ordering sequence (right tests first)</span><span style="font-weight:700">5 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Interview quality (topic areas covered)</span><span style="font-weight:700">10 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Gate question performance (minus 1 per retry)</span><span style="font-weight:700">5 pts</span></div>
     <div class="fb" style="padding:4px 0"><span>Bonus, completed through Day 3</span><span style="font-weight:700">5 pts</span></div>
+  
   </div>
   <div class="sep"></div>
   <div style="text-align:center"><button class="bb" onclick="S.phase='intro';render()" style="font-size:16px;padding:16px 56px">Meet your patient</button></div>
@@ -632,7 +885,10 @@ function renderInterview(){
   document.getElementById("app").innerHTML=`
 <div class="fb" style="margin-bottom:.875rem">
   <div><span class="badge b-navy">Patient Interview</span> <strong style="margin-left:8px;font-family:var(--display);font-style:italic">${CASE.patient.name}</strong></div>
-  <button class="${done?'bt':'bb'}" onclick="S.phase='investigate';render()">${done?'Interview complete, investigate':'Skip to investigation'}</button>
+  <div class="flex">
+    <button onclick="fullReset()" style="font-size:13px;padding:6px 12px;color:var(--terra);border-color:var(--terra-bd)">Reset session</button>
+    <button class="${done?'bt':'bb'}" onclick="S.phase='investigate';render()">${done?'Interview complete, investigate':'Skip to investigation'}</button>
+  </div>
 </div>
 <div style="background:var(--navy-bg);border:1px solid var(--navy-bd);border-radius:var(--rs);padding:11px 14px;display:flex;align-items:center;gap:14px;margin-bottom:.875rem;flex-wrap:wrap">
   <div style="font-family:var(--display);font-style:italic;font-weight:600;font-size:46px;color:var(--navy);line-height:1">${rem}</div>
@@ -648,7 +904,7 @@ function renderInterview(){
     ${S.iPending?`<div class="msg assistant patient"><div class="ml">${CASE.patient.name}</div><div class="mb"><span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div></div>`:""}
     ${done&&S.iMsgs.length>0&&!S.iPending?`<div class="msg assistant"><div class="mb" style="background:var(--gold-bg);border-color:var(--gold-bd);color:var(--warn)">You have used all 10 questions. The interview is now closed.</div></div>`:""}
   </div>
-  ${!done?`<div class="ir"><textarea id="qi" rows="2" placeholder="${S.iPending?'Aiden is thinking...':'Ask Aiden anything...'}" ${S.iPending?'disabled':''} onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendInterview();}"></textarea><button onclick="sendInterview()" ${S.iPending?'disabled':''}>${S.iPending?'...':'Ask'}</button></div>`:`<div style="padding:12px;border-top:1px solid var(--divider-light);text-align:center"><button class="bt" onclick="S.phase='investigate';render()" style="width:100%">Interview complete, begin investigation</button></div>`}
+  ${!done?`<div class="ir"><textarea id="qi" rows="2" placeholder="${S.iPending?'Aiden is thinking...':'Ask Aiden anything... (click Ask or press Cmd+Enter to send)'}" ${S.iPending?'disabled':''} onkeydown="if((event.metaKey||event.ctrlKey)&&event.key==='Enter'){event.preventDefault();sendInterview();}"></textarea><button onclick="sendInterview()" ${S.iPending?'disabled':''}>${S.iPending?'...':'Ask'}</button></div>`:`<div style="padding:12px;border-top:1px solid var(--divider-light);text-align:center"><button class="bt" onclick="S.phase='investigate';render()" style="width:100%">Interview complete, begin investigation</button></div>`}
 </div>`;
   scrollEl("ci");
 }
@@ -692,6 +948,7 @@ function renderInvestigate(){
 <div class="fb" style="margin-bottom:.875rem">
   <div><span class="badge b-navy">Week 2 Investigation</span> <strong style="margin-left:8px;font-family:var(--display);font-style:italic">${CASE.patient.name}, ${CASE.patient.age}y ${CASE.patient.gender}</strong></div>
   <div class="flex">
+    <button onclick="fullReset()" style="font-size:13px;padding:6px 12px;color:var(--terra);border-color:var(--terra-bd)">Reset session</button>
     <button onclick="S.phase='interview';render()" style="font-size:15px">Interview (${S.maxInterview-S.interviewCount} left)</button>
     ${S.daysUnlocked>=3?`<button class="bt" onclick="S.phase='submit';render()" style="font-size:15px">Submit final diagnosis</button>`:""}
   </div>
@@ -736,13 +993,53 @@ function renderInvestigate(){
       </div>
       <div class="ir"><textarea id="invi" rows="2" placeholder="Type A, B, C, or D to answer gate question..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendInv();}"></textarea><button onclick="sendInv()">Send</button></div>
     </div>
+    <div style="margin-top:.75rem">
+      <button onclick="toggleTutor()" class="${S.tutorOpen?'bb':''}" style="width:100%;text-align:left;font-size:14.5px">${S.tutorOpen?'Hide':'Open'} AI anatomy tutor (${TUTOR_MAX-S.tCount} of ${TUTOR_MAX} questions left)</button>
+      ${S.tutorOpen?`
+      <div class="chatbox" style="margin-top:8px">
+        <div class="ci" id="t-ci" style="height:260px">
+          ${S.tMsgs.length===0?`<div class="msg assistant"><div class="ml">AI Tutor</div><div class="mb" style="font-size:15px">Ask me about anatomy terms, structures, or procedures. For example: "what is the periosteum," "what is the difference between open and closed reduction," "what does ORIF stand for." I will not give you the diagnosis, interpret findings, or solve gate questions.<br><br>You have ${TUTOR_MAX-S.tCount} of ${TUTOR_MAX} tutor questions remaining for this case.</div></div>`:""}
+          ${S.tMsgs.map(m=>`<div class="msg ${m.role}"><div class="ml">${m.role==='user'?'You':'AI Tutor'}</div><div class="mb" style="font-size:15.5px">${m.content.replace(/\n/g,'<br>')}</div></div>`).join("")}
+          ${S.tPending?`<div class="msg assistant"><div class="ml">AI Tutor</div><div class="mb"><span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div></div>`:""}
+        </div>
+        <div class="ir"><textarea id="tinp" rows="2" placeholder="${S.tCount>=TUTOR_MAX?'No tutor questions remaining for this case.':S.tPending?'Tutor is thinking...':'Ask about a term, structure, or procedure (Cmd+Enter to send)'}" ${S.tPending||S.tCount>=TUTOR_MAX?'disabled':''} onkeydown="if((event.metaKey||event.ctrlKey)&&event.key==='Enter'){event.preventDefault();sendTutor();}"></textarea><button onclick="sendTutor()" ${S.tPending||S.tCount>=TUTOR_MAX?'disabled':''}>${S.tPending?'...':'Ask'}</button></div>
+      </div>`:""}
+    </div>
   </div>
 </div>`;
   scrollEl("inv-ci");
+  if(S.tutorOpen)scrollEl("t-ci");
 }
 
 function switchDay(d){S.currentDay=d;saveState();render();}
 function getFree(k){if(!S.freeObtained.includes(k)){S.freeObtained.push(k);saveState();}render();}
+
+/* ------ GATE SHUFFLER ------
+   Runtime: each gate gets a per-session randomized letter mapping.
+   The original CASE always defines correct:"A". Here we permute the four
+   options and rewrite both the option labels and the explanation prefixes.
+*/
+function shuffleGateOptions(gate){
+  const origCorrectIdx=["A","B","C","D"].indexOf(gate.correct);
+  // Fisher-Yates shuffle
+  const perm=[0,1,2,3];
+  for(let i=perm.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [perm[i],perm[j]]=[perm[j],perm[i]];
+  }
+  const letters=["A","B","C","D"];
+  const shuffledOpts=perm.map((origIdx,newIdx)=>{
+    const text=gate.opts[origIdx].replace(/^[A-D]\)\s*/,"");
+    return `${letters[newIdx]}) ${text}`;
+  });
+  const newCorrect=letters[perm.indexOf(origCorrectIdx)];
+  const shuffledExp=gate.exp.replace(/\b([A-D]):\s/g,(m,origLetter)=>{
+    const origIdx=origLetter.charCodeAt(0)-65;
+    const newIdx=perm.indexOf(origIdx);
+    return `${letters[newIdx]}: `;
+  });
+  return {q:gate.q, opts:shuffledOpts, correct:newCorrect, exp:shuffledExp};
+}
 
 function orderTest(id,day){
   if(S.results.find(r=>r.id===id))return;
@@ -751,10 +1048,17 @@ function orderTest(id,day){
   if(S.credits<order.cost){S.invMsgs.push({role:"assistant",cls:"fail",content:"Not enough credits to order this test."});render();return;}
   S.credits=Math.max(0,S.credits-order.cost);
   if(!S.ordered.includes(id))S.ordered.push(id);
-  S.gateActive={orderId:id,order,day};
-  const g=order.gate;
-  const optHtml=g.opts.map(o=>`<span style="display:block;margin:6px 0;padding:6px 0;border-bottom:1px solid rgba(20,41,64,.08)">${o}</span>`).join("");
-  S.invMsgs.push({role:"assistant",cls:"gate",isHtml:true,content:`<strong>Order:</strong> ${order.name} (minus ${order.cost} credits)<br><br><strong>ANATOMY GATE QUESTION</strong><br><br>${g.q}<br><br>${optHtml}<br>Type the letter of your answer: <strong>A, B, C, or D</strong>`});
+  // No-gate path: management/consult items release directly
+  if(!order.gate){
+    S.results.push({id:order.id,result:order.result});
+    S.invMsgs.push({role:"assistant",cls:"result",isHtml:true,content:`<strong>${order.name}</strong> (minus ${order.cost} credits)<br><br><strong>OUTCOME:</strong><br><br>${order.result.replace(/\n/g,'<br>')}`});
+    saveState();render();scrollEl("inv-ci");return;
+  }
+  // Gated path: shuffle once per gate, persist
+  const shuffled=shuffleGateOptions(order.gate);
+  S.gateActive={orderId:id,order,day,shuffled};
+  const optHtml=shuffled.opts.map(o=>`<span style="display:block;margin:6px 0;padding:6px 0;border-bottom:1px solid rgba(20,41,64,.08)">${o}</span>`).join("");
+  S.invMsgs.push({role:"assistant",cls:"gate",isHtml:true,content:`<strong>Order:</strong> ${order.name} (minus ${order.cost} credits)<br><br><strong>ANATOMY GATE QUESTION</strong><br><br>${shuffled.q}<br><br>${optHtml}<br>Type the letter of your answer: <strong>A, B, C, or D</strong>`});
   saveState();render();scrollEl("inv-ci");
 }
 
@@ -766,11 +1070,11 @@ function sendInv(){
   if(S.gateActive){
     const letter=txt.trim().toUpperCase().charAt(0);
     if(!["A","B","C","D"].includes(letter)){S.invMsgs.push({role:"assistant",cls:"gate",content:"Please type just the letter of your answer: A, B, C, or D."});render();scrollEl("inv-ci");return;}
-    const{order}=S.gateActive;const g=order.gate;
-    if(letter===g.correct){
+    const{order,shuffled}=S.gateActive;
+    if(letter===shuffled.correct){
       S.results.push({id:order.id,result:order.result});
       S.gateActive=null;
-      S.invMsgs.push({role:"assistant",cls:"result",isHtml:true,content:`<strong>CORRECT. ${letter} is right.</strong><br><br><strong>Explanation:</strong> ${g.exp}<br><br><strong>RESULT:</strong><br><br>${order.result.replace(/\n/g,'<br>')}`});
+      S.invMsgs.push({role:"assistant",cls:"result",isHtml:true,content:`<strong>CORRECT. ${letter} is right.</strong><br><br><strong>Explanation:</strong> ${shuffled.exp}<br><br><strong>RESULT:</strong><br><br>${order.result.replace(/\n/g,'<br>')}`});
     } else {
       S.retries++; S.credits=Math.max(0,S.credits-15);
       S.invMsgs.push({role:"assistant",cls:"fail",isHtml:true,content:`<strong>Incorrect.</strong> ${letter} is not right. (minus 15 credits)<br><br>Think about the anatomy. Type A, B, C, or D to retry.`});
@@ -782,21 +1086,46 @@ function sendInv(){
 }
 
 function renderSubmit(){
+  // Shuffle differential options once per session so the correct answer is not
+  // always in the same dropdown position. Persist the shuffle in S.
+  if(!S.diffOrder||S.diffOrder.length!==(CASE.differentials||[]).length){
+    const n=(CASE.differentials||[]).length;
+    const arr=Array.from({length:n},(_,i)=>i);
+    for(let i=arr.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+    S.diffOrder=arr;
+    saveState();
+  }
+  const orderedDiffs=S.diffOrder.map(i=>CASE.differentials[i]);
+  const optHtml=orderedDiffs.map(d=>`<option value="${d.label.replace(/"/g,'&quot;')}" ${S.diagText===d.label?'selected':''}>${d.label}</option>`).join("");
   document.getElementById("app").innerHTML=`
 <div class="card" style="border-top:4px solid var(--ok);max-width:660px;margin:0 auto">
   <div class="sl" style="margin-bottom:.5rem">Submit final diagnosis, Week 2</div>
   <h1 style="margin-bottom:.4rem">${CASE.patient.name}, ${CASE.patient.age}y</h1>
   <p style="margin-bottom:1rem;font-size:15.5px">Credits remaining: ${S.credits}/200 . Tests ordered: ${S.ordered.length} . Days unlocked: ${S.daysUnlocked}/3 . Gate retries: ${S.retries}</p>
-  <div class="note">Your submission is private. Submit your best diagnosis based on all data collected. The reveal code is given after Thursday TBL.</div>
-  <div style="margin-bottom:1rem"><div class="sl">Final diagnosis</div><input type="text" id="sd" placeholder="e.g. Salter-Harris III fracture of the distal tibia (Tillaux fracture)" value="${S.diagText}" style="font-size:16px"></div>
-  <div style="margin-bottom:1.4rem"><div class="sl">Anatomical rationale (3-5 sentences). Use the foundational bone anatomy you have learned this week. Where exactly is the fracture (which region of the long bone, which structures does the fracture line cross)? Which Salter-Harris type is this and why (which structures define each type)? Which bone cells will drive repair, and which type of ossification recurs from your fetal-development reading? How will the metaphyseal trabeculae and the periosteum participate in healing?</div><textarea id="sr" rows="6" placeholder="Anchor your reasoning in long bone regions, the physis, the bone cells of repair, and the type of ossification that builds new bone in the callus.">${S.rationaleText}</textarea></div>
+  <div class="note">Your submission is private. Choose your best diagnosis from the list of candidates you researched in pre-work, then defend it with anatomical reasoning. The reveal code is given after Thursday TBL.</div>
+  <div style="margin-bottom:1rem">
+    <div class="sl">What is your final diagnosis?</div>
+    <select id="sd" style="width:100%;font-family:var(--body);font-size:16px;padding:10px 12px;border:1px solid var(--divider);border-radius:var(--rs);background:var(--white);color:var(--ink);line-height:1.55">
+      <option value="">-- select one --</option>
+      ${optHtml}
+    </select>
+  </div>
+  <div style="margin-bottom:1.4rem">
+    <div class="sl">Defend your selection (3-5 sentences)</div>
+    <p style="font-size:14.5px;color:var(--ink-soft);margin-bottom:8px;line-height:1.55">Use the foundational bone anatomy you have learned this week. Where exactly is the dysfunction (which region of the long bone, which structures does the fracture line cross)? Which structures define the type of injury you selected? Which bone cells will drive repair, and which type of ossification recurs from your fetal-development reading? How will the metaphyseal trabeculae and the periosteum participate in healing?</p>
+    <textarea id="sr" rows="6" placeholder="Anchor your reasoning in the bone anatomy you have studied: long bone regions, the physis, the bone cells of repair, and the type of ossification that builds new bone in the callus.">${S.rationaleText}</textarea>
+  </div>
   <div class="fb"><button onclick="S.phase='investigate';render()">Back</button><button class="bt" onclick="doSubmit()">Submit diagnosis</button></div>
 </div>`;
 }
 async function doSubmit(){
   const sd=document.getElementById("sd"),sr=document.getElementById("sr");
-  if(!sd?.value.trim()||!sr?.value.trim()){alert("Please complete both fields.");return;}
-  S.diagText=sd.value.trim();S.rationaleText=sr.value.trim();
+  if(!sd||!sd.value){alert("Please select a diagnosis from the dropdown.");return;}
+  if(!sr||!sr.value.trim()){alert("Please defend your diagnosis in the rationale box.");return;}
+  S.diagText=sd.value;S.rationaleText=sr.value.trim();
   const sc=calcScores();S.scores=sc;
   await submitToForm(sc);
   S.phase="submitted";saveState();render();
@@ -831,6 +1160,7 @@ function tryReveal(){
 
 function renderReveal(){
   const sc=S.scores||calcScores();
+  const fb=generateFeedback(sc);
   function scCls(e,m){return e>=m*.8?"full":e>=m*.4?"part":"zero";}
   document.getElementById("app").innerHTML=`
 <div class="fb" style="margin-bottom:.875rem">
@@ -897,12 +1227,22 @@ KEY TEACHING ANCHORS (Week 2):
 <div class="card">
   <h2>Your score</h2>
   <div class="score-row"><span>Diagnostic accuracy</span><span class="sv ${scCls(sc.diag,35)}">${sc.diag}/35</span></div>
-  <div class="score-row"><span>Data efficiency (credits remaining)</span><span class="sv ${scCls(sc.eff,20)}">${sc.eff}/20</span></div>
-  <div class="score-row"><span>Interview quality (topic coverage)</span><span class="sv ${scCls(sc.interview,15)}">${sc.interview}/15</span></div>
-  <div class="score-row"><span>Gate question performance</span><span class="sv ${scCls(sc.gate,10)}">${sc.gate}/10</span></div>
+  <div class="score-row"><span>Data efficiency (credits remaining)</span><span class="sv ${scCls(sc.eff,10)}">${sc.eff}/10</span></div>
+  <div class="score-row"><span>High-yield test selection</span><span class="sv ${scCls(sc.hy,15)}">${sc.hy}/15</span></div>
+  <div class="score-row"><span>Test ordering sequence</span><span class="sv ${scCls(sc.seq,5)}">${sc.seq}/5</span></div>
+  <div class="score-row"><span>Interview quality (topic coverage)</span><span class="sv ${scCls(sc.interview,10)}">${sc.interview}/10</span></div>
+  <div class="score-row"><span>Gate question performance</span><span class="sv ${scCls(sc.gate,5)}">${sc.gate}/5</span></div>
   <div class="score-row"><span>Completion bonus</span><span class="sv ${scCls(sc.complete,5)}">${sc.complete}/5</span></div>
   <div class="score-row" style="margin-top:8px;border-top:2px solid var(--navy);padding-top:12px"><span style="font-weight:700;font-size:17px">Total</span><span class="sv full" style="font-size:19px">${sc.total}/${sc.max}</span></div>
 </div>
+<div class="card" style="border-top:4px solid var(--ok);background:var(--cream-warm)">
+  <h2>What you did well</h2>
+  ${fb.wins.length>0?`<ul style="margin:0;padding-left:20px;line-height:1.85">${fb.wins.map(w=>`<li style="margin-bottom:8px">${w}</li>`).join("")}</ul>`:`<p style="color:var(--ink-soft)">No notable strengths to call out yet, this case can be done again with the Restart button to build them.</p>`}
+</div>
+${fb.opps.length>0?`<div class="card" style="border-top:4px solid var(--terra);background:var(--cream-warm)">
+  <h2>What would have scored more points</h2>
+  <ul style="margin:0;padding-left:20px;line-height:1.85">${fb.opps.map(o=>`<li style="margin-bottom:8px">${o}</li>`).join("")}</ul>
+</div>`:""}
 <div class="card" style="border-top:4px solid var(--gold)">
   <h2>Your submission</h2>
   <div class="sl">Your diagnosis</div>
