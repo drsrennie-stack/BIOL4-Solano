@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinical Reasoning Simulator, Week 2, BIO 004</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="description" content="Week 2 clinical reasoning case, skeletal system. Educational simulation only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#142940; --navy-deep:#0A1A2A; --navy-bg:#E8EDF3; --navy-bd:#B8C5D5;
+  --terra:#7C2018; --terra-bg:#F5E5E2; --terra-bd:#E5BFB8;
+  --gold:#C9A961; --gold-bg:#F8F1E0; --gold-bd:#E5D4A6;
+  --ok:#2E5A3F; --ok-bg:#E5F0E8; --ok-bd:#B8D4C2;
+  --warn:#7A5800; --warn-bg:#FAF1D8; --warn-bd:#E8D49B;
+  
+  --ink:#0A1A2A; --ink-soft:#3D4F5A; --ink-mute:#4A5965;
+  --divider:#BFC8CD; --divider-light:#D8DEE2;
+  --cream:#FAF7F2; --cream-warm:#F5F2EC; --cream-deep:#EEEAE0; --white:#FFFFFF;
+  --r:8px; --rs:5px;
+  --display:'Lora',Georgia,serif;
+  --sans:'Plus Jakarta Sans',Arial,sans-serif;
+  --body:'DM Sans',Arial,sans-serif;
+  --mono:'SF Mono',Monaco,'Courier New',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+*:not(input):not(textarea){user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms!important}}
+@media print{body{display:none!important}}
+body{font-family:var(--body);background:var(--white);color:var(--ink);min-height:100vh;font-size:17px;padding-bottom:80px;-webkit-font-smoothing:antialiased;line-height:1.6}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:1.25rem 1rem;position:relative;z-index:2}
+
+/* Watermark */
+.watermark{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:1;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.watermark-text{font-family:var(--sans);font-weight:700;font-size:72px;color:var(--navy);opacity:.05;transform:rotate(-30deg);white-space:nowrap;letter-spacing:.05em;text-align:center;line-height:1.2}
+
+h1{font-family:var(--sans);font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1.2}
+h2{font-family:var(--sans);font-size:20px;font-weight:700;color:var(--navy);margin-bottom:.5rem;letter-spacing:-.01em}
+p{font-size:16.5px;color:var(--ink-soft);line-height:1.65}
+
+button{font-family:var(--sans);font-size:15px;font-weight:600;padding:10px 20px;border:1px solid var(--divider);border-radius:var(--rs);background:var(--white);color:var(--ink);cursor:pointer;transition:all .15s}
+button:hover:not(:disabled){background:var(--cream-warm);border-color:var(--ink-soft)}
+button:disabled{opacity:.4;cursor:default}
+button.bb{background:var(--navy);color:var(--white);border-color:var(--navy)}
+button.bb:hover:not(:disabled){background:var(--navy-deep)}
+button.bt{background:var(--ok);color:var(--white);border-color:var(--ok)}
+button.bt:hover:not(:disabled){background:#1F4530}
+button.bg{background:var(--gold);color:var(--navy-deep);border-color:var(--gold)}
+button.bg:hover:not(:disabled){background:#B89545}
+
+input[type=text],input[type=password],textarea{font-family:var(--body);font-size:17px;border:1px solid var(--divider);border-radius:var(--rs);padding:10px 12px;width:100%;background:var(--white);color:var(--ink);line-height:1.55;resize:vertical}
+input:focus,textarea:focus{outline:3px solid var(--gold);outline-offset:0;border-color:var(--navy)}
+
+.card{background:var(--white);border:1px solid var(--divider-light);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;box-shadow:0 1px 2px rgba(20,41,64,.05),0 1px 3px rgba(20,41,64,.04)}
+.badge{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:700;padding:5px 13px;border-radius:13px;letter-spacing:.06em;text-transform:uppercase}
+.b-navy{background:var(--navy-bg);color:var(--navy);border:1px solid var(--navy-bd)}
+.b-terra{background:var(--terra-bg);color:var(--terra);border:1px solid var(--terra-bd)}
+.b-gold{background:var(--gold-bg);color:var(--warn);border:1px solid var(--gold-bd)}
+.b-ok{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+.b-reveal{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+
+.sl{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.sep{border:none;border-top:1px solid var(--divider-light);margin:1rem 0}
+.flex{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fb{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.g2{display:grid;grid-template-columns:300px 1fr;gap:1rem}
+@media(max-width:760px){.g2{grid-template-columns:1fr}}
+
+/* Credit bar */
+.cbar{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:10px 14px;display:flex;align-items:center;gap:14px;margin-bottom:.875rem}
+.cnum{font-family:var(--display);font-style:italic;font-weight:600;font-size:42px;color:var(--navy);line-height:1}
+.clabel{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--warn);letter-spacing:.04em;text-transform:uppercase}
+.csub{font-size:15px;color:var(--ink-soft);line-height:1.55;margin-top:6px;font-weight:500}
+.pb{height:6px;background:var(--cream-deep);border-radius:3px;overflow:hidden;margin-top:5px}
+.pf{height:100%;border-radius:3px;background:var(--gold);transition:width .3s}
+.pf.low{background:var(--terra)} .pf.mid{background:var(--gold)}
+
+/* Day tabs */
+.day-tabs{display:flex;gap:0;border:1px solid var(--divider);border-radius:var(--rs);overflow:hidden;margin-bottom:.875rem;background:var(--cream-warm)}
+.day-tab{flex:1;padding:14px 8px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--ink-soft);text-align:center;transition:all .15s;border-right:1px solid var(--divider);line-height:1.3}
+.day-tab:last-child{border-right:none}
+.day-tab.active{background:var(--white);color:var(--navy)}
+.day-tab.locked{color:var(--ink-mute);cursor:default}
+.day-tab.unlocked{color:var(--ok)}
+
+/* Unlock bar */
+.unlock-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);margin-bottom:.875rem;flex-wrap:wrap}
+.unlock-bar input{flex:1;min-width:140px;padding:11px 14px;font-size:16px;letter-spacing:.08em;text-transform:uppercase}
+
+/* Items */
+.fi{padding:13px 15px;border-radius:var(--rs);border:1px solid var(--divider-light);margin-bottom:7px;cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:space-between;font-size:15.5px;font-weight:500}
+.fi:hover{background:var(--ok-bg);border-color:var(--ok-bd)}
+.fi.got{background:var(--ok-bg);border-color:var(--ok-bd)}
+.oc{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 7px;padding-left:2px}
+.oi{padding:13px 15px;border-radius:var(--rs);border:1px solid var(--divider-light);margin-bottom:7px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .12s;font-size:15.5px;font-weight:500}
+.oi:hover:not(.done){background:var(--navy-bg);border-color:var(--navy-bd)}
+.oi.done{background:var(--ok-bg);border-color:var(--ok-bd);cursor:default}
+
+/* Chat */
+.chatbox{border:1px solid var(--divider-light);border-radius:var(--r);overflow:hidden;background:var(--white)}
+.ci{padding:.875rem;overflow-y:auto;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.msg{max-width:78%}
+.msg.user{align-self:flex-end}
+.msg.assistant{align-self:flex-start}
+.ml{font-family:var(--sans);font-size:14.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.msg.user .ml{text-align:right}
+.mb{padding:16px 20px;border-radius:var(--r);font-size:18px;line-height:1.65}
+.msg.user .mb{background:var(--navy-bg);border:1px solid var(--navy-bd);border-bottom-right-radius:3px;color:var(--navy)}
+.msg.assistant .mb{background:var(--cream-warm);border:1px solid var(--divider-light);border-bottom-left-radius:3px}
+.msg.assistant.gate .mb{background:var(--gold-bg);border-color:var(--gold-bd)}
+.msg.assistant.result .mb{background:var(--ok-bg);border-color:var(--ok-bd)}
+.msg.assistant.fail .mb{background:var(--terra-bg);border-color:var(--terra-bd);color:var(--terra)}
+.msg.assistant.patient .mb{background:var(--cream-warm);border-color:var(--terra-bd);border-left:4px solid var(--terra);font-family:var(--display);font-style:italic;color:var(--terra)}
+.msg.assistant.unlock .mb{background:var(--ok-bg);border-color:var(--ok-bd)}
+.ir{display:flex;gap:6px;padding:8px 10px;border-top:1px solid var(--divider-light);align-items:flex-end}
+.ir textarea{flex:1;min-height:38px;max-height:80px;resize:none}
+
+/* Result cards */
+.rc{background:var(--ok-bg);border:1px solid var(--ok-bd);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap;font-family:var(--mono)}
+.rl{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--ok);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.fc{background:var(--cream-warm);border:1px solid var(--divider-light);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap}
+.fl{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.ar{background:var(--terra-bg);border:1px solid var(--terra-bd);border-left:4px solid var(--terra);border-radius:var(--rs);padding:15px 18px;margin-bottom:9px;font-size:15px;line-height:1.75;white-space:pre-wrap;font-family:var(--mono)}
+.al{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+
+/* Topic pills */
+.tpill{font-family:var(--sans);font-size:14.5px;padding:6px 14px;border-radius:14px;font-weight:600}
+.tpill.hit{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+.tpill.miss{background:var(--cream-deep);color:var(--ink-mute);border:1px solid var(--divider-light)}
+
+/* Score row */
+.score-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--divider-light);font-size:16px}
+.score-row:last-child{border-bottom:none}
+.sv{font-family:var(--mono);font-weight:700}
+.sv.full{color:var(--ok)} .sv.part{color:var(--warn)} .sv.zero{color:var(--terra)}
+.reveal-text{background:var(--cream-warm);border:1px solid var(--divider-light);border-radius:var(--rs);padding:18px 22px;font-size:15.5px;line-height:1.85;white-space:pre-wrap;max-height:560px;overflow-y:auto}
+.istep{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--divider-light);font-size:16px;line-height:1.7}
+.istep:last-child{border-bottom:none}
+.inum{width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--white);font-family:var(--sans);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+.note{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:15px 20px;font-size:15.5px;color:var(--warn);line-height:1.7;margin-bottom:1rem;font-weight:500}
+.alert-terra{background:var(--terra-bg);border:1px solid var(--terra-bd);border-left:4px solid var(--terra);border-radius:var(--rs);padding:15px 20px;font-size:16px;color:var(--terra);line-height:1.65;margin-bottom:1rem;font-weight:500}
+
+.dots{display:inline-flex;gap:4px;padding:5px 0;align-items:center}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--ink-mute);animation:bop 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s} .dot:nth-child(3){animation-delay:.4s}
+@keyframes bop{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+
+/* Disclaimer */
+.disclaimer{position:fixed;bottom:0;left:0;right:0;background:var(--gold-bg);border-top:1px solid var(--gold-bd);padding:11px 16px;font-family:var(--sans);font-size:14px;color:var(--warn);text-align:center;z-index:9999;font-weight:500}
+</style>
+</head>
+<body>
+<div class="watermark"><div class="watermark-text" id="wmt">BIO 004 ,  Confidential</div></div>
+<div class="wrap"><div id="app"></div></div>
+<div class="disclaimer">Educational simulation only. All patients and clinical scenarios are entirely fictional and created for learning purposes. Not medical advice.</div>
+<script>
+/* COURSE / DAY / REVEAL CODES */
+const COURSE_PW = "OSTEON";        // Initial access (instructor announces in Monday class)
+const REVEAL_CODE = "TILLAUX";     // After Thursday TBL
+const FORM_URL = "";
+const FORM_FIELDS = {name:"entry.1",diag:"entry.2",rationale:"entry.3",credits:"entry.4",total:"entry.5"};
+
+/* THE CASE */
+const CASE = {
+  id:"BIO004-W2-OKAFOR", title:"Week 2, Aiden Okafor",
+  system:"Skeletal System: Bone Tissue & Long Bone Anatomy",
+  patient:{name:"Aiden Okafor", age:14, gender:"Male"},
+  cc:"My ankle hurts so bad I can't walk on it",
+  dayCodes:{2:"TRABECULA", 3:"ENDOSTEUM"},
+  highYield:["ankle_ap_d1","mortise_d1","postred_d2","headct_d3"],
+
+  /* INTERVIEW */
+  interviewResponses:[
+    /* === ONSET === */
+    {keys:["when did this happen","when did this start","when did it start","when did the pain start","how long ago","when injured","when hurt","yesterday"],
+     r:"Yesterday afternoon, around 4 pm, during soccer practice."},
+    {keys:["what time today","what time now","right now","since when today"],
+     r:"It is the morning after. About 16 hours since the injury."},
+    /* === MECHANISM === */
+    {keys:["how did this happen","how did it happen","what happened","mechanism","what were you doing","how injured","how hurt","how did you injure"],
+     r:"I was dribbling, planted my right foot to cut left, and another player crashed into me from the side. My foot stayed planted but my body twisted hard."},
+    {keys:["heard a pop","felt a pop","felt a snap","crack sound","popping","popped"],
+     r:"Yes, a loud pop right when my body twisted. Everyone heard it."},
+    {keys:["foot rotate","foot twist","ankle twist","rotation","twisted","rotational"],
+     r:"My foot was planted, my whole leg rotated outward. It felt like my ankle was the only thing not moving."},
+    {keys:["fall","fell","go down","hit the ground","crashed"],
+     r:"I went down hard. My right side hit the turf first. My head bounced once."},
+    /* === PAIN LOCATION === */
+    {keys:["where does it hurt","where is the pain","location of pain","painful spot","point to where","exact location","where exactly"],
+     r:"Right here, the front of my ankle, deep inside. The outer side of my ankle hurts too but less."},
+    {keys:["describe the pain","what does the pain feel","kind of pain","sharp or dull","stabbing","throbbing"],
+     r:"Sharp when I try to move it. Throbbing when I am still. A 9 out of 10 if I try to bear weight."},
+    {keys:["weight bearing","stand on it","walk on it","put weight","bear weight","stand up"],
+     r:"I cannot. I tried this morning and almost passed out. My mom carried me to the car."},
+    {keys:["swelling","swollen","puffy","bigger","inflamed"],
+     r:"Yes, my whole ankle is swollen, almost twice the size of the other one. The skin is tight and shiny."},
+    {keys:["bruising","bruise","discolor","purple","black and blue"],
+     r:"There is a big purple bruise across the front of my ankle, spreading down toward my big toe."},
+    {keys:["deformity","look wrong","crooked","misshapen","out of place"],
+     r:"It looks wrong. The front of my ankle is sort of bumped out compared to the other side."},
+    /* === HEAD IMPACT === */
+    {keys:["hit your head","hit head","head impact","head injury","head trauma","strike head","head bounced"],
+     r:"My head bounced off the turf when I fell. Just a quick smack. I did not lose consciousness."},
+    {keys:["lose consciousness","loc","black out","pass out","knocked out","unconscious"],
+     r:"No, I never lost consciousness. I knew where I was the whole time."},
+    {keys:["headache","head hurt","head pain","head ache"],
+     r:"A dull one behind my eyes. Started after I hit the ground. It is getting a little worse, not better."},
+    {keys:["dizzy","dizziness","lightheaded","vertigo","spinning"],
+     r:"Maybe a tiny bit when I sit up. Mostly I just feel exhausted."},
+    {keys:["nausea","vomit","throw up","queasy","sick to stomach"],
+     r:"No vomiting. I am hungry but a little nauseous, hard to tell."},
+    {keys:["vision","blurry","double vision","see ok","eyesight"],
+     r:"Vision is fine. Normal."},
+    {keys:["face hurt","face pain","cheek","facial pain"],
+     r:"My right cheekbone is tender where I hit the ground. Nothing sharp."},
+    {keys:["jaw","tmj","bite","chew"],
+     r:"My jaw is fine. I can open and close normally."},
+    {keys:["teeth","tooth"],
+     r:"My teeth feel fine. I bit my lip a little."},
+    {keys:["nose","nasal","nosebleed"],
+     r:"No nosebleed. My nose feels normal."},
+    {keys:["neck pain","neck hurt","stiff neck"],
+     r:"My neck is fine. I can turn it both ways without pain."},
+    {keys:["other injury","other pain","anywhere else","scrapes","cuts","bruises elsewhere","other wounds"],
+     r:"Some scrapes on my left forearm and right hip from the fall. Nothing else hurts."},
+    /* === PAST MEDICAL HISTORY === */
+    {keys:["broken bones before","prior fracture","previous fracture","fractured before","past fracture","ever broken"],
+     r:"Never. This would be my first fracture, if it is one."},
+    {keys:["medical history","past medical","chronic condition","health condition","medical condition","other illness","previous diagnos"],
+     r:"None. I get sports physicals every year, no issues."},
+    {keys:["medication","medicine","drug","pill","prescription","taking any","on any med"],
+     r:"None. No vitamins, no supplements, no daily meds."},
+    {keys:["allerg","reaction to medication","drug allergy"],
+     r:"No known allergies."},
+    {keys:["growth","growing","grew taller","growth spurt","puberty","got taller"],
+     r:"I grew about 4 inches this past year. My mom keeps complaining about new shoes."},
+    {keys:["bone disease","bone disorder","brittle bones","osteogenesis"],
+     r:"Nothing I know of. My bones have always seemed fine."},
+    {keys:["surgery","operation","hospitalized","hospital before"],
+     r:"Never had surgery. I had stitches once on my chin from a bike fall when I was 7."},
+    /* === FAMILY HISTORY === */
+    {keys:["family history","family medical","mother","father","parent","sibling","relative","heredit","genetic"],
+     r:"Mom and Dad are healthy. I have a younger sister, also healthy. No bone problems anywhere in the family."},
+    {keys:["family bone","relatives bone","brittle","easy fracture"],
+     r:"No. Nobody in my family fractures easily or has bone issues."},
+    /* === SOCIAL === */
+    {keys:["school","grade","student","what year"],
+     r:"I am a freshman at Vacaville High."},
+    {keys:["sport","play soccer","activity","exercise","athletic","play any"],
+     r:"Varsity soccer. We practice 5 days a week. Games on weekends."},
+    {keys:["smoke","tobacco","cigarette","vape"],
+     r:"No, never."},
+    {keys:["drink","alcohol","beer","wine"],
+     r:"No, I am 14."},
+    {keys:["recreational","drugs","substance","marijuana","weed"],
+     r:"No, never."},
+    {keys:["nutrition","diet","eat well","calcium","milk","dairy","food"],
+     r:"I eat normally. Lots of milk because I love cereal."},
+    {keys:["last meal","last ate","when did you eat","food today"],
+     r:"Lunch yesterday around noon. Nothing since the injury."},
+    /* === CONSTITUTIONAL === */
+    {keys:["fever","temperature","chills","feverish","hot"],
+     r:"No fever. Just the ankle."},
+    {keys:["sleep","tired","fatigue","exhausted"],
+     r:"Did not sleep well. The pain kept waking me. I am tired."},
+    {keys:["scared","worried","afraid","anxious","upset"],
+     r:"Yes. I am freaked out about missing the season. Conference tournament is in three weeks."},
+  ],
+  
+  interviewTopics:{
+    onset:{label:"Onset/timeline",pattern:/when|start|onset|begin|first|ago|yesterday|time/i},
+    mechanism:{label:"Mechanism",pattern:/how|happen|mechanism|twist|plant|pop|fall|fell|cut|crash|rotate/i},
+    pain:{label:"Pain/swelling",pattern:/pain|hurt|swell|bruise|sharp|throb|weight|bear|deform/i},
+    head:{label:"Head/secondary",pattern:/head|loc|conscious|dizzy|vision|nausea|neck|face|cheek|jaw|teeth|nose/i},
+    history:{label:"PMH/prior fx",pattern:/medical|history|prior|previous|fracture|broken|allerg|medication|growth|bone disease|surgery/i},
+    family:{label:"Family hx",pattern:/family|mother|father|parent|relative|heredit|sister|brother/i},
+    social:{label:"Social/activity",pattern:/school|sport|soccer|activity|smoke|drink|drug|nutrition|diet|grade/i},
+  },
+
+  /* FREE BEDSIDE DATA */
+  free:{
+    vitals:{icon:"VS",label:"Vital signs",result:"T: 37.0 C (98.6 F)\nHR: 96 bpm  (mildly elevated, pain)\nBP: 124/76 mmHg\nRR: 16 /min\nSpO2: 99% on room air\nPain: 9/10 (right ankle, on attempted weight bearing)\nWt: 62 kg  Ht: 174 cm  BMI: 20.5 (skeletally immature, mid-puberty)"},
+    general:{icon:"GA",label:"General appearance",result:"Well-developed, well-nourished adolescent male. Alert and oriented x3. Calm but visibly anxious. Right lower leg held in slight external rotation, knee flexed. Avoids any movement of the right ankle. Multiple superficial abrasions on left forearm and right lateral hip, consistent with fall onto turf."},
+    ankle:{icon:"MSK",label:"Right ankle focused exam",result:"INSPECTION: Marked swelling diffusely, anterior > posterior. Visible ecchymosis spanning anterior ankle and dorsum of foot, extending toward 1st MTP. Mild deformity noted on the anterolateral aspect of the distal tibia, the contour bulges outward.\n\nPALPATION: Exquisite point tenderness over the anterolateral distal tibial epiphysis. Less severe but real tenderness over the lateral malleolus. Medial malleolus non-tender. No tenderness over the proximal fibula.\n\nRANGE OF MOTION: Patient declines active and passive motion at the ankle, severe pain.\n\nSKIN: Intact. No open wound. No tenting. Capillary refill < 2 sec at toes."},
+    nv:{icon:"NV",label:"Neurovascular check, right foot",result:"DORSALIS PEDIS PULSE: 2+ (normal, equal to left).\nPOSTERIOR TIBIAL PULSE: 2+.\nCAPILLARY REFILL: < 2 seconds at the great toe.\nSENSATION: Intact to light touch over all five dermatomes of the foot (saphenous, deep peroneal, superficial peroneal, sural, posterior tibial distributions).\nMOTOR: Toes wiggle weakly but voluntarily. Patient declines plantarflexion / dorsiflexion at the ankle, pain limited.\n\nNo signs of compartment syndrome at this time."},
+    headexam:{icon:"HD",label:"Head, face, and neck exam",result:"HEAD: No scalp lacerations. No hematoma palpable on cranium. Mild diffuse tenderness over right parietal scalp where head struck turf, no step-off, no boggy swelling.\n\nFACE: Right zygomatic eminence tender to palpation, no step-off, no asymmetry compared to left. No periorbital ecchymosis. No subconjunctival hemorrhage. No epistaxis. No septal hematoma. Maxilla stable to rocking. Mandible tracks midline on opening, full range of motion, no malocclusion.\n\nNECK: No midline cervical tenderness. Full painless range of motion. Negative straight-line and rotation testing.\n\nNEURO SCREEN: GCS 15. CN II to XII grossly intact. No focal deficits."},
+    pmhsummary:{icon:"PMH",label:"Quick chart summary",result:"AIDEN OKAFOR, 14 yo M\nLast wellness visit 6 months ago: normal growth velocity (Tanner 3), height 50th percentile, weight 50th percentile.\nNo prior fractures. No prior surgeries. No chronic medications. Up to date on immunizations.\n\nFAMILY HISTORY: Parents and 11 yo sister all healthy. No bone disease, no connective tissue disorders, no consanguinity.\n\nSOCIAL: Freshman at Vacaville HS. Varsity soccer (~5 days/week). No tobacco, alcohol, or recreational drug use."},
+  },
+
+  /* DAYS */
+  days:{
+    1:{
+      label:"Day 1 ,  Monday: Initial encounter",
+      note:"Today's pre-work covers bone classification, gross long bone anatomy (epiphysis, diaphysis, metaphysis, medullary cavity, periosteum, endosteum), and compact bone microanatomy (osteon, central canal, lamellae, lacunae, canaliculi, perforating canal). Each test you order requires a gate question that applies that terminology to Aiden's case. Order tests deliberately, credits do not refund.",
+      autoReveal:null,
+      orders:[
+        {id:"ankle_ap_d1",cat:"Imaging",name:"Right ankle X-ray, AP view",cost:15,
+          result:"RIGHT ANKLE, AP VIEW\n\nFINDINGS:\n  Distal tibial epiphysis: A vertical fracture line is visible in the lateral portion of the distal tibial epiphysis, extending from the articular surface superiorly toward (but not crossing into) the metaphysis.\n  Distal tibial physis (growth plate): Open, partially closed medially, fully open laterally. Fracture line traverses the lateral aspect of the physis.\n  Distal tibial metaphysis: No fracture line. Cortex intact.\n  Distal tibial diaphysis: No fracture line. Normal cortical thickness.\n  Fibula: No fracture identified at any level.\n  Talar dome: Normal.\n  Soft tissue: Marked swelling lateral to the ankle joint.\n\nIMPRESSION: Vertical fracture of the lateral distal tibial epiphysis with extension to the lateral physis. Findings concerning for a juvenile epiphyseal injury pattern. Recommend mortise view for further characterization.",
+          gate:{q:"Aiden's fracture is at the distal end of the tibia. In long bone gross anatomy, the END of a long bone (the part that articulates with another bone at a joint) is called the:",
+            opts:[
+              "A) Epiphysis",
+              "B) Diaphysis",
+              "C) Metaphysis",
+              "D) Periosteum"],
+            correct:"A",exp:"A: The EPIPHYSIS is the end of a long bone, where it articulates at a joint. A long bone has a proximal epiphysis and a distal epiphysis. Aiden's fracture is in the DISTAL tibial epiphysis. B: the DIAPHYSIS is the long shaft, between the two epiphyses. C: the METAPHYSIS is the transitional flared region between the diaphysis and the physis (growth plate); it is the most metabolically active region. D: the PERIOSTEUM is the dense connective tissue covering the outer surface of the bone, not a region. These four terms (plus medullary cavity, endosteum, and physis) are the foundational vocabulary for describing long bone injuries."}},
+        {id:"ankle_lat_d1",cat:"Imaging",name:"Right ankle X-ray, lateral view",cost:15,
+          result:"RIGHT ANKLE, LATERAL VIEW\n\nFINDINGS:\n  Distal tibia: A vertical fracture line is again seen in the distal tibial epiphysis, best appreciated through the anterolateral epiphysis. The fracture exits at the articular surface anteriorly.\n  Posterior cortex: Intact. No fracture line extending posteriorly.\n  Anterior cortex: Disrupted at the level of the epiphyseal fragment.\n  Talus: Normal articulation. No subluxation.\n  Calcaneus: Normal.\n  Soft tissue: Anterior soft tissue swelling.\n\nIMPRESSION: Anterolateral epiphyseal fragment of distal tibia. The fracture pattern is in the plane of the epiphysis only, with extension to the articular surface and to the lateral physis.",
+          gate:{q:"The lateral X-ray shows disruption of the anterior cortex of the distal tibia. The cortex is the dense, outer compact bone of the diaphysis and metaphysis. What dense connective tissue layer covers the OUTER surface of this cortex (everywhere except the articular surfaces)?",
+            opts:[
+              "A) Periosteum",
+              "B) Endosteum",
+              "C) Articular cartilage",
+              "D) Medullary cavity lining"],
+            correct:"A",exp:"A: The PERIOSTEUM is the tough fibrous and cellular layer covering the outer surface of bone. It contains osteoprogenitor cells (relevant for fracture repair), and is innervated and vascularized, which is why fractures hurt so much. B: the ENDOSTEUM lines the INNER surface of the bone (the medullary cavity, the trabeculae of spongy bone, and the canals within compact bone). C: ARTICULAR CARTILAGE covers the epiphyseal articular surface specifically (where one bone meets another at a joint), not the whole outer cortex. D: there is no separate structure called \"medullary cavity lining\", that lining is in fact the endosteum. Outer = periosteum, inner = endosteum."}},
+        {id:"mortise_d1",cat:"Imaging",name:"Right ankle X-ray, mortise view (15 deg internal rotation)",cost:15,
+          result:"RIGHT ANKLE, MORTISE VIEW (15 deg internal rotation)\n\nFINDINGS:\n  The distal tibial epiphyseal fragment is now better defined. The fragment involves the ANTEROLATERAL portion of the epiphysis only. The medial epiphysis is intact.\n  The fracture line: enters at the articular surface of the distal tibia, extends superiorly through the epiphysis in the sagittal plane, and exits laterally THROUGH THE PHYSIS (growth plate).\n  Notably, the fracture line does NOT extend into the metaphysis.\n  Medial physis: Appears partially closed (consistent with patient's age, ~14 yo, mid-pubertal).\n  Lateral physis: Fully open, with the fracture line traversing it.\n  Mortise alignment: Maintained. No talar tilt.\n\nIMPRESSION: An epiphyseal fragment is displaced ~3 mm laterally and rotated. The fracture line traverses epiphysis and physis but spares the metaphysis.",
+          gate:{q:"Compact bone (the dense bone of the cortex you have been imaging on these X-rays) is built from repeating cylindrical units. Each unit consists of concentric rings of bone matrix (lamellae) surrounding a central canal that carries a blood vessel and nerve. What is this fundamental structural unit called?",
+            opts:[
+              "A) Osteon (Haversian system)",
+              "B) Trabecula",
+              "C) Lacuna",
+              "D) Canaliculus"],
+            correct:"A",exp:"A: An OSTEON, also called a HAVERSIAN SYSTEM, is the cylindrical structural unit of compact bone. Each osteon has a central canal (Haversian canal) carrying a blood vessel and nerve, surrounded by concentric rings of mineralized matrix called concentric LAMELLAE. Cortical bone is essentially packed osteons running parallel to the long axis of the bone. B: a TRABECULA is a strut of SPONGY bone (different organization, no concentric lamellae). C: a LACUNA is the tiny cavity inside the lamellae where a single osteocyte sits. D: a CANALICULUS is a hair-thin channel connecting lacunae to each other and to the central canal. Osteon = the unit; lamellae = the rings; lacunae = where cells live; canaliculi = the connecting channels."}},
+        {id:"cbc_d1",cat:"Hematology",name:"CBC with differential (pre-op screen)",cost:10,
+          result:"COMPLETE BLOOD COUNT WITH DIFFERENTIAL\n\nWBC: 9.4 x 10^9/L  (normal)\nNeutrophils: 65% (normal)\nLymphocytes: 28% (normal)\nMonocytes/Eos/Baso: within range\n\nRBC: 4.9 x 10^12/L  (normal)\nHgb: 14.2 g/dL  (normal male adolescent)\nHct: 42.0%  (normal)\n\nPlatelets: 248 x 10^9/L  (normal)\n\nSummary: Unremarkable. No occult blood loss. Normal pre-operative profile.",
+          gate:{q:"In a 14-year-old's long bones (such as Aiden's tibia and femur), red bone marrow is still actively producing blood cells. Where in the gross anatomy of the long bone does this red bone marrow primarily sit?",
+            opts:[
+              "A) Within the medullary cavity of the diaphysis and within the spongy bone of the epiphyses",
+              "B) On the outer surface of the bone, deep to the periosteum",
+              "C) Within the articular cartilage of the epiphyses",
+              "D) Inside the central canal of every osteon"],
+            correct:"A",exp:"A: Red bone marrow (the hematopoietic tissue that makes blood cells) sits within the spaces of the long bone interior: in the MEDULLARY CAVITY of the diaphysis (still red marrow in adolescents, transitions to yellow/fatty in adults) and within the marrow spaces between the trabeculae of SPONGY BONE in the epiphyses and metaphyses. B: deep to the periosteum is bone cortex, no marrow there. C: articular cartilage is solid hyaline cartilage, no marrow. D: the central (Haversian) canal carries a blood vessel and nerve only, it is far too narrow to house marrow. The medullary cavity and the spongy bone interstices are where blood is made."}},
+        {id:"cmp_d1",cat:"Chemistry",name:"Comprehensive metabolic panel (pre-op screen)",cost:10,
+          result:"Na: 140  K: 4.2  Cl: 102  HCO3: 24\nBUN: 12  Cr: 0.7\nGlucose: 96\nCa: 9.8  Phos: 4.6 (normal pediatric)  Mg: 2.0\nAlbumin: 4.4  Total protein: 7.2\nAST: 22  ALT: 18  ALP: 285 (elevated, normal for adolescent growth)  T.bili: 0.5\n\nSummary: Within normal limits for age. ALP elevation is expected in a growing adolescent and reflects active osteoblast activity at growth plates.",
+          gate:{q:"On a high-power view of compact bone, you see small almond-shaped cavities embedded between the concentric lamellae of an osteon. These cavities are where the bone cells (osteocytes) physically reside. Hair-thin channels radiate from each cavity, connecting it to its neighbors. What is the cavity itself called, and what are the channels called?",
+            opts:[
+              "A) Lacuna (the cavity), canaliculi (the channels)",
+              "B) Trabecula (the cavity), Volkmann's canals (the channels)",
+              "C) Osteon (the cavity), central canal (the channels)",
+              "D) Lamella (the cavity), perforating canal (the channels)"],
+            correct:"A",exp:"A: LACUNA is the small cavity within compact bone that houses one osteocyte (cell body). CANALICULI are the microscopic channels that radiate from each lacuna and interconnect lacunae and the central canal. The osteocyte sends thin cytoplasmic processes through these canaliculi to communicate with neighboring osteocytes and reach nutrients from the central blood vessel. B: a TRABECULA is a strut of spongy bone, not a cavity; VOLKMANN's (perforating) CANALS run perpendicular to central canals, connecting them. C: the OSTEON is the entire structural unit; the CENTRAL canal carries vessels, it is not a network of small channels. D: a LAMELLA is a concentric ring of matrix, not a cavity."}},
+      ]
+    },
+    2:{
+      label:"Day 2 ,  Tuesday: Reduction and bone biology",
+      note:"Code from Monday class unlocks today. Today's pre-work covers spongy bone (trabeculae and where they live), bone cells (osteoblast, osteocyte, osteoclast, osteoprogenitor), and the two types of ossification (intramembranous vs endochondral). Reduction was performed overnight, the orthopedic consult is auto-revealed below. Today's gates apply bone-cell and ossification terminology to the case. Use today to understand the biology that will drive Aiden's healing.",
+      autoReveal:{label:"OVERNIGHT: Orthopedic consult and closed reduction",result:"ORTHOPEDIC SURGERY CONSULT NOTE (overnight, prior to OR scheduling)\n\nIMPRESSION: Right distal tibial fracture in a skeletally immature 14 yo male. Fracture pattern based on three radiographic views:\n\n  - Fracture line ENTERS at the articular surface of the distal tibia (anterolaterally),\n  - Travels SUPERIORLY through the lateral portion of the EPIPHYSIS,\n  - Exits LATERALLY through the lateral PHYSIS (growth plate),\n  - Does NOT extend into the metaphysis.\n\nThe fragment is the anterolateral epiphysis. Initial displacement on imaging: ~3 mm. The medial physis appears partially closed (consistent with mid-pubertal physeal closure pattern in adolescents).\n\nPLAN:\n  1. Closed reduction in the ED under conscious sedation (completed at 23:40, post-reduction films pending).\n  2. If post-reduction displacement is < 2 mm, plan long-leg cast x 4 weeks then short-leg walking cast.\n  3. If post-reduction displacement is >= 2 mm, plan ORIF tomorrow (anatomic restoration of the articular surface is critical to preserve joint function).\n  4. Pediatric ortho follow-up at 1 week, 4 weeks, 3 months, 6 months. Serial films to monitor for premature physeal closure (a long-term complication of this fracture type)."},
+      orders:[
+        {id:"postred_d2",cat:"Imaging",name:"Post-reduction ankle X-ray, three views",cost:15,
+          result:"POST-REDUCTION FILMS, RIGHT ANKLE (AP, lateral, mortise)\n\nFINDINGS:\n  The anterolateral distal tibial epiphyseal fragment has been partially reduced. Residual displacement: 2.5 mm at the articular surface.\n  Fracture line still visible, traversing epiphysis and lateral physis.\n  Mortise alignment is maintained.\n  Medial epiphysis intact.\n  Metaphysis without fracture extension.\n  Spongy bone of the metaphysis: trabecular pattern preserved, no impaction.\n\nIMPRESSION: Residual articular displacement 2.5 mm. Open reduction and internal fixation indicated to anatomically restore the joint surface.",
+          gate:{q:"The post-reduction film shows that the metaphysis of Aiden's distal tibia has its trabecular pattern preserved. Spongy bone (made of trabeculae) is found in specific locations within long bones. Where in a long bone does spongy bone primarily sit?",
+            opts:[
+              "A) Within the epiphyses and the metaphyses (deep to a thin shell of compact bone)",
+              "B) Forming the dense outer cortex of the diaphysis",
+              "C) Filling the medullary cavity of the diaphysis",
+              "D) On the articular surface of the epiphysis"],
+            correct:"A",exp:"A: SPONGY (cancellous, trabecular) bone is found within the EPIPHYSES and METAPHYSES of long bones, deep to the thin outer compact shell. Its honeycomb of trabeculae provides strength along lines of stress while leaving spaces for red bone marrow. B: the DIAPHYSEAL CORTEX is dense COMPACT bone, packed osteons, not spongy. C: the MEDULLARY CAVITY of the diaphysis is hollow space filled with marrow, not spongy bone trabeculae. D: ARTICULAR CARTILAGE covers the epiphyseal joint surface, not spongy bone. Spongy bone in the metaphysis is biomechanically critical because the metaphysis is where load transfers between the cortical shaft and the cartilaginous physis."}},
+        {id:"capho_d2",cat:"Chemistry",name:"Calcium and Phosphate panel",cost:10,
+          result:"Total Calcium: 9.8 mg/dL  (normal)\nIonized Calcium: 1.22 mmol/L  (normal)\nPhosphate: 4.6 mg/dL  (normal pediatric)\nMagnesium: 2.0 mg/dL  (normal)\n25-hydroxy Vitamin D: pending (separate order)\nPTH: 32 pg/mL  (normal)\n\nSummary: Calcium-phosphate homeostasis intact. No metabolic bone disease. Excludes hyperparathyroidism, vitamin D deficiency rickets, and hypercalcemia of malignancy as background pathology.",
+          gate:{q:"Healing of Aiden's fracture will require new bone matrix to be laid down. Which BONE CELL is responsible for synthesizing and depositing the organic matrix (osteoid: collagen + ground substance) that subsequently mineralizes into new bone?",
+            opts:[
+              "A) Osteoblast",
+              "B) Osteocyte",
+              "C) Osteoclast",
+              "D) Osteoprogenitor cell"],
+            correct:"A",exp:"A: The OSTEOBLAST is the bone-FORMING cell. It synthesizes osteoid (type I collagen plus ground substance) and regulates its mineralization. Osteoblasts sit on bone surfaces, in active areas of formation. Once an osteoblast finishes laying matrix and gets surrounded by it, it differentiates into an osteocyte. B: an OSTEOCYTE is the mature, trapped cell that lives inside a lacuna and maintains the matrix; it does not actively lay new matrix. C: an OSTEOCLAST is the bone-RESORBING cell (large, multinucleate, from monocyte/macrophage lineage); it dissolves bone, the opposite function. D: an OSTEOPROGENITOR cell is the stem-like precursor in the periosteum and endosteum that divides and differentiates into osteoblasts. The four bone cells form a developmental sequence: progenitor to osteoblast to osteocyte (with osteoclasts as the separate-lineage demolition crew)."}},
+        {id:"alp_d2",cat:"Chemistry",name:"Alkaline phosphatase (bone isoenzyme)",cost:10,
+          result:"Total ALP: 285 U/L  (elevated, expected for adolescent)\nBone-specific ALP isoenzyme: 78%  (elevated)\nLiver-specific ALP isoenzyme: 22%  (normal)\n\nSummary: Elevation is bone in origin and reflects active osteoblastic activity at the open physes (normal for a growing 14 yo). Will be followed serially during fracture healing as a marker of callus formation.",
+          gate:{q:"Once Aiden's fracture begins to heal, an internal callus will form, then later be RESHAPED back into the proper bone contour over months. The cell type responsible for RESORBING bone (dissolving matrix and removing it) during this remodeling phase is large, multinucleated, and derived from the monocyte-macrophage lineage. This cell is the:",
+            opts:[
+              "A) Osteoclast",
+              "B) Osteoblast",
+              "C) Osteocyte",
+              "D) Chondroblast"],
+            correct:"A",exp:"A: The OSTEOCLAST resorbs bone. It is large, multinucleated (formed by fusion of monocyte/macrophage precursors), and sits in resorption pits called Howship's lacunae on the bone surface. It secretes acid and proteolytic enzymes (e.g., cathepsin K) to dissolve mineral and matrix. Osteoclasts are essential during remodeling, when woven bone of the early callus is reshaped into stronger lamellar bone. B: the OSTEOBLAST builds bone, the opposite function; it is mononuclear and from a mesenchymal lineage. C: the OSTEOCYTE maintains bone but does not resorb it. D: a CHONDROBLAST builds cartilage matrix (relevant during the soft callus stage), not resorbs bone. Bone biology has two opposing crews: osteoblasts (build) and osteoclasts (demolish), with osteocytes (maintain) and progenitor cells (replenish) supporting them."}},
+        {id:"vitd_d2",cat:"Chemistry",name:"25-hydroxy Vitamin D",cost:15,
+          result:"25-hydroxy Vitamin D: 38 ng/mL  (sufficient, > 30)\n\nSummary: Sufficient vitamin D status. Adequate substrate for calcium absorption and bone mineralization during healing.",
+          gate:{q:"During fracture healing, NEW osteoblasts must be generated at the fracture site to lay down callus and eventually new bone. Where do these new osteoblasts come from? Which cell DIFFERENTIATES into an osteoblast?",
+            opts:[
+              "A) The osteoprogenitor cell, which lives in the periosteum and endosteum",
+              "B) The osteocyte, which exits its lacuna and dedifferentiates",
+              "C) The osteoclast, which divides into multiple osteoblasts",
+              "D) The chondrocyte, which transforms directly into an osteoblast"],
+            correct:"A",exp:"A: OSTEOPROGENITOR cells are the stem-like precursors that reside in the inner cellular layer of the periosteum and within the endosteum lining the medullary cavity and the canals of compact bone. When activated (by injury or mechanical stress), they divide and differentiate into OSTEOBLASTS. This is critical in fracture repair: when the periosteum is torn at the fracture, its osteoprogenitor cells are recruited en masse to begin laying down callus. B: osteocytes are TERMINALLY differentiated and do not exit their lacunae. C: osteoclasts are bone-resorbing cells from a completely different lineage (monocyte/macrophage); they cannot become osteoblasts. D: chondrocytes are cartilage cells, in endochondral ossification they undergo apoptosis and are REPLACED by osteoblasts, not transformed into them. Sequence: progenitor to osteoblast to osteocyte."}},
+        {id:"mri_d2",cat:"Imaging",name:"MRI of right ankle (assess physis and cartilage)",cost:25,
+          result:"MRI RIGHT ANKLE (T1, T2, fat-suppressed sequences)\n\nFINDINGS:\n  Distal tibial physis: Fracture line clearly traverses the lateral half of the physis. The growth plate cartilage has been disrupted at the fracture line. The medial half of the physis appears intact and partially closed.\n  Distal tibial epiphysis: Fragment as on plain films. No additional occult fracture line.\n  Articular cartilage of the tibial plafond: Step-off of approximately 2.5 mm at the articular surface, corresponding to the displaced fragment.\n  Distal tibial metaphysis: Marrow edema present, but NO fracture line into the metaphysis.\n  Talar dome cartilage: Intact, no chondral injury.\n  Ligaments: Anterior tibiofibular ligament intact at its origin, but stretched. Anterior talofibular ligament intact.\n  Soft tissue: Diffuse edema, hemarthrosis present.\n\nIMPRESSION: Findings consistent with prior radiographs. Articular incongruity 2.5 mm warrants surgical reduction.",
+          gate:{q:"Aiden's fracture line goes through the PHYSIS, the cartilaginous growth plate that allows long bones to elongate. At the physis, cartilage is continuously formed by chondrocytes and progressively replaced by bone, lengthening the bone. This process, where a CARTILAGE MODEL is replaced by bone, is called:",
+            opts:[
+              "A) Endochondral ossification",
+              "B) Intramembranous ossification",
+              "C) Appositional growth",
+              "D) Bone remodeling"],
+            correct:"A",exp:"A: ENDOCHONDRAL OSSIFICATION is the process where a cartilage template is replaced by bone. It builds most of the skeleton (all long bones, vertebrae, ribs, base of skull). At the PHYSIS of a growing long bone, endochondral ossification is happening every day: cartilage is laid down on the epiphyseal side of the physis, and bone replaces it on the metaphyseal side, so the bone gets longer. This process recurs during fracture repair (the bony callus stage), so understanding the physis prepares you to understand how Aiden will heal. B: INTRAMEMBRANOUS OSSIFICATION skips the cartilage step entirely; mesenchyme differentiates directly into osteoblasts that lay bone. It builds the FLAT bones of the skull (frontal, parietal, occipital, temporal flat portions), the clavicle, and most facial bones. C: APPOSITIONAL GROWTH refers to bone widening (osteoblasts on periosteum lay bone on the outer surface), not lengthening. D: REMODELING is the lifelong reshaping of bone, not the initial replacement of cartilage."}},
+      ]
+    },
+    3:{
+      label:"Day 3 ,  Wednesday: Secondary survey",
+      note:"Code from Tuesday class unlocks today. Today's pre-work covers cranial bones (frontal, parietal, temporal, occipital, sphenoid, ethmoid; sutures), facial bones (maxilla, mandible, zygomatic, nasal, lacrimal, palatine, vomer, inferior nasal concha), and the hyoid. Aiden developed concerning symptoms overnight, today's tests apply skull and facial bone terminology to a secondary survey before scheduled OR. Submit your final fracture diagnosis any time after today's data is in.",
+      autoReveal:{label:"OVERNIGHT: Concerning new symptoms",result:"OVERNIGHT EVENT NOTES (Tuesday night to Wednesday morning)\n\n  - Patient reports worsening headache, now 6/10 (from 3/10 on admission), localized to right parietal region where head struck turf during fall.\n  - Mild nausea, no vomiting.\n  - Memory of the fall is fragmentary, patient states he can recall the planted-foot collision but \"the next 30 seconds are a blur\".\n  - GCS 15. Pupils equal and reactive. No focal neurologic deficits.\n  - Right zygomatic tenderness persists. New mild ecchymosis noted lateral to right eye (delayed presentation).\n\nClinical concern: A more thorough secondary survey is warranted before tomorrow morning's scheduled ORIF, to rule out concurrent intracranial or facial injury that might have been missed on initial trauma evaluation. Today's imaging will focus on the cranium and face.\n\n(The fracture diagnosis from Days 1 and 2 is unchanged. Today's purpose is to clear the patient for OR.)"},
+      orders:[
+        {id:"headct_d3",cat:"Imaging",name:"Head CT, non-contrast",cost:25,
+          result:"HEAD CT, NON-CONTRAST\n\nFINDINGS:\n  No intracranial hemorrhage (no epidural, subdural, subarachnoid, or intraparenchymal blood).\n  No mass effect, no midline shift.\n  Ventricles, sulci, and cisterns unremarkable for age.\n  Bone windows: NO fracture identified in the calvaria, including frontal, parietal, temporal squamous, or occipital bones. No fracture of the cranial base.\n  Right parietal scalp: small subgaleal hematoma overlying the right parietal bone, corresponding to point of impact.\n  Mastoid air cells, middle ear, and inner ear structures bilaterally unremarkable.\n\nIMPRESSION: No intracranial injury. No skull fracture. Soft-tissue scalp hematoma only. Cleared for OR from neurosurgical standpoint.",
+          gate:{q:"The CT bone windows specifically commented that NO fracture was seen in the calvaria. Aiden's point of impact was the right PARIETAL scalp. The two parietal bones meet each other in the midline at the top of the skull. The suture that joins the two parietal bones to each other is called the:",
+            opts:[
+              "A) Sagittal suture",
+              "B) Coronal suture",
+              "C) Lambdoid suture",
+              "D) Squamous suture"],
+            correct:"A",exp:"A: The SAGITTAL SUTURE runs in the midline along the top of the skull, joining the right and left PARIETAL bones to each other. B: the CORONAL SUTURE runs side to side across the top of the skull, joining the FRONTAL bone (anteriorly) to the two PARIETAL bones (posteriorly). C: the LAMBDOID SUTURE forms an inverted V at the back of the skull, joining the two PARIETAL bones (anteriorly) to the OCCIPITAL bone (posteriorly). D: the SQUAMOUS SUTURE runs along the side of the skull, joining the PARIETAL bone (above) to the squamous part of the TEMPORAL bone (below). Knowing which suture runs where lets you describe scalp findings and skull fractures by anatomic landmark."}},
+        {id:"facect_d3",cat:"Imaging",name:"Maxillofacial CT (rule out facial fracture)",cost:25,
+          result:"MAXILLOFACIAL CT, NON-CONTRAST\n\nFINDINGS:\n  Frontal bone: Intact. No fracture of supraorbital ridge.\n  Right zygomatic bone (cheekbone): Intact. No fracture of zygomatic body, arch, or frontal process.\n  Maxilla: Intact bilaterally. Maxillary sinuses clear, no fluid level. Anterior and posterior walls intact.\n  Nasal bones: Intact, no fracture. Nasal septum midline.\n  Orbital walls: Floors, medial walls, and lateral walls intact. No blowout fracture.\n  Mandible: Intact. Condylar processes seated normally. No body, angle, or symphysis fracture.\n  Lacrimal bones, palatine bones, vomer: Unremarkable.\n  Inferior nasal conchae: Symmetric.\n  Soft tissue: Mild edema overlying right zygomatic eminence, no underlying fracture.\n\nIMPRESSION: No facial fracture. Soft-tissue contusion of right cheek only. Cleared for OR from oromaxillofacial standpoint.",
+          gate:{q:"Aiden has tenderness over his right CHEEKBONE. The cheekbone is the prominence formed by which facial bone, which articulates with the frontal bone, the maxilla, and the temporal bone (forming the zygomatic arch)?",
+            opts:[
+              "A) Zygomatic bone",
+              "B) Maxilla",
+              "C) Temporal bone",
+              "D) Mandible"],
+            correct:"A",exp:"A: The ZYGOMATIC BONE forms the cheekbone prominence and the lateral wall of the orbit. It articulates with: the frontal bone (above, at the frontozygomatic suture), the maxilla (medially, forming the inferior orbital rim), the temporal bone (posteriorly, forming the zygomatic arch), and the sphenoid bone (deep, in the lateral orbital wall). B: the MAXILLA forms the upper jaw and most of the hard palate; it is medial to the zygomatic. C: the TEMPORAL bone is a cranial bone forming the lateral skull and housing the ear; it contributes the posterior portion of the zygomatic arch but is not the cheekbone itself. D: the MANDIBLE is the lower jaw, far inferior. The 14 facial bones (vomer, mandible, plus 6 paired) build the face on top of the cranial vault."}},
+        {id:"sinusxr_d3",cat:"Imaging",name:"Sinus X-ray, Waters view",cost:15,
+          result:"SINUS X-RAY, WATERS VIEW\n\nFINDINGS:\n  Maxillary sinuses: Bilaterally clear, no air-fluid level, no opacification.\n  Frontal sinuses: Aerated, no fluid.\n  Ethmoid air cells: Clear bilaterally.\n  Orbital floors and infraorbital rims: Intact.\n  Nasal cavity: Septum midline. Inferior turbinates symmetric.\n\nIMPRESSION: No sinus fracture, no hemosinus.",
+          gate:{q:"The maxillary sinus, the largest of the paranasal sinuses, lies WITHIN which facial bone? (This is the facial bone that forms the upper jaw and most of the hard palate.)",
+            opts:[
+              "A) Maxilla",
+              "B) Sphenoid bone",
+              "C) Ethmoid bone",
+              "D) Frontal bone"],
+            correct:"A",exp:"A: The MAXILLARY SINUS is the air space WITHIN the MAXILLA, the upper-jaw bone. It is the largest paranasal sinus. The maxilla also forms most of the hard palate, the inferior orbital rim, and houses the upper teeth. B: the SPHENOID bone is centrally located in the cranial base; it contains the SPHENOID SINUS. C: the ETHMOID bone (between the two orbits, behind the nose) contains the ETHMOID AIR CELLS. D: the FRONTAL bone (forehead) contains the FRONTAL SINUS. The four paranasal sinuses are named for their containing bone: maxillary, frontal, ethmoid, sphenoid. Knowing which sinus sits in which bone lets you predict which fractures will produce hemosinus on imaging."}},
+        {id:"mandxr_d3",cat:"Imaging",name:"Panoramic mandibular X-ray",cost:10,
+          result:"PANORAMIC MANDIBULAR X-RAY\n\nFINDINGS:\n  Mandibular body, ramus, angle, condyle, and coronoid process intact bilaterally.\n  Symphysis intact.\n  Dentition: All teeth present and intact for age. No avulsions, no root fractures.\n  Temporomandibular joints: Symmetric, condyles seated.\n\nIMPRESSION: No mandibular fracture. No dental injury.",
+          gate:{q:"The mandible articulates with the temporal bone at the temporomandibular joint (TMJ). Specifically, which prominent process of the MANDIBLE fits into the mandibular fossa of the TEMPORAL bone to form this joint?",
+            opts:[
+              "A) Mandibular condyle",
+              "B) Coronoid process of the mandible",
+              "C) Mental protuberance",
+              "D) Angle of the mandible"],
+            correct:"A",exp:"A: The MANDIBULAR CONDYLE is the rounded process at the superior end of the ramus. It articulates with the mandibular fossa of the TEMPORAL bone to form the TEMPOROMANDIBULAR JOINT (TMJ). B: the CORONOID PROCESS is the anterior projection from the top of the ramus, it serves as the attachment site for the temporalis muscle but does not articulate. C: the MENTAL PROTUBERANCE is the bony prominence of the chin (anterior midline of the body of the mandible). D: the ANGLE of the mandible is the corner between the ramus and the body, the masseter and medial pterygoid attach here. The mandible is the only mobile bone of the skull, and its movement happens entirely at the paired TMJs."}},
+        {id:"calvxr_d3",cat:"Imaging",name:"Skull X-ray, four standard views",cost:15,
+          result:"SKULL X-RAY, FOUR VIEWS (AP, lateral, Towne, Caldwell)\n\nFINDINGS:\n  Frontal bone: Intact.\n  Parietal bones: Intact bilaterally. Sagittal and coronal sutures normal for age.\n  Temporal bones (squamous portions): Intact.\n  Occipital bone: Intact.\n  Sphenoid (greater wings visible on AP): Intact.\n  Ethmoid: Crista galli midline.\n  Cranial base: No fracture.\n  Sinuses: Aerated, no air-fluid levels.\n\nIMPRESSION: Normal skull series. No fracture.",
+          gate:{q:"On the lateral skull X-ray, you can see the suture that runs side-to-side across the top of the skull, separating the FRONTAL bone (anteriorly) from the two PARIETAL bones (posteriorly). What is this suture called?",
+            opts:[
+              "A) Coronal suture",
+              "B) Sagittal suture",
+              "C) Lambdoid suture",
+              "D) Frontonasal suture"],
+            correct:"A",exp:"A: The CORONAL SUTURE runs in the coronal plane (side to side) across the top of the skull, joining the FRONTAL bone (anteriorly) to the two PARIETAL bones (posteriorly). B: the SAGITTAL SUTURE runs in the midline along the top of the skull, joining the two PARIETAL bones to each other. C: the LAMBDOID SUTURE joins the parietal bones to the OCCIPITAL bone at the back of the skull. D: the FRONTONASAL SUTURE joins the frontal bone to the nasal bones at the bridge of the nose. Mnemonic: the Coronal suture is at the front (think Crown), the Sagittal is the spine of the skull (sagittal arrow midline), the Lambdoid looks like the Greek letter Lambda upside-down at the back."}},
+      ]
+    }
+  }
+};
+
+/* STATE */
+const STORAGE_KEY = "bio004-w2-aiden-state-v1";
+let S = loadState() || newState();
+
+function newState(){return{
+  phase:"key",
+  studentName:"",
+  currentDay:1, daysUnlocked:1,
+  credits:200, maxCredits:200,
+  freeObtained:[], ordered:[], results:[], autoRevealed:[],
+  iMsgs:[], interviewCount:0, maxInterview:10, iTopicHit:{},
+  invMsgs:[], gateActive:null, retries:0,
+  diagText:"", rationaleText:"",
+  scores:null,
+};}
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(S));}catch(e){}}
+function loadState(){try{const v=localStorage.getItem(STORAGE_KEY);return v?JSON.parse(v):null;}catch(e){return null;}}
+function fullReset(){if(confirm("Reset Week 2 simulation? All progress will be lost.")){localStorage.removeItem(STORAGE_KEY);S=newState();render();}}
+
+/* INTERVIEW MATCH */
+const STOPWORDS=new Set(['the','a','an','is','are','was','were','be','been','being','have','has','had','do','does','did','my','your','his','her','its','our','their','you','he','she','we','they','this','that','these','those','can','could','would','should','will','shall','may','might','to','for','of','in','on','at','by','with','about','from','tell','please','say','give','let','know','want','any','some','what','which','who','whom','where','when','why','how']);
+function stem(w){
+  const tries=[['ies','y'],['ied','y'],['ing',''],['ed',''],['es',''],['ly',''],['s','']];
+  for(const[sfx,rep] of tries){
+    if(w.endsWith(sfx)){
+      const result=w.slice(0,w.length-sfx.length)+rep;
+      if(result.length>=3)return result;
+    }
+  }
+  return w;
+}
+function tokenize(s){
+  return s.toLowerCase()
+    .replace(/[^a-z0-9 ]/g,' ')
+    .split(/\s+/)
+    .filter(w=>w.length>=3 && !STOPWORDS.has(w))
+    .map(stem)
+    .filter(w=>w.length>=3);
+}
+function matchInterview(text){
+  for(const[topic,info] of Object.entries(CASE.interviewTopics)){
+    if(info.pattern.test(text)) S.iTopicHit[topic]=true;
+  }
+  const t=text.toLowerCase();
+  const queryTokens=new Set(tokenize(text));
+  if(queryTokens.size===0){
+    return "Could you tell me more, in a complete sentence? I want to give you accurate information.";
+  }
+  let bestScore=0, bestResponse=null;
+  for(const{keys,r} of CASE.interviewResponses){
+    for(const k of keys){
+      if(t.includes(k.toLowerCase())){return r;}
+      const keyTokens=tokenize(k);
+      if(keyTokens.length===0)continue;
+      let matched=0;
+      for(const kt of keyTokens){
+        if(queryTokens.has(kt))matched++;
+      }
+      const score=matched/keyTokens.length;
+      const querySize=queryTokens.size;
+      const queryCoverage=querySize>0?matched/querySize:0;
+      const combined=score*0.7 + queryCoverage*0.3;
+      if(combined>bestScore){bestScore=combined;bestResponse=r;}
+    }
+  }
+  if(bestScore>=0.4)return bestResponse;
+  return "I am not sure what you are asking. Could you rephrase that as a clinical question? You could ask about my injury, when things started, my mechanism, my history, or anything else.";
+}
+
+/* SCORING */
+function calcScores(){
+  const max={diag:35, eff:20, interview:15, gate:10, complete:5}, total_max=85;
+  const diagPattern=/tillaux|salter.?harris.?(iii|3)|salter.?harris.?type.?3|distal tibi.?epiphys|epiphyseal fracture|salter.?harris.?type.?III/i;
+  const rationalePatterns=[
+    /salter.?harris|physis|growth plate|epiphys|metaphys|diaphys/i,
+    /osteoblast|osteocyte|osteoclast|osteoprogenitor|chondroblast|chondrocyte/i,
+    /spongy|trabecul|cancellous/i,
+    /compact bone|cortical|osteon|haversian|lamell|canaliculi|lacuna/i,
+    /endochondral|intramembranous|ossif/i,
+    /callus|hematoma|woven bone|remodel/i,
+    /periosteum|endosteum|medullary cavity/i,
+    /tillaux|distal tibi|external rotation|anterolateral|articular surface/i,
+  ];
+  let diagPts=diagPattern.test(S.diagText)?20:0;
+  diagPts+=rationalePatterns.filter(p=>p.test(S.rationaleText)).length*3;
+  diagPts=Math.min(diagPts,max.diag);
+  const effPts=Math.round((S.credits/S.maxCredits)*max.eff);
+  const topicCount=Object.keys(CASE.interviewTopics).length;
+  const hits=Object.values(S.iTopicHit).filter(v=>v).length;
+  const intPts=Math.round((hits/topicCount)*max.interview);
+  const gatePts=Math.max(0,max.gate-(S.retries*2));
+  const completePts=S.daysUnlocked>=3?max.complete:0;
+  return{diag:diagPts,eff:effPts,interview:intPts,gate:gatePts,complete:completePts,total:diagPts+effPts+intPts+gatePts+completePts,max:total_max};
+}
+
+async function submitToForm(sc){
+  if(!FORM_URL)return;
+  const d=new FormData();
+  d.append(FORM_FIELDS.name,S.studentName);d.append(FORM_FIELDS.diag,S.diagText);
+  d.append(FORM_FIELDS.rationale,S.rationaleText);d.append(FORM_FIELDS.credits,String(S.credits));
+  d.append(FORM_FIELDS.total,String(sc.total));
+  try{await fetch(FORM_URL,{method:"POST",mode:"no-cors",body:d});}catch(e){}
+}
+
+/* UNLOCK */
+function tryUnlockDay(){
+  const inp=document.getElementById("day-unlock-inp");
+  if(!inp)return;
+  const val=inp.value.trim().toUpperCase();
+  for(const[day,code] of Object.entries(CASE.dayCodes)){
+    const d=parseInt(day);
+    if(val===code.toUpperCase()&&d>S.daysUnlocked){
+      S.daysUnlocked=d; S.currentDay=d;
+      const dayData=CASE.days[d];
+      if(dayData.autoReveal&&!S.autoRevealed.includes(d)) S.autoRevealed.push(d);
+      inp.value="";
+      S.invMsgs.push({role:"assistant",cls:"unlock",content:`Day ${d} unlocked, ${dayData.label}${dayData.autoReveal?'\n\n'+dayData.autoReveal.label+' has been added to your results panel.':''}`});
+      saveState(); render(); scrollEl("inv-ci"); return;
+    }
+  }
+  if(val){inp.value="";S.invMsgs.push({role:"assistant",cls:"fail",content:"Incorrect unlock code. Wait for your instructor to announce it at the beginning of class."});render();scrollEl("inv-ci");}
+}
+
+/* RENDER ROUTER */
+function render(){
+  saveState();
+  const watermark=document.getElementById("wmt");
+  if(watermark&&S.studentName) watermark.textContent=`${S.studentName} . BIO 004 . Week 2`;
+  const p=S.phase;
+  if(p==="key") renderKey();
+  else if(p==="instructions") renderInstructions();
+  else if(p==="intro") renderIntro();
+  else if(p==="interview") renderInterview();
+  else if(p==="investigate") renderInvestigate();
+  else if(p==="submit") renderSubmit();
+  else if(p==="submitted") renderSubmitted();
+  else if(p==="reveal") renderReveal();
+}
+
+function renderKey(){
+  document.getElementById("app").innerHTML=`
+<div style="max-width:440px;margin:4rem auto;padding:0 1rem;text-align:center">
+  <div style="font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:.6rem">BIO 004 . Clinical Reasoning</div>
+  <div style="width:48px;height:3px;background:var(--gold);margin:0 auto 1.4rem;border-radius:2px"></div>
+  <h1 style="font-size:34px;margin-bottom:.4rem">Week 2, Aiden Okafor</h1>
+  <p style="margin-bottom:.4rem;font-size:16px;color:var(--ink-soft)">Skeletal System: Bone Tissue &amp; Long Bone Anatomy</p>
+  <p style="margin-bottom:1.8rem;font-size:14px;color:var(--ink-mute)">Single file . 3 days . One credit bank . Code-locked progression</p>
+  <div class="card" style="text-align:left">
+    <div class="sl">Your name (required for tracking)</div>
+    <input type="text" id="ki-name" placeholder="First and last name" style="margin-bottom:14px" value="${S.studentName||''}">
+    <div class="sl">Course access code (instructor announces in Monday class)</div>
+    <input type="password" id="ki" placeholder="Enter code..." style="margin-bottom:10px;letter-spacing:.14em;font-size:17px;text-align:center;text-transform:uppercase" onkeydown="if(event.key==='Enter')subKey()">
+    <div id="kerr" style="color:var(--terra);font-size:14px;margin-bottom:8px;display:none">Incorrect. Check with your instructor.</div>
+    <button class="bb" onclick="subKey()" style="width:100%;font-size:15px;padding:14px">Enter</button>
+  </div>
+  <p style="margin-top:1rem;font-size:13px;color:var(--ink-mute);font-style:italic">By entering, you confirm this material is for your educational use only. Do not screenshot, share, or redistribute.</p>
+</div>`;
+  setTimeout(()=>{const i=document.getElementById("ki-name")||document.getElementById("ki");if(i)i.focus();},80);
+}
+function subKey(){
+  const ni=document.getElementById("ki-name");const i=document.getElementById("ki");
+  if(!i)return;
+  if(!ni.value.trim()){alert("Please enter your name.");ni.focus();return;}
+  if(i.value.trim().toUpperCase()===COURSE_PW.toUpperCase()){
+    S.studentName=ni.value.trim(); S.phase="instructions"; render();
+  } else {document.getElementById("kerr").style.display="block";i.value="";i.focus();}
+}
+
+function renderInstructions(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="border-top:4px solid var(--navy);max-width:720px;margin:0 auto">
+  <div style="text-align:center;margin-bottom:1.5rem">
+    <div class="sl" style="margin-bottom:8px">${CASE.system}</div>
+    <h1 style="margin-bottom:.4rem">Week 2, ${CASE.patient.name}</h1>
+    <p style="font-size:16px">Clinical Reasoning Simulation . 3-day case . One credit bank</p>
+  </div>
+  <div class="alert-terra"><strong>Welcome, ${S.studentName}.</strong> This case unfolds across Monday, Tuesday, and Wednesday class sessions. Day 2 and Day 3 unlock with codes your instructor announces at the beginning of each class, attendance is how you get the code. Use Thursday TBL to defend your final diagnosis.</div>
+  <h2>How it works</h2>
+  <div style="margin-bottom:1.4rem">
+    <div class="istep"><div class="inum">1</div><div><strong>Interview your patient (10 questions).</strong> Free. Ask about symptoms, mechanism, history. Interview is open all week.</div></div>
+    <div class="istep"><div class="inum">2</div><div><strong>Free bedside data is always available.</strong> Vitals, focused exam, neurovascular check, no credits.</div></div>
+    <div class="istep"><div class="inum">3</div><div><strong>Order tests with your 200-credit bank.</strong> Credits do not reset between days. Irrelevant tests still cost credits. Unused credits boost your efficiency score.</div></div>
+    <div class="istep"><div class="inum">4</div><div><strong>Answer an anatomy gate question for every test.</strong> Right means result released. Wrong means a 15-credit retry penalty.</div></div>
+    <div class="istep"><div class="inum">5</div><div><strong>Day 2 (Tuesday) unlocks with a code your instructor announces at the beginning of Tuesday class.</strong> Day 3 (Wednesday) unlocks with a code announced at the beginning of Wednesday class. You must be in class to get the code.</div></div>
+    <div class="istep"><div class="inum">6</div><div><strong>Submit your final diagnosis any time after Day 3 unlocks.</strong> Submission is private until reveal.</div></div>
+    <div class="istep"><div class="inum">7</div><div><strong>After Thursday TBL, enter the reveal code from your instructor.</strong> See the correct diagnosis, full rationale, and your week-long score.</div></div>
+  </div>
+  <div class="sep"></div>
+  <h2>Scoring (85 points)</h2>
+  <div style="font-size:14.5px;line-height:1.9;color:var(--ink-soft)">
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Diagnostic accuracy (final dx + anatomical rationale)</span><span style="font-weight:700">35 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Data efficiency (credits remaining of 200)</span><span style="font-weight:700">20 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Interview quality (7 topic areas covered)</span><span style="font-weight:700">15 pts</span></div>
+    <div class="fb" style="padding:4px 0;border-bottom:1px solid var(--divider-light)"><span>Gate question performance (minus 2 per retry)</span><span style="font-weight:700">10 pts</span></div>
+    <div class="fb" style="padding:4px 0"><span>Bonus, completed through Day 3</span><span style="font-weight:700">5 pts</span></div>
+  </div>
+  <div class="sep"></div>
+  <div style="text-align:center"><button class="bb" onclick="S.phase='intro';render()" style="font-size:16px;padding:16px 56px">Meet your patient</button></div>
+</div>`;
+}
+
+function renderIntro(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="text-align:center;padding:2.5rem 2rem;border-top:4px solid var(--navy);max-width:560px;margin:0 auto">
+  <div class="sl" style="margin-bottom:1rem">Your patient . Week 2, Day 1 (Monday)</div>
+  <div style="width:84px;height:84px;border-radius:50%;background:var(--navy-bg);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:28px;font-weight:700;margin:0 auto 1.2rem">AO</div>
+  <h1 style="font-size:36px;margin-bottom:.4rem;font-family:var(--display);font-style:italic;font-weight:600">${CASE.patient.name}</h1>
+  <p style="font-size:18px;color:var(--ink-soft);margin-bottom:.4rem">${CASE.patient.age} years old . ${CASE.patient.gender}</p>
+  <div style="background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:var(--rs);padding:14px 22px;display:inline-block;margin:1.4rem 0">
+    <div class="sl" style="margin-bottom:6px">Chief complaint</div>
+    <p style="font-size:17px;color:var(--navy);font-weight:600;font-family:var(--display);font-style:italic">${CASE.cc}</p>
+  </div>
+  <p style="max-width:440px;margin:0 auto 1.8rem;font-size:15px">You have <strong>10 interview questions</strong> with Aiden available across the entire week. Spend them carefully.</p>
+  <button class="bb" onclick="S.phase='interview';render()" style="font-size:16px;padding:16px 42px">Begin patient interview</button>
+</div>`;
+}
+
+function renderInterview(){
+  const rem=S.maxInterview-S.interviewCount;
+  const done=rem<=0;
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-navy">Patient Interview</span> <strong style="margin-left:8px;font-family:var(--display);font-style:italic">${CASE.patient.name}</strong></div>
+  <button class="${done?'bt':'bb'}" onclick="S.phase='investigate';render()">${done?'Interview complete, investigate':'Skip to investigation'}</button>
+</div>
+<div style="background:var(--navy-bg);border:1px solid var(--navy-bd);border-radius:var(--rs);padding:11px 14px;display:flex;align-items:center;gap:14px;margin-bottom:.875rem;flex-wrap:wrap">
+  <div style="font-family:var(--display);font-style:italic;font-weight:600;font-size:46px;color:var(--navy);line-height:1">${rem}</div>
+  <div style="flex:1;min-width:160px"><div style="font-family:var(--sans);font-size:15.5px;font-weight:700;color:var(--navy);letter-spacing:.04em;text-transform:uppercase">Questions remaining (carry across all 3 days)</div><div style="font-size:15px;color:var(--ink-soft);margin-top:5px">Interview closes permanently when all 10 are used.</div></div>
+  <div style="display:flex;gap:5px;flex-wrap:wrap">
+    ${Object.entries(CASE.interviewTopics).map(([k,t])=>`<span class="tpill ${S.iTopicHit[k]?'hit':'miss'}">${t.label}</span>`).join("")}
+  </div>
+</div>
+<div class="chatbox">
+  <div class="ci" id="ci" style="height:440px">
+    ${S.iMsgs.length===0?`<div class="msg assistant patient"><div class="ml">${CASE.patient.name}</div><div class="mb">Thanks for seeing me. My ankle is killing me. What do you need to know?</div></div>`:""}
+    ${S.iMsgs.map(m=>`<div class="msg ${m.role} ${m.role==='assistant'?'patient':''}"><div class="ml">${m.role==='user'?'You':CASE.patient.name}</div><div class="mb">${m.content}</div></div>`).join("")}
+    ${done&&S.iMsgs.length>0?`<div class="msg assistant"><div class="mb" style="background:var(--gold-bg);border-color:var(--gold-bd);color:var(--warn)">You have used all 10 questions. The interview is now closed.</div></div>`:""}
+  </div>
+  ${!done?`<div class="ir"><textarea id="qi" rows="2" placeholder="Ask Aiden anything..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendInterview();}"></textarea><button onclick="sendInterview()">Ask</button></div>`:`<div style="padding:12px;border-top:1px solid var(--divider-light);text-align:center"><button class="bt" onclick="S.phase='investigate';render()" style="width:100%">Interview complete, begin investigation</button></div>`}
+</div>`;
+  scrollEl("ci");
+}
+function sendInterview(){
+  if(S.interviewCount>=S.maxInterview)return;
+  const inp=document.getElementById("qi");
+  if(!inp||!inp.value.trim())return;
+  const txt=inp.value.trim();inp.value="";
+  S.iMsgs.push({role:"user",content:txt});
+  S.interviewCount++;
+  S.iMsgs.push({role:"assistant",content:matchInterview(txt)});
+  saveState();render();scrollEl("ci");
+}
+
+function renderInvestigate(){
+  const pct=Math.max(0,(S.credits/S.maxCredits)*100);
+  const pcls=pct<25?"low":pct<50?"mid":"";
+  const dayData=CASE.days[S.currentDay];
+  const cats=[...new Set(dayData.orders.map(o=>o.cat))];
+
+  const tabHtml=Object.keys(CASE.days).map(d=>{
+    const di=parseInt(d);
+    const unlocked=di<=S.daysUnlocked;
+    const active=di===S.currentDay;
+    const dayLabel=CASE.days[di].label.split(", ")[0].trim();
+    return`<button class="day-tab ${active?'active':unlocked?'unlocked':'locked'}" onclick="${unlocked?`switchDay(${di})`:'void(0)'}">${dayLabel}${!unlocked?' [locked]':''}</button>`;
+  }).join("");
+
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-navy">Week 2 Investigation</span> <strong style="margin-left:8px;font-family:var(--display);font-style:italic">${CASE.patient.name}, ${CASE.patient.age}y ${CASE.patient.gender}</strong></div>
+  <div class="flex">
+    <button onclick="S.phase='interview';render()" style="font-size:15px">Interview (${S.maxInterview-S.interviewCount} left)</button>
+    ${S.daysUnlocked>=3?`<button class="bt" onclick="S.phase='submit';render()" style="font-size:15px">Submit final diagnosis</button>`:""}
+  </div>
+</div>
+<div class="cbar">
+  <div class="cnum">${S.credits}</div>
+  <div style="flex:1"><div class="clabel">Credits, carry across all 3 days</div><div class="csub">All tests cost credits. Wrong gate retries cost 15 each. Unused credits give a higher efficiency score.</div><div class="pb"><div class="pf ${pcls}" style="width:${pct}%"></div></div></div>
+</div>
+<div class="day-tabs">${tabHtml}</div>
+<div class="unlock-bar">
+  <span style="font-family:var(--sans);font-size:15px;font-weight:700;color:var(--warn);letter-spacing:.04em;text-transform:uppercase">Day unlock code</span>
+  <input id="day-unlock-inp" type="text" placeholder="Enter code from instructor..." onkeydown="if(event.key==='Enter')tryUnlockDay()">
+  <button onclick="tryUnlockDay()" class="bg" style="padding:10px 20px;font-size:15px">Unlock</button>
+</div>
+<div style="background:var(--navy-bg);border:1px solid var(--navy-bd);border-radius:var(--rs);padding:16px 20px;margin-bottom:.875rem;font-size:16px;color:var(--navy);line-height:1.7">${dayData.note}</div>
+<div class="g2">
+  <div>
+    <div class="card" style="padding:1rem">
+      <div class="sl" style="margin-bottom:8px">Free bedside data, always available</div>
+      ${Object.entries(CASE.free).map(([k,v])=>`<div class="fi ${S.freeObtained.includes(k)?'got':''}" onclick="getFree('${k}')">
+        <span>[${v.icon}] ${v.label}</span>
+        <span class="badge ${S.freeObtained.includes(k)?'b-ok':'b-navy'}" style="font-size:13px;letter-spacing:.04em">${S.freeObtained.includes(k)?'viewed':'free'}</span>
+      </div>`).join("")}
+    </div>
+    ${dayData.orders.length>0?`<div class="card" style="padding:1rem">
+      <div class="sl" style="margin-bottom:6px">Day ${S.currentDay} orders (credits + gate)</div>
+      ${cats.map(cat=>`<div class="oc">${cat}</div>${dayData.orders.filter(o=>o.cat===cat).map(o=>{const done=!!S.results.find(r=>r.id===o.id);return`<div class="oi ${done?'done':''}" onclick="${done?'':"orderTest('"+o.id+"',"+S.currentDay+")"}"><span>${o.name}</span><span style="font-size:14.5px;font-weight:700;color:${done?'var(--ok)':'var(--terra)'}">${done?'done':'-'+o.cost+' cr'}</span></div>`;}).join("")}`).join("")}
+    </div>`:`<div class="card" style="padding:1rem;text-align:center"><p style="color:var(--ink-soft);font-size:15px">No additional tests on this day.</p></div>`}
+  </div>
+  <div>
+    <div class="card" style="padding:1rem;margin-bottom:.75rem;max-height:300px;overflow-y:auto">
+      <div class="sl" style="margin-bottom:8px">All results, running total (${S.results.length} ordered . ${S.freeObtained.length} free . ${S.autoRevealed.length} day reveals)</div>
+      ${S.freeObtained.length===0&&S.results.length===0&&S.autoRevealed.length===0?`<p style="color:var(--ink-soft);font-size:15px">No data yet. Click items to the left to begin.</p>`:""}
+      ${S.freeObtained.map(k=>`<div class="fc"><div class="fl">[${CASE.free[k].icon}] ${CASE.free[k].label}</div>${CASE.free[k].result}</div>`).join("")}
+      ${S.autoRevealed.map(d=>{const ar=CASE.days[d].autoReveal;return`<div class="ar"><div class="al">${ar.label}</div>${ar.result}</div>`;}).join("")}
+      ${S.results.map(r=>{const order=Object.values(CASE.days).flatMap(d=>d.orders).find(o=>o.id===r.id);return`<div class="rc"><div class="rl">${order?.name||r.id}</div>${r.result}</div>`;}).join("")}
+    </div>
+    <div class="chatbox">
+      <div class="ci" id="inv-ci" style="height:340px">
+        ${S.invMsgs.length===0?`<div class="msg assistant"><div class="ml">Clinical Facilitator</div><div class="mb">Click a test on the left to order it. You will receive an anatomy gate question before each result is released. Day unlock codes appear after your instructor announces them.</div></div>`:""}
+        ${S.invMsgs.map(m=>`<div class="msg ${m.role} ${m.cls||''}"><div class="ml">${m.role==='user'?'You':'Clinical Facilitator'}</div><div class="mb">${m.isHtml?m.content:m.content.replace(/\n/g,'<br>')}</div></div>`).join("")}
+      </div>
+      <div class="ir"><textarea id="invi" rows="2" placeholder="Type A, B, C, or D to answer gate question..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendInv();}"></textarea><button onclick="sendInv()">Send</button></div>
+    </div>
+  </div>
+</div>`;
+  scrollEl("inv-ci");
+}
+
+function switchDay(d){S.currentDay=d;saveState();render();}
+function getFree(k){if(!S.freeObtained.includes(k)){S.freeObtained.push(k);saveState();}render();}
+
+function orderTest(id,day){
+  if(S.results.find(r=>r.id===id))return;
+  const order=CASE.days[day].orders.find(o=>o.id===id);
+  if(!order)return;
+  if(S.credits<order.cost){S.invMsgs.push({role:"assistant",cls:"fail",content:"Not enough credits to order this test."});render();return;}
+  S.credits=Math.max(0,S.credits-order.cost);
+  if(!S.ordered.includes(id))S.ordered.push(id);
+  S.gateActive={orderId:id,order,day};
+  const g=order.gate;
+  const optHtml=g.opts.map(o=>`<span style="display:block;margin:6px 0;padding:6px 0;border-bottom:1px solid rgba(20,41,64,.08)">${o}</span>`).join("");
+  S.invMsgs.push({role:"assistant",cls:"gate",isHtml:true,content:`<strong>Order:</strong> ${order.name} (minus ${order.cost} credits)<br><br><strong>ANATOMY GATE QUESTION</strong><br><br>${g.q}<br><br>${optHtml}<br>Type the letter of your answer: <strong>A, B, C, or D</strong>`});
+  saveState();render();scrollEl("inv-ci");
+}
+
+function sendInv(){
+  const inp=document.getElementById("invi");
+  if(!inp||!inp.value.trim())return;
+  const txt=inp.value.trim();inp.value="";
+  S.invMsgs.push({role:"user",content:txt});
+  if(S.gateActive){
+    const letter=txt.trim().toUpperCase().charAt(0);
+    if(!["A","B","C","D"].includes(letter)){S.invMsgs.push({role:"assistant",cls:"gate",content:"Please type just the letter of your answer: A, B, C, or D."});render();scrollEl("inv-ci");return;}
+    const{order}=S.gateActive;const g=order.gate;
+    if(letter===g.correct){
+      S.results.push({id:order.id,result:order.result});
+      S.gateActive=null;
+      S.invMsgs.push({role:"assistant",cls:"result",isHtml:true,content:`<strong>CORRECT. ${letter} is right.</strong><br><br><strong>Explanation:</strong> ${g.exp}<br><br><strong>RESULT:</strong><br><br>${order.result.replace(/\n/g,'<br>')}`});
+    } else {
+      S.retries++; S.credits=Math.max(0,S.credits-15);
+      S.invMsgs.push({role:"assistant",cls:"fail",isHtml:true,content:`<strong>Incorrect.</strong> ${letter} is not right. (minus 15 credits)<br><br>Think about the anatomy. Type A, B, C, or D to retry.`});
+    }
+    saveState();render();scrollEl("inv-ci");return;
+  }
+  S.invMsgs.push({role:"assistant",content:"Click a test on the left panel to order it and receive a gate question."});
+  render();scrollEl("inv-ci");
+}
+
+function renderSubmit(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="border-top:4px solid var(--ok);max-width:660px;margin:0 auto">
+  <div class="sl" style="margin-bottom:.5rem">Submit final diagnosis, Week 2</div>
+  <h1 style="margin-bottom:.4rem">${CASE.patient.name}, ${CASE.patient.age}y</h1>
+  <p style="margin-bottom:1rem;font-size:15.5px">Credits remaining: ${S.credits}/200 . Tests ordered: ${S.ordered.length} . Days unlocked: ${S.daysUnlocked}/3 . Gate retries: ${S.retries}</p>
+  <div class="note">Your submission is private. Submit your best diagnosis based on all data collected. The reveal code is given after Thursday TBL.</div>
+  <div style="margin-bottom:1rem"><div class="sl">Final diagnosis</div><input type="text" id="sd" placeholder="e.g. Salter-Harris III fracture of the distal tibia (Tillaux fracture)" value="${S.diagText}" style="font-size:16px"></div>
+  <div style="margin-bottom:1.4rem"><div class="sl">Anatomical rationale (3-5 sentences). Use the foundational bone anatomy you have learned this week. Where exactly is the fracture (which region of the long bone, which structures does the fracture line cross)? Which Salter-Harris type is this and why (which structures define each type)? Which bone cells will drive repair, and which type of ossification recurs from your fetal-development reading? How will the metaphyseal trabeculae and the periosteum participate in healing?</div><textarea id="sr" rows="6" placeholder="Anchor your reasoning in long bone regions, the physis, the bone cells of repair, and the type of ossification that builds new bone in the callus.">${S.rationaleText}</textarea></div>
+  <div class="fb"><button onclick="S.phase='investigate';render()">Back</button><button class="bt" onclick="doSubmit()">Submit diagnosis</button></div>
+</div>`;
+}
+async function doSubmit(){
+  const sd=document.getElementById("sd"),sr=document.getElementById("sr");
+  if(!sd?.value.trim()||!sr?.value.trim()){alert("Please complete both fields.");return;}
+  S.diagText=sd.value.trim();S.rationaleText=sr.value.trim();
+  const sc=calcScores();S.scores=sc;
+  await submitToForm(sc);
+  S.phase="submitted";saveState();render();
+}
+
+function renderSubmitted(){
+  document.getElementById("app").innerHTML=`
+<div class="card" style="text-align:center;padding:2.5rem 2rem;border-top:4px solid var(--ok);max-width:560px;margin:0 auto">
+  <div style="font-size:44px;margin-bottom:1rem;font-family:var(--display);font-style:italic;color:var(--ok)">Submitted</div>
+  <h1 style="color:var(--ok);margin-bottom:.75rem">Week 2 Diagnosis Submitted</h1>
+  <p style="max-width:440px;margin:0 auto 1.5rem">Recorded privately, ${S.studentName}. Present your data and reasoning in Thursday TBL. Do not reveal your diagnosis to other teams beforehand.</p>
+  <div class="note" style="text-align:left;max-width:480px;margin:0 auto 1.5rem;font-size:14.5px">
+    <strong>Next steps</strong><br>
+    1. Defend your diagnosis at Thursday TBL (iRAT to tRAT to application).<br>
+    2. After TBL, your instructor will give the reveal code.<br>
+    3. Enter it below to see the correct diagnosis, your full score, and the anatomical explanation.
+  </div>
+  <div style="max-width:380px;margin:0 auto">
+    <div class="sl" style="margin-bottom:8px">Reveal code (given after Thursday TBL)</div>
+    <input type="text" id="uki" placeholder="Enter reveal code..." style="margin-bottom:10px;font-size:17px;letter-spacing:.14em;text-align:center;text-transform:uppercase" onkeydown="if(event.key==='Enter')tryReveal()">
+    <div id="ukerr" style="color:var(--terra);font-size:14px;margin-bottom:8px;display:none">Incorrect. Wait for your instructor after Thursday TBL.</div>
+    <button class="bb" onclick="tryReveal()" style="width:100%;font-size:15px;padding:14px">Reveal diagnosis &amp; scores</button>
+  </div>
+</div>`;
+}
+function tryReveal(){
+  const inp=document.getElementById("uki");
+  if(!inp||!inp.value.trim())return;
+  if(inp.value.trim().toUpperCase()!==REVEAL_CODE.toUpperCase()){document.getElementById("ukerr").style.display="block";inp.value="";return;}
+  S.phase="reveal";saveState();render();
+}
+
+function renderReveal(){
+  const sc=S.scores||calcScores();
+  function scCls(e,m){return e>=m*.8?"full":e>=m*.4?"part":"zero";}
+  document.getElementById("app").innerHTML=`
+<div class="fb" style="margin-bottom:.875rem">
+  <div><span class="badge b-ok">Week 2 Complete</span></div>
+  <button onclick="fullReset()">Restart Week 2</button>
+</div>
+<div class="card" style="border-top:4px solid var(--navy);margin-bottom:1rem">
+  <div class="sl" style="margin-bottom:8px">Confirmed diagnosis</div>
+  <h1 style="font-size:24px;margin-bottom:8px;color:var(--navy)">Salter-Harris Type III fracture of the distal tibia (Tillaux fracture), right ankle</h1>
+  <p style="font-size:15.5px;margin-bottom:0;color:var(--ink-soft)">A juvenile epiphyseal fracture in a skeletally immature 14 yo with partially closed medial physis. The fracture line traverses the EPIPHYSIS and PHYSIS only, sparing the metaphysis (defining feature of Salter-Harris III). Mechanism: planted foot with external rotation, avulsing the anterolateral epiphyseal fragment via the anterior tibiofibular ligament. ORIF was indicated due to 2.5 mm articular step-off.</p>
+</div>
+<div class="card">
+  <h2>Why this diagnosis (anatomical reasoning)</h2>
+  <div class="reveal-text">PATHOMECHANICS (mechanism to anatomic injury):
+
+1. AGE AND PHYSIS STATE: Aiden is 14, mid-pubertal. The distal tibial physis closes asymmetrically over ages 12 to 15, MEDIAL FIRST, then central, then ANTEROLATERAL last. For a window of about 18 months, the medial physis is fused while the anterolateral physis is still open. This is a transitional skeleton: the physis can no longer fail uniformly (as it does in younger Salter-Harris I and II patterns) because part of it is bone, but the anterolateral corner remains a weak link.
+
+2. MECHANISM: External rotation of a planted foot. The talus rotates externally inside the mortise. The anterior tibiofibular ligament (ATFL) is taut and pulls on its tibial origin, the anterolateral distal tibial epiphysis. Because the medial physis is fused, the bone cannot fail there. Instead, the ATFL avulses the anterolateral epiphyseal corner.
+
+3. RESULTING FRACTURE LINE: enters at the articular surface of the tibial plafond anteriorly, extends superiorly through the EPIPHYSIS in the sagittal plane, and exits laterally through the still-open lateral PHYSIS. The line does NOT enter the metaphysis. This anatomic path is the definition of Salter-Harris TYPE III.
+
+WHY THE OTHER SALTER-HARRIS TYPES ARE EXCLUDED (each defined by which structure the fracture line crosses):
+
+  - Salter-Harris I: line through PHYSIS ONLY, no bone fragment. Aiden has a clear epiphyseal fragment on imaging. Excluded.
+  - Salter-Harris II: line through PHYSIS + METAPHYSIS, no epiphyseal involvement. Aiden's line traverses epiphysis and stops at the physis without entering the metaphysis. Excluded.
+  - Salter-Harris IV (Triplane): line through EPIPHYSIS + PHYSIS + METAPHYSIS, all three. Aiden's metaphysis is uninvolved on plain film, MRI, and post-reduction views. Excluded. (Triplane is the closest mimic and was the most important distractor to rule out, an MRI helped here.)
+  - Salter-Harris V: a CRUSH injury to the physis without a visible fracture line. Mechanism is axial compression, not rotation. Imaging shows no displaced fragment. Excluded.
+
+WHY OTHER ANKLE INJURIES ARE EXCLUDED:
+
+  - Adult Weber B fibular fracture: requires a closed physis (skeletally mature ankle). Aiden's physes are open. Excluded.
+  - Pilon fracture: high-energy axial loading of the tibial plafond producing a comminuted articular fracture. Mechanism wrong, age wrong, fracture pattern wrong. Excluded.
+  - Pure ankle sprain (ATFL tear without bony avulsion): no visible fracture line on imaging. Aiden has a clear bony fragment. Excluded.
+  - Maisonneuve fracture: an external-rotation injury that fractures the proximal fibula plus disrupts the medial ankle. Aiden's fibula is intact. Excluded.
+
+REPAIR ANATOMY (what Aiden's body will do over the next 6 to 16 weeks):
+
+The four classic stages of fracture repair, each defined by which bone cell is dominant and which type of bone matrix is being laid down:
+
+STAGE 1, HEMATOMA (hours to days): A FRACTURE HEMATOMA forms at the injury site. Bleeding from torn periosteal vessels, endosteal vessels, and the osteons of the cortex pools at the fracture line. Inflammatory cells arrive. The hematoma scaffolds the next stage.
+
+STAGE 2, FIBROCARTILAGINOUS (SOFT) CALLUS (days to weeks): OSTEOPROGENITOR cells of the periosteum proliferate and differentiate. CHONDROBLASTS (also from periosteum and surrounding mesenchyme) lay down a CARTILAGE matrix that bridges the fracture gap. This soft callus is mechanically weak but stabilizing.
+
+STAGE 3, BONY (HARD) CALLUS (weeks to months): The cartilage of the soft callus is REPLACED by bone via the SAME PROCESS that built Aiden's bones during fetal development: ENDOCHONDRAL OSSIFICATION. Chondrocytes hypertrophy and undergo apoptosis. OSTEOBLASTS invade and lay down WOVEN BONE on the cartilage scaffold. The callus becomes mechanically functional.
+
+STAGE 4, REMODELING (months to years): The disorganized woven bone of the callus is reshaped into stronger LAMELLAR BONE. OSTEOCLASTS resorb excess callus and old woven bone (especially on surfaces that no longer bear stress); OSTEOBLASTS lay new lamellar bone along stress lines (Wolff's law). Eventually the medullary cavity is reformed, the cortex is reconstituted into osteons, and the bone returns to near-normal anatomy.
+
+RECURRENT THEME: ENDOCHONDRAL OSSIFICATION
+Endochondral ossification first appears in fetal long bone development (cartilage model replaced by bone). It then drives long-bone lengthening at the PHYSIS throughout childhood. It now reappears in Aiden's bony callus. The same cellular sequence (chondrocytes proliferate, hypertrophy, die, are replaced by osteoblast-laid woven bone) underlies all three. Recognizing this recurrence is the synthesis target of this case.
+
+PHYSIS-SPECIFIC CONCERN:
+Because the fracture line crossed the LATERAL PHYSIS, there is a real (though typically low for SH-III) risk of premature physeal arrest. If a bony bar forms across the physis during healing, it can tether the lateral epiphysis and produce angular growth deformity. This is why Aiden will get serial follow-up films at 1 week, 4 weeks, 3 months, and 6 months. The fact that he is 14 and his physis is already partially closed mitigates the long-term risk: there is little growth remaining at this physis to be lost.
+
+KEY TEACHING ANCHORS (Week 2):
+
+  - Long bone regions: epiphysis (end), metaphysis (transitional, contains physis on one side and trabecular spongy bone), diaphysis (shaft), with periosteum (outer covering) and endosteum (inner lining of medullary cavity and canals).
+  - Compact bone microanatomy: osteon (Haversian system) = central canal + concentric lamellae + lacunae (housing osteocytes) + canaliculi (the communication channels).
+  - Spongy bone: trabeculae of the epiphysis and metaphysis, containing red bone marrow.
+  - Bone cells: osteoprogenitor (precursor) to osteoblast (builder) to osteocyte (maintainer); osteoclast (multinucleate resorber, separate lineage); chondroblast and chondrocyte (cartilage cells, critical to repair).
+  - Two ossifications: endochondral (cartilage model replaced by bone, builds long bones and drives the physis and bony callus) versus intramembranous (mesenchyme directly to bone, builds skull flat bones and clavicle).
+  - Salter-Harris classification: typed by which structure the line crosses (P, M, E combinations).
+  - Tillaux specifically: a SH-III caused by ATFL avulsion of the anterolateral distal tibial epiphysis in adolescents with the medial physis already closed.</div>
+</div>
+<div class="card">
+  <h2>Your score</h2>
+  <div class="score-row"><span>Diagnostic accuracy</span><span class="sv ${scCls(sc.diag,35)}">${sc.diag}/35</span></div>
+  <div class="score-row"><span>Data efficiency (credits remaining)</span><span class="sv ${scCls(sc.eff,20)}">${sc.eff}/20</span></div>
+  <div class="score-row"><span>Interview quality (topic coverage)</span><span class="sv ${scCls(sc.interview,15)}">${sc.interview}/15</span></div>
+  <div class="score-row"><span>Gate question performance</span><span class="sv ${scCls(sc.gate,10)}">${sc.gate}/10</span></div>
+  <div class="score-row"><span>Completion bonus</span><span class="sv ${scCls(sc.complete,5)}">${sc.complete}/5</span></div>
+  <div class="score-row" style="margin-top:8px;border-top:2px solid var(--navy);padding-top:12px"><span style="font-weight:700;font-size:17px">Total</span><span class="sv full" style="font-size:19px">${sc.total}/${sc.max}</span></div>
+</div>
+<div class="card" style="border-top:4px solid var(--gold)">
+  <h2>Your submission</h2>
+  <div class="sl">Your diagnosis</div>
+  <p style="margin-bottom:14px;color:var(--ink)">${S.diagText||"(not submitted)"}</p>
+  <div class="sl">Your rationale</div>
+  <p style="white-space:pre-wrap;color:var(--ink)">${S.rationaleText||"(not submitted)"}</p>
+</div>`;
+}
+
+/* HELPERS */
+function scrollEl(id){setTimeout(()=>{const e=document.getElementById(id);if(e)e.scrollTop=e.scrollHeight;},20);}
+
+/* COPY / SCREENSHOT PROTECTION */
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>{const t=e.target;if(t.tagName==='INPUT'||t.tagName==='TEXTAREA')return;e.preventDefault();});
+document.addEventListener('copy',e=>{e.preventDefault();try{e.clipboardData.setData('text/plain','Copying is disabled in this exam environment.');}catch(_){}});
+document.addEventListener('cut',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=(e.key||'').toLowerCase();
+  const ctrl=e.ctrlKey||e.metaKey;
+  if(ctrl&&['c','x','s','p','u','a'].includes(k)){const t=e.target;if(t.tagName==='INPUT'||t.tagName==='TEXTAREA')return;e.preventDefault();}
+  if(k==='f12'||(e.ctrlKey&&e.shiftKey&&['i','j','c'].includes(k))||(e.metaKey&&e.altKey&&['i','j','c'].includes(k))){e.preventDefault();}
+  if(ctrl&&e.shiftKey&&k==='s'){e.preventDefault();}
+});
+
+/* INIT */
+render();
+
+/* IFRAME HEIGHT SENDER */
+(function(){
+  const FRAME_ID='bio004-w2-aiden-sim';
+  function sendHeight(){try{const h=document.documentElement.scrollHeight;if(window.parent&&window.parent!==window)window.parent.postMessage({type:'iframeHeight',id:FRAME_ID,height:h},'*');}catch(e){}}
+  window.addEventListener('load',sendHeight);window.addEventListener('resize',sendHeight);
+  if('ResizeObserver' in window){new ResizeObserver(sendHeight).observe(document.body);}
+  setTimeout(sendHeight,200);setTimeout(sendHeight,800);setTimeout(sendHeight,2000);
+})();
+</script>
+</body>
+</html>
