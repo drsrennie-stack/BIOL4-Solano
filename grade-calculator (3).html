@@ -1,0 +1,2352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1322;
+    --navy-mid: #1F2D44;
+    --gold: #D4A24C;
+    --gold-text: #6E5018;
+    --gold-bright: #E5B45C;
+    --terra: #C25A3E;
+    --terra-text: #7A2F18;
+    --terra-bright: #E59575;
+    --teal-text: #2C5F66;
+    --teal-bright: #5B9AA0;
+    --plum-text: #5C2A66;
+    --plum-bright: #8D5099;
+    --slate-text: #334155;
+    --ink-soft: #14202F;
+    --ink-muted: #3D4860;
+    --rule: #B8BEC8;
+    --rule-soft: #DCE0E6;
+    --rule-faint: #E8EBEF;
+    --success: #2E7D5C;
+    --success-bg: #E5F1EB;
+
+    --shadow-card: 0 1px 3px rgba(10,19,34,0.08), 0 1px 2px rgba(10,19,34,0.05);
+    --shadow-lift: 0 6px 16px rgba(10,19,34,0.10), 0 3px 6px rgba(10,19,34,0.06);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  em, i, cite, dfn, var { font-style: normal; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: var(--ink-soft);
+    font-family: 'Atkinson Hyperlegible', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+
+  /* Header */
+  .header { margin-bottom: 28px; }
+  .eyebrow {
+    color: var(--terra-text);
+    font-family: 'DM Sans', 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    color: var(--navy);
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.15;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .subhead {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    color: var(--terra-text);
+    font-size: 17px;
+    margin: 0;
+  }
+  .description {
+    color: var(--ink-muted);
+    margin: 12px 0 0;
+    font-size: 15px;
+    max-width: 72ch;
+  }
+
+  /* Summary card */
+  .summary {
+    background: var(--navy);
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 28px 28px 24px;
+    margin: 24px 0 24px;
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .summary-left .label {
+    font-family: 'DM Sans', 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 6px;
+  }
+  .summary-left .grade-line {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .summary-pct {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+  }
+  .summary-letter {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--gold-bright);
+    padding: 6px 16px;
+    border: 1.5px solid var(--gold-bright);
+    border-radius: 99px;
+    line-height: 1;
+  }
+  .summary-note {
+    margin-top: 10px;
+    color: #C8D0DD;
+    font-size: 14px;
+  }
+  .summary-right {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 240px;
+  }
+  .weight-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    font-size: 14px;
+    color: #C8D0DD;
+    gap: 12px;
+  }
+  .weight-row:last-child { border-bottom: none; }
+  .weight-row .name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+  }
+  .weight-row .value {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+  .weight-row.bonus-row .name { color: var(--gold-bright); }
+  .weight-row.bonus-row .value { color: var(--gold-bright); }
+
+  .progress-meta {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #C8D0DD;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .progress-bar {
+    margin-top: 6px;
+    height: 6px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--gold-bright);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  /* Course Setup card */
+  .config-card {
+    background: #ffffff;
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    padding: 18px 22px 20px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-card);
+  }
+  .config-card h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 16px;
+    margin: 0 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .config-card h2 .meta {
+    font-family: 'DM Sans', 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .config-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+  .config-field label {
+    display: block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .config-field input {
+    width: 100%;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 8px 12px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: #ffffff;
+    -moz-appearance: textfield;
+  }
+  .config-field input::-webkit-outer-spin-button,
+  .config-field input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .config-field input:focus { outline: none; border-color: var(--navy); }
+
+  /* Section cards */
+  .section {
+    background: #ffffff;
+    border: 1px solid var(--rule-soft);
+    border-left: 4px solid var(--rule);
+    border-radius: 4px;
+    padding: 22px 24px 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-card);
+  }
+  .section.lecture { border-left-color: var(--gold); }
+  .section.lab { border-left-color: var(--terra); }
+  .section.tbl { border-left-color: var(--teal-bright); }
+  .section.cumulative { border-left-color: var(--navy-mid); }
+  .section.scholar { border-left-color: var(--plum-bright); }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .section-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 20px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .lecture .section-title { color: var(--gold-text); }
+  .lab .section-title { color: var(--terra-text); }
+  .tbl .section-title { color: var(--teal-text); }
+  .cumulative .section-title { color: var(--navy); }
+  .scholar .section-title { color: var(--plum-text); }
+
+  .weight-pill {
+    display: inline-block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    padding: 4px 12px;
+    border-radius: 99px;
+    background: var(--rule-faint);
+    color: var(--ink-muted);
+  }
+  .lecture .weight-pill { background: #FAF1DE; color: var(--gold-text); }
+  .lab .weight-pill { background: #F8E5DD; color: var(--terra-text); }
+  .tbl .weight-pill { background: #DDEAEC; color: var(--teal-text); }
+  .cumulative .weight-pill { background: var(--rule-faint); color: var(--navy); }
+  .scholar .weight-pill { background: #EBDFEE; color: var(--plum-text); }
+
+  .section-avg {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+  .section-avg strong {
+    color: var(--navy);
+    font-size: 16px;
+    margin-left: 6px;
+  }
+
+  /* Input grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+  .field {
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    padding: 12px 14px 14px;
+    background: #ffffff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field:focus-within {
+    border-color: var(--navy-mid);
+    box-shadow: 0 0 0 2px rgba(31,45,68,0.10);
+  }
+  .field.replaced {
+    border-color: var(--success);
+    box-shadow: 0 0 0 1px var(--success-bg);
+  }
+  .field-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--navy);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .replaced-tag {
+    display: inline-block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 99px;
+    background: var(--success);
+    color: #ffffff;
+  }
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+  .input-row .sep {
+    color: var(--ink-muted);
+    font-weight: 700;
+  }
+  .field input[type="number"] {
+    width: 100%;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 8px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: #ffffff;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+  .field input[type="number"]::-webkit-outer-spin-button,
+  .field input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .field input[type="number"]:focus { outline: none; border-color: var(--navy); }
+  .field input[type="number"]::placeholder {
+    color: var(--rule);
+    font-weight: 500;
+  }
+  .field-pct {
+    margin-top: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-muted);
+    text-align: center;
+    min-height: 20px;
+  }
+  .field-pct.set { color: var(--navy); }
+  .field-pct .raw {
+    color: var(--ink-muted);
+    text-decoration: line-through;
+    font-weight: 500;
+    margin-right: 6px;
+  }
+  .field-pct .new {
+    color: var(--success);
+  }
+
+  .info-note {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    background: #ffffff;
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+  .info-note strong { color: var(--navy); font-weight: 700; }
+  .tbl .info-note strong { color: var(--teal-text); }
+  .lab .info-note strong { color: var(--terra-text); }
+  .cumulative .info-note strong { color: var(--navy); }
+  .scholar .info-note strong { color: var(--plum-text); }
+
+  /* Lab Challenge sub-card */
+  .sub-card {
+    margin-top: 18px;
+    padding: 16px 18px 18px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: var(--shadow-card);
+  }
+  .sub-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .sub-card-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--terra-text);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .bonus-pill {
+    display: inline-block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: var(--gold);
+    color: var(--navy);
+  }
+  .sub-card-result {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+  .sub-card-result strong {
+    color: var(--terra-text);
+    font-size: 16px;
+    margin-left: 4px;
+  }
+  .sub-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 4px;
+  }
+
+  /* TBL section */
+  .tbl-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .tbl-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .tbl-row {
+    display: grid;
+    grid-template-columns: 1fr 110px auto;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    background: #ffffff;
+  }
+  .tbl-row.dropped { opacity: 0.55; border-style: dashed; }
+  .tbl-row .tbl-label {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 7px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: #ffffff;
+  }
+  .tbl-row .tbl-label:focus { outline: none; border-color: var(--navy); }
+  .tbl-value-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tbl-row .tbl-value {
+    width: 70px;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 7px 8px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: #ffffff;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+  .tbl-row .tbl-value::-webkit-outer-spin-button,
+  .tbl-row .tbl-value::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .tbl-row .tbl-value:focus { outline: none; border-color: var(--navy); }
+  .tbl-of {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--ink-muted);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .tbl-row .tbl-remove {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink-muted);
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 700;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .tbl-row .tbl-remove:hover {
+    background: var(--terra);
+    color: #ffffff;
+    border-color: var(--terra);
+  }
+  .tbl-row .tbl-remove:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+  }
+  .tbl-empty {
+    padding: 20px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 14px;
+    border: 1px dashed var(--rule);
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  .tbl-summary {
+    padding: 12px 14px;
+    background: #ffffff;
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+  .tbl-summary .meta {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--teal-text);
+  }
+  .btn-add {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--teal-text);
+    background: #ffffff;
+    border: 1.5px solid var(--teal-bright);
+    border-radius: 4px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+  .btn-add:hover { background: #DDEAEC; }
+  .btn-add:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* Cumulative finals */
+  .cum-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .cum-grid { grid-template-columns: 1fr; }
+  }
+  .cum-card {
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    padding: 16px 18px 18px;
+    background: #ffffff;
+  }
+  .cum-card h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 15px;
+    margin: 0 0 10px;
+  }
+  .cum-input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .cum-input-row input {
+    width: 120px;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 8px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+  .cum-input-row input::-webkit-outer-spin-button,
+  .cum-input-row input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .cum-input-row input:focus { outline: none; border-color: var(--navy); }
+  .cum-input-row .of {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+  .cum-effect {
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    padding: 10px 12px;
+    background: var(--rule-faint);
+    border-radius: 4px;
+  }
+  .cum-effect.applied {
+    background: var(--success-bg);
+    color: var(--ink-soft);
+  }
+  .cum-effect .boost {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--success);
+  }
+  .cum-effect strong {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--navy);
+  }
+  .cum-tip {
+    padding: 12px 14px;
+    background: #ffffff;
+    border: 1px solid var(--rule-soft);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    line-height: 1.55;
+  }
+  .cum-tip strong {
+    color: var(--gold-text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+  }
+
+  /* Scholar Points */
+  .scholar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .scholar-grid { grid-template-columns: 1fr; }
+  }
+  .scholar-card {
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    padding: 16px 18px 18px;
+    background: #ffffff;
+  }
+  .scholar-card h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--plum-text);
+    font-size: 15px;
+    margin: 0 0 4px;
+  }
+  .scholar-card .max {
+    font-family: 'DM Sans', 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .hours-input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .hours-input-row input {
+    width: 100px;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 8px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+  .hours-input-row input::-webkit-outer-spin-button,
+  .hours-input-row input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .hours-input-row input:focus { outline: none; border-color: var(--navy); }
+  .hours-input-row .of {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+  .hours-bar {
+    height: 6px;
+    background: var(--rule-faint);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .hours-bar-fill {
+    height: 100%;
+    background: var(--plum-bright);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .scholar-status {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .scholar-status .earned {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: var(--success-bg);
+    color: var(--success);
+    font-size: 13px;
+    margin-left: 6px;
+  }
+  .scholar-status .pending {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: var(--rule-faint);
+    color: var(--ink-muted);
+    font-size: 13px;
+    margin-left: 6px;
+  }
+  .check-list {
+    margin: 10px 0 12px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+  }
+  .check-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    color: var(--ink-muted);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+  }
+  .check-list .mark {
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    border-radius: 99px;
+    background: var(--rule-faint);
+    color: var(--ink-muted);
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .check-list li.met .mark {
+    background: var(--success);
+    color: #ffffff;
+  }
+  .check-list li.met { color: var(--navy); }
+
+  .scholar-total {
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 1.5px solid var(--plum-bright);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .scholar-total .label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--plum-text);
+    font-size: 15px;
+  }
+  .scholar-total .value {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    color: var(--plum-text);
+  }
+
+  /* Target tool */
+  .target {
+    background: #ffffff;
+    border: 1px solid var(--rule-soft);
+    border-left: 4px solid var(--navy-mid);
+    border-radius: 4px;
+    padding: 22px 24px 24px;
+    margin-top: 28px;
+    box-shadow: var(--shadow-card);
+  }
+  .target h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 20px;
+    margin: 0 0 6px;
+  }
+  .target p.intro {
+    color: var(--ink-muted);
+    margin: 0 0 16px;
+    font-size: 15px;
+  }
+  .target-controls {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .target-controls label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--navy);
+  }
+  .target-controls input[type="number"] {
+    width: 120px;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 10px 12px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+  .target-controls input[type="number"]::-webkit-outer-spin-button,
+  .target-controls input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .target-result {
+    padding: 14px 16px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    background: #ffffff;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .target-result.empty { color: var(--ink-muted); }
+  .target-result strong {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .target-result .need {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 99px;
+    background: var(--navy);
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 2px;
+  }
+  .target-result .need.impossible { background: var(--terra); }
+  .target-result .need.locked-in { background: var(--success); }
+  .target-fineprint {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* Required Cumulative sub-card */
+  .req-cum {
+    margin-top: 16px;
+    padding: 16px 18px 18px;
+    border: 1px solid var(--rule-soft);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    background: #ffffff;
+  }
+  .req-cum h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--gold-text);
+    font-size: 15px;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .req-cum .intro {
+    color: var(--ink-muted);
+    font-size: 13px;
+    margin: 0 0 14px;
+  }
+  .req-cum-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .req-cum-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    background: #ffffff;
+  }
+  .req-cum-row .scenario {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .req-cum-row .scenario .sub {
+    display: block;
+    font-weight: 400;
+    color: var(--ink-muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  .req-cum-row .answer {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #ffffff;
+    background: var(--navy);
+    padding: 5px 14px;
+    border-radius: 99px;
+    white-space: nowrap;
+  }
+  .req-cum-row .answer.impossible { background: var(--terra); }
+  .req-cum-row .answer.lockedin { background: var(--success); }
+  .req-cum-row .answer.text {
+    background: var(--rule-faint);
+    color: var(--ink-muted);
+    font-weight: 600;
+  }
+
+  /* Toolbar */
+  .toolbar {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    padding: 11px 20px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  .btn-primary { background: var(--navy); color: #ffffff; }
+  .btn-primary:hover { background: var(--navy-mid); }
+  .btn-secondary {
+    background: #ffffff;
+    color: var(--navy);
+    border-color: var(--rule);
+  }
+  .btn-secondary:hover {
+    background: var(--rule-faint);
+    border-color: var(--ink-muted);
+  }
+  .btn:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .page { padding: 24px 16px 48px; }
+    .summary {
+      grid-template-columns: 1fr;
+      padding: 22px 20px;
+    }
+    .summary-pct { font-size: 44px; }
+    .target-controls { grid-template-columns: 1fr; gap: 8px; }
+    .target-controls input[type="number"] { width: 100%; }
+    .tbl-row { grid-template-columns: 1fr 100px auto; }
+    .req-cum-row { grid-template-columns: 1fr; }
+    .req-cum-row .answer { justify-self: start; }
+  }
+
+  /* Print */
+  @media print {
+    .toolbar, .tbl-remove, .btn-add { display: none; }
+    body { background: #ffffff; }
+    .summary { background: #ffffff; color: var(--ink-soft); border: 2px solid var(--navy); }
+    .summary-pct, .summary-letter, .summary-note,
+    .weight-row .name, .weight-row .value, .progress-meta { color: var(--ink-soft); }
+    .summary-letter { border-color: var(--navy); color: var(--navy); }
+  }
+
+  input:focus-visible { outline: none; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="header">
+    <div class="eyebrow">Anatomy &amp; Physiology · MedMasters Collaborative</div>
+    <h1>Grade Calculator</h1>
+    <p class="subhead">Track your standing, plan your finals, see your finish line</p>
+    <p class="description">Enter your scores as you receive them. Your grade updates live, your entries save in this browser, and you can experiment with cumulative final scores to see exactly what you need to land your goal grade.</p>
+  </header>
+
+  <!-- Summary -->
+  <section class="summary" aria-live="polite" aria-atomic="true">
+    <div class="summary-left">
+      <div class="label">Current Course Grade</div>
+      <div class="grade-line">
+        <div class="summary-pct" id="summary-pct">—</div>
+        <div class="summary-letter" id="summary-letter">—</div>
+      </div>
+      <div class="summary-note" id="summary-note">Enter scores below to begin.</div>
+      <div class="progress-meta">
+        <span>Weighted coverage</span>
+        <span id="coverage-pct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="coverage-fill"></div></div>
+    </div>
+    <div class="summary-right" aria-label="Category breakdown">
+      <div class="weight-row">
+        <span class="name">Lecture Exams</span>
+        <span class="value"><span id="cat-lecture">—</span> · 35%</span>
+      </div>
+      <div class="weight-row">
+        <span class="name">Lab Exams</span>
+        <span class="value"><span id="cat-lab">—</span> · 35%</span>
+      </div>
+      <div class="weight-row">
+        <span class="name">TBL</span>
+        <span class="value"><span id="cat-tbl">—</span> · 30%</span>
+      </div>
+      <div class="weight-row bonus-row">
+        <span class="name">Scholar Points</span>
+        <span class="value" id="cat-scholar">+0.0%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Setup -->
+  <section class="config-card" aria-labelledby="config-head">
+    <h2 id="config-head">Course Setup <span class="meta">Adjust to match your class</span></h2>
+    <div class="config-grid">
+      <div class="config-field">
+        <label for="config-lec-count">Number of lecture exams</label>
+        <input type="number" id="config-lec-count" min="0" max="15" value="4">
+      </div>
+      <div class="config-field">
+        <label for="config-lab-count">Number of lab exams</label>
+        <input type="number" id="config-lab-count" min="0" max="15" value="4">
+      </div>
+      <div class="config-field">
+        <label for="config-tbl-drops">TBL: drop lowest</label>
+        <input type="number" id="config-tbl-drops" min="0" max="5" value="2">
+      </div>
+      <div class="config-field">
+        <label for="config-lab-bank">Lab challenge bank (points)</label>
+        <input type="number" id="config-lab-bank" min="1" max="100" value="20">
+      </div>
+      <div class="config-field">
+        <label for="config-tbl-points">TBL: points per item</label>
+        <input type="number" id="config-tbl-points" min="1" max="200" value="50">
+      </div>
+    </div>
+  </section>
+
+  <!-- Lecture exams -->
+  <section class="section lecture" id="section-lecture" aria-labelledby="lecture-head">
+    <div class="section-head">
+      <h2 class="section-title" id="lecture-head">
+        Lecture Exams
+        <span class="weight-pill">35% of grade</span>
+      </h2>
+      <div class="section-avg">Average: <strong id="avg-lecture">—</strong></div>
+    </div>
+    <div class="grid" id="grid-lecture"></div>
+  </section>
+
+  <!-- Lab exams -->
+  <section class="section lab" id="section-lab" aria-labelledby="lab-head">
+    <div class="section-head">
+      <h2 class="section-title" id="lab-head">
+        Lab Exams
+        <span class="weight-pill">35% of grade</span>
+      </h2>
+      <div class="section-avg">Average: <strong id="avg-lab">—</strong></div>
+    </div>
+    <div class="grid" id="grid-lab"></div>
+
+    <div class="sub-card" aria-labelledby="lab-challenge-head">
+      <div class="sub-card-head">
+        <h3 class="sub-card-title" id="lab-challenge-head">
+          Lab Challenge Questions
+          <span class="bonus-pill">Bonus</span>
+        </h3>
+        <div class="sub-card-result">Bonus earned: <strong id="lab-bonus-points">0.00 pts</strong> of 10 max</div>
+      </div>
+      <div class="sub-card-grid">
+        <div class="field">
+          <label class="field-label" for="lab-challenge-earned">Points earned (of 20)</label>
+          <input type="number" id="lab-challenge-earned" min="0" step="0.01" placeholder="0" aria-label="Lab challenge points earned out of 20">
+          <div class="field-pct" id="lab-challenge-pct"></div>
+        </div>
+        <div class="info-note">
+          <strong>How this works:</strong> the challenge bank size is set in Course Setup (default 20 points). The percentage you earn from the bank is applied to a maximum of <strong>10 bonus points</strong>, added to your lab exam total at the end of the semester. Example: 15 of 20 (75%) earns 7.5 bonus points. Scoring above the bank cap still earns the full 10-point bonus. The bonus only applies once all lab exams are entered.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TBL -->
+  <section class="section tbl" aria-labelledby="tbl-head">
+    <div class="section-head">
+      <h2 class="section-title" id="tbl-head">
+        Team-Based Learning
+        <span class="weight-pill">30% of grade</span>
+      </h2>
+      <div class="section-avg">Average: <strong id="avg-tbl">—</strong></div>
+    </div>
+    <div class="tbl-toolbar">
+      <button type="button" class="btn-add" id="btn-add-tbl">+ Add TBL Score</button>
+      <span class="section-avg" id="tbl-drop-meta">No items yet</span>
+    </div>
+    <div class="tbl-list" id="tbl-list"></div>
+    <div class="tbl-empty" id="tbl-empty">No TBL scores entered yet. Click "Add TBL Score" to start. Each TBL package bundles your iRAT, tRAT, and pRAT together as a single grade (default 50 points, configurable in Course Setup). Include your GI Map and Nephron Map here too. Enter the points you earned, exactly as they appear in your gradebook.</div>
+    <div class="tbl-summary" id="tbl-summary">
+      <strong style="color: var(--teal-text);">Drop policy:</strong> the lowest TBL scores are dropped from your average. Adjust the drop count in Course Setup above.
+    </div>
+  </section>
+
+  <!-- Cumulative Finals -->
+  <section class="section cumulative" aria-labelledby="cum-head">
+    <div class="section-head">
+      <h2 class="section-title" id="cum-head">
+        Cumulative Finals
+        <span class="weight-pill">Replaces lowest exam</span>
+      </h2>
+    </div>
+
+    <div class="cum-tip">
+      <strong>Tip:</strong> Enter <strong>0</strong> in both fields below to see your current baseline grade with no cumulative improvement. That tells you exactly where you stand if nothing else changes. Then experiment with different scores to see how each cumulative would lift your grade.
+    </div>
+
+    <div class="cum-grid">
+      <div class="cum-card">
+        <h3>Lecture Cumulative Final</h3>
+        <div class="cum-input-row">
+          <input type="number" id="cum-lec" min="0" max="100" step="0.01" placeholder="0" aria-label="Lecture cumulative final percentage">
+          <span class="of">%</span>
+        </div>
+        <div class="cum-effect" id="cum-lec-effect">Enter a score to see how it affects your lowest lecture exam.</div>
+      </div>
+
+      <div class="cum-card">
+        <h3>Lab Cumulative Final</h3>
+        <div class="cum-input-row">
+          <input type="number" id="cum-lab" min="0" max="100" step="0.01" placeholder="0" aria-label="Lab cumulative final percentage">
+          <span class="of">%</span>
+        </div>
+        <div class="cum-effect" id="cum-lab-effect">Enter a score to see how it affects your lowest lab exam.</div>
+      </div>
+    </div>
+
+    <div class="info-note">
+      <strong>How this works:</strong> each cumulative final partially replaces your lowest score in its category by splitting the difference. If your lowest lab exam was 20 and your lab cumulative is 80, that 20 becomes 50 (the midpoint of the two). If the cumulative is lower than your lowest exam, no replacement is applied. The cumulative finals do not count as one of your regular exams.
+    </div>
+  </section>
+
+  <!-- Scholar Points -->
+  <section class="section scholar" aria-labelledby="scholar-head">
+    <div class="section-head">
+      <h2 class="section-title" id="scholar-head">
+        Scholar Points
+        <span class="weight-pill">Up to +3.0% bonus</span>
+      </h2>
+      <div class="section-avg">Bonus earned: <strong id="scholar-total-pill">+0.00%</strong></div>
+    </div>
+
+    <div class="scholar-grid">
+      <div class="scholar-card">
+        <h3>Tutoring Engagement</h3>
+        <div class="max">Up to +2.0% · prorated by hours completed</div>
+        <div class="hours-input-row">
+          <input type="number" id="tutoring-hours" min="0" step="0.5" placeholder="0" aria-label="Verified tutoring hours">
+          <span class="of">hours of 36</span>
+        </div>
+        <div class="hours-bar" aria-hidden="true"><div class="hours-bar-fill" id="hours-bar-fill"></div></div>
+        <div class="scholar-status">
+          Tutoring bonus
+          <span class="earned" id="tutoring-status">+0.00%</span>
+        </div>
+      </div>
+
+      <div class="scholar-card">
+        <h3>Academic Performance</h3>
+        <div class="max">+1.0% · requires both conditions below</div>
+        <ul class="check-list" id="ap-checklist">
+          <li id="ap-check-avg"><span class="mark">·</span><span>Pre-bonus average ≥ 80%</span></li>
+          <li id="ap-check-hours"><span class="mark">·</span><span>Tutoring hours ≥ 36</span></li>
+        </ul>
+        <div class="scholar-status">
+          Performance bonus
+          <span class="pending" id="ap-status">Not yet earned</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scholar-total">
+      <span class="label">Total Scholar Points bonus</span>
+      <span class="value" id="scholar-total-value">+0.00%</span>
+    </div>
+
+    <div class="info-note">
+      <strong>How Scholar Points work:</strong> the tutoring portion is prorated based on the hours you complete (max 2.0% at 36 hours). The Academic Performance portion adds 1.0% only when you complete the full 36 tutoring hours AND maintain an 80% or higher pre-bonus average. Total bonus is capped at 3.0%.
+    </div>
+  </section>
+
+  <!-- Target -->
+  <section class="target" aria-labelledby="target-head">
+    <h2 id="target-head">What do I need on the rest?</h2>
+    <p class="intro">Pick a goal grade. Any empty exam fields above are treated as still-to-come. This tool shows the average you need across those remaining items, plus required cumulative final scores once all exams are entered.</p>
+    <div class="target-controls">
+      <label for="target-input">Goal grade (%)</label>
+      <input type="number" id="target-input" min="0" max="110" step="0.1" placeholder="e.g. 90" aria-describedby="target-result">
+    </div>
+    <div class="target-result empty" id="target-result" role="status" aria-live="polite">
+      Set a goal grade to see what is required.
+    </div>
+    <div class="target-fineprint">
+      The target calculation uses your current cumulative final scores, Scholar Points, and Lab Challenge bonus as entered. To experiment, change those values above and watch the required average update.
+    </div>
+
+    <div class="req-cum hidden" id="req-cum-block" aria-live="polite">
+      <h3>Required Cumulative Final Scores</h3>
+      <p class="intro">To finish at your goal grade, here are the cumulative final scores you would need under three scenarios:</p>
+      <div class="req-cum-list" id="req-cum-list"></div>
+    </div>
+  </section>
+
+  <div class="toolbar">
+    <button type="button" class="btn btn-secondary" id="btn-reset">Reset all scores</button>
+    <button type="button" class="btn btn-secondary" id="btn-print">Print summary</button>
+  </div>
+
+</main>
+
+<script>
+(function() {
+  'use strict';
+
+  const WEIGHTS = { lecture: 0.35, lab: 0.35, tbl: 0.30 };
+  const SCHOLAR = {
+    requiredHours: 36,
+    tutoringMax: 2.0,
+    performanceBonus: 1.0,
+    totalMax: 3.0,
+    apThresholdAvg: 80
+  };
+  const LAB_CHALLENGE = { bonusMaxPoints: 10 };
+
+  const STORAGE_KEY = 'medmasters-grade-calc-v4';
+
+  // ---------- State ----------
+  let lecCount = 4;
+  let labCount = 4;
+  let tblDrops = 2;
+  let tblPointsPerItem = 50;
+  let labChallengeBank = 20;
+  let tblItems = []; // { uid, label, value }
+  let tblUidCounter = 0;
+
+  // ---------- Helpers ----------
+  function escapeHTML(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function letterGrade(pct) {
+    if (pct === null || isNaN(pct)) return '—';
+    if (pct >= 90) return 'A';
+    if (pct >= 80) return 'B';
+    if (pct >= 70) return 'C';
+    if (pct >= 60) return 'D';
+    return 'F';
+  }
+
+  function fmt(v, d) {
+    if (v === null || isNaN(v)) return '—';
+    return v.toFixed(d === undefined ? 2 : d) + '%';
+  }
+
+  function getNextTblNumber() {
+    let max = 0;
+    tblItems.forEach(it => {
+      const match = (it.label || '').match(/^TBL\s+(\d+)$/);
+      if (match) {
+        const n = parseInt(match[1], 10);
+        if (n > max) max = n;
+      }
+    });
+    return max + 1;
+  }
+
+  function updateLabChallengeLabel() {
+    const labelEl = document.querySelector('label[for="lab-challenge-earned"]');
+    if (labelEl) labelEl.textContent = 'Points earned (of ' + labChallengeBank + ')';
+  }
+
+  // ---------- Build exam fields ----------
+  function buildExamFields(category, count) {
+    const container = document.getElementById('grid-' + category);
+    const existingValues = {};
+    container.querySelectorAll('input').forEach(el => {
+      if (el.value !== '') existingValues[el.id] = el.value;
+    });
+    container.innerHTML = '';
+    const labelText = category === 'lecture' ? 'Lecture Exam' : 'Lab Exam';
+    for (let i = 1; i <= count; i++) {
+      const id = category + '-' + i;
+      const wrap = document.createElement('div');
+      wrap.className = 'field';
+      wrap.id = id + '-field';
+      wrap.innerHTML =
+        '<div class="field-label">' +
+          '<span>' + labelText + ' ' + i + '</span>' +
+          '<span class="replaced-tag hidden" id="' + id + '-tag">Replaced</span>' +
+        '</div>' +
+        '<div class="input-row">' +
+          '<input type="number" id="' + id + '-earned" data-cat="' + category + '" data-idx="' + i + '" data-kind="earned" min="0" step="0.01" placeholder="earned" aria-label="' + labelText + ' ' + i + ' points earned">' +
+          '<span class="sep" aria-hidden="true">/</span>' +
+          '<input type="number" id="' + id + '-possible" data-cat="' + category + '" data-idx="' + i + '" data-kind="possible" min="0.01" step="0.01" placeholder="100" value="100" aria-label="' + labelText + ' ' + i + ' points possible">' +
+        '</div>' +
+        '<div class="field-pct" id="' + id + '-pct" aria-live="polite"></div>';
+      container.appendChild(wrap);
+    }
+    Object.entries(existingValues).forEach(([k, v]) => {
+      const el = document.getElementById(k);
+      if (el) el.value = v;
+    });
+    container.querySelectorAll('input').forEach(el => {
+      el.addEventListener('input', () => { saveState(); recalc(); });
+    });
+    document.getElementById('section-' + category).classList.toggle('hidden', count === 0);
+  }
+
+  // ---------- TBL list ----------
+  function renderTbl() {
+    const list = document.getElementById('tbl-list');
+    const empty = document.getElementById('tbl-empty');
+    list.innerHTML = '';
+    if (tblItems.length === 0) {
+      empty.classList.remove('hidden');
+      list.classList.add('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+    list.classList.remove('hidden');
+
+    const dropped = computeTblDropped();
+
+    tblItems.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'tbl-row';
+      row.dataset.uid = item.uid;
+      if (dropped.indexOf(item.uid) !== -1) row.classList.add('dropped');
+      row.innerHTML =
+        '<input type="text" class="tbl-label" value="' + escapeHTML(item.label) + '" aria-label="TBL item name" maxlength="40">' +
+        '<div class="tbl-value-wrap">' +
+          '<input type="number" class="tbl-value" min="0" step="0.01" value="' + escapeHTML(item.value) + '" placeholder="0" aria-label="TBL item points earned">' +
+          '<span class="tbl-of">/ ' + tblPointsPerItem + '</span>' +
+        '</div>' +
+        '<button type="button" class="tbl-remove" aria-label="Remove this TBL item">&times;</button>';
+      const labelEl = row.querySelector('.tbl-label');
+      const valueEl = row.querySelector('.tbl-value');
+      const removeEl = row.querySelector('.tbl-remove');
+      labelEl.addEventListener('input', () => {
+        item.label = labelEl.value;
+        saveState();
+      });
+      valueEl.addEventListener('input', () => {
+        item.value = valueEl.value;
+        saveState();
+        recalc();
+        updateTblDroppedVisuals();
+      });
+      removeEl.addEventListener('click', () => removeTblItem(item.uid));
+      list.appendChild(row);
+    });
+  }
+
+  function updateTblDroppedVisuals() {
+    const dropped = computeTblDropped();
+    document.querySelectorAll('.tbl-row').forEach(row => {
+      const uid = parseInt(row.dataset.uid, 10);
+      row.classList.toggle('dropped', dropped.indexOf(uid) !== -1);
+    });
+  }
+
+  function addTblItem(label, value) {
+    const uid = ++tblUidCounter;
+    tblItems.push({
+      uid: uid,
+      label: label || ('TBL ' + getNextTblNumber()),
+      value: value || ''
+    });
+    renderTbl();
+    saveState();
+    recalc();
+  }
+
+  function removeTblItem(uid) {
+    tblItems = tblItems.filter(it => it.uid !== uid);
+    renderTbl();
+    saveState();
+    recalc();
+  }
+
+  function getTblNumericItems() {
+    return tblItems
+      .map(it => {
+        const points = parseFloat(it.value);
+        return {
+          uid: it.uid,
+          label: it.label,
+          points: points,
+          pct: !isNaN(points) ? (points / tblPointsPerItem * 100) : NaN
+        };
+      })
+      .filter(it => !isNaN(it.points));
+  }
+
+  function computeTblDropped() {
+    const items = getTblNumericItems();
+    if (items.length === 0) return [];
+    const drops = Math.min(tblDrops, Math.max(0, items.length - 1));
+    if (drops === 0) return [];
+    const sorted = [...items].sort((a, b) => a.points - b.points);
+    return sorted.slice(0, drops).map(it => it.uid);
+  }
+
+  function tblStats() {
+    const items = getTblNumericItems();
+    if (items.length === 0) return { avg: null, kept: [], dropped: [], count: 0 };
+    const drops = Math.min(tblDrops, Math.max(0, items.length - 1));
+    const sorted = [...items].sort((a, b) => a.points - b.points);
+    const dropped = sorted.slice(0, drops);
+    const kept = sorted.slice(drops);
+    const totalEarned = kept.reduce((s, it) => s + it.points, 0);
+    const totalPossible = kept.length * tblPointsPerItem;
+    const avg = totalPossible > 0 ? (totalEarned / totalPossible * 100) : null;
+    return { avg: avg, kept: kept, dropped: dropped, count: items.length, drops: drops };
+  }
+
+  // ---------- Lab Challenge ----------
+  function getLabChallenge() {
+    const earnedEl = document.getElementById('lab-challenge-earned');
+    const earned = parseFloat(earnedEl.value);
+    if (isNaN(earned) || earnedEl.value.trim() === '') {
+      return { complete: false, fraction: 0, bonusPoints: 0, overCap: false };
+    }
+    const cappedEarned = Math.max(0, Math.min(earned, labChallengeBank));
+    const fraction = cappedEarned / labChallengeBank;
+    return {
+      complete: true,
+      earned: earned,
+      cappedEarned: cappedEarned,
+      overCap: earned > labChallengeBank,
+      fraction: fraction,
+      bonusPoints: fraction * LAB_CHALLENGE.bonusMaxPoints
+    };
+  }
+
+  // ---------- Cumulative finals ----------
+  function getCum(category) {
+    const el = document.getElementById('cum-' + (category === 'lecture' ? 'lec' : 'lab'));
+    const v = parseFloat(el.value);
+    if (isNaN(v) || el.value.trim() === '') return null;
+    return v;
+  }
+
+  // ---------- Tutoring hours ----------
+  function getTutoringHours() {
+    const el = document.getElementById('tutoring-hours');
+    const v = parseFloat(el.value);
+    if (isNaN(v) || v < 0) return 0;
+    return v;
+  }
+
+  // ---------- Per-category data ----------
+  function getExamCategoryItems(category) {
+    const count = category === 'lecture' ? lecCount : labCount;
+    const items = [];
+    for (let i = 1; i <= count; i++) {
+      const earnedEl = document.getElementById(category + '-' + i + '-earned');
+      const possibleEl = document.getElementById(category + '-' + i + '-possible');
+      if (!earnedEl || !possibleEl) continue;
+      const earned = parseFloat(earnedEl.value);
+      const possible = parseFloat(possibleEl.value);
+      const hasE = !isNaN(earned) && earnedEl.value.trim() !== '';
+      const hasP = !isNaN(possible) && possible > 0;
+      const complete = hasE && hasP;
+      items.push({
+        idx: i,
+        earned: complete ? earned : null,
+        possible: complete ? possible : null,
+        pct: complete ? (earned / possible * 100) : null,
+        complete: complete
+      });
+    }
+    return items;
+  }
+
+  function examCategoryStats(category, cumPct, labBonusPoints) {
+    const items = getExamCategoryItems(category);
+    const count = items.length;
+    const completed = items.filter(it => it.complete);
+    if (completed.length === 0) {
+      return { items: items, completed: completed, avg: null, sumEarned: 0, sumPossible: 0, shareDone: 0, replacement: null };
+    }
+
+    let lowestIdx = -1;
+    let lowestPct = Infinity;
+    completed.forEach((it, idx) => {
+      if (it.pct < lowestPct) { lowestPct = it.pct; lowestIdx = idx; }
+    });
+
+    let replacement = null;
+    let sumEarned = 0;
+    const sumPossible = completed.reduce((a, it) => a + it.possible, 0);
+
+    completed.forEach((it, idx) => {
+      let earned = it.earned;
+      if (idx === lowestIdx && cumPct !== null && cumPct > it.pct) {
+        const newPct = (it.pct + cumPct) / 2;
+        earned = newPct / 100 * it.possible;
+        replacement = {
+          examIdx: it.idx,
+          origPct: it.pct,
+          newPct: newPct,
+          delta: newPct - it.pct
+        };
+      }
+      sumEarned += earned;
+    });
+
+    if (category === 'lab' && labBonusPoints > 0 && labCount > 0 && completed.length === labCount) {
+      sumEarned += labBonusPoints;
+    }
+
+    const avg = sumPossible > 0 ? (sumEarned / sumPossible * 100) : null;
+    const shareDone = count > 0 ? completed.length / count : 0;
+    return {
+      items: items,
+      completed: completed,
+      avg: avg,
+      sumEarned: sumEarned,
+      sumPossible: sumPossible,
+      shareDone: shareDone,
+      replacement: replacement
+    };
+  }
+
+  // ---------- Scholar Points ----------
+  function computeScholarPoints(preBonusAvg) {
+    const hours = getTutoringHours();
+    const cappedHours = Math.min(hours, SCHOLAR.requiredHours);
+    const tutoringPct = (cappedHours / SCHOLAR.requiredHours) * SCHOLAR.tutoringMax;
+    const meetsHours = hours >= SCHOLAR.requiredHours;
+    const meetsAvg = preBonusAvg !== null && preBonusAvg >= SCHOLAR.apThresholdAvg;
+    const apEarned = meetsHours && meetsAvg;
+    const apPct = apEarned ? SCHOLAR.performanceBonus : 0;
+    const total = Math.min(tutoringPct + apPct, SCHOLAR.totalMax);
+    return {
+      hours: hours,
+      tutoringPct: tutoringPct,
+      meetsHours: meetsHours,
+      meetsAvg: meetsAvg,
+      apEarned: apEarned,
+      apPct: apPct,
+      total: total
+    };
+  }
+
+  // ---------- Display helpers ----------
+  function updateExamFieldPct(category, stats) {
+    const items = stats.items;
+    const replacement = stats.replacement;
+    items.forEach(it => {
+      const el = document.getElementById(category + '-' + it.idx + '-pct');
+      const fieldEl = document.getElementById(category + '-' + it.idx + '-field');
+      const tagEl = document.getElementById(category + '-' + it.idx + '-tag');
+      if (!el) return;
+      if (it.complete) {
+        if (replacement && replacement.examIdx === it.idx) {
+          el.innerHTML = '<span class="raw">' + it.pct.toFixed(1) + '%</span><span class="new">' + replacement.newPct.toFixed(1) + '%</span>';
+          el.classList.add('set');
+          if (fieldEl) fieldEl.classList.add('replaced');
+          if (tagEl) tagEl.classList.remove('hidden');
+        } else {
+          el.textContent = it.pct.toFixed(1) + '%';
+          el.classList.add('set');
+          if (fieldEl) fieldEl.classList.remove('replaced');
+          if (tagEl) tagEl.classList.add('hidden');
+        }
+      } else {
+        el.textContent = '';
+        el.classList.remove('set');
+        if (fieldEl) fieldEl.classList.remove('replaced');
+        if (tagEl) tagEl.classList.add('hidden');
+      }
+    });
+  }
+
+  function updateCumEffect(category, stats, cumPct) {
+    const effectEl = document.getElementById('cum-' + (category === 'lecture' ? 'lec' : 'lab') + '-effect');
+    const catLabel = category === 'lecture' ? 'lecture' : 'lab';
+    if (cumPct === null) {
+      effectEl.className = 'cum-effect';
+      effectEl.textContent = 'Enter a score to see how it affects your lowest ' + catLabel + ' exam.';
+      return;
+    }
+    if (stats.completed.length === 0) {
+      effectEl.className = 'cum-effect';
+      effectEl.textContent = 'Enter your ' + catLabel + ' exam scores above to see the effect.';
+      return;
+    }
+    let lowestPct = Infinity;
+    let lowestIdx = -1;
+    stats.completed.forEach(it => {
+      if (it.pct < lowestPct) { lowestPct = it.pct; lowestIdx = it.idx; }
+    });
+    if (cumPct > lowestPct) {
+      const newPct = (lowestPct + cumPct) / 2;
+      const delta = newPct - lowestPct;
+      effectEl.className = 'cum-effect applied';
+      effectEl.innerHTML = 'Your lowest ' + catLabel + ' exam is <strong>Exam ' + lowestIdx + '</strong> at <strong>' + lowestPct.toFixed(1) + '%</strong>. The cumulative final replaces it with <span class="boost">' + newPct.toFixed(1) + '%</span> (a boost of ' + delta.toFixed(1) + ' points).';
+    } else {
+      effectEl.className = 'cum-effect';
+      effectEl.innerHTML = 'Your cumulative score (<strong>' + cumPct.toFixed(1) + '%</strong>) is at or below your lowest ' + catLabel + ' exam (<strong>' + lowestPct.toFixed(1) + '%</strong>). No replacement applied. Your original score stays.';
+    }
+  }
+
+  function updateTblDisplays() {
+    const stats = tblStats();
+    const dropMetaEl = document.getElementById('tbl-drop-meta');
+    const summaryEl = document.getElementById('tbl-summary');
+
+    if (stats.avg === null) {
+      dropMetaEl.textContent = 'No items yet';
+      summaryEl.innerHTML = '<strong style="color: var(--teal-text);">Drop policy:</strong> the lowest TBL scores are dropped from your average. Adjust the drop count in Course Setup above.';
+    } else {
+      const kept = stats.kept.length;
+      const total = stats.count;
+      dropMetaEl.innerHTML = 'Avg of best <strong>' + kept + ' of ' + total + '</strong>: <strong style="color: var(--navy);">' + stats.avg.toFixed(2) + '%</strong>';
+      if (stats.dropped.length > 0) {
+        const droppedNames = stats.dropped.map(d => d.label + ' (' + d.points.toFixed(1) + ' / ' + tblPointsPerItem + ')').join(', ');
+        summaryEl.innerHTML = '<span class="meta">Dropped ' + stats.dropped.length + ' lowest:</span> ' + escapeHTML(droppedNames);
+      } else {
+        summaryEl.innerHTML = '<span class="meta">No drops applied yet.</span> Drops will engage once you have more entries than the drop count.';
+      }
+    }
+    document.getElementById('avg-tbl').textContent = stats.avg === null ? '—' : fmt(stats.avg);
+    document.getElementById('cat-tbl').textContent = stats.avg === null ? '—' : fmt(stats.avg, 1);
+  }
+
+  // ---------- Main recalc ----------
+  function recalc() {
+    const cumLec = getCum('lecture');
+    const cumLab = getCum('lab');
+    const challenge = getLabChallenge();
+
+    const lec = examCategoryStats('lecture', cumLec, 0);
+    const lab = examCategoryStats('lab', cumLab, challenge.bonusPoints);
+    const tbl = tblStats();
+
+    updateExamFieldPct('lecture', lec);
+    updateExamFieldPct('lab', lab);
+    updateCumEffect('lecture', lec, cumLec);
+    updateCumEffect('lab', lab, cumLab);
+    updateTblDisplays();
+
+    const cats = [
+      { key: 'lecture', weight: WEIGHTS.lecture, avg: lec.avg, shareDone: lec.shareDone },
+      { key: 'lab',     weight: WEIGHTS.lab,     avg: lab.avg, shareDone: lab.shareDone },
+      { key: 'tbl',     weight: WEIGHTS.tbl,     avg: tbl.avg, shareDone: tbl.avg !== null ? 1 : 0 }
+    ];
+
+    let totalCovered = 0;
+    let weightedSum = 0;
+    cats.forEach(c => {
+      if (c.avg === null) return;
+      const covered = c.weight * c.shareDone;
+      totalCovered += covered;
+      weightedSum += covered * c.avg;
+    });
+
+    const preBonus = totalCovered > 0 ? (weightedSum / totalCovered) : null;
+    const scholar = computeScholarPoints(preBonus);
+
+    document.getElementById('avg-lecture').textContent = fmt(lec.avg);
+    document.getElementById('avg-lab').textContent = fmt(lab.avg);
+    document.getElementById('cat-lecture').textContent = fmt(lec.avg, 1);
+    document.getElementById('cat-lab').textContent = fmt(lab.avg, 1);
+    document.getElementById('cat-scholar').textContent = '+' + scholar.total.toFixed(2) + '%';
+
+    const lcPctEl = document.getElementById('lab-challenge-pct');
+    if (challenge.complete) {
+      let pctTxt = (challenge.fraction * 100).toFixed(1) + '% of bank';
+      if (challenge.overCap) pctTxt += ' (capped at ' + labChallengeBank + ')';
+      if (labCount > 0) {
+        if (lab.completed.length === labCount) {
+          pctTxt += ' · Applied to lab total';
+        } else {
+          const remaining = labCount - lab.completed.length;
+          pctTxt += ' · Pending (' + remaining + ' lab exam' + (remaining === 1 ? '' : 's') + ' to go)';
+        }
+      }
+      lcPctEl.textContent = pctTxt;
+      lcPctEl.classList.add('set');
+    } else {
+      lcPctEl.textContent = '';
+      lcPctEl.classList.remove('set');
+    }
+    document.getElementById('lab-bonus-points').textContent = challenge.bonusPoints.toFixed(2) + ' pts';
+
+    const hoursFill = Math.min(scholar.hours / SCHOLAR.requiredHours, 1) * 100;
+    document.getElementById('hours-bar-fill').style.width = hoursFill + '%';
+    document.getElementById('tutoring-status').textContent = '+' + scholar.tutoringPct.toFixed(2) + '%';
+    setCheckState(document.getElementById('ap-check-avg'), scholar.meetsAvg);
+    setCheckState(document.getElementById('ap-check-hours'), scholar.meetsHours);
+    const apStatusEl = document.getElementById('ap-status');
+    if (scholar.apEarned) {
+      apStatusEl.textContent = '+1.00% earned';
+      apStatusEl.className = 'earned';
+    } else {
+      apStatusEl.textContent = 'Not yet earned';
+      apStatusEl.className = 'pending';
+    }
+    document.getElementById('scholar-total-value').textContent = '+' + scholar.total.toFixed(2) + '%';
+    document.getElementById('scholar-total-pill').textContent = '+' + scholar.total.toFixed(2) + '%';
+
+    const finalGrade = preBonus !== null ? (preBonus + scholar.total) : null;
+    const sumPctEl = document.getElementById('summary-pct');
+    const sumLetterEl = document.getElementById('summary-letter');
+    const sumNoteEl = document.getElementById('summary-note');
+    const covPctEl = document.getElementById('coverage-pct');
+    const covFillEl = document.getElementById('coverage-fill');
+
+    if (finalGrade === null) {
+      sumPctEl.textContent = '—';
+      sumLetterEl.textContent = '—';
+      sumNoteEl.textContent = 'Enter scores below to begin.';
+    } else {
+      sumPctEl.textContent = finalGrade.toFixed(2) + '%';
+      sumLetterEl.textContent = letterGrade(finalGrade);
+      const covPct = Math.round(totalCovered * 100);
+      const bonusNote = scholar.total > 0 ? (' Includes +' + scholar.total.toFixed(2) + '% Scholar Points bonus.') : '';
+      if (totalCovered >= 0.999) {
+        sumNoteEl.textContent = 'All categories accounted for. This is your projected final course grade.' + bonusNote;
+      } else {
+        sumNoteEl.textContent = 'Based on ' + covPct + '% of the course completed.' + bonusNote;
+      }
+    }
+    const covPctRounded = Math.round(totalCovered * 100);
+    covPctEl.textContent = covPctRounded + '%';
+    covFillEl.style.width = covPctRounded + '%';
+
+    updateTarget(lec, lab, tbl, scholar, challenge, cumLec, cumLab);
+  }
+
+  function setCheckState(el, met) {
+    if (!el) return;
+    if (met) {
+      el.classList.add('met');
+      el.querySelector('.mark').textContent = '\u2713';
+    } else {
+      el.classList.remove('met');
+      el.querySelector('.mark').textContent = '\u00B7';
+    }
+  }
+
+  // ---------- Required Cumulative Final calculator ----------
+  function computeRequiredCum(target, lec, lab, tbl, scholar, cumLec, cumLab, challenge) {
+    const lecApplicable = lecCount > 0;
+    const labApplicable = labCount > 0;
+
+    const lecComplete = !lecApplicable || lec.completed.length === lecCount;
+    const labComplete = !labApplicable || lab.completed.length === labCount;
+    const tblComplete = tbl.avg !== null;
+
+    if (!lecComplete || !labComplete || !tblComplete) {
+      return { status: 'incomplete', lecComplete, labComplete, tblComplete };
+    }
+
+    // Compute base avgs without cumulative replacement
+    let lecAvgBase = null, lecLowestPct = null, lecLowestPossible = null, lecSumPossible = null;
+    if (lecApplicable && lec.completed.length > 0) {
+      lecSumPossible = lec.completed.reduce((s, it) => s + it.possible, 0);
+      const lecSumEarned = lec.completed.reduce((s, it) => s + it.earned, 0);
+      lecAvgBase = lecSumEarned / lecSumPossible * 100;
+      let low = Infinity, lowPos = 0;
+      lec.completed.forEach(it => {
+        if (it.pct < low) { low = it.pct; lowPos = it.possible; }
+      });
+      lecLowestPct = low;
+      lecLowestPossible = lowPos;
+    }
+    let labAvgBase = null, labLowestPct = null, labLowestPossible = null, labSumPossible = null;
+    if (labApplicable && lab.completed.length > 0) {
+      labSumPossible = lab.completed.reduce((s, it) => s + it.possible, 0);
+      const labSumEarned = lab.completed.reduce((s, it) => s + it.earned, 0);
+      labAvgBase = (labSumEarned + challenge.bonusPoints) / labSumPossible * 100;
+      let low = Infinity, lowPos = 0;
+      lab.completed.forEach(it => {
+        // Note: lowest is determined by exam pct alone (not bonus-adjusted), since replacement targets the exam
+        if (it.pct < low) { low = it.pct; lowPos = it.possible; }
+      });
+      labLowestPct = low;
+      labLowestPossible = lowPos;
+    }
+
+    // Renormalized weights
+    const wLecRaw = lecApplicable ? WEIGHTS.lecture : 0;
+    const wLabRaw = labApplicable ? WEIGHTS.lab : 0;
+    const wTblRaw = WEIGHTS.tbl;
+    const wTotal = wLecRaw + wLabRaw + wTblRaw;
+    const wLec = wLecRaw / wTotal;
+    const wLab = wLabRaw / wTotal;
+    const wTbl = wTblRaw / wTotal;
+
+    function lecAvgFor(c) {
+      if (!lecApplicable) return 0;
+      if (c === null || c <= lecLowestPct) return lecAvgBase;
+      return lecAvgBase + (c - lecLowestPct) / 2 * lecLowestPossible / lecSumPossible;
+    }
+    function labAvgFor(c) {
+      if (!labApplicable) return 0;
+      if (c === null || c <= labLowestPct) return labAvgBase;
+      return labAvgBase + (c - labLowestPct) / 2 * labLowestPossible / labSumPossible;
+    }
+    function gradeFor(cl, cb) {
+      return wLec * lecAvgFor(cl) + wLab * labAvgFor(cb) + wTbl * tbl.avg + scholar.total;
+    }
+
+    const preBonusTarget = target - scholar.total;
+    const modes = [];
+
+    // Mode: solve for cum_lec, lab cumulative as entered
+    if (lecApplicable) {
+      const labFixed = labAvgFor(cumLab);
+      const requiredLec = (preBonusTarget - wLab * labFixed - wTbl * tbl.avg) / wLec;
+      let result;
+      if (requiredLec <= lecAvgBase + 0.0001) {
+        // Already on track even without lec boost
+        result = { value: null, status: 'lockedin', label: 'Any score works' };
+      } else {
+        const needed = lecLowestPct + 2 * (requiredLec - lecAvgBase) * lecSumPossible / lecLowestPossible;
+        if (needed > 100) {
+          result = { value: needed, status: 'impossible', label: 'Need > 100%' };
+        } else {
+          result = { value: needed, status: 'ok', label: needed.toFixed(1) + '%' };
+        }
+      }
+      modes.push({
+        scenario: 'Lecture cumulative final needed',
+        condition: cumLab !== null
+          ? 'assuming lab cumulative = ' + cumLab.toFixed(1) + '%'
+          : 'with no lab cumulative entered',
+        result: result
+      });
+    }
+
+    // Mode: solve for cum_lab, lec cumulative as entered
+    if (labApplicable) {
+      const lecFixed = lecAvgFor(cumLec);
+      const requiredLab = (preBonusTarget - wLec * lecFixed - wTbl * tbl.avg) / wLab;
+      let result;
+      if (requiredLab <= labAvgBase + 0.0001) {
+        result = { value: null, status: 'lockedin', label: 'Any score works' };
+      } else {
+        const needed = labLowestPct + 2 * (requiredLab - labAvgBase) * labSumPossible / labLowestPossible;
+        if (needed > 100) {
+          result = { value: needed, status: 'impossible', label: 'Need > 100%' };
+        } else {
+          result = { value: needed, status: 'ok', label: needed.toFixed(1) + '%' };
+        }
+      }
+      modes.push({
+        scenario: 'Lab cumulative final needed',
+        condition: cumLec !== null
+          ? 'assuming lecture cumulative = ' + cumLec.toFixed(1) + '%'
+          : 'with no lecture cumulative entered',
+        result: result
+      });
+    }
+
+    // Mode: both equal (binary search)
+    if (lecApplicable && labApplicable) {
+      let result;
+      if (gradeFor(0, 0) >= target - 0.0001) {
+        result = { value: 0, status: 'lockedin', label: 'Any score works' };
+      } else if (gradeFor(100, 100) < target - 0.0001) {
+        result = { value: null, status: 'impossible', label: 'Not achievable' };
+      } else {
+        let lo = 0, hi = 100;
+        for (let i = 0; i < 60; i++) {
+          const mid = (lo + hi) / 2;
+          if (gradeFor(mid, mid) < target) lo = mid;
+          else hi = mid;
+        }
+        result = { value: hi, status: 'ok', label: hi.toFixed(1) + '% on both' };
+      }
+      modes.push({
+        scenario: 'Same score on both cumulative finals',
+        condition: 'if you score equally on the lecture and lab cumulative',
+        result: result
+      });
+    }
+
+    return { status: 'ok', modes };
+  }
+
+  function renderRequiredCum(target, lec, lab, tbl, scholar, cumLec, cumLab, challenge) {
+    const block = document.getElementById('req-cum-block');
+    const list = document.getElementById('req-cum-list');
+    if (isNaN(target)) {
+      block.classList.add('hidden');
+      return;
+    }
+    const res = computeRequiredCum(target, lec, lab, tbl, scholar, cumLec, cumLab, challenge);
+    if (res.status === 'incomplete') {
+      block.classList.remove('hidden');
+      const missing = [];
+      if (!res.lecComplete) missing.push('all lecture exams');
+      if (!res.labComplete) missing.push('all lab exams');
+      if (!res.tblComplete) missing.push('at least one TBL score');
+      list.innerHTML =
+        '<div class="req-cum-row">' +
+          '<div class="scenario">Enter ' + missing.join(' and ') + ' to compute required cumulative final scores.</div>' +
+          '<div class="answer text">Waiting</div>' +
+        '</div>';
+      return;
+    }
+    block.classList.remove('hidden');
+    list.innerHTML = '';
+    res.modes.forEach(m => {
+      const row = document.createElement('div');
+      row.className = 'req-cum-row';
+      const ansClass = m.result.status === 'impossible' ? 'impossible'
+        : m.result.status === 'lockedin' ? 'lockedin' : '';
+      row.innerHTML =
+        '<div class="scenario">' + m.scenario + '<span class="sub">' + m.condition + '</span></div>' +
+        '<div class="answer ' + ansClass + '">' + m.result.label + '</div>';
+      list.appendChild(row);
+    });
+  }
+
+  // ---------- Target Calculator ----------
+  function updateTarget(lec, lab, tbl, scholar, challenge, cumLec, cumLab) {
+    const targetEl = document.getElementById('target-input');
+    const resultEl = document.getElementById('target-result');
+    const target = parseFloat(targetEl.value);
+
+    if (isNaN(target) || targetEl.value.trim() === '') {
+      resultEl.className = 'target-result empty';
+      resultEl.textContent = 'Set a goal grade to see what is required.';
+      document.getElementById('req-cum-block').classList.add('hidden');
+      return;
+    }
+
+    const preBonusTarget = target - scholar.total;
+
+    let lockedContribution = 0;
+    let remainingWeight = 0;
+    let remainingCount = 0;
+
+    if (lecCount > 0) {
+      const perItemWeight = WEIGHTS.lecture / lecCount;
+      lec.items.forEach(it => {
+        if (it.complete) {
+          let pct = it.pct;
+          if (lec.replacement && lec.replacement.examIdx === it.idx) {
+            pct = lec.replacement.newPct;
+          }
+          lockedContribution += perItemWeight * pct;
+        } else {
+          remainingWeight += perItemWeight;
+          remainingCount += 1;
+        }
+      });
+    }
+
+    if (labCount > 0) {
+      const perItemWeight = WEIGHTS.lab / labCount;
+      let totalLabPossible = 0;
+      lab.items.forEach(it => {
+        if (it.complete) {
+          let earned = it.earned;
+          if (lab.replacement && lab.replacement.examIdx === it.idx) {
+            earned = lab.replacement.newPct / 100 * it.possible;
+          }
+          const pct = earned / it.possible * 100;
+          lockedContribution += perItemWeight * pct;
+          totalLabPossible += it.possible;
+        } else {
+          remainingWeight += perItemWeight;
+          remainingCount += 1;
+          const possibleEl = document.getElementById('lab-' + it.idx + '-possible');
+          const possible = possibleEl ? parseFloat(possibleEl.value) : 100;
+          totalLabPossible += (!isNaN(possible) && possible > 0) ? possible : 100;
+        }
+      });
+      // Forward-looking: the lab challenge bonus will apply once all labs are entered.
+      // Add its contribution to locked so the "needed avg on remaining" already factors it in.
+      if (challenge.bonusPoints > 0 && totalLabPossible > 0) {
+        lockedContribution += WEIGHTS.lab * (challenge.bonusPoints / totalLabPossible) * 100;
+      }
+    }
+
+    if (tbl.avg !== null) {
+      lockedContribution += WEIGHTS.tbl * tbl.avg;
+    } else {
+      remainingWeight += WEIGHTS.tbl;
+    }
+
+    resultEl.className = 'target-result';
+
+    const cumNote = (cumLec !== null || cumLab !== null)
+      ? ' Cumulative final values are used as entered.'
+      : '';
+    const bonusParts = [];
+    if (scholar.total > 0) bonusParts.push('+' + scholar.total.toFixed(2) + '% Scholar Points');
+    if (challenge.bonusPoints > 0) bonusParts.push('lab challenge bonus of ' + challenge.bonusPoints.toFixed(2) + ' pts');
+    const bonusText = bonusParts.length > 0
+      ? ' (factoring in ' + bonusParts.join(' and ') + ')'
+      : '';
+
+    if (remainingCount === 0 && tbl.avg !== null) {
+      const finalGrade = lockedContribution + scholar.total;
+      const diff = finalGrade - target;
+      if (diff >= 0) {
+        resultEl.innerHTML = 'Everything is entered. Your final grade is <strong>' + finalGrade.toFixed(2) + '%</strong>, which meets your goal of <strong>' + target.toFixed(2) + '%</strong>.';
+      } else {
+        resultEl.innerHTML = 'Everything is entered. Your final grade is <strong>' + finalGrade.toFixed(2) + '%</strong>, which is <strong>' + Math.abs(diff).toFixed(2) + ' points</strong> below your goal of <strong>' + target.toFixed(2) + '%</strong>.';
+      }
+    } else if (remainingWeight === 0) {
+      resultEl.innerHTML = 'No remaining items to compute. Enter more scores or adjust your inputs above.';
+    } else {
+      const neededAvg = (preBonusTarget - lockedContribution) / remainingWeight;
+      const remainingDescription = remainingCount > 0
+        ? remainingCount + ' remaining exam' + (remainingCount === 1 ? '' : 's')
+        : 'your remaining TBL work';
+
+      if (neededAvg <= 0) {
+        resultEl.innerHTML = 'You have already locked in your goal of <strong>' + target.toFixed(2) + '%</strong>' + bonusText + '. You could score <span class="need locked-in">0%</span> on ' + remainingDescription + ' and still hit it.' + cumNote;
+      } else if (neededAvg > 100) {
+        resultEl.innerHTML = 'To finish at <strong>' + target.toFixed(2) + '%</strong>' + bonusText + ', you would need an average of <span class="need impossible">' + neededAvg.toFixed(2) + '%</span> across ' + remainingDescription + ', which is not achievable. Try a different goal or experiment with the cumulative final values above.';
+      } else {
+        const letter = letterGrade(neededAvg);
+        resultEl.innerHTML = 'To finish the course at <strong>' + target.toFixed(2) + '%</strong>' + bonusText + ', you need to average <span class="need">' + neededAvg.toFixed(2) + '%</span> (a ' + letter + ') across <strong>' + remainingDescription + '</strong>.' + cumNote;
+      }
+    }
+
+    renderRequiredCum(target, lec, lab, tbl, scholar, cumLec, cumLab, challenge);
+  }
+
+  // ---------- Persistence ----------
+  function saveState() {
+    try {
+      const inputs = {};
+      document.querySelectorAll('input[type="number"]').forEach(el => {
+        if (el.id && el.value !== '') inputs[el.id] = el.value;
+      });
+      const data = {
+        lecCount: lecCount,
+        labCount: labCount,
+        tblDrops: tblDrops,
+        tblPointsPerItem: tblPointsPerItem,
+        labChallengeBank: labChallengeBank,
+        tblItems: tblItems,
+        tblUidCounter: tblUidCounter,
+        inputs: inputs
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) { console.warn('Save failed:', e); }
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+
+      if (typeof data.lecCount === 'number') lecCount = data.lecCount;
+      if (typeof data.labCount === 'number') labCount = data.labCount;
+      if (typeof data.tblDrops === 'number') tblDrops = data.tblDrops;
+      if (typeof data.tblPointsPerItem === 'number') tblPointsPerItem = data.tblPointsPerItem;
+      if (typeof data.labChallengeBank === 'number') labChallengeBank = data.labChallengeBank;
+      if (Array.isArray(data.tblItems)) tblItems = data.tblItems;
+      if (typeof data.tblUidCounter === 'number') tblUidCounter = data.tblUidCounter;
+      if (tblItems.length > 0 && tblUidCounter === 0) {
+        tblUidCounter = Math.max.apply(null, tblItems.map(it => it.uid || 0));
+      }
+
+      document.getElementById('config-lec-count').value = lecCount;
+      document.getElementById('config-lab-count').value = labCount;
+      document.getElementById('config-tbl-drops').value = tblDrops;
+      document.getElementById('config-tbl-points').value = tblPointsPerItem;
+      document.getElementById('config-lab-bank').value = labChallengeBank;
+      updateLabChallengeLabel();
+
+      buildExamFields('lecture', lecCount);
+      buildExamFields('lab', labCount);
+      renderTbl();
+
+      if (data.inputs) {
+        Object.entries(data.inputs).forEach(([k, v]) => {
+          const el = document.getElementById(k);
+          if (el) el.value = v;
+        });
+      }
+    } catch (e) { console.warn('Load failed:', e); }
+  }
+
+  // ---------- Wire up config ----------
+  document.getElementById('config-lec-count').addEventListener('input', e => {
+    const v = Math.max(0, Math.min(15, parseInt(e.target.value, 10) || 0));
+    lecCount = v;
+    buildExamFields('lecture', v);
+    saveState();
+    recalc();
+  });
+  document.getElementById('config-lab-count').addEventListener('input', e => {
+    const v = Math.max(0, Math.min(15, parseInt(e.target.value, 10) || 0));
+    labCount = v;
+    buildExamFields('lab', v);
+    saveState();
+    recalc();
+  });
+  document.getElementById('config-tbl-drops').addEventListener('input', e => {
+    const v = Math.max(0, Math.min(5, parseInt(e.target.value, 10) || 0));
+    tblDrops = v;
+    saveState();
+    recalc();
+    updateTblDroppedVisuals();
+  });
+  document.getElementById('config-lab-bank').addEventListener('input', e => {
+    const v = Math.max(1, Math.min(100, parseFloat(e.target.value) || 1));
+    labChallengeBank = v;
+    updateLabChallengeLabel();
+    saveState();
+    recalc();
+  });
+  document.getElementById('config-tbl-points').addEventListener('input', e => {
+    const v = Math.max(1, Math.min(200, parseFloat(e.target.value) || 1));
+    tblPointsPerItem = v;
+    renderTbl();
+    saveState();
+    recalc();
+  });
+
+  // ---------- Wire up static inputs ----------
+  ['lab-challenge-earned', 'cum-lec', 'cum-lab', 'tutoring-hours', 'target-input'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', () => { saveState(); recalc(); });
+  });
+
+  // ---------- TBL add button ----------
+  document.getElementById('btn-add-tbl').addEventListener('click', () => addTblItem());
+
+  // ---------- Reset ----------
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    if (!confirm('Clear all entered scores and TBL items? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="number"]').forEach(el => {
+      if (el.dataset.kind === 'possible') {
+        el.value = '100';
+      } else if (el.id === 'config-lec-count' || el.id === 'config-lab-count') {
+        el.value = '4';
+      } else if (el.id === 'config-tbl-drops') {
+        el.value = '2';
+      } else if (el.id === 'config-tbl-points') {
+        el.value = '50';
+      } else if (el.id === 'config-lab-bank') {
+        el.value = '20';
+      } else {
+        el.value = '';
+      }
+    });
+    lecCount = 4;
+    labCount = 4;
+    tblDrops = 2;
+    tblPointsPerItem = 50;
+    labChallengeBank = 20;
+    tblItems = [];
+    tblUidCounter = 0;
+    buildExamFields('lecture', 4);
+    buildExamFields('lab', 4);
+    renderTbl();
+    updateLabChallengeLabel();
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    recalc();
+  });
+
+  // ---------- Print ----------
+  document.getElementById('btn-print').addEventListener('click', () => window.print());
+
+  // ---------- Initialize ----------
+  buildExamFields('lecture', lecCount);
+  buildExamFields('lab', labCount);
+  renderTbl();
+  updateLabChallengeLabel();
+  loadState();
+  buildExamFields('lecture', lecCount);
+  buildExamFields('lab', labCount);
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const data = JSON.parse(raw);
+      if (data.inputs) {
+        Object.entries(data.inputs).forEach(([k, v]) => {
+          const el = document.getElementById(k);
+          if (el) el.value = v;
+        });
+      }
+    }
+  } catch (e) {}
+  recalc();
+
+  // ---------- Iframe height sender (Kajabi) ----------
+  (function() {
+    const ID = 'grade-calculator';
+    const send = () => {
+      try {
+        const h = document.documentElement.scrollHeight;
+        window.parent.postMessage({ type: 'resize', id: ID, height: h }, '*');
+      } catch (e) {}
+    };
+    window.addEventListener('load', send);
+    window.addEventListener('resize', send);
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(send);
+      ro.observe(document.body);
+    }
+    document.addEventListener('input', () => setTimeout(send, 60));
+    document.addEventListener('click', () => setTimeout(send, 60));
+  })();
+
+})();
+</script>
+</body>
+</html>
