@@ -553,6 +553,193 @@ button:focus-visible,
 }
 
 /* ============================================================
+   STATUS NOW BANNER (auto-detected current state)
+   ============================================================ */
+.status-now {
+  background: var(--card);
+  border: 1px solid var(--divider);
+  border-left: 6px solid var(--terra);
+  border-radius: 14px;
+  padding: 18px 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.status-now:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(20, 41, 64, 0.12), 0 2px 4px rgba(20, 41, 64, 0.08);
+}
+
+.status-now--pre {
+  border-left-color: var(--gold);
+}
+
+.status-now--post {
+  border-left-color: var(--navy-soft);
+  opacity: 0.85;
+}
+
+.status-now-label {
+  background: var(--terra);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.status-now--pre .status-now-label {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.status-now--post .status-now-label {
+  background: var(--navy-soft);
+  color: #FFFFFF;
+}
+
+.status-now-text {
+  flex: 1;
+  min-width: 200px;
+  font-size: 15px;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.status-now-text strong {
+  color: var(--terra);
+  font-weight: 700;
+}
+
+.status-now--pre .status-now-text strong {
+  color: var(--terra-light);
+}
+
+.status-now-arrow {
+  font-size: 18px;
+  color: var(--navy-soft);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+@media (max-width: 640px) {
+  .status-now {
+    padding: 16px 18px;
+    gap: 12px;
+  }
+  .status-now-text {
+    font-size: 14px;
+  }
+}
+
+/* ============================================================
+   CURRENT / NEXT / PAST WEEK STATES
+   ============================================================ */
+.week-card--current {
+  border-color: var(--terra);
+  box-shadow: 0 6px 18px rgba(124, 32, 24, 0.14), 0 2px 4px rgba(20, 41, 64, 0.08);
+  background:
+    linear-gradient(to right, rgba(124, 32, 24, 0.05), var(--card) 40%),
+    var(--card);
+}
+
+.week-card--current .week-tab {
+  background: var(--terra);
+  color: #FFFFFF;
+  border-right-color: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 640px) {
+  .week-card--current .week-tab {
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.week-card--next {
+  border-color: var(--gold);
+  border-left-width: 4px;
+}
+
+.week-card--past {
+  opacity: 0.55;
+}
+
+.week-card--past:hover,
+.week-card--past:focus-within {
+  opacity: 1;
+}
+
+/* Status badge in week header */
+.week-status-pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 100px;
+  margin-top: 6px;
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+}
+
+.week-status-pill--current {
+  background: var(--terra);
+  color: #FFFFFF;
+}
+
+.week-status-pill--next {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+/* Today highlight inside day list */
+.day-list dt.day-today,
+.day-list dd.day-today {
+  background: rgba(124, 32, 24, 0.05);
+}
+
+.day-list dt.day-today {
+  color: var(--terra);
+  position: relative;
+  padding-left: 10px;
+  margin-left: -10px;
+  border-radius: 6px 0 0 6px;
+}
+
+.day-list dd.day-today {
+  padding-right: 10px;
+  margin-right: -10px;
+  border-radius: 0 6px 6px 0;
+}
+
+.day-today-pill {
+  display: inline-block;
+  background: var(--terra);
+  color: #FFFFFF;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-left: 8px;
+  text-transform: uppercase;
+  vertical-align: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
    ACCESSIBILITY MEDIA QUERIES
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -604,7 +791,7 @@ button:focus-visible,
     font-size: 10.5pt;
   }
 
-  .skip-link, .banner-actions { display: none !important; }
+  .skip-link, .banner-actions, .status-now { display: none !important; }
 
   .banner {
     background: #FFFFFF !important;
@@ -720,6 +907,8 @@ button:focus-visible,
     <span><strong>8</strong> weekly cases</span>
   </section>
 
+  <a id="status-now" class="status-now" href="#schedule-list" aria-live="polite" hidden></a>
+
   <ol id="schedule-list" class="schedule-list" aria-label="Weekly schedule"></ol>
 
   <footer class="course-footer">
@@ -733,6 +922,8 @@ const weeks = [
   {
     number: 1,
     dates: 'June 15 to 18',
+    startDate: '2026-06-15',
+    endDate: '2026-06-18',
     moduleLabel: 'Module 1',
     moduleTitle: 'Foundations and Integumentary System',
     days: [
@@ -748,6 +939,8 @@ const weeks = [
   {
     number: 2,
     dates: 'June 22 to 25',
+    startDate: '2026-06-22',
+    endDate: '2026-06-25',
     moduleLabel: 'Module 2, Part 1',
     moduleTitle: 'Skeletal: Bone Microanatomy and Axial Skeleton',
     days: [
@@ -768,6 +961,8 @@ const weeks = [
   {
     number: 3,
     dates: 'June 29 to July 2',
+    startDate: '2026-06-29',
+    endDate: '2026-07-02',
     moduleLabel: 'Module 2, Part 2',
     moduleTitle: 'Appendicular Skeleton, Joints, and Muscle as a System',
     days: [
@@ -788,6 +983,8 @@ const weeks = [
   {
     number: 4,
     dates: 'July 6 to 9',
+    startDate: '2026-07-06',
+    endDate: '2026-07-09',
     moduleLabel: 'Module 3, Part 1',
     moduleTitle: 'Cardiovascular: Heart, Great Vessels, Thoracic and Upper Extremity Region',
     days: [
@@ -808,6 +1005,8 @@ const weeks = [
   {
     number: 5,
     dates: 'July 13 to 16',
+    startDate: '2026-07-13',
+    endDate: '2026-07-16',
     moduleLabel: 'Module 3, Part 2',
     moduleTitle: 'Respiratory, Lymphatic, Immune, and Blood',
     days: [
@@ -828,6 +1027,8 @@ const weeks = [
   {
     number: 6,
     dates: 'July 20 to 23',
+    startDate: '2026-07-20',
+    endDate: '2026-07-23',
     moduleLabel: 'Module 4',
     moduleTitle: 'Digestive System with Abdominal, Pelvic, and Lower Extremity Regional Anatomy',
     days: [
@@ -848,6 +1049,8 @@ const weeks = [
   {
     number: 7,
     dates: 'July 27 to 30',
+    startDate: '2026-07-27',
+    endDate: '2026-07-30',
     moduleLabel: 'Module 5',
     moduleTitle: 'Urinary, Reproductive, and Endocrine Systems',
     days: [
@@ -868,6 +1071,8 @@ const weeks = [
   {
     number: 8,
     dates: 'August 3 to 6',
+    startDate: '2026-08-03',
+    endDate: '2026-08-06',
     moduleLabel: 'Module 6',
     moduleTitle: 'Nervous System with Head, Neck, Face, and Eye Regional Anatomy',
     days: [
@@ -896,7 +1101,7 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
-function renderDay(d) {
+function renderDay(d, isToday) {
   let primaryHtml;
   if (d.pill === 'tbl') {
     primaryHtml = '<span class="pill-tbl">' + escapeHtml(d.activity) + '</span>';
@@ -906,13 +1111,19 @@ function renderDay(d) {
     primaryHtml = '<span class="activity-plain">' + escapeHtml(d.activity) + '</span>';
   }
 
+  if (isToday) {
+    primaryHtml += '<span class="day-today-pill" aria-label="Today">Today</span>';
+  }
+
   if (d.prework) {
     primaryHtml += ' <span class="pre-work"><span aria-hidden="true">. </span>Pre-work: ' + escapeHtml(d.prework) + '</span>';
   } else if (d.bundleNote) {
     primaryHtml += ' <span class="bundle-note"><span aria-hidden="true">. </span>' + escapeHtml(d.bundleNote) + '</span>';
   }
 
-  return '<dt>' + escapeHtml(d.day) + '</dt><dd>' + primaryHtml + '</dd>';
+  const dtClass = isToday ? ' class="day-today"' : '';
+  const ddClass = isToday ? ' class="day-today"' : '';
+  return '<dt' + dtClass + '>' + escapeHtml(d.day) + '</dt><dd' + ddClass + '>' + primaryHtml + '</dd>';
 }
 
 function renderExamBlock(eb) {
@@ -927,14 +1138,176 @@ function renderExamBlock(eb) {
   '</aside>';
 }
 
-function renderSchedule() {
+/* ============================================================
+   DATE LOGIC: detect current state from today's date
+   ============================================================ */
+const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const DAY_NAMES_LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+function parseLocalDate(isoStr) {
+  // Parse YYYY-MM-DD as local midnight, never UTC
+  const parts = isoStr.split('-');
+  return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+}
+
+function startOfToday() {
+  const t = new Date();
+  t.setHours(0, 0, 0, 0);
+  return t;
+}
+
+function formatLongDate(d) {
+  return DAY_NAMES_LONG[d.getDay()] + ', ' + MONTH_NAMES[d.getMonth()] + ' ' + d.getDate();
+}
+
+function daysBetween(a, b) {
+  // Whole days between two local-midnight dates
+  return Math.round((b.getTime() - a.getTime()) / 86400000);
+}
+
+function computeNow(weeks) {
+  const today = startOfToday();
+  const firstStart = parseLocalDate(weeks[0].startDate);
+  const lastEnd = parseLocalDate(weeks[weeks.length - 1].endDate);
+
+  let currentWeek = null;
+  let nextWeek = null;
+
+  for (let i = 0; i < weeks.length; i++) {
+    const wk = weeks[i];
+    const start = parseLocalDate(wk.startDate);
+    const end = parseLocalDate(wk.endDate);
+    if (today >= start && today <= end) {
+      currentWeek = wk;
+    } else if (today < start && nextWeek === null) {
+      nextWeek = wk;
+    }
+  }
+
+  let phase;
+  if (today < firstStart) {
+    phase = 'pre';
+  } else if (today > lastEnd) {
+    phase = 'post';
+  } else {
+    phase = 'active';
+  }
+
+  return {
+    today: today,
+    phase: phase,
+    firstStart: firstStart,
+    lastEnd: lastEnd,
+    currentWeek: currentWeek,
+    nextWeek: nextWeek,
+    todayDayName: DAY_NAMES[today.getDay()]
+  };
+}
+
+function renderStatusBanner(info) {
+  const el = document.getElementById('status-now');
+  if (!el) return;
+
+  let label = '';
+  let text = '';
+  let extraClass = '';
+
+  if (info.phase === 'pre') {
+    extraClass = 'status-now--pre';
+    const days = daysBetween(info.today, info.firstStart);
+    const dayWord = days === 1 ? 'day' : 'days';
+    label = 'Coming up';
+    text = 'Term begins <strong>' + formatLongDate(info.firstStart) + '</strong>. ' + days + ' ' + dayWord + ' to go. Week 1 opens with Foundations and the Integumentary System.';
+  } else if (info.phase === 'post') {
+    extraClass = 'status-now--post';
+    label = 'Term complete';
+    text = 'Summer 2026 term wrapped on ' + formatLongDate(info.lastEnd) + '. Nice work.';
+  } else if (info.currentWeek) {
+    const wk = info.currentWeek;
+    const dayName = info.todayDayName;
+    const todayItem = wk.days.find(function(d) { return d.day === dayName; });
+    label = 'Today';
+    if (todayItem) {
+      text = '<strong>Week ' + wk.number + ', ' + DAY_NAMES_LONG[info.today.getDay()] + '.</strong> ' + todayItem.activity + '. ' + escapeHtml(wk.moduleTitle) + '.';
+    } else {
+      // Friday, Saturday, or Sunday within a week's span (rare; week ends Thu)
+      const start = parseLocalDate(wk.startDate);
+      const end = parseLocalDate(wk.endDate);
+      if (info.today > end) {
+        // After Thursday of this week but before next week starts
+        if (info.nextWeek) {
+          const nextStart = parseLocalDate(info.nextWeek.startDate);
+          const daysToNext = daysBetween(info.today, nextStart);
+          text = '<strong>Week ' + wk.number + ' wrapped.</strong> Week ' + info.nextWeek.number + ' begins ' + formatLongDate(nextStart) + ' (' + daysToNext + ' day' + (daysToNext === 1 ? '' : 's') + ').';
+        } else {
+          text = '<strong>Week ' + wk.number + ' wrapped.</strong> Last week of term.';
+        }
+      } else {
+        text = '<strong>Week ' + wk.number + ', ' + DAY_NAMES_LONG[info.today.getDay()] + '.</strong> No class scheduled today. ' + escapeHtml(wk.moduleTitle) + '.';
+      }
+    }
+  } else if (info.nextWeek) {
+    // Between weeks (e.g. weekend after Thursday before next Monday)
+    const nextStart = parseLocalDate(info.nextWeek.startDate);
+    const days = daysBetween(info.today, nextStart);
+    const dayWord = days === 1 ? 'day' : 'days';
+    label = 'Up next';
+    text = '<strong>Week ' + info.nextWeek.number + '</strong> begins ' + formatLongDate(nextStart) + ' (' + days + ' ' + dayWord + '). ' + escapeHtml(info.nextWeek.moduleTitle) + '.';
+  }
+
+  if (!text) {
+    el.hidden = true;
+    return;
+  }
+
+  el.className = 'status-now' + (extraClass ? ' ' + extraClass : '');
+  el.innerHTML =
+    '<span class="status-now-label">' + escapeHtml(label) + '</span>' +
+    '<span class="status-now-text">' + text + '</span>' +
+    '<span class="status-now-arrow" aria-hidden="true">&rsaquo;</span>';
+
+  // Anchor to the current or next week card if one exists
+  if (info.currentWeek) {
+    el.href = '#week-' + info.currentWeek.number;
+  } else if (info.nextWeek) {
+    el.href = '#week-' + info.nextWeek.number;
+  } else {
+    el.removeAttribute('href');
+    el.style.cursor = 'default';
+  }
+  el.hidden = false;
+}
+
+function renderSchedule(info) {
   const list = document.getElementById('schedule-list');
 
   weeks.forEach(function(wk) {
     const numberLabel = String(wk.number).padStart(2, '0');
     const tabLabel = 'Wk ' + numberLabel;
 
-    const daysHtml = wk.days.map(renderDay).join('');
+    // Decide week state and today day
+    let stateClass = '';
+    let statusPillHtml = '';
+    const isCurrent = info.currentWeek && info.currentWeek.number === wk.number;
+    const isNext = !info.currentWeek && info.nextWeek && info.nextWeek.number === wk.number;
+    const wkEndDate = parseLocalDate(wk.endDate);
+    const isPast = !isCurrent && wkEndDate < info.today;
+
+    if (isCurrent) {
+      stateClass = ' week-card--current';
+      statusPillHtml = '<div><span class="week-status-pill week-status-pill--current">This week</span></div>';
+    } else if (isNext) {
+      stateClass = ' week-card--next';
+      statusPillHtml = '<div><span class="week-status-pill week-status-pill--next">Up next</span></div>';
+    } else if (isPast) {
+      stateClass = ' week-card--past';
+    }
+
+    const daysHtml = wk.days.map(function(d) {
+      const isToday = isCurrent && d.day === info.todayDayName;
+      return renderDay(d, isToday);
+    }).join('');
 
     const caseValue = wk.caseOfWeek
       ? '<p class="field-value">' + escapeHtml(wk.caseOfWeek) + '</p>'
@@ -951,8 +1324,12 @@ function renderSchedule() {
     const footerClass = hasNotes ? 'week-footer' : 'week-footer week-footer--single';
 
     const li = document.createElement('li');
-    li.className = 'week-card';
-    li.setAttribute('aria-label', 'Week ' + wk.number + ', ' + wk.dates + ', ' + wk.moduleLabel + ', ' + wk.moduleTitle);
+    li.className = 'week-card' + stateClass;
+    li.id = 'week-' + wk.number;
+    let ariaSuffix = '';
+    if (isCurrent) ariaSuffix = ', this week';
+    else if (isNext) ariaSuffix = ', up next';
+    li.setAttribute('aria-label', 'Week ' + wk.number + ', ' + wk.dates + ', ' + wk.moduleLabel + ', ' + wk.moduleTitle + ariaSuffix);
     li.innerHTML =
       '<div class="week-tab" aria-hidden="true">' + escapeHtml(tabLabel) + '</div>' +
       '<div class="week-body">' +
@@ -961,6 +1338,7 @@ function renderSchedule() {
           '<div class="week-meta">' +
             '<h2 class="week-dates">' + escapeHtml(wk.dates) + '</h2>' +
             '<p class="week-module">' + escapeHtml(wk.moduleLabel) + ' <span aria-hidden="true">.</span> ' + escapeHtml(wk.moduleTitle) + '</p>' +
+            statusPillHtml +
           '</div>' +
         '</div>' +
         renderExamBlock(wk.examBlock) +
@@ -977,7 +1355,9 @@ function renderSchedule() {
   });
 }
 
-renderSchedule();
+const nowInfo = computeNow(weeks);
+renderStatusBanner(nowInfo);
+renderSchedule(nowInfo);
 
 (function() {
   const FRAME_ID = 'anatomy-schedule';
