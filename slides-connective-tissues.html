@@ -345,9 +345,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     #FFFFFF;
   flex: 1;
   min-height: 520px;
-  cursor: crosshair;
-  touch-action: none;
-  -webkit-user-select: none;
+  cursor: crosshair; -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
   overscroll-behavior: contain;
@@ -933,7 +931,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     }
     function start(ev) {
       ev.preventDefault();
-      canvas.setPointerCapture && canvas.setPointerCapture(ev.pointerId);
+      if (canvas.setPointerCapture) { try { canvas.setPointerCapture(ev.pointerId); } catch (e) {} }
       var p = getXY(ev);
       state.currentStroke = {
         color: state.erasing ? null : state.color,
@@ -941,6 +939,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
         erasing: state.erasing,
         points: [p]
       };
+      state.currentPointerId = ev.pointerId;
+      state.currentPointerType = ev.pointerType;
       state.strokes.push(state.currentStroke);
       drawStrokeSegment(state, state.currentStroke, 0);
     }
@@ -953,17 +953,19 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
       s.points.push(p);
       drawStrokeSegment(state, s, prevIdx);
     }
-    function end() {
+    function end(ev) {
       if (!state.currentStroke) return;
+      if (ev && ev.pointerId != null && state.currentPointerId != null && ev.pointerId !== state.currentPointerId) return;
       state.currentStroke = null;
+      state.currentPointerId = null;
+      state.currentPointerType = null;
     }
     canvas.addEventListener('pointerdown', start);
     canvas.addEventListener('pointermove', move);
     canvas.addEventListener('pointerup', end);
     canvas.addEventListener('pointercancel', end);
-    canvas.addEventListener('pointerleave', end);
-    canvas.addEventListener('touchstart', function(e){ e.preventDefault(); }, {passive:false});
-    canvas.addEventListener('touchmove', function(e){ e.preventDefault(); }, {passive:false});
+    canvas.addEventListener('touchstart',function(e){ var t=e.touches&&e.touches[0]; if(t&&t.touchType==='stylus')return; if(state.currentStroke&&state.currentPointerType==='pen')return; e.preventDefault(); },{passive:false});
+    canvas.addEventListener('touchmove',function(e){ var t=e.touches&&e.touches[0]; if(t&&t.touchType==='stylus')return; if(state.currentStroke&&state.currentPointerType==='pen')return; e.preventDefault(); },{passive:false});
     canvas.addEventListener('gesturestart', function(e){ e.preventDefault(); });
     canvas.addEventListener('contextmenu', function(e){ e.preventDefault(); });
 

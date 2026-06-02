@@ -89,7 +89,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
 .action-btn.is-active { background: #0B1530; color: #FFFFFF; border-color: #0B1530; }
 /* canvas-lock-v1 */
 .canvas-col { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
-.canvas-wrap { position: relative; background: linear-gradient(rgba(11, 21, 48, 0.04) 1px, transparent 1px) 0 0/24px 24px, linear-gradient(90deg, rgba(11, 21, 48, 0.04) 1px, transparent 1px) 0 0/24px 24px, #FFFFFF; flex: 1; min-height: 520px; cursor: crosshair; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; overscroll-behavior: contain; }
+.canvas-wrap { position: relative; background: linear-gradient(rgba(11, 21, 48, 0.04) 1px, transparent 1px) 0 0/24px 24px, linear-gradient(90deg, rgba(11, 21, 48, 0.04) 1px, transparent 1px) 0 0/24px 24px, #FFFFFF; flex: 1; min-height: 520px; cursor: crosshair; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; overscroll-behavior: contain; }
 .canvas-wrap.is-erasing { cursor: cell; }
 .draw-canvas { display: block; width: 100%; height: 100%; position: absolute; inset: 0; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
 .footer-section { background: #060A18; padding-top: 22px; padding-bottom: 18px; text-align: center; }
@@ -391,12 +391,20 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
     function resize(){ var rect=wrap.getBoundingClientRect(); var dpr=window.devicePixelRatio||1; state.dpr=dpr; canvas.width=Math.max(1,Math.floor(rect.width*dpr)); canvas.height=Math.max(1,Math.floor(rect.height*dpr)); canvas.style.width=rect.width+'px'; canvas.style.height=rect.height+'px'; state.ctx.setTransform(dpr,0,0,dpr,0,0); redraw(state); }
     resize(); window.addEventListener('resize',resize); if(window.ResizeObserver)new ResizeObserver(resize).observe(wrap);
     function getXY(ev){ var r=canvas.getBoundingClientRect(); return {x:ev.clientX-r.left, y:ev.clientY-r.top}; }
-    function start(ev){ ev.preventDefault(); canvas.setPointerCapture&&canvas.setPointerCapture(ev.pointerId); var p=getXY(ev); state.currentStroke={color:state.erasing?null:state.color, size:state.erasing?Math.max(12,state.size*4):state.size, erasing:state.erasing, points:[p]}; state.strokes.push(state.currentStroke); drawStrokeSegment(state, state.currentStroke, 0); }
+    function start(ev){ ev.preventDefault(); if (canvas.setPointerCapture) { try { canvas.setPointerCapture(ev.pointerId); } catch (e) {} } var p=getXY(ev); state.currentStroke={color:state.erasing?null:state.color, size:state.erasing?Math.max(12,state.size*4):state.size, erasing:state.erasing, points:[p]}; state.currentPointerId = ev.pointerId;
+ state.currentPointerType = ev.pointerType;
+ state.strokes.push(state.currentStroke); drawStrokeSegment(state, state.currentStroke, 0); }
     function move(ev){ if(!state.currentStroke)return; ev.preventDefault(); var p=getXY(ev); var s=state.currentStroke; var prevIdx=s.points.length-1; s.points.push(p); drawStrokeSegment(state,s,prevIdx); }
-    function end(){ if(!state.currentStroke)return; state.currentStroke=null; }
-    canvas.addEventListener('pointerdown',start); canvas.addEventListener('pointermove',move); canvas.addEventListener('pointerup',end); canvas.addEventListener('pointercancel',end); canvas.addEventListener('pointerleave',end);
-    canvas.addEventListener('touchstart',function(e){ e.preventDefault(); },{passive:false});
-    canvas.addEventListener('touchmove',function(e){ e.preventDefault(); },{passive:false});
+    function end(ev) {
+      if (!state.currentStroke) return;
+      if (ev && ev.pointerId != null && state.currentPointerId != null && ev.pointerId !== state.currentPointerId) return;
+      state.currentStroke = null;
+      state.currentPointerId = null;
+      state.currentPointerType = null;
+    }
+    canvas.addEventListener('pointerdown',start); canvas.addEventListener('pointermove',move); canvas.addEventListener('pointerup',end); canvas.addEventListener('pointercancel',end);
+    canvas.addEventListener('touchstart',function(e){ var t=e.touches&&e.touches[0]; if(t&&t.touchType==='stylus')return; if(state.currentStroke&&state.currentPointerType==='pen')return; e.preventDefault(); },{passive:false});
+    canvas.addEventListener('touchmove',function(e){ var t=e.touches&&e.touches[0]; if(t&&t.touchType==='stylus')return; if(state.currentStroke&&state.currentPointerType==='pen')return; e.preventDefault(); },{passive:false});
     canvas.addEventListener('gesturestart',function(e){ e.preventDefault(); });
     canvas.addEventListener('contextmenu',function(e){ e.preventDefault(); });
     allCanvases.push(state);
