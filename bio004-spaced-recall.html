@@ -1,0 +1,3283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- MCAS_REBRAND_APPLIED v6 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIO 004 Pre-Work and Spaced Recall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@import url('https://cdn.jsdelivr.net/npm/@fontsource-variable/plus-jakarta-sans/index.css');
+:root {
+    --navy: #1E3D4C;
+    --navy-deep: #142a36;
+    --navy-tint: #EDF1F3;
+    --gold: #B8924A;
+    --gold-deep: #9a7838;
+    --terra: #C2734D;
+    --terra-dark: #A0522D;
+    --white: #FFFFFF;
+    --off-white: #FAFAF9;
+    --gray-line: #cfd6da;
+    --gray-soft: #5c6970;
+    --shadow-rest: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 16px rgba(0,0,0,0.10);
+    --t-fast: 150ms ease;
+    --t-med: 200ms ease;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Lora", Georgia, serif;
+    color: var(--navy);
+    background: var(--off-white);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Skip link */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 18px;
+    z-index: 100;
+    text-decoration: none;
+    border-radius: 0 0 6px 0;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 600;
+  }
+  .skip-link:focus { left: 0; }
+
+  /* Focus indicators */
+  :focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Header */
+  header.page-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-line);
+    padding: 24px 32px 20px;
+  }
+  .eyebrow {
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terra-dark);
+    margin: 0 0 6px;
+  }
+  h1.page-title {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(26px, 3.2vw, 36px);
+    color: var(--navy);
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subhead {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(15px, 1.6vw, 18px);
+    color: var(--terra-dark);
+    margin: 0 0 8px;
+  }
+  .usage {
+    font-family: "Lora", Georgia, serif;
+    font-style: italic;
+    color: var(--gray-soft);
+    font-size: 15px;
+    margin: 6px 0 0;
+    max-width: 70ch;
+  }
+
+  /* Top nav */
+  nav.top-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  nav.top-nav button {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    background: transparent;
+    color: var(--navy);
+    border: 1px solid var(--gray-line);
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+  }
+  nav.top-nav button:hover,
+  nav.top-nav button:focus-visible {
+    background: var(--navy-tint);
+    border-color: var(--navy);
+  }
+  nav.top-nav button[aria-current="page"] {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+  }
+
+  /* Main layout */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 24px 60px;
+  }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* Cards */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--gray-line);
+    border-radius: 10px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow-rest);
+    transition: transform var(--t-med), box-shadow var(--t-med);
+    margin-bottom: 16px;
+  }
+  .card.interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    cursor: pointer;
+  }
+  .card.state-locked {
+    border-style: dashed;
+    border-color: var(--gray-line);
+    background: var(--off-white);
+  }
+  .card.state-unlocked {
+    border-color: var(--gold);
+  }
+  .card.state-completed {
+    border-color: var(--navy);
+    background: var(--navy-tint);
+  }
+
+  h2 {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 600;
+    color: var(--terra-dark);
+    font-size: 22px;
+    margin: 0 0 12px;
+  }
+  h3 {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 600;
+    color: var(--terra-dark);
+    font-size: 17px;
+    margin: 0 0 8px;
+  }
+  h4 {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 15px;
+    margin: 0 0 6px;
+  }
+
+  /* Topic list (dashboard) */
+  .topic-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .topic-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 13px;
+    color: var(--gray-soft);
+  }
+  .pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--gray-line);
+  }
+  .pill.locked { background: transparent; color: var(--gray-soft); }
+  .pill.unlocked { background: transparent; color: var(--gold-deep); border-color: var(--gold); }
+  .pill.completed { background: var(--navy-tint); color: var(--navy); border-color: var(--navy); }
+  .pill.due { background: transparent; color: var(--terra-dark); border-color: var(--terra); }
+
+
+  /* Multiple-choice option buttons (spaced recall) */
+  .mc-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 14px 0 10px;
+  }
+  .mc-option {
+    text-align: left;
+    background: var(--white);
+    border: 2px solid var(--gray-line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    color: var(--navy);
+    cursor: pointer;
+    transition: border-color var(--t-fast), background var(--t-fast);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.45;
+  }
+  .mc-option:hover:not(:disabled),
+  .mc-option:focus-visible:not(:disabled) {
+    border-color: var(--navy);
+    background: var(--navy-tint);
+  }
+  .mc-option .mc-letter {
+    flex-shrink: 0;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 700;
+    color: var(--terra-dark);
+    width: 1.6em;
+  }
+  .mc-option.correct {
+    border-color: var(--navy);
+    background: var(--navy-tint);
+  }
+  .mc-option.correct .mc-letter { color: var(--navy); }
+  .mc-option.wrong {
+    border-color: var(--terra-dark);
+    background: #FAF1EC;
+  }
+  .mc-option.wrong .mc-letter { color: var(--terra-dark); }
+  .mc-option:disabled { cursor: default; opacity: 0.85; }
+  .mc-option.dim { opacity: 0.5; }
+
+  .feedback-panel {
+    background: var(--navy-tint);
+    border-left: 4px solid var(--navy);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0 10px;
+  }
+  .feedback-panel.wrong {
+    background: #FAF1EC;
+    border-left-color: var(--terra-dark);
+  }
+  .feedback-panel .fb-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 0 0 4px;
+  }
+  .feedback-panel.wrong .fb-label { color: var(--terra-dark); }
+  .feedback-panel .fb-explain {
+    font-family: 'Lora', Georgia, serif;
+    color: var(--navy);
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  /* Buttons */
+  .btn {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+  }
+  .btn-primary:hover, .btn-primary:focus-visible {
+    background: var(--navy-deep);
+    border-color: var(--navy-deep);
+  }
+  .btn-gold {
+    background: var(--navy);
+    color: var(--white);
+    border: 2px solid var(--gold);
+  }
+  .btn-gold:hover, .btn-gold:focus-visible {
+    background: var(--navy-deep);
+    border-color: var(--gold-deep);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--navy);
+    border-color: var(--gray-line);
+  }
+  .btn-ghost:hover, .btn-ghost:focus-visible {
+    background: var(--navy-tint);
+    border-color: var(--navy);
+  }
+  .btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .stat {
+    background: var(--white);
+    border: 1px solid var(--gray-line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow-rest);
+  }
+  .stat-label {
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra-dark);
+    margin: 0 0 4px;
+  }
+  .stat-value {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .stat-sub {
+    font-size: 12px;
+    color: var(--gray-soft);
+    margin-top: 4px;
+  }
+
+  /* Video panel */
+  .video-frame {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--navy-deep);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .video-frame .placeholder-label {
+    text-align: center;
+    padding: 24px;
+    max-width: 80%;
+  }
+  .video-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 6px;
+    background: var(--gold);
+    width: 0%;
+    transition: width 250ms linear;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .video-progress { transition: none; }
+  }
+
+  /* Gate */
+  .gate {
+    background: var(--white);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-top: 14px;
+  }
+  .gate label {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 600;
+    color: var(--navy);
+    display: block;
+    margin: 0 0 8px;
+  }
+  .gate textarea {
+    width: 100%;
+    min-height: 140px;
+    padding: 12px;
+    border: 1px solid var(--gray-line);
+    border-radius: 6px;
+    font-family: "Lora", Georgia, serif;
+    font-size: 16px;
+    color: var(--navy);
+    background: var(--off-white);
+    resize: vertical;
+  }
+  .gate textarea:focus { background: var(--white); }
+  .gate-feedback {
+    margin-top: 10px;
+    font-family: "Lora", Georgia, serif;
+    font-style: italic;
+    min-height: 1.5em;
+  }
+  .gate-feedback.error { color: var(--terra-dark); }
+  .gate-feedback.success { color: var(--navy); font-style: normal; font-weight: 600; font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+  .gate-meter {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-size: 13px;
+    color: var(--gray-soft);
+  }
+  .gate-meter span strong { color: var(--navy); }
+
+  /* Learning view: single column. Notes are an external link, not an inline panel. */
+  .learn-single {
+    max-width: 720px;
+  }
+
+  /* Card practice */
+  .practice-card {
+    background: var(--white);
+    border: 2px solid var(--navy);
+    border-radius: 10px;
+    padding: 26px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-rest);
+  }
+  .practice-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dok-badge {
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid;
+  }
+  .dok-1 { color: var(--navy); border-color: var(--navy); }
+  .dok-2 { color: var(--navy); border-color: var(--gold-deep); background: #fbf4e3; }
+  .dok-3 { color: var(--terra-dark); border-color: var(--terra-dark); }
+
+  .progress-text {
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--gray-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .q-text {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--navy);
+    margin: 12px 0 16px;
+  }
+  .a-text {
+    font-family: "Lora", Georgia, serif;
+    font-size: 16px;
+    color: var(--navy);
+    padding: 14px 16px;
+    background: var(--navy-tint);
+    border-left: 3px solid var(--navy);
+    border-radius: 4px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .a-text.revealed { display: block; }
+
+  .rate-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  @media (max-width: 540px) {
+    .rate-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  .rate-btn {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 12px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--gray-line);
+    background: var(--white);
+    cursor: pointer;
+    color: var(--navy);
+    transition: background var(--t-fast), border-color var(--t-fast);
+    line-height: 1.2;
+    text-align: center;
+  }
+  .rate-btn small {
+    display: block;
+    font-weight: 500;
+    font-size: 11px;
+    color: var(--gray-soft);
+    margin-top: 4px;
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+  .rate-btn:hover, .rate-btn:focus-visible {
+    background: var(--navy-tint);
+    border-color: var(--navy);
+  }
+  .rate-btn.again { border-color: var(--terra); }
+  .rate-btn.again:hover, .rate-btn.again:focus-visible { background: #fbeee6; }
+  .rate-btn.easy { border-color: var(--gold); }
+  .rate-btn.easy:hover, .rate-btn.easy:focus-visible { background: #f7eed8; }
+
+  /* Mastery bars */
+  .mastery-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 60px;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-size: 13px;
+  }
+  .mastery-bar {
+    height: 8px;
+    background: var(--navy-tint);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .mastery-fill {
+    height: 100%;
+    background: var(--navy);
+    border-radius: 4px;
+    transition: width var(--t-med);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mastery-fill { transition: none; }
+  }
+  .mastery-fill.l1 { background: var(--navy); }
+  .mastery-fill.l2 { background: var(--gold-deep); }
+  .mastery-fill.l3 { background: var(--terra-dark); }
+
+  /* Sessions list */
+  .session-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 70px 70px;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--gray-line);
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-size: 13px;
+  }
+  .session-row:last-child { border-bottom: none; }
+  .session-row .date { color: var(--navy); font-weight: 600; }
+  .session-row .topics { color: var(--gray-soft); }
+
+  /* Live region */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    color: var(--gray-soft);
+    padding: 20px;
+    font-family: "Lora", Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+  }
+
+  /* Empty state */
+  .empty {
+    text-align: center;
+    padding: 30px 16px;
+    color: var(--gray-soft);
+    font-style: italic;
+  }
+
+  /* Module groups */
+  .module-group {
+    background: var(--white);
+    border: 1px solid var(--gray-line);
+    border-radius: 10px;
+    box-shadow: var(--shadow-rest);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .module-group > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    border-bottom: 1px solid transparent;
+    transition: background var(--t-fast), border-color var(--t-fast);
+  }
+  .module-group > summary::-webkit-details-marker { display: none; }
+  .module-group[open] > summary { border-bottom-color: var(--gray-line); }
+  .module-group > summary:hover,
+  .module-group > summary:focus-visible {
+    background: var(--navy-tint);
+  }
+  .module-group > summary::before {
+    content: "+";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid var(--navy);
+    color: var(--navy);
+    text-align: center;
+    line-height: 20px;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .module-group[open] > summary::before { content: "−"; }
+  .module-week {
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra-dark);
+  }
+  .module-title {
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--navy);
+    flex: 1;
+    min-width: 200px;
+  }
+  .module-progress {
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-size: 13px;
+    color: var(--gray-soft);
+  }
+  .module-progress.complete { color: var(--navy); font-weight: 700; }
+  .module-body { padding: 12px 18px 18px; }
+  .module-body .card { margin-bottom: 10px; padding: 16px 18px; }
+  .module-body .card:last-child { margin-bottom: 0; }
+  .module-body .card h3 { font-size: 15px; margin: 0 0 4px; }
+
+  /* "Tonight" highlight ribbon */
+  .tonight-block {
+    background: var(--navy-tint);
+    border: 1px solid var(--navy);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 22px;
+  }
+  .tonight-block h3 {
+    color: var(--navy);
+    margin-top: 0;
+  }
+
+  /* Daily Review nudge banner (dashboard) */
+  .dr-nudge {
+    background: var(--white);
+    border: 1px solid var(--gold);
+    border-left: 4px solid var(--gold);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    box-shadow: var(--shadow-rest);
+  }
+  .dr-nudge-text { flex: 1; min-width: 240px; }
+  .dr-nudge-eyebrow {
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra-dark);
+    margin: 0 0 4px;
+  }
+  .dr-nudge-headline {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 17px;
+    margin: 0 0 4px;
+  }
+  .dr-nudge-sub {
+    font-family: "Lora", Georgia, serif;
+    font-style: italic;
+    color: var(--gray-soft);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  /* Toolbar */
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 18px 0;
+  }
+
+  /* Print styles */
+  @media print {
+    nav.top-nav, .skip-link, footer, .no-print { display: none !important; }
+    body { background: white; color: black; }
+    .view { display: none; }
+    .view.print-view { display: block !important; }
+    .card, .stat, .practice-card, .notes-panel {
+      box-shadow: none;
+      border-color: #888;
+      page-break-inside: avoid;
+    }
+    header.page-header { border-bottom: 2px solid #333; }
+    h1.page-title, h2, h3, h4 { color: black; }
+    .mastery-fill { background: #555 !important; }
+    .pill { border-color: #555; }
+  }
+
+  /* High contrast preference */
+  @media (prefers-contrast: more) {
+    .card, .stat, .practice-card, .notes-panel { border-color: var(--navy); }
+    .gray-line, .pill { border-color: var(--navy); }
+  }
+
+/* ============================================================
+   MCAS REBRAND OVERRIDES — appended by rebrand-mcas.py
+   These rules win the cascade so the underlying page styling
+   does not need to change. JS logic (video gating, spaced recall)
+   is untouched.
+   ============================================================ */
+:root {
+  /* New MCAS tokens for any rule that wants them */
+  --mcas-navy:  #0B1530;
+  --mcas-rust:  #8B3A2E;
+  --mcas-gold:  #C9A14A;
+  --mcas-cream: #F5F1E8;
+  --mcas-dark:  #060A18;
+  /* Remap legacy PRIMARY palette tokens (syllabus, schedule, etc.)
+     so every rule that references them switches to MCAS values
+     automatically. No rule-by-rule rewriting needed. */
+  --navy: #0B1530;
+  --navy-deep: #060A18;
+  --navy-tint: #F5F1E8;
+  --gold: #C9A14A;
+  --gold-deep: #B08B3A;
+  --terra: #8B3A2E;
+  --terra-dark: #8B3A2E;
+  /* Sage is banned. Remap any sage tokens to MCAS gold so legacy
+     sage rules render as gold accents on dark sections. */
+  --sage-dark: #C9A14A;
+  --sage-deeper: #B08B3A;
+  --white: #FFFFFF;
+  --off-white: #FFFFFF;
+  --gray-line: rgba(11, 21, 48, 0.18);
+  --gray-soft: rgba(11, 21, 48, 0.72);
+}
+html, body.mcas-page {
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  background: #FFFFFF !important;
+  color: var(--mcas-navy) !important;
+}
+/* Force Plus Jakarta Sans across EVERY element except code/monospace.
+   This kills Lora, DM Sans, Cormorant Garamond, Georgia, and any other
+   stray font-family declarations on child elements that were winning
+   the specificity fight against the body rule. */
+body.mcas-page,
+body.mcas-page *:not(code):not(pre):not(kbd):not(samp):not(tt) {
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+}
+body.mcas-page h1, body.mcas-page h2, body.mcas-page h3,
+body.mcas-page h4, body.mcas-page h5, body.mcas-page h6 {
+  color: var(--mcas-navy) !important;
+  letter-spacing: -0.015em;
+}
+body.mcas-page a { color: var(--mcas-rust); }
+body.mcas-page a:hover { color: #A0452F; }
+body.mcas-page a:focus-visible {
+  outline: 3px solid var(--mcas-rust);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ----- NO BOOKENDS RULE -----
+   Strip section-edge bookend borders from header.page-head, section.band,
+   nav.toc, .banner, .page-head, the syllabus's section blocks, etc.
+   Cards (.card, [class*="-card"], details, table, button) keep their
+   functional outlines. Sections rely on background contrast and hover
+   lifts for differentiation. */
+body.mcas-page header.page-head,
+body.mcas-page .banner,
+body.mcas-page .page-head,
+body.mcas-page section.band,
+body.mcas-page nav.toc,
+body.mcas-page .footer-section,
+body.mcas-page .footer-top {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+/* Hover lift utility — ONLY on elements that are actually clickable
+   (an anchor) or interactive (FAQ summary). Read-only info elements
+   like .glance-item never lift. */
+body.mcas-page a[class*="-card"],
+body.mcas-page a[class*="-tile"],
+body.mcas-page a.resource-tile,
+body.mcas-page details.faq-item {
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+body.mcas-page a[class*="-card"]:hover,
+body.mcas-page a[class*="-tile"]:hover,
+body.mcas-page a.resource-tile:hover,
+body.mcas-page details.faq-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(11, 21, 48, 0.10);
+}
+
+/* Responsive: stack each day-tile pill button on its own line below 900px.
+   This covers phones AND tablets, so each Pre-work / SR / Lab workbook /
+   Daily Review / Discussion button sits on its own row, full-width,
+   with a comfortable 44px tap target. Above 900px the original inline
+   layout shows. */
+@media (max-width: 900px) {
+  body.mcas-page .day-tile a.day-pill,
+  body.mcas-page a.day-pill {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 8px 0 !important;
+    padding: 12px 18px !important;
+    min-height: 44px !important;
+    box-sizing: border-box !important;
+  }
+  body.mcas-page .day-tile {
+    padding: 14px !important;
+  }
+}
+
+/* Course-at-a-Glance (syllabus Section 2 / schedule overview) — one info
+   panel, not eight clickable-looking cards. Forces white background,
+   thin shadow, and strips the individual card styling from inner items. */
+body.mcas-page .glance {
+  background: #FFFFFF !important;
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 1px 3px rgba(11, 21, 48, 0.08) !important;
+  padding: 30px 34px !important;
+  display: grid !important;
+  gap: 24px 36px !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+}
+body.mcas-page .glance-item {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  transform: none !important;
+  cursor: default !important;
+}
+body.mcas-page .glance-item:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* MCAS chrome (site header + footer) — scoped so it never collides
+   with existing IDs/classes on the page */
+.mcas-chrome,
+.mcas-chrome * { box-sizing: border-box; }
+.mcas-header {
+  /* No bookend border per MCAS rule — separation via background contrast */
+  background: #FFFFFF;
+  padding: 24px max(40px, 5vw);
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.mcas-header-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.mcas-brand { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; color: var(--mcas-navy); }
+.mcas-brand svg { height: 44px; width: auto; display: block; }
+.mcas-brand-title { font-size: 18px; font-weight: 800; line-height: 1; letter-spacing: -0.015em; }
+.mcas-brand-title .accent { color: var(--mcas-rust); }
+.mcas-brand-sub {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.20em;
+  text-transform: uppercase; color: var(--mcas-navy); opacity: 0.72;
+  display: block; margin-top: 3px;
+}
+.mcas-back {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--mcas-rust);
+  text-decoration: none; padding: 8px 14px; border: 1px solid var(--mcas-rust);
+  border-radius: 4px;
+}
+.mcas-back:hover, .mcas-back:focus-visible {
+  background: var(--mcas-rust); color: #FFFFFF;
+}
+/* Thin back-link strip — used when the page already has its own brand */
+.mcas-backlink-strip {
+  background: #FFFFFF;
+  padding: 14px max(40px, 5vw);
+  display: flex; justify-content: flex-start; align-items: center;
+}
+.mcas-footer {
+  /* No bookend border — dark background is the separator */
+  background: var(--mcas-dark);
+  color: var(--mcas-cream);
+  padding: 40px max(40px, 5vw) 28px;
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif;
+  margin-top: 56px;
+}
+/* Footer link color — bumped to body-scoped selector so it wins
+   specificity against body.mcas-page a (which was forcing rust on dark
+   navy and failing WCAG contrast). White on the near-black footer
+   passes AAA; gold on hover gives brand pop. */
+body.mcas-page .mcas-footer a,
+.mcas-footer a {
+  color: #FFFFFF !important;
+  text-decoration: none;
+  opacity: 0.92;
+}
+body.mcas-page .mcas-footer a:hover,
+body.mcas-page .mcas-footer a:focus-visible,
+.mcas-footer a:hover,
+.mcas-footer a:focus-visible {
+  color: var(--mcas-gold) !important;
+  opacity: 1;
+  text-decoration: underline;
+}
+body.mcas-page .mcas-footer a:focus-visible,
+.mcas-footer a:focus-visible {
+  outline: 3px solid var(--mcas-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.mcas-footer-row {
+  /* No bookend border — extra padding-top supplies the separation */
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap; padding-top: 32px; margin-top: 24px;
+}
+.mcas-footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+.mcas-footer-link { font-size: 12.5px; font-weight: 500; letter-spacing: 0.02em; }
+.mcas-footer-copyright {
+  font-size: 11px; opacity: 0.72; letter-spacing: 0.03em;
+}
+.mcas-footer-byline {
+  font-size: 11px; font-weight: 700; color: var(--mcas-gold);
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+.mcas-skip {
+  position: absolute; top: -100px; left: 8px;
+  background: var(--mcas-navy); color: var(--mcas-cream);
+  padding: 12px 20px; text-decoration: none;
+  font-size: 13px; font-weight: 700;
+  border-radius: 4px; z-index: 9999; letter-spacing: 0.04em;
+}
+.mcas-skip:focus { top: 8px; }
+@media (prefers-reduced-motion: reduce) {
+  .mcas-chrome *, .mcas-chrome { transition: none !important; animation: none !important; }
+}
+
+/* ----- Primary CTA button (.btn-gold) — accessibility fix -----
+   The underlying page styled .btn-gold as navy bg + white text, but the
+   body.mcas-page anchor color rule (rust on a) won the cascade and gave
+   us rust text on dark navy — fails WCAG contrast. Override: dark terra
+   cotta background (brand rust) with white text. Hover deepens to
+   rust-dark per the MCAS spec.
+*/
+body.mcas-page a.btn-gold,
+body.mcas-page .btn-gold {
+  background: var(--mcas-rust) !important;
+  color: #FFFFFF !important;
+  border: 2px solid var(--mcas-rust) !important;
+}
+body.mcas-page a.btn-gold:hover,
+body.mcas-page a.btn-gold:focus-visible,
+body.mcas-page .btn-gold:hover,
+body.mcas-page .btn-gold:focus-visible {
+  background: #A0452F !important;
+  color: #FFFFFF !important;
+  border-color: #A0452F !important;
+}
+
+/* ----- Pre-work ↔ Workbook wiring asides -----
+   .mcas-next-up        appears on a pre-work topic spoke, points forward
+                        to the Day-N lab workbook.
+   .mcas-prework-link   appears on a Day-N workbook, points back to its
+                        pre-work topic spoke.
+   Same visual: white card, thin shadow, gold accent line on the left,
+   no hover-lift (these are read-then-click affordances, not browsing tiles).
+*/
+body.mcas-page .mcas-next-up,
+body.mcas-page .mcas-prework-link {
+  background: #FFFFFF;
+  border: none;
+  border-left: 4px solid var(--mcas-gold);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(11, 21, 48, 0.08);
+  padding: 20px 24px;
+  margin: 28px 0;
+  display: block;
+}
+body.mcas-page .mcas-next-up-eyebrow,
+body.mcas-page .mcas-prework-link-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mcas-rust);
+  margin: 0 0 6px 0;
+}
+body.mcas-page a.mcas-next-up-cta,
+body.mcas-page a.mcas-prework-link-cta {
+  display: inline-block;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--mcas-navy);
+  text-decoration: none;
+  line-height: 1.35;
+}
+body.mcas-page a.mcas-next-up-cta:hover,
+body.mcas-page a.mcas-prework-link-cta:hover,
+body.mcas-page a.mcas-next-up-cta:focus-visible,
+body.mcas-page a.mcas-prework-link-cta:focus-visible {
+  color: var(--mcas-rust);
+  text-decoration: underline;
+}
+body.mcas-page a.mcas-next-up-cta:focus-visible,
+body.mcas-page a.mcas-prework-link-cta:focus-visible {
+  outline: 3px solid var(--mcas-rust);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ----- Lecture video notes section (on spoke pages, under the video) -----
+   Freeform textarea that autosaves to localStorage keyed by topic ID.
+   Visible in Notes and Study modes; hidden in Quiz mode. Prints cleanly
+   so handwritten or typed notes can be carried out of class.
+*/
+body.mcas-page .mcas-lecture-notes {
+  background: #FFFFFF;
+  border: none;
+  border-left: 4px solid var(--mcas-gold);
+  border-radius: 6px;
+  padding: 22px 24px 18px;
+  margin: 16px 0 24px;
+  box-shadow: 0 1px 3px rgba(11, 21, 48, 0.06);
+}
+body.mcas-page .mcas-lecture-notes-eyebrow {
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mcas-rust);
+  margin: 0 0 4px;
+}
+body.mcas-page .mcas-lecture-notes h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--mcas-navy);
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+body.mcas-page .mcas-lecture-notes-instr {
+  font-style: italic;
+  font-size: 13.5px;
+  color: var(--mcas-navy);
+  opacity: 0.78;
+  margin: 0 0 10px;
+}
+body.mcas-page #mcas-lecture-notes-input {
+  width: 100%;
+  min-height: 160px;
+  padding: 14px 16px;
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 15px;
+  color: var(--mcas-navy);
+  line-height: 1.55;
+  border: 1px solid rgba(11, 21, 48, 0.18);
+  border-radius: 6px;
+  background: #FFFFFF;
+  resize: vertical;
+  box-sizing: border-box;
+}
+body.mcas-page #mcas-lecture-notes-input:focus-visible {
+  outline: 3px solid var(--mcas-rust);
+  outline-offset: 1px;
+  border-color: var(--mcas-navy);
+}
+body.mcas-page .mcas-lecture-notes-status {
+  font-size: 12px;
+  color: var(--mcas-navy);
+  opacity: 0.6;
+  margin: 6px 0 0;
+  min-height: 1.2em;
+}
+/* Hide in quiz mode (consistent with other interactive elements). */
+body.mcas-page.quiz .mcas-lecture-notes { display: none; }
+@media print {
+  body.mcas-page .mcas-lecture-notes {
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,0.15);
+    page-break-inside: avoid;
+  }
+  body.mcas-page #mcas-lecture-notes-input {
+    border: 1px solid rgba(0,0,0,0.3);
+    background: #FFFFFF;
+    color: #000;
+  }
+}
+
+/* Gated state — workbook aside is locked until the spoke page's retrieval
+   check is passed. The gating JS adds .gate-locked to the CTA when the
+   localStorage flag bio004-gate-{TOPIC_ID} is not yet set. */
+body.mcas-page .mcas-next-up.is-gated {
+  border-left-color: rgba(11, 21, 48, 0.25);
+}
+body.mcas-page a.mcas-next-up-cta.gate-locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: auto;
+  color: var(--mcas-navy);
+}
+body.mcas-page a.mcas-next-up-cta.gate-locked:hover,
+body.mcas-page a.mcas-next-up-cta.gate-locked:focus-visible {
+  color: var(--mcas-navy);
+  text-decoration: none;
+}
+body.mcas-page .mcas-next-up-gate-hint {
+  display: block;
+  margin-top: 8px;
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mcas-rust);
+}
+body.mcas-page .mcas-next-up-gate-hint[hidden] { display: none; }
+</style>
+
+<style>
+.bio004-lecture-notice {
+  background: #0B1530;
+  border: 0;
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 16px 0 22px;
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif;
+  color: #FAFAF9;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  box-shadow: 0 4px 12px rgba(11, 21, 48, 0.18);
+}
+.bio004-lecture-notice .icon {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #C9A14A;
+  color: #0B1530;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif;
+  margin-top: 1px;
+}
+.bio004-lecture-notice .copy { flex: 1 1 auto; }
+.bio004-lecture-notice .label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C9A14A;
+  margin: 0 0 6px;
+}
+.bio004-lecture-notice p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #FAFAF9;
+}
+.bio004-lecture-notice strong { color: #C9A14A; font-weight: 700; }
+</style>
+</head>
+<body class="mcas-page">
+<!-- mcas-chrome-header -->
+<a href="#mcas-content" class="mcas-skip">Skip to main content</a>
+<div class="mcas-chrome">
+<header class="mcas-header">
+  <div class="mcas-header-row">
+    <a class="mcas-brand" href="index.html" target="_top" aria-label="BIO 004 Human Anatomy, course home">
+      <svg viewBox="40 10 125 148" role="img" aria-hidden="true" focusable="false">
+<g transform="translate(0, 18)">
+<g transform="translate(60, 0) rotate(8 0 130)">
+<circle cx="0" cy="20" r="10" fill="#0B1530"/>
+<path d="M 0,32 C -10,32 -16,36 -16,42 C -16,55 -13,68 -11,82 C -10,100 -12,118 -14,130 L 14,130 C 12,118 10,100 11,82 C 13,68 16,55 16,42 C 16,36 10,32 0,32 Z" fill="#0B1530"/>
+</g>
+<g transform="translate(100, 0)">
+<circle cx="0" cy="10" r="11" fill="#8B3A2E"/>
+<path d="M 0,22 C -11,22 -17,26 -17,34 C -17,52 -14,70 -12,86 C -11,108 -13,122 -15,132 L 15,132 C 13,122 11,108 12,86 C 14,70 17,52 17,34 C 17,26 11,22 0,22 Z" fill="#8B3A2E"/>
+</g>
+<g transform="translate(140, 0) rotate(-8 0 130)">
+<circle cx="0" cy="20" r="10" fill="#C9A14A"/>
+<path d="M 0,32 C -10,32 -16,36 -16,42 C -16,55 -13,68 -11,82 C -10,100 -12,118 -14,130 L 14,130 C 12,118 10,100 11,82 C 13,68 16,55 16,42 C 16,36 10,32 0,32 Z" fill="#C9A14A"/>
+</g>
+</g>
+</svg>
+      <span>
+        <span class="mcas-brand-title">Human <span class="accent">A&amp;P</span></span>
+        <span class="mcas-brand-sub">BIO 004 &middot; Solano Community College</span>
+      </span>
+    </a>
+    <a class="mcas-back" href="index.html" target="_top">&larr; Course home</a>
+  </div>
+</header>
+</div>
+<main id="mcas-content" class="mcas-content">
+<!-- mcas-chrome-header-end -->
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="page-header">
+  <p class="eyebrow">BIO 004 &middot; Human Anatomy &middot; Solano Community College</p>
+  <h1 class="page-title">Nightly Pre-Work and Spaced Recall</h1>
+  <p class="subhead" id="subhead-context">Tonight&rsquo;s prep, your daily review, and your engagement record</p>
+  <p class="usage">Watch each video. Explain it in your own words to unlock notes and your question set. Rate how you felt on each card. Come back tomorrow and your cards will be ready for review.</p>
+  <nav class="top-nav" aria-label="Primary">
+    <button type="button" data-nav="dashboard" aria-current="page">Tonight&rsquo;s pre-work</button>
+    <button type="button" data-nav="review">Daily review</button>
+    <button type="button" data-nav="report">Engagement report</button>
+    <button type="button" data-nav="settings">Settings</button>
+  </nav>
+</header>
+
+<aside class="bio004-lecture-notice" role="note" aria-label="Important note about today's cards">
+  <span class="icon" aria-hidden="true">!</span>
+  <div class="copy">
+    <p class="label">Read before you start</p>
+    <p>Today's cards unlock only after you watch the day's lecture video and write your one-line explanation on this page. <strong>If you skip the lecture, today's cards will stay locked</strong> and you will only see cards from lectures you have already completed. That means your review may be missing the material we covered today. Plan to watch the video first.</p>
+  </div>
+</aside>
+
+<div role="status" aria-live="polite" class="sr-only" id="live-region"></div>
+
+<main id="main-content" tabindex="-1">
+
+  <!-- DASHBOARD -->
+  <section class="view active" id="view-dashboard" aria-labelledby="dash-heading">
+    <h2 id="dash-heading">Tonight&rsquo;s pre-work</h2>
+    <div class="stats-row">
+      <div class="stat">
+        <p class="stat-label">Streak</p>
+        <p class="stat-value" id="stat-streak">0</p>
+        <p class="stat-sub">days in a row</p>
+      </div>
+      <div class="stat">
+        <p class="stat-label">Cards due today</p>
+        <p class="stat-value" id="stat-due">0</p>
+        <p class="stat-sub">from prior sessions</p>
+      </div>
+      <div class="stat">
+        <p class="stat-label">Topics tonight</p>
+        <p class="stat-value" id="stat-topics-tonight">0</p>
+        <p class="stat-sub" id="stat-topics-tonight-sub">today&rsquo;s pre-work</p>
+      </div>
+      <div class="stat">
+        <p class="stat-label">All-time cards</p>
+        <p class="stat-value" id="stat-total-cards">0</p>
+        <p class="stat-sub">reviewed</p>
+      </div>
+    </div>
+    <div id="topic-list" aria-live="polite"></div>
+  </section>
+
+  <!-- TOPIC LOCKED (video + gate) -->
+  <section class="view" id="view-topic" aria-labelledby="topic-heading">
+    <button type="button" class="btn btn-ghost" data-nav="dashboard" style="margin-bottom:14px;">&larr; Back to tonight&rsquo;s list</button>
+    <h2 id="topic-heading">Topic</h2>
+    <p class="usage" id="topic-summary"></p>
+
+    <div class="card" id="video-card">
+      <h3 id="video-card-heading">Step 1. Watch the lecture video</h3>
+      <p class="usage" id="video-status">Watch this topic's lecture video on its lecture page, then return here to keep going.</p>
+      <div class="toolbar">
+        <a class="btn btn-primary" id="btn-open-lecture-page" href="#" target="_top" hidden>Open lecture page &rarr;</a>
+        <button type="button" class="btn btn-primary" id="btn-simulate-watch" hidden>Simulate watching (10s)</button>
+        <button type="button" class="btn btn-gold" id="btn-mark-watched">I&rsquo;ve watched it</button>
+      </div>
+      <div class="video-frame" id="video-frame-legacy" aria-label="Legacy in-app video player" hidden>
+        <div class="placeholder-label" id="video-placeholder-label">Placeholder video. The real video must play start-to-finish before the next step appears.</div>
+        <div class="video-progress" id="video-progress"></div>
+      </div>
+    </div>
+
+    <p class="usage" id="gate-locked-note" style="margin-top:16px;">Step 2 unlocks once Step 1 is complete.</p>
+
+    <div class="gate" id="gate-card" aria-labelledby="gate-heading" hidden>
+      <h3 id="gate-heading">Step 2. Explain in your own words</h3>
+      <label for="gate-input">In your own words, what did this video teach you? Aim for at least 60 words and include the key ideas.</label>
+      <textarea id="gate-input" aria-describedby="gate-help" placeholder="Type your explanation here..."></textarea>
+      <p id="gate-help" class="usage">Your explanation stays on this device. It will print with your engagement report so your professor can see your understanding.</p>
+      <p class="usage" id="gate-preview-hint" hidden style="margin-top:6px;">
+        <strong style="color:var(--terra-dark);font-style:normal;">Preview mode hint:</strong>
+        the system is looking for these key concepts in your explanation:
+        <span id="gate-preview-keywords" style="font-family:'DM Sans',system-ui,sans-serif;font-style:normal;color:var(--navy);"></span>
+      </p>
+      <div class="gate-meter" aria-live="polite">
+        <span>Words: <strong id="gate-word-count">0</strong> / 60</span>
+        <span>Concepts found: <strong id="gate-keyword-count">0</strong> / <span id="gate-keyword-target">0</span></span>
+        <button type="button" id="btn-toggle-preview-hint" class="btn btn-ghost" style="padding:4px 10px;font-size:12px;margin-left:auto;">Show concepts (preview)</button>
+      </div>
+      <div class="toolbar">
+        <button type="button" class="btn btn-primary" id="btn-submit-gate">Unlock notes and questions</button>
+      </div>
+      <p class="gate-feedback" id="gate-feedback" role="status"></p>
+    </div>
+  </section>
+
+  <!-- LEARNING VIEW (cards; notes link out to the existing notes hub) -->
+  <section class="view" id="view-learn" aria-labelledby="learn-heading">
+    <div class="toolbar" style="margin-bottom:14px;">
+      <button type="button" class="btn btn-ghost" data-nav="dashboard">&larr; Back to tonight&rsquo;s list</button>
+      <a id="link-open-notes" class="btn btn-gold" target="_blank" rel="noopener noreferrer" href="#" hidden>Open notes &#x2197;</a>
+      <a id="link-open-reading" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" href="#" hidden>OpenStax reference &#x2197;</a>
+      <!-- mcas-workbook-btn -->
+      <a id="link-open-workbook" class="btn btn-gold" target="_blank" rel="noopener noreferrer" href="#" hidden>Lab workbook &#x2197;</a>
+      <!-- mcas-workbook-btn-end -->
+      <span id="notes-link-pending" class="usage" style="font-style:italic;align-self:center;">Notes link not yet wired for this topic.</span>
+    </div>
+    <h2 id="learn-heading">Spaced recall</h2>
+    <p class="usage" style="margin-top:-6px;">Try to recall the answer before opening the notes. Reach for notes only when you are genuinely stuck.</p>
+    <div class="learn-single">
+      <div>
+        <div class="practice-card" id="practice-card" aria-live="polite">
+          <div class="practice-meta">
+            <span class="dok-badge dok-1" id="card-dok-badge">DOK 1</span>
+            <span class="progress-text" id="card-progress">Card 1 of 20</span>
+          </div>
+          <div>
+            <p class="q-text" id="card-question">Question loads here.</p>
+            <div class="mc-options" id="mc-options" role="group" aria-label="Answer choices"></div>
+            <div class="feedback-panel" id="feedback-panel" hidden>
+              <p class="fb-label" id="fb-label">CORRECT</p>
+              <p class="fb-explain" id="fb-explain"></p>
+            </div>
+            <p class="a-text" id="card-answer" hidden>Answer loads here.</p>
+          </div>
+          <div>
+            <p class="usage" id="rate-instructions" hidden style="margin:0 0 8px;">How hard did that feel? Your rating tunes when the card comes back.</p>
+            <div class="rate-row" id="rate-row" hidden>
+              <button type="button" class="rate-btn again" data-rate="again">Again<small>didn&rsquo;t know it</small></button>
+              <button type="button" class="rate-btn" data-rate="hard">Hard<small>got it, struggled</small></button>
+              <button type="button" class="rate-btn" data-rate="good">Good<small>knew it</small></button>
+              <button type="button" class="rate-btn easy" data-rate="easy">Easy<small>solid</small></button>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:18px;">
+          <h3>Mastery in this topic</h3>
+          <div class="mastery-row"><span>DOK 1</span><div class="mastery-bar"><div class="mastery-fill l1" id="mastery-l1" style="width:0%"></div></div><span id="mastery-l1-text">0%</span></div>
+          <div class="mastery-row"><span>DOK 2</span><div class="mastery-bar"><div class="mastery-fill l2" id="mastery-l2" style="width:0%"></div></div><span id="mastery-l2-text">0%</span></div>
+          <div class="mastery-row"><span>DOK 3</span><div class="mastery-bar"><div class="mastery-fill l3" id="mastery-l3" style="width:0%"></div></div><span id="mastery-l3-text">0%</span></div>
+          <p class="usage" id="dok-adapt-note">Adaptive level: warming up at DOK 1.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAILY REVIEW -->
+  <section class="view" id="view-review" aria-labelledby="review-heading">
+    <h2 id="review-heading">Daily review</h2>
+    <p class="usage" id="review-mode-note">These cards are due based on how you rated them last time. Lower confidence resurfaces first.</p>
+    <div class="toolbar" style="margin-bottom:12px;flex-wrap:wrap;gap:8px;align-items:center;">
+      <span style="font-family:'DM Sans',system-ui,sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-dark);">Show</span>
+      <button type="button" class="btn btn-primary" id="btn-review-due" aria-pressed="true">Due today only</button>
+      <button type="button" class="btn btn-ghost" id="btn-review-all" aria-pressed="false">All unlocked cards</button>
+    </div>
+    <div id="review-body"></div>
+  </section>
+
+  <!-- ENGAGEMENT REPORT -->
+  <section class="view print-view" id="view-report" aria-labelledby="report-heading">
+    <h2 id="report-heading">Engagement report</h2>
+    <p class="usage">A printable record of your nightly work. Hand this in or save it as a PDF.</p>
+    <div class="toolbar no-print">
+      <button type="button" class="btn btn-primary" id="btn-print">Print or save as PDF</button>
+      <button type="button" class="btn btn-ghost" id="btn-export">Export progress code</button>
+      <button type="button" class="btn btn-ghost" id="btn-import">Import progress code</button>
+    </div>
+    <div id="report-body"></div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="view" id="view-settings" aria-labelledby="settings-heading">
+    <h2 id="settings-heading">Settings</h2>
+    <div class="card">
+      <h3>Reset and data</h3>
+      <p class="usage">Everything is stored on this device only. No names, no IDs, no accounts.</p>
+      <div class="toolbar">
+        <button type="button" class="btn btn-ghost" id="btn-reset-day">Simulate next day (for testing)</button>
+        <button type="button" class="btn btn-ghost" id="btn-reset-all">Reset all progress</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>About this prototype</h3>
+      <p class="usage">BIO 004 nightly pre-work tool. Forces video watch, requires a written explanation gate, then unlocks notes and an adaptive spaced-recall card set across DOK 1 to 3. Reviews carry across days using a lightweight SM2-style scheduler.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Dr. Sharilyn Rennie &middot; BIO 004 &middot; All progress stays on your device.</p>
+</footer>
+
+<!-- External course content. Edit course-content.js to add/edit modules, topics, and cards.
+     If this file is missing, the engine falls back to a single bundled demo topic. -->
+<script src="course-content.js"></script>
+
+<!-- mcas-topic-lecture-map -->
+<script>
+/* Topic-ID → Lecture (spoke) page URL. Used by the engine's Option A
+   topic-view fallback: when a student hits view-topic without the gate
+   flag set, the engine reads topic.lecturePageUrl. This patch augments
+   each topic with that URL based on the topic id, so course-content.js
+   doesn't have to know spoke filenames. */
+window.MCAS_LECTURE_BY_TOPIC = {
+    "t-action-potentials": "action-potentials-synapses.html",
+    "t-adaptive-immunity": "adaptive-immunity.html",
+    "t-anatomical-terminology": "anatomical-position.html",
+    "t-appendicular-skeleton": "appendicular-skeleton.html",
+    "t-axial-skeleton": "axial-skeleton.html",
+    "t-blood-composition": "blood-composition.html",
+    "t-bone-tissue": "bone-tissue.html",
+    "t-cell-structure": "cell-structure.html",
+    "t-cns-organization": "cns-organization.html",
+    "t-conduction-ecg": "cardiac-conduction.html",
+    "t-connective-tissue": "connective-tissues.html",
+    "t-digestion-absorption": "digestion-absorption.html",
+    "t-epithelial-tissue": "epithelial-tissue.html",
+    "t-female-reproductive": "female-reproductive.html",
+    "t-fluid-acid-base": "fluid-electrolyte-acid-base.html",
+    "t-gas-exchange-transport": "gas-exchange-transport.html",
+    "t-gi-anatomy-motility": "gi-anatomy-motility.html",
+    "t-hearing-equilibrium": "hearing-equilibrium.html",
+    "t-heart-cardiac-cycle": "heart-anatomy.html",
+    "t-hemostasis-blood-typing": "hemostasis-blood-typing.html",
+    "t-homeostasis": "homeostasis-feedback.html",
+    "t-hormone-mechanisms": "hormone-mechanisms.html",
+    "t-joints-movements": "joints-and-movements.html",
+    "t-kidney-filtration": "kidney-anatomy-gfr.html",
+    "t-levels-of-organization": "levels-of-organization.html",
+    "t-lymphatic-innate": "lymphatic-innate-immunity.html",
+    "t-major-glands": "major-endocrine-glands.html",
+    "t-male-reproductive": "male-reproductive.html",
+    "t-membrane-transport": "membrane-transport.html",
+    "t-motor-units": "motor-units.html",
+    "t-muscle-nervous-tissue": "muscle-nervous-tissue.html",
+    "t-neurons-rmp": "neurons-resting-potential.html",
+    "t-pns-autonomic": "pns-autonomic.html",
+    "t-pregnancy-development": "pregnancy-basics.html",
+    "t-resp-anatomy-mechanics": "respiratory-anatomy.html",
+    "t-skeletal-muscle-microanatomy": "skeletal-muscle-microanatomy.html",
+    "t-skin-functions": "skin-functions.html",
+    "t-skin-layers": "skin-layers.html",
+    "t-sliding-filament": "cross-bridge-cycle.html",
+    "t-tubular-function": "tubular-function.html",
+    "t-vessels-hemodynamics": "blood-vessels-hemodynamics.html",
+    "t-vision": "vision.html"
+};
+
+/* Patch the course content: for every topic without a lecturePageUrl,
+   set it from the map above. Runs once at parse time, before the engine
+   IIFE reads the data. */
+(function(){
+  try {
+    var data = window.BIO004_COURSE_CONTENT;
+    if (!data || !data.modules) return;
+    var map = window.MCAS_LECTURE_BY_TOPIC || {};
+    data.modules.forEach(function(mod){
+      (mod.topics || []).forEach(function(t){
+        if (!t || !t.id) return;
+        if (!t.lecturePageUrl && map[t.id]) {
+          t.lecturePageUrl = map[t.id];
+        }
+      });
+    });
+  } catch (e) {}
+})();
+</script>
+<!-- mcas-topic-lecture-map-end -->
+
+<!-- mcas-topic-workbook-map -->
+<script>
+/* Topic-ID → Lab-workbook URL. Derived from schedule.html badge-sr/pill-lab
+   pairings. Injected by the wiring pass; rebuild from schedule with the
+   "topic_workbook_map" extractor in the rebrand toolkit when topic IDs
+   or workbook filenames change. */
+window.MCAS_WORKBOOK_BY_TOPIC = {
+    "t-action-potentials": "workbook_day16_action-potentials-and-synaptic-transmission.html",
+    "t-adaptive-immunity": "workbook_day26_adaptive-immunity.html",
+    "t-anatomical-terminology": "workbook_day01_anatomical-terminology-and-body-regions.html",
+    "t-appendicular-skeleton": "workbook_day11_appendicular-skeleton.html",
+    "t-axial-skeleton": "workbook_day10_axial-skeleton.html",
+    "t-blood-composition": "workbook_day21_blood-composition-and-hemopoiesis.html",
+    "t-bone-tissue": "workbook_day09_bone-tissue-and-bone-growth.html",
+    "t-cell-structure": "workbook_day03_cell-structure-and-organelles.html",
+    "t-cns-organization": "workbook_day17_cns-organization-brain-and-spinal-cord.html",
+    "t-conduction-ecg": "workbook_day23_cardiac-conduction-system.html",
+    "t-connective-tissue": "workbook_day06_connective-tissues.html",
+    "t-digestion-absorption": "workbook_day28_digestion-and-absorption.html",
+    "t-epithelial-tissue": "workbook_day05_epithelial-tissue-classification.html",
+    "t-female-reproductive": "workbook_day32_female-reproductive-system.html",
+    "t-fluid-acid-base": "workbook_day31_fluid-electrolyte-and-acid-base-balance.html",
+    "t-gas-exchange-transport": "workbook_day27_gas-exchange-and-transport.html",
+    "t-gi-anatomy-motility": "workbook_day28_gi-tract-anatomy-and-motility.html",
+    "t-hearing-equilibrium": "workbook_day19_hearing-and-equilibrium.html",
+    "t-heart-cardiac-cycle": "workbook_day22_heart-anatomy-and-the-cardiac-cycle.html",
+    "t-hemostasis-blood-typing": "workbook_day21_hemostasis-and-blood-typing.html",
+    "t-homeostasis": "workbook_day02_homeostasis-and-feedback-loops.html",
+    "t-hormone-mechanisms": "workbook_day20_hormone-mechanisms.html",
+    "t-joints-movements": "workbook_day12_joints-and-body-movements.html",
+    "t-kidney-filtration": "workbook_day29_kidney-anatomy-and-glomerular-filtration.html",
+    "t-levels-of-organization": "workbook_day01_levels-of-organization.html",
+    "t-lymphatic-innate": "workbook_day25_lymphatic-system-and-innate-immunity.html",
+    "t-major-glands": "workbook_day20_major-endocrine-glands.html",
+    "t-male-reproductive": "workbook_day31_male-reproductive-system.html",
+    "t-membrane-transport": "workbook_day04_membrane-transport.html",
+    "t-motor-units": "workbook_day13_motor-units-and-muscle-mechanics.html",
+    "t-muscle-nervous-tissue": "workbook_day07_muscle-and-nervous-tissue-overview.html",
+    "t-neurons-rmp": "workbook_day15_neurons-and-resting-membrane-potential.html",
+    "t-pns-autonomic": "workbook_day18_pns-and-autonomic-nervous-system.html",
+    "t-pregnancy-development": "workbook_day32_pregnancy-aandp-basics.html",
+    "t-resp-anatomy-mechanics": "workbook_day27_respiratory-anatomy-and-mechanics.html",
+    "t-skeletal-muscle-microanatomy": "workbook_day13_skeletal-muscle-microanatomy.html",
+    "t-skin-functions": "workbook_day08_skin-functions-and-accessory-structures.html",
+    "t-skin-layers": "workbook_day07_skin-structure-and-layers.html",
+    "t-sliding-filament": "workbook_day14_sliding-filament-and-the-cross-bridge-cycle.html",
+    "t-tubular-function": "workbook_day30_tubular-function-and-urine-concentration.html",
+    "t-vessels-hemodynamics": "workbook_day24_blood-vessels-and-hemodynamics.html",
+    "t-vision": "workbook_day19_vision.html"
+};
+</script>
+<!-- mcas-topic-workbook-map-end -->
+
+<script>
+/* ============================================================
+   BIO 004 Pre-Work and Spaced Recall
+   Engine only. Content is loaded from course-content.js.
+   localStorage only. No PII collected.
+   ============================================================ */
+
+(function(){
+  "use strict";
+
+  /* ---------- CONTENT ----------
+     Course content lives in course-content.js (loaded above).
+     If that file is missing, a single demo topic is bundled here as fallback. */
+
+    const FALLBACK_CONTENT = {
+    courseLabel: "BIO 004",
+    modules: [{
+      id: "m-demo",
+      title: "Demo (load course-content.js for the full course)",
+      week: 0,
+      topics: [
+      {
+        id: "t-anatomical-position",
+        title: "Anatomical Position and Directional Terms",
+        summary: "The reference posture used to describe every structural relationship in the body, and the directional vocabulary built on top of it.",
+        videoLabel: "Video: Anatomical position and directional terms (placeholder)",
+        gateKeywords: ["anatomical position", "supine", "prone", "superior", "inferior", "anterior", "posterior", "medial", "lateral", "proximal", "distal", "superficial", "deep"],
+        notes: [
+          { heading: "Anatomical position", body: [
+            "Body upright, feet flat and parallel, arms at the sides, palms facing forward, head and gaze directed forward.",
+            "Every directional term assumes this reference posture, even when the body is lying down."
+          ]},
+          { heading: "Body orientation terms", body: [
+            "Supine: lying face up.",
+            "Prone: lying face down."
+          ]},
+          { heading: "Directional terms, paired", body: [
+            "Superior (cranial) vs. inferior (caudal): toward the head vs. toward the feet.",
+            "Anterior (ventral) vs. posterior (dorsal): toward the front of the body vs. toward the back.",
+            "Medial vs. lateral: toward the midline vs. away from the midline.",
+            "Proximal vs. distal: closer to the trunk or point of attachment vs. farther from it (used on the limbs).",
+            "Superficial vs. deep: closer to the body surface vs. farther from the surface."
+          ]},
+          { heading: "Why it matters", body: [
+            "Anatomical descriptions are useless without a fixed reference. Anatomical position is that reference.",
+            "Knowing which direction a structure lies relative to another is the foundation for every system you will study this term."
+          ]}
+        ],
+        cards: [
+          { id: "ap-1", dok: 1, q: "Describe anatomical position.", a: "Body upright, feet flat and parallel, arms at the sides, palms facing forward, head facing forward." },
+          { id: "ap-2", dok: 1, q: "Define supine.", a: "Lying face up." },
+          { id: "ap-3", dok: 1, q: "Define prone.", a: "Lying face down." },
+          { id: "ap-4", dok: 1, q: "What does superior mean?", a: "Toward the head; also called cranial." },
+          { id: "ap-5", dok: 1, q: "What does inferior mean?", a: "Toward the feet; also called caudal." },
+          { id: "ap-6", dok: 1, q: "What does anterior mean?", a: "Toward the front of the body; also called ventral." },
+          { id: "ap-7", dok: 1, q: "What does posterior mean?", a: "Toward the back of the body; also called dorsal." },
+          { id: "ap-8", dok: 1, q: "What does medial mean?", a: "Toward the midline of the body." },
+          { id: "ap-9", dok: 1, q: "What does lateral mean?", a: "Away from the midline of the body." },
+          { id: "ap-10", dok: 2, q: "On the upper limb, is the elbow proximal or distal to the wrist?", a: "Proximal. The elbow sits closer to the trunk (the point of attachment) than the wrist." },
+          { id: "ap-11", dok: 2, q: "Is the heart superficial or deep to the sternum?", a: "Deep. The sternum sits at the surface of the chest; the heart sits beneath it." },
+          { id: "ap-12", dok: 2, q: "The thumb is on which side of the hand in anatomical position?", a: "The lateral side. Because palms face forward in anatomical position, the thumbs point outward, away from the midline." },
+          { id: "ap-13", dok: 2, q: "Describe the position of the navel relative to the spine.", a: "Anterior (ventral) to the spine. The navel sits on the front of the body; the spine sits at the back." },
+          { id: "ap-14", dok: 3, q: "A patient lies face down on the exam table. Which directional terms now describe the position of the heart relative to the spine, and why is anatomical position still the reference?", a: "The heart is still anterior to the spine. Directional terms reference anatomical position regardless of the patient's actual posture. Even prone, anterior means toward the front of the body." },
+          { id: "ap-15", dok: 3, q: "Explain why the terms proximal and distal are reserved for the limbs.", a: "Proximal and distal describe distance from the point of attachment of a limb to the trunk. They only carry meaning when there is a clear point of origin, which the limbs have but the trunk and head do not." }
+        ]
+      }
+    ]
+  }]
+};
+
+  /* Use external content if course-content.js loaded; otherwise fall back to the demo. */
+  const CONTENT = (typeof window !== "undefined" && window.BIO004_COURSE_CONTENT)
+    ? window.BIO004_COURSE_CONTENT
+    : FALLBACK_CONTENT;
+
+  /* Flatten helpers (topics live inside modules). */
+  function allTopics(){
+    const out = [];
+    (CONTENT.modules || []).forEach(m => (m.topics || []).forEach(t => out.push(t)));
+    return out;
+  }
+  function topicById(id){
+    for (const m of (CONTENT.modules || [])) {
+      for (const t of (m.topics || [])) {
+        if (t.id === id) return t;
+      }
+    }
+    return null;
+  }
+  function moduleByTopicId(id){
+    for (const m of (CONTENT.modules || [])) {
+      for (const t of (m.topics || [])) {
+        if (t.id === id) return m;
+      }
+    }
+    return null;
+  }
+
+  /* ---------- STATE / PERSISTENCE ---------- */
+
+  const STORAGE_KEY = "bio004_spaced_recall_v1";
+  const DAY_MS = 24 * 60 * 60 * 1000;
+
+  function todayKey(offsetDays){
+    // Single source of truth for "now" with the simulated-day offset applied once.
+    const ms = Date.now() + (((offsetDays || 0) + (STATE.daysSimulated || 0)) * DAY_MS);
+    return new Date(ms).toISOString().slice(0,10);
+  }
+
+  // Fisher-Yates shuffle. Returns a new array so callers don't have to clone.
+  function shuffleArray(arr){
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function nowSim(){
+    return Date.now() + (STATE.daysSimulated || 0) * DAY_MS;
+  }
+
+  function freshState(){
+    return {
+      version: 1,
+      createdAt: new Date().toISOString(),
+      daysSimulated: 0,
+      topics: {},
+      sessions: [],
+      lastOpenedDate: ""
+    };
+  }
+
+  function loadState(){
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return freshState();
+      const parsed = JSON.parse(raw);
+      if (!parsed.version) return freshState();
+      return parsed;
+    } catch(e){
+      return freshState();
+    }
+  }
+
+  function saveState(){
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+    } catch(e){
+      announce("Could not save progress. Storage may be full or disabled.");
+    }
+  }
+
+  let STATE = loadState();
+
+  function getTopicState(topicId){
+    if (!STATE.topics[topicId]) {
+      STATE.topics[topicId] = {
+        videoWatched: false,
+        gateCompleted: false,
+        gateExplanation: "",
+        gateCompletedAt: "",
+        unlockedAt: "",
+        cards: {},
+        dok: { 1: { correct: 0, total: 0 }, 2: { correct: 0, total: 0 }, 3: { correct: 0, total: 0 } },
+        adaptiveLevel: 1
+      };
+    }
+    return STATE.topics[topicId];
+  }
+
+  function getCardState(topicId, cardId, dok){
+    const ts = getTopicState(topicId);
+    if (!ts.cards[cardId]) {
+      ts.cards[cardId] = {
+        dok: dok,
+        reps: 0,
+        lapses: 0,
+        ease: 2.5,
+        interval: 0,
+        nextDue: nowSim(),
+        lastRating: "",
+        history: []
+      };
+    }
+    return ts.cards[cardId];
+  }
+
+  /* ---------- SCHEDULER (SM2-lite) ---------- */
+
+  function scheduleCard(cardState, rating, wasCorrect){
+    // Correctness is now captured directly from the multiple-choice click.
+    // If they got it wrong, the card always resurfaces tomorrow, regardless
+    // of the difficulty rating they then gave. Right answers + difficulty
+    // rating tune the interval the SM-2 way.
+    const ratingMap = { again: 1, hard: 2, good: 3, easy: 4 };
+    const q = ratingMap[rating] || 3;
+    cardState.history.push({
+      at: new Date(nowSim()).toISOString(),
+      rating: rating,
+      correct: !!wasCorrect
+    });
+    cardState.lastRating = rating;
+    cardState.lastCorrect = !!wasCorrect;
+
+    if (!wasCorrect || q === 1) {
+      // Wrong answer OR student self-rated "again": reset interval.
+      cardState.reps = 0;
+      cardState.lapses += 1;
+      cardState.interval = 0;
+      cardState.ease = Math.max(1.3, cardState.ease - 0.2);
+      cardState.nextDue = nowSim() + 0.7 * DAY_MS;
+      return;
+    }
+
+    cardState.reps += 1;
+    if (cardState.reps === 1) {
+      cardState.interval = 1;
+    } else if (cardState.reps === 2) {
+      cardState.interval = 3;
+    } else {
+      cardState.interval = Math.round(cardState.interval * cardState.ease);
+    }
+    if (q === 2) {
+      cardState.ease = Math.max(1.3, cardState.ease - 0.15);
+      cardState.interval = Math.max(1, Math.round(cardState.interval * 0.8));
+    } else if (q === 4) {
+      cardState.ease = cardState.ease + 0.15;
+      cardState.interval = Math.round(cardState.interval * 1.2);
+    }
+    cardState.nextDue = nowSim() + cardState.interval * DAY_MS;
+  }
+
+  /* ---------- DOK MASTERY / ADAPTATION ---------- */
+
+  function recordDokOutcome(topicId, dok, rating, wasCorrect){
+    // Mastery now tracks real correctness from the multiple-choice click,
+    // not the student's self-rated difficulty. Also tracks "correct in a row"
+    // so DOK level N+1 unlocks after 3 correct in a row at level N.
+    const ts = getTopicState(topicId);
+    if (!ts.dok[dok]) ts.dok[dok] = { correct: 0, total: 0, streak: 0 };
+    if (typeof ts.dok[dok].streak !== "number") ts.dok[dok].streak = 0;
+    ts.dok[dok].total += 1;
+    if (wasCorrect) {
+      ts.dok[dok].correct += 1;
+      ts.dok[dok].streak += 1;
+    } else {
+      ts.dok[dok].streak = 0;
+    }
+  }
+
+  function masteryFor(topicId, dok){
+    const ts = getTopicState(topicId);
+    const b = ts.dok[dok];
+    if (!b || b.total < 3) return 0;
+    return b.correct / b.total;
+  }
+
+  function computeAdaptiveLevel(topicId){
+    const ts = getTopicState(topicId);
+    const m1 = masteryFor(topicId, 1);
+    const m2 = masteryFor(topicId, 2);
+    // New rule: also require 3 consecutive correct at level N before
+    // unlocking level N+1. Streak is tracked in recordDokOutcome.
+    const streak1 = (ts.dok[1] && ts.dok[1].streak) || 0;
+    const streak2 = (ts.dok[2] && ts.dok[2].streak) || 0;
+    if (m1 >= 0.7 && streak1 >= 3 && m2 >= 0.6 && streak2 >= 3) return 3;
+    if (m1 >= 0.7 && streak1 >= 3) return 2;
+    return 1;
+  }
+
+  function pickCardForTopic(topicId){
+    const topic = topicById(topicId);
+    if (!topic) return null;
+    const level = computeAdaptiveLevel(topicId);
+    const ts = getTopicState(topicId);
+
+    // 1) Any cards due now (across DOK levels)?
+    // Shuffle shuffledCards so order isn't memorizable.
+    const shuffledCards = shuffleArray(topic.cards);
+    const due = shuffledCards
+      .map(c => ({ card: c, st: getCardState(topicId, c.id, c.dok) }))
+      .filter(x => x.st.reps > 0 && x.st.nextDue <= nowSim())
+      .sort((a,b) => a.st.nextDue - b.st.nextDue);
+    if (due.length) return due[0].card;
+
+    // 2) Otherwise pick a new card at the adaptive level (or below if none).
+    const newCards = shuffledCards.filter(c => {
+      const st = getCardState(topicId, c.id, c.dok);
+      return st.reps === 0 && c.dok <= level;
+    });
+    if (newCards.length) {
+      // Prefer the lowest-DOK new card so we ladder up.
+      newCards.sort((a,b) => a.dok - b.dok);
+      return newCards[0];
+    }
+
+    // 3) Everything new at this level is used. Mix in any not-yet-due cards
+    // due in the next 24h to keep practice rolling, or higher-DOK new cards.
+    const higher = shuffledCards.filter(c => {
+      const st = getCardState(topicId, c.id, c.dok);
+      return st.reps === 0;
+    });
+    if (higher.length) return higher.sort((a,b) => a.dok - b.dok)[0];
+
+    const soon = shuffledCards
+      .map(c => ({ card: c, st: getCardState(topicId, c.id, c.dok) }))
+      .sort((a,b) => a.st.nextDue - b.st.nextDue);
+    return soon.length ? soon[0].card : null;
+  }
+
+  function countDueGlobally(){
+    let n = 0;
+    allTopics().forEach(t => {
+      t.cards.forEach(c => {
+        const st = getCardState(t.id, c.id, c.dok);
+        if (st.reps > 0 && st.nextDue <= nowSim()) n += 1;
+      });
+    });
+    return n;
+  }
+
+  function totalCardsReviewed(){
+    let n = 0;
+    Object.values(STATE.topics).forEach(ts => {
+      Object.values(ts.cards).forEach(c => { n += c.history.length; });
+    });
+    return n;
+  }
+
+  /* ---------- SESSIONS / STREAK ---------- */
+
+  function logSessionActivity(meta){
+    const day = todayKey(0);
+    let s = STATE.sessions.find(x => x.date === day);
+    if (!s) {
+      s = { date: day, topicsCompleted: [], cardsReviewed: 0, gates: [] };
+      STATE.sessions.push(s);
+    }
+    if (meta.topicCompleted && !s.topicsCompleted.includes(meta.topicCompleted)) {
+      s.topicsCompleted.push(meta.topicCompleted);
+    }
+    if (meta.cardReview) s.cardsReviewed += 1;
+    if (meta.gate) s.gates.push(meta.gate);
+    saveState();
+  }
+
+  function computeStreak(){
+    if (!STATE.sessions.length) return 0;
+    const dates = STATE.sessions.map(s => s.date).sort();
+    const today = todayKey(0);
+    let streak = 0;
+    let cursor = new Date(today + "T00:00:00");
+    for (let i = 0; i < 365; i++){
+      const key = cursor.toISOString().slice(0,10);
+      if (dates.includes(key)) {
+        streak += 1;
+        cursor = new Date(cursor.getTime() - DAY_MS);
+      } else if (i === 0) {
+        // No activity today yet. Look at yesterday for a streak.
+        cursor = new Date(cursor.getTime() - DAY_MS);
+      } else {
+        break;
+      }
+    }
+    return streak;
+  }
+
+  /* ---------- DOM HELPERS ---------- */
+
+  const $ = (sel, root) => (root || document).querySelector(sel);
+  const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+
+  function announce(msg){
+    const lr = $("#live-region");
+    if (lr) { lr.textContent = ""; setTimeout(() => { lr.textContent = msg; }, 30); }
+  }
+
+  /* ---------- NAVIGATION ---------- */
+
+  let CURRENT_TOPIC = null;
+  let CURRENT_CARD = null;
+  let CURRENT_CARD_CORRECT = null;  // set by MC click, consumed by rateCard
+  let CURRENT_CARD_OPTIONS = null;   // shuffled option order for the current render
+
+  function nav(view, topicId){
+    $$(".view").forEach(v => v.classList.remove("active"));
+    const target = $("#view-" + view);
+    if (target) target.classList.add("active");
+    $$("nav.top-nav button").forEach(b => {
+      const isCurrent = b.dataset.nav === view || (view === "topic" && b.dataset.nav === "dashboard") || (view === "learn" && b.dataset.nav === "dashboard");
+      b.setAttribute("aria-current", isCurrent ? "page" : "false");
+    });
+    if (view === "dashboard") renderDashboard();
+    if (view === "topic") renderTopic(topicId);
+    if (view === "learn") renderLearn(topicId);
+    if (view === "review") renderReview();
+    if (view === "report") renderReport();
+    if (view === "settings") renderSettings();
+    const main = $("#main-content");
+    if (main) main.focus({ preventScroll: false });
+  }
+
+  /* ---------- DASHBOARD ---------- */
+
+  function topicStatus(topicId){
+    const ts = STATE.topics[topicId];
+    if (!ts) return "locked";
+    if (ts.gateCompleted && ts.videoWatched) return "completed";
+    if (ts.videoWatched) return "unlocked";
+    return "locked";
+  }
+
+  /* Course-day calendar: pre-work runs Mon, Tue, Thu, Fri. Wednesday is
+     spaced-recall + lab. Saturday/Sunday are off (recall available). */
+  const COURSE_DAYS_OF_WEEK = [1, 2, 4, 5]; // Mon Tue Thu Fri (JS getDay: 0=Sun)
+  const COURSE_DAY_NAMES = ["Monday", "Tuesday", "Thursday", "Friday"];
+  const COURSE_DAY_SHORT = ["Mon", "Tue", "Thu", "Fri"];
+
+  /* Compute the current day in the course (1-32) given courseStart.
+     Only Mon/Tue/Thu/Fri advance the course day. On Wed/Sat/Sun the course
+     day is whatever the most recent Mon/Tue/Thu/Fri was. Returns 0 if
+     courseStart is not set (release scheduling disabled). */
+  function currentDayInCourse(){
+    if (!CONTENT.courseStart) return 0;
+    const start = new Date(CONTENT.courseStart + "T00:00:00");
+    const now = new Date(nowSim());
+    const startMs = start.getTime();
+    const nowMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    if (nowMidnight < startMs) return 0;
+    let day = 0;
+    for (let t = startMs; t <= nowMidnight; t += DAY_MS) {
+      const d = new Date(t);
+      if (COURSE_DAYS_OF_WEEK.includes(d.getDay())) day += 1;
+    }
+    return day;
+  }
+
+  /* Is today a pre-work day (Mon/Tue/Thu/Fri) or a recall+lab day (Wed)? */
+  function todayIsCourseDay(){
+    const now = new Date(nowSim());
+    return COURSE_DAYS_OF_WEEK.includes(now.getDay());
+  }
+  function todayIsLabRecallDay(){
+    const now = new Date(nowSim());
+    return now.getDay() === 3; // Wednesday
+  }
+
+  /* Released = topic's dayInCourse is <= the current course day (or no schedule). */
+  function isReleased(topic){
+    if (!CONTENT.courseStart || !topic.dayInCourse) return true;
+    return topic.dayInCourse <= currentDayInCourse();
+  }
+
+  function topicsForToday(){
+    // Topics whose dayInCourse equals exactly today's course day.
+    if (!CONTENT.courseStart) return [];
+    const today = currentDayInCourse();
+    return allTopics().filter(t => t.dayInCourse === today);
+  }
+
+  function topicsTonight(){
+    // Tonight's pre-work = released topics not yet completed today.
+    const today = todayKey(0);
+    const session = STATE.sessions.find(s => s.date === today);
+    return allTopics().filter(t => {
+      if (!isReleased(t)) return false;
+      const completedToday = session && session.topicsCompleted.includes(t.id);
+      return !completedToday;
+    });
+  }
+
+  function renderDashboard(){
+    $("#stat-streak").textContent = computeStreak();
+    $("#stat-due").textContent = countDueGlobally();
+    // Tonight count: if courseStart is set, today's topics. Otherwise preview day 1.
+    let tonightCount;
+    if (CONTENT.courseStart) {
+      tonightCount = todayIsLabRecallDay() ? 0 : topicsForToday().length;
+    } else {
+      tonightCount = allTopics().filter(t => t.dayInCourse === 1).length;
+    }
+    $("#stat-topics-tonight").textContent = tonightCount;
+    const sub = $("#stat-topics-tonight-sub");
+    if (sub) {
+      if (CONTENT.courseStart) {
+        sub.textContent = todayIsLabRecallDay() ? "Wednesday recall day" : "today's pre-work";
+      } else {
+        sub.textContent = "preview (set courseStart)";
+      }
+    }
+    $("#stat-total-cards").textContent = totalCardsReviewed();
+
+    const wrap = $("#topic-list");
+    wrap.innerHTML = "";
+
+    const all = allTopics();
+    if (!all.length) {
+      wrap.innerHTML = '<div class="card"><p class="empty">No course content loaded. Make sure course-content.js is in the same folder as this file.</p></div>';
+      return;
+    }
+
+    // Daily Review nudge banner: shown when cards are due AND it's not a
+    // recall day (the recall day block already has its own daily-review CTA).
+    const nudgeDue = countDueGlobally();
+    if (nudgeDue > 0 && !(CONTENT.courseStart && todayIsLabRecallDay())) {
+      const nudge = document.createElement("div");
+      nudge.className = "dr-nudge";
+      nudge.setAttribute("role", "status");
+      nudge.innerHTML =
+        '<div class="dr-nudge-text">' +
+          '<p class="dr-nudge-eyebrow">Daily review</p>' +
+          '<p class="dr-nudge-headline">You have ' + nudgeDue + ' card' + (nudgeDue === 1 ? '' : 's') + ' due for review today.</p>' +
+          '<p class="dr-nudge-sub">Take a few minutes before tonight’s pre-work. Cards are sharpest when you review them on the day they’re due.</p>' +
+        '</div>' +
+        '<button type="button" class="btn btn-primary" id="btn-dr-nudge">Start daily review</button>';
+      wrap.appendChild(nudge);
+    }
+
+    // Group topics by week (1-8) and day-of-week (0=Mon, 1=Tue, 2=Thu, 3=Fri).
+    const byWeek = {};
+    all.forEach(t => {
+      if (!t.dayInCourse) return;
+      const wk = Math.ceil(t.dayInCourse / 4);
+      const dayIdx = (t.dayInCourse - 1) % 4;
+      byWeek[wk] = byWeek[wk] || {};
+      byWeek[wk][dayIdx] = byWeek[wk][dayIdx] || [];
+      byWeek[wk][dayIdx].push(t);
+    });
+
+    // Today highlight block (only when courseStart is set)
+    const todayDay = currentDayInCourse();
+    if (CONTENT.courseStart && todayDay > 0) {
+      if (todayIsLabRecallDay()) {
+        const wk = Math.ceil(todayDay / 4);
+        const due = countDueGlobally();
+        const recall = document.createElement("div");
+        recall.className = "tonight-block";
+        recall.innerHTML = `
+          <h3>Today is recall and lab day (Week ${wk}, Wednesday)</h3>
+          <p class="usage">No new pre-work releases today. Review the cards that are due, then head to lab.</p>
+          <div class="toolbar" style="margin:8px 0 0;">
+            <button class="btn btn-primary" data-nav="review">Open daily review (${due} cards due)</button>
+          </div>
+        `;
+        wrap.appendChild(recall);
+      } else {
+        const todaysTopics = topicsForToday();
+        if (todaysTopics.length) {
+          const wk = Math.ceil(todayDay / 4);
+          const dayName = COURSE_DAY_NAMES[(todayDay - 1) % 4];
+          const tonight = document.createElement("div");
+          tonight.className = "tonight-block";
+          tonight.innerHTML = `<h3>Tonight (Week ${wk}, ${dayName})</h3>`;
+          todaysTopics.forEach(t => {
+            const status = topicStatus(t.id);
+            const btnLabel = status === "completed" ? "Reopen" : status === "unlocked" ? "Continue" : "Start";
+            const btnClass = status === "completed" ? "btn-ghost" : "btn-primary";
+            const row = document.createElement("div");
+            row.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;flex-wrap:wrap;";
+            row.innerHTML = `
+              <div style="flex:1;min-width:240px;">
+                <strong style="font-family:'Plus Jakarta Sans',sans-serif;color:var(--navy);">${escapeHtml(t.title)}</strong>
+                <div class="usage" style="margin:2px 0 0;">${escapeHtml(t.summary || "")}</div>
+              </div>
+              <button class="btn ${btnClass}" data-open-topic="${t.id}">${btnLabel}</button>
+            `;
+            tonight.appendChild(row);
+          });
+          wrap.appendChild(tonight);
+        }
+      }
+    }
+
+    // Determine the "active" week to auto-expand.
+    let activeWeek = todayDay > 0 ? Math.ceil(todayDay / 4) : null;
+    if (!activeWeek) {
+      for (let wk = 1; wk <= 8; wk++) {
+        const wkTopics = Object.values(byWeek[wk] || {}).flat();
+        if (wkTopics.some(t => topicStatus(t.id) !== "completed")) {
+          activeWeek = wk;
+          break;
+        }
+      }
+    }
+    activeWeek = activeWeek || 1;
+
+    const totalWeeks = Math.max(...Object.keys(byWeek).map(Number));
+
+    for (let wk = 1; wk <= totalWeeks; wk++) {
+      const days = byWeek[wk] || {};
+      const wkTopics = Object.values(days).flat();
+      const completed = wkTopics.filter(t => topicStatus(t.id) === "completed").length;
+      const totalCards = wkTopics.reduce((acc, t) => acc + t.cards.length, 0);
+
+      // Module titles represented this week (subtle metadata)
+      const modSet = new Set();
+      wkTopics.forEach(t => {
+        const m = moduleByTopicId(t.id);
+        if (m) modSet.add(m.title);
+      });
+      const moduleTitleList = Array.from(modSet).join(" + ");
+
+      const details = document.createElement("details");
+      details.className = "module-group";
+      if (wk === activeWeek) details.open = true;
+
+      const summary = document.createElement("summary");
+      summary.innerHTML = `
+        <span class="module-week">Week ${wk}</span>
+        <span class="module-title">${escapeHtml(moduleTitleList)}</span>
+        <span class="module-progress${completed === wkTopics.length ? " complete" : ""}">${completed} of ${wkTopics.length} complete  .  ${totalCards} cards</span>
+      `;
+      details.appendChild(summary);
+
+      const body = document.createElement("div");
+      body.className = "module-body";
+
+      // Render 4 day rows + a Wed divider between Tue and Thu.
+      for (let di = 0; di < 4; di++) {
+        if (di === 2) {
+          const wedRow = document.createElement("div");
+          wedRow.style.cssText = "margin:8px 0;padding:10px 14px;background:var(--off-white);border-left:3px solid var(--gold-deep);border-radius:4px;font-family:'DM Sans',system-ui,sans-serif;font-size:12px;color:var(--gray-soft);letter-spacing:0.03em;";
+          wedRow.innerHTML = '<strong style="color:var(--navy);font-family:\'Plus Jakarta Sans\',system-ui,sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;">Wednesday</strong> &nbsp;.&nbsp; recall and lab day. No new pre-work.';
+          body.appendChild(wedRow);
+        }
+
+        const dayLong = COURSE_DAY_NAMES[di];
+        const dayShort = COURSE_DAY_SHORT[di];
+        const dayTopics = days[di] || [];
+
+        const dayHeader = document.createElement("div");
+        dayHeader.style.cssText = "margin:10px 0 4px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-weight:700;font-size:13px;color:var(--terra-dark);text-transform:uppercase;letter-spacing:0.08em;";
+        dayHeader.textContent = `${dayLong}  .  Day ${(wk - 1) * 4 + di + 1}`;
+        body.appendChild(dayHeader);
+
+        if (dayTopics.length === 0) {
+          const empty = document.createElement("div");
+          empty.style.cssText = "padding:8px 14px;color:var(--gray-soft);font-style:italic;font-family:'Lora',Georgia,serif;font-size:13px;";
+          empty.textContent = "No pre-work assigned.";
+          body.appendChild(empty);
+          continue;
+        }
+
+        dayTopics.forEach(t => {
+          const status = topicStatus(t.id);
+          const released = isReleased(t);
+          const ts = STATE.topics[t.id];
+          const cardsReviewed = ts ? Object.values(ts.cards).reduce((acc,c) => acc + c.history.length, 0) : 0;
+          const seen = ts ? Object.values(ts.cards).filter(c => c.history.length > 0).length : 0;
+          const hasVideo = !!t.videoUrl;
+          const mod = moduleByTopicId(t.id);
+          const modLabel = mod ? mod.title : "";
+
+          const card = document.createElement("article");
+          card.className = "card state-" + status + (released ? "" : " state-unreleased");
+          if (!released) card.style.opacity = "0.55";
+          card.innerHTML = `
+            <div class="topic-row">
+              <div style="flex:1; min-width:240px;">
+                <h3>${escapeHtml(t.title)}</h3>
+                <p class="usage" style="margin:2px 0 6px;font-style:italic;">${escapeHtml(t.summary || "")}</p>
+                <div class="topic-meta">
+                  ${released
+                    ? `<span class="pill ${status}">${status === "completed" ? "Completed" : status === "unlocked" ? "In progress" : "Not started"}</span>`
+                    : `<span class="pill locked">Not yet open</span>`}
+                  <span style="color:var(--gray-soft);">${escapeHtml(modLabel)}</span>
+                  <span>${t.cards.length} cards (${seen} seen, ${cardsReviewed} reviews)</span>
+                  ${hasVideo ? "" : '<span style="color:var(--terra-dark);">video pending</span>'}
+                </div>
+              </div>
+              <div class="toolbar" style="margin:0;">
+                ${ !released
+                  ? `<button class="btn btn-ghost" disabled>Locked</button>`
+                  : status === "completed"
+                    ? `<button class="btn btn-ghost" data-open-topic="${t.id}">Reopen</button>`
+                    : status === "unlocked"
+                      ? `<button class="btn btn-gold" data-open-topic="${t.id}">Continue</button>`
+                      : `<button class="btn btn-primary" data-open-topic="${t.id}">Start</button>`
+                }
+              </div>
+            </div>
+          `;
+          body.appendChild(card);
+        });
+      }
+
+      details.appendChild(body);
+      wrap.appendChild(details);
+    }
+
+    // Daily Review nudge button: bind directly (data-nav listeners are
+    // wired once at init and don't reach dynamically-inserted elements).
+    var nudgeBtn = document.getElementById("btn-dr-nudge");
+    if (nudgeBtn) {
+      nudgeBtn.addEventListener("click", function () { nav("review"); });
+    }
+
+    // Also bind the recall-day "Open daily review" button if present,
+    // for the same reason. Looking for any data-nav buttons inside the
+    // dashboard's topic-list that haven't been wired yet.
+    $$('#topic-list [data-nav]').forEach(function (b) {
+      if (b.dataset.navWired) return;
+      b.dataset.navWired = "1";
+      b.addEventListener("click", function () { nav(b.dataset.nav); });
+    });
+
+    $$('[data-open-topic]').forEach(b => {
+      b.addEventListener("click", () => {
+        const id = b.dataset.openTopic;
+        CURRENT_TOPIC = id;
+        const ts = getTopicState(id);
+        // Option A: check the cross-page gate flag set by the lecture page.
+        // If the student has passed the lecture-page gate, jump straight to cards.
+        var gatePassed = false;
+        try {
+          gatePassed = window.localStorage.getItem("bio004-gate-" + id) === "true"
+                    || window.localStorage.getItem("bio004-video-" + id) === "true";
+        } catch (e) {}
+        if (gatePassed || ts.gateCompleted) {
+          if (!ts.gateCompleted) {
+            ts.gateCompleted = true;
+            ts.videoWatched = true;
+            saveTopicState(id, ts);
+          }
+          nav("learn", id);
+        } else {
+          nav("topic", id);
+        }
+      });
+    });
+  }
+
+  /* ---------- TOPIC (video + gate) ---------- */
+
+  function renderTopic(topicId){
+    // Option A: the topic view is now a single pointer back to the lecture page.
+    // The cards live behind the lecture-page gate. If a student lands here, the
+    // gate isn't passed yet, so route them to the lecture page (or show a fallback
+    // mark-complete button for topics without a lecture page).
+    CURRENT_TOPIC = topicId;
+    const topic = topicById(topicId);
+    if (!topic) { nav("dashboard"); return; }
+    const ts = getTopicState(topicId);
+    $("#topic-heading").textContent = topic.title;
+    $("#topic-summary").textContent = topic.summary || "";
+
+    // Hide the legacy Step 1 (video) and Step 2 (gate) cards entirely under Option A.
+    if ($("#video-card")) $("#video-card").hidden = true;
+    if ($("#gate-card")) $("#gate-card").hidden = true;
+    if ($("#gate-locked-note")) $("#gate-locked-note").hidden = true;
+
+    // Build (or reset) a simple "Watch the lecture first" card injected after the heading.
+    var existing = document.getElementById("lecture-pointer-card");
+    if (existing) existing.remove();
+    var card = document.createElement("div");
+    card.id = "lecture-pointer-card";
+    card.className = "card";
+    if (topic.lecturePageUrl) {
+      card.innerHTML =
+        '<h3>Watch the lecture first</h3>' +
+        '<p class="usage">This topic\'s cards unlock after you finish the lecture video and complete the short retrieval check on the lecture page. The lecture page sets a flag that this app reads automatically; once it\'s set, you land here at the cards directly.</p>' +
+        '<div class="toolbar" style="margin-top:14px;">' +
+          '<a class="btn btn-primary" id="btn-go-lecture" href="' + topic.lecturePageUrl + '" target="_top">Open the lecture page &rarr;</a>' +
+          '<button type="button" class="btn btn-ghost" id="btn-back-dashboard" data-nav="dashboard">Back to tonight\'s list</button>' +
+        '</div>';
+    } else {
+      // Fallback for topics without a lecture page yet: a simple "mark complete" button
+      card.innerHTML =
+        '<h3>Lecture page coming soon</h3>' +
+        '<p class="usage">A dedicated lecture page is not wired up yet for this topic. You can mark it complete to preview the cards.</p>' +
+        '<div class="toolbar" style="margin-top:14px;">' +
+          '<button type="button" class="btn btn-primary" id="btn-skip-gate">Mark complete and open cards</button>' +
+          '<button type="button" class="btn btn-ghost" id="btn-back-dashboard" data-nav="dashboard">Back to tonight\'s list</button>' +
+        '</div>';
+    }
+    var view = $("#view-topic");
+    view.appendChild(card);
+
+    // Wire the buttons
+    var skipBtn = document.getElementById("btn-skip-gate");
+    if (skipBtn) {
+      skipBtn.addEventListener("click", function () {
+        ts.gateCompleted = true;
+        ts.videoWatched = true;
+        try { window.localStorage.setItem("bio004-gate-" + topic.id, "true"); } catch(e) {}
+        try { window.localStorage.setItem("bio004-video-" + topic.id, "true"); } catch(e) {}
+        saveTopicState(topic.id, ts);
+        nav("learn", topic.id);
+      });
+    }
+    var backBtn = document.getElementById("btn-back-dashboard");
+    if (backBtn) {
+      backBtn.addEventListener("click", function () { nav("dashboard"); });
+    }
+    var goBtn = document.getElementById("btn-go-lecture");
+    if (goBtn) {
+      // When the student returns from the lecture page with the gate passed,
+      // the dashboard's click handler will skip topic view next time.
+    }
+  }
+
+  function renderVideoPlayer(topic){
+    const frame = document.querySelector(".video-frame");
+    if (!frame) return;
+    // Clear any previously mounted player but preserve the placeholder elements.
+    Array.from(frame.querySelectorAll(".mounted-player")).forEach(el => el.remove());
+    const placeholder = $("#video-placeholder-label");
+    if (!topic.videoUrl) {
+      if (placeholder) placeholder.style.display = "";
+      return;
+    }
+    if (placeholder) placeholder.style.display = "none";
+    const url = topic.videoUrl;
+    const isYouTube = /youtu\.?be/.test(url);
+    if (isYouTube) {
+      // For YouTube, embed via iframe API. Detecting "ended" reliably requires the YT IFrame API,
+      // which is loaded lazily. For now we embed the player so the student can watch.
+      // The "Mark watched" gate is still enforced via the Simulate/Mark watched buttons until
+      // the YT API is fully wired in v2.
+      const id = ytIdFromUrl(url);
+      const iframe = document.createElement("iframe");
+      iframe.className = "mounted-player";
+      iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?rel=0&modestbranding=1";
+      iframe.title = topic.videoLabel || topic.title;
+      iframe.allow = "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      iframe.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;";
+      frame.appendChild(iframe);
+    } else {
+      // Self-hosted file (mp4/webm). Use a native <video> with the "ended" event to enable Mark watched.
+      const video = document.createElement("video");
+      video.className = "mounted-player";
+      video.src = url;
+      video.controls = true;
+      video.preload = "metadata";
+      video.style.cssText = "position:absolute;inset:0;width:100%;height:100%;background:black;";
+      video.addEventListener("ended", () => {
+        $("#video-progress").style.width = "100%";
+        $("#btn-mark-watched").disabled = false;
+        $("#video-status").textContent = "Video complete. Click ‘Mark watched’ to proceed.";
+        announce("Video complete. You can mark it watched.");
+      });
+      video.addEventListener("timeupdate", () => {
+        if (video.duration > 0) {
+          $("#video-progress").style.width = ((video.currentTime / video.duration) * 100).toFixed(1) + "%";
+        }
+      });
+      frame.appendChild(video);
+    }
+  }
+
+  function ytIdFromUrl(url){
+    try {
+      const u = new URL(url);
+      if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
+      const v = u.searchParams.get("v");
+      if (v) return v;
+      const parts = u.pathname.split("/");
+      return parts[parts.length - 1] || "";
+    } catch(e) {
+      return url;
+    }
+  }
+
+  let simulateTimer = null;
+  function simulateWatch(){
+    const ts = getTopicState(CURRENT_TOPIC);
+    if (ts.videoWatched) return;
+    let progress = 0;
+    $("#btn-simulate-watch").disabled = true;
+    $("#btn-mark-watched").disabled = true;
+    if (simulateTimer) clearInterval(simulateTimer);
+    simulateTimer = setInterval(() => {
+      progress += 10;
+      $("#video-progress").style.width = progress + "%";
+      $("#video-status").textContent = "Watching... " + progress + "%";
+      if (progress >= 100) {
+        clearInterval(simulateTimer);
+        $("#btn-mark-watched").disabled = false;
+        $("#video-status").textContent = "Video complete. Click ‘Mark watched’ to proceed.";
+        announce("Video complete. You can mark it watched.");
+      }
+    }, 1000);
+  }
+
+  function markWatched(){
+    const ts = getTopicState(CURRENT_TOPIC);
+    ts.videoWatched = true;
+    saveState();
+    // Mirror the in-app watched state to the cross-page flag the lecture pages use,
+    // so navigating between surfaces is consistent.
+    try { window.localStorage.setItem("bio004-video-" + CURRENT_TOPIC, "true"); } catch(e) {}
+    announce("Video marked watched. Now write your explanation.");
+    renderTopic(CURRENT_TOPIC);
+    $("#gate-input").focus();
+  }
+
+  function gateCheck(topic, text){
+    const words = (text || "").trim().split(/\s+/).filter(Boolean);
+    const wordCount = words.length;
+    const lowered = (text || "").toLowerCase();
+    const matched = topic.gateKeywords.filter(k => lowered.includes(k.toLowerCase()));
+    const minWords = 60;
+    const minKeywords = Math.max(2, Math.ceil(topic.gateKeywords.length * 0.6));
+    return {
+      wordCount: wordCount,
+      keywordCount: matched.length,
+      matched: matched,
+      minWords: minWords,
+      minKeywords: minKeywords,
+      passed: wordCount >= minWords && matched.length >= minKeywords
+    };
+  }
+
+  function updateGateMeter(topic, text){
+    const r = gateCheck(topic, text);
+    $("#gate-word-count").textContent = r.wordCount;
+    $("#gate-keyword-count").textContent = r.keywordCount;
+  }
+
+  function submitGate(){
+    const topic = topicById(CURRENT_TOPIC);
+    if (!topic) return;
+    const ts = getTopicState(CURRENT_TOPIC);
+    if (!ts.videoWatched) {
+      const fb = $("#gate-feedback");
+      fb.textContent = "Watch the video first, then come back to this step.";
+      fb.className = "gate-feedback error";
+      announce("Watch the video first.");
+      return;
+    }
+    const text = $("#gate-input").value;
+    const r = gateCheck(topic, text);
+    const fb = $("#gate-feedback");
+    if (r.passed) {
+      ts.gateCompleted = true;
+      ts.gateExplanation = text;
+      ts.gateCompletedAt = new Date(nowSim()).toISOString();
+      ts.unlockedAt = ts.gateCompletedAt;
+      logSessionActivity({ gate: { topicId: CURRENT_TOPIC, at: ts.gateCompletedAt, words: r.wordCount, text: text } });
+      saveState();
+      fb.textContent = "Unlocked. Notes and questions are ready.";
+      fb.className = "gate-feedback success";
+      announce("Gate unlocked.");
+      setTimeout(() => nav("learn", CURRENT_TOPIC), 600);
+    } else {
+      const needWords = Math.max(0, r.minWords - r.wordCount);
+      const needKw = Math.max(0, r.minKeywords - r.keywordCount);
+      const parts = [];
+      if (needWords > 0) parts.push("add about " + needWords + " more words");
+      if (needKw > 0) parts.push("include " + needKw + " more key concept(s) from the video");
+      fb.textContent = "Not quite yet. Try to " + parts.join(" and ") + ".";
+      fb.className = "gate-feedback error";
+      announce("Explanation needs more detail.");
+    }
+  }
+
+  /* ---------- LEARNING VIEW ---------- */
+
+  function renderLearn(topicId){
+    CURRENT_TOPIC = topicId;
+    const topic = topicById(topicId);
+    if (!topic) { nav("dashboard"); return; }
+    const ts = getTopicState(topicId);
+    if (!ts.gateCompleted) { nav("topic", topicId); return; }
+    $("#learn-heading").textContent = topic.title;
+    renderNotesLink(topic);
+    renderMastery(topicId);
+    loadNextCard();
+  }
+
+  function renderNotesLink(topic){
+    const notesLink = $("#link-open-notes");
+    const readingLink = $("#link-open-reading");
+    const pending = $("#notes-link-pending");
+
+    if (topic.notesUrl) {
+      notesLink.href = topic.notesUrl;
+      notesLink.hidden = false;
+      pending.hidden = true;
+    } else {
+      notesLink.hidden = true;
+      notesLink.href = "#";
+      pending.hidden = false;
+    }
+
+    if (topic.readingUrl) {
+      readingLink.href = topic.readingUrl;
+      readingLink.hidden = false;
+      // If we have a reading link but no notes link, hide the pending note since at least one reference is wired.
+      if (topic.readingUrl && !topic.notesUrl) pending.hidden = true;
+    } else {
+      readingLink.hidden = true;
+      readingLink.href = "#";
+    }
+
+    /* mcas-workbook-link */
+    var workbookLink = document.getElementById("link-open-workbook");
+    if (workbookLink) {
+      var wbMap = window.MCAS_WORKBOOK_BY_TOPIC || {};
+      var wbUrl = (topic && topic.id && wbMap[topic.id]) ? wbMap[topic.id] : null;
+      if (wbUrl) {
+        workbookLink.href = wbUrl;
+        workbookLink.hidden = false;
+        pending.hidden = true;
+      } else {
+        workbookLink.hidden = true;
+        workbookLink.href = "#";
+      }
+    }
+    /* mcas-workbook-link-end */
+  }
+
+  function renderMastery(topicId){
+    [1,2,3].forEach(lv => {
+      const m = masteryFor(topicId, lv);
+      const pct = Math.round(m * 100);
+      $("#mastery-l" + lv).style.width = pct + "%";
+      $("#mastery-l" + lv + "-text").textContent = pct + "%";
+    });
+    const level = computeAdaptiveLevel(topicId);
+    const msg = level === 1
+      ? "Adaptive level: building DOK 1 fluency."
+      : level === 2
+        ? "Adaptive level: mixing in DOK 2 application questions."
+        : "Adaptive level: working at DOK 3 analysis questions.";
+    $("#dok-adapt-note").textContent = msg;
+  }
+
+  function loadNextCard(){
+    const card = pickCardForTopic(CURRENT_TOPIC);
+    CURRENT_CARD_CORRECT = null;
+    CURRENT_CARD_OPTIONS = null;
+
+    const mcWrap = $("#mc-options");
+    const fb = $("#feedback-panel");
+    const rateRow = $("#rate-row");
+    const rateInstructions = $("#rate-instructions");
+    const ans = $("#card-answer");
+
+    // Always reset UI between cards
+    if (mcWrap) mcWrap.innerHTML = "";
+    if (fb) fb.hidden = true;
+    if (rateRow) rateRow.hidden = true;
+    if (rateInstructions) rateInstructions.hidden = true;
+    if (ans) ans.hidden = true;
+
+    if (!card) {
+      $("#card-question").textContent = "All cards in this topic are scheduled out. Come back tomorrow or rotate to another topic.";
+      $("#card-dok-badge").textContent = "DONE";
+      $("#card-dok-badge").className = "dok-badge dok-1";
+      $("#card-progress").textContent = "";
+      return;
+    }
+
+    CURRENT_CARD = card;
+    const topic = topicById(CURRENT_TOPIC);
+    const idx = topic.cards.findIndex(c => c.id === card.id) + 1;
+    $("#card-question").textContent = card.q;
+    $("#card-dok-badge").textContent = "DOK " + card.dok;
+    $("#card-dok-badge").className = "dok-badge dok-" + card.dok;
+    $("#card-progress").textContent = "Card " + idx + " of " + topic.cards.length;
+
+    renderMcOptions(card);
+  }
+
+  // Render the 4 multiple-choice options in random order each time.
+  function renderMcOptions(card){
+    const wrap = $("#mc-options");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+
+    // If a card somehow lacks options (older content), fall back to a single
+    // "Show answer" affordance so the app still works on legacy data.
+    if (!card.options || !Array.isArray(card.options) || card.options.length !== 4) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "btn btn-primary";
+      btn.textContent = "Show answer";
+      btn.addEventListener("click", function(){
+        $("#card-answer").textContent = card.a;
+        $("#card-answer").hidden = false;
+        $("#rate-instructions").hidden = false;
+        $("#rate-row").hidden = false;
+        CURRENT_CARD_CORRECT = true; // legacy path counts as correct for scheduling
+        announce("Answer revealed. Rate how that felt.");
+      });
+      wrap.appendChild(btn);
+      return;
+    }
+
+    // Build a shuffled order: array of original indices in randomized positions.
+    const order = shuffleArray([0, 1, 2, 3]);
+    CURRENT_CARD_OPTIONS = order;
+    const letters = ["A", "B", "C", "D"];
+
+    order.forEach((origIdx, pos) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "mc-option";
+      btn.setAttribute("data-orig-index", String(origIdx));
+      btn.setAttribute("aria-label", "Option " + letters[pos] + ": " + card.options[origIdx]);
+      btn.innerHTML = '<span class="mc-letter">' + letters[pos] + '.</span><span>' + escapeHtml(card.options[origIdx]) + '</span>';
+      btn.addEventListener("click", function(){ handleMcChoice(origIdx); });
+      wrap.appendChild(btn);
+    });
+
+    announce("Question loaded. Pick the best answer from " + order.length + " options.");
+  }
+
+  // Called when the student clicks an MC option.
+  function handleMcChoice(chosenOrigIdx){
+    if (!CURRENT_CARD) return;
+    if (CURRENT_CARD_CORRECT !== null) return; // already answered
+
+    const card = CURRENT_CARD;
+    const wasCorrect = (chosenOrigIdx === card.correctIndex);
+    CURRENT_CARD_CORRECT = wasCorrect;
+
+    // Mark the buttons
+    $$("#mc-options .mc-option").forEach(b => {
+      const orig = parseInt(b.getAttribute("data-orig-index"), 10);
+      b.disabled = true;
+      if (orig === card.correctIndex) b.classList.add("correct");
+      else if (orig === chosenOrigIdx) b.classList.add("wrong");
+      else b.classList.add("dim");
+    });
+
+    // Reveal the feedback panel with explanation
+    const fb = $("#feedback-panel");
+    const fbLabel = $("#fb-label");
+    const fbExplain = $("#fb-explain");
+    if (fb && fbLabel && fbExplain) {
+      fb.hidden = false;
+      fb.classList.toggle("wrong", !wasCorrect);
+      fbLabel.textContent = wasCorrect ? "CORRECT" : "NOT QUITE";
+      fbExplain.textContent = card.explanation || card.a || "";
+    }
+    // Show the canonical answer text too for students who like to see it
+    // separated from the explanation.
+    const ans = $("#card-answer");
+    if (ans) {
+      ans.hidden = false;
+      ans.textContent = "Answer: " + card.a;
+    }
+
+    // Show the difficulty rating row
+    $("#rate-instructions").hidden = false;
+    $("#rate-row").hidden = false;
+
+    announce(wasCorrect ? "Correct. Rate how that felt." : "Not quite. Read the explanation, then rate how that felt.");
+  }
+
+  // revealAnswer removed; MC click handler replaces it
+
+
+  function rateCard(rating){
+    if (!CURRENT_CARD) return;
+    const cardSt = getCardState(CURRENT_TOPIC, CURRENT_CARD.id, CURRENT_CARD.dok);
+    // Correctness was set when the student clicked their MC option.
+    // If for some reason it wasn't recorded (legacy data), assume correct
+    // so the rating still functions.
+    const wasCorrect = (CURRENT_CARD_CORRECT === null) ? true : !!CURRENT_CARD_CORRECT;
+    scheduleCard(cardSt, rating, wasCorrect);
+    recordDokOutcome(CURRENT_TOPIC, CURRENT_CARD.dok, rating, wasCorrect);
+    logSessionActivity({ cardReview: true });
+    saveState();
+
+    // Check if topic is "done for tonight" (every card has been seen at least once today).
+    const ts = getTopicState(CURRENT_TOPIC);
+    const topic = topicById(CURRENT_TOPIC);
+    const seenCount = topic.cards.filter(c => {
+      const s = ts.cards[c.id];
+      return s && s.history.length > 0;
+    }).length;
+    if (seenCount >= topic.cards.length) {
+      logSessionActivity({ topicCompleted: CURRENT_TOPIC });
+    }
+    renderMastery(CURRENT_TOPIC);
+    loadNextCard();
+  }
+
+  /* ---------- DAILY REVIEW ---------- */
+
+  // 'due' = only cards whose nextDue is now or earlier (the daily-review default).
+  // 'all' = every card from a topic the student has already unlocked (passed the gate).
+  //         Lets students drill everything they've ever seen, ignoring schedule.
+  //         Locked topics stay hidden.
+  let REVIEW_MODE = "due";
+
+  function renderReview(){
+    const body = $("#review-body");
+    body.innerHTML = "";
+    const items = [];
+    allTopics().forEach(t => {
+      const ts = STATE.topics[t.id];
+      if (REVIEW_MODE === "all" && !(ts && ts.gateCompleted)) return; // skip locked topics
+      t.cards.forEach(c => {
+        const st = getCardState(t.id, c.id, c.dok);
+        if (REVIEW_MODE === "due") {
+          if (st.reps > 0 && st.nextDue <= nowSim()) items.push({ topic: t, card: c, st: st });
+        } else {
+          // "all unlocked": include every card from an unlocked topic, whether seen or not.
+          items.push({ topic: t, card: c, st: st });
+        }
+      });
+    });
+
+    // Update the mode toggle UI and the helper paragraph.
+    const btnDue = $("#btn-review-due");
+    const btnAll = $("#btn-review-all");
+    if (btnDue && btnAll) {
+      btnDue.classList.toggle("btn-primary", REVIEW_MODE === "due");
+      btnDue.classList.toggle("btn-ghost", REVIEW_MODE !== "due");
+      btnDue.setAttribute("aria-pressed", REVIEW_MODE === "due" ? "true" : "false");
+      btnAll.classList.toggle("btn-primary", REVIEW_MODE === "all");
+      btnAll.classList.toggle("btn-ghost", REVIEW_MODE !== "all");
+      btnAll.setAttribute("aria-pressed", REVIEW_MODE === "all" ? "true" : "false");
+    }
+    const note = $("#review-mode-note");
+    if (note) {
+      note.textContent = REVIEW_MODE === "due"
+        ? "These cards are due based on how you rated them last time. Lower confidence resurfaces first."
+        : "Drill every card from topics you've unlocked, regardless of due date. Useful before a quiz. Topics you haven't unlocked yet are not shown.";
+    }
+
+    if (!items.length) {
+      body.innerHTML = REVIEW_MODE === "due"
+        ? '<div class="card"><p class="empty">No cards are due right now. Come back tomorrow, or start a new topic from tonight’s pre-work.</p></div>'
+        : '<div class="card"><p class="empty">No unlocked topics yet. Start tonight’s pre-work first, then come back here.</p></div>';
+      return;
+    }
+
+    // Order: lowest ease first (struggle cards), then earliest due.
+    items.sort((a,b) => a.st.ease - b.st.ease || a.st.nextDue - b.st.nextDue);
+    const wrap = document.createElement("div");
+    wrap.className = "card";
+    const total = items.length;
+    const heading = REVIEW_MODE === "due"
+      ? total + " card" + (total === 1 ? "" : "s") + " due across topics"
+      : total + " card" + (total === 1 ? "" : "s") + " in your unlocked deck";
+    wrap.innerHTML = "<h3>" + heading + "</h3>";
+    const list = document.createElement("div");
+    items.slice(0, 30).forEach(item => {
+      const row = document.createElement("div");
+      row.style.cssText = "display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray-line);";
+      row.innerHTML = `
+        <div style="flex:1; min-width:0;">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;color:var(--navy);">${escapeHtml(item.topic.title)}</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--gray-soft);">DOK ${item.card.dok} &middot; last rated "${item.st.lastRating || "new"}"</div>
+        </div>
+        <button class="btn btn-gold" data-review-open="${item.topic.id}">Review</button>
+      `;
+      list.appendChild(row);
+    });
+    if (items.length > 30) {
+      const more = document.createElement("p");
+      more.className = "usage";
+      more.style.marginTop = "10px";
+      more.textContent = "Showing top 30 of " + items.length + ". Open a topic to drill all of its cards.";
+      list.appendChild(more);
+    }
+    wrap.appendChild(list);
+    body.appendChild(wrap);
+
+    $$('[data-review-open]').forEach(b => {
+      b.addEventListener("click", () => {
+        const tid = b.dataset.reviewOpen;
+        const ts = getTopicState(tid);
+        if (!ts.gateCompleted) nav("topic", tid);
+        else nav("learn", tid);
+      });
+    });
+  }
+
+  function setReviewMode(mode){
+    REVIEW_MODE = mode;
+    renderReview();
+  }
+
+  /* ---------- ENGAGEMENT REPORT ---------- */
+
+  function renderReport(){
+    const body = $("#report-body");
+    body.innerHTML = "";
+
+    const stats = document.createElement("div");
+    stats.className = "stats-row";
+    stats.innerHTML = `
+      <div class="stat"><p class="stat-label">Streak</p><p class="stat-value">${computeStreak()}</p><p class="stat-sub">days</p></div>
+      <div class="stat"><p class="stat-label">Sessions logged</p><p class="stat-value">${STATE.sessions.length}</p><p class="stat-sub">total</p></div>
+      <div class="stat"><p class="stat-label">Card reviews</p><p class="stat-value">${totalCardsReviewed()}</p><p class="stat-sub">all time</p></div>
+      <div class="stat"><p class="stat-label">Cards due now</p><p class="stat-value">${countDueGlobally()}</p><p class="stat-sub">across topics</p></div>
+    `;
+    body.appendChild(stats);
+
+    // Per-topic mastery
+    const masteryCard = document.createElement("div");
+    masteryCard.className = "card";
+    masteryCard.innerHTML = "<h3>Mastery by topic</h3>";
+    allTopics().forEach(t => {
+      const ts = STATE.topics[t.id];
+      if (!ts) return;
+      const tWrap = document.createElement("div");
+      tWrap.style.cssText = "margin:10px 0;padding:8px 0;border-bottom:1px solid var(--gray-line);";
+      const tt = document.createElement("h4");
+      tt.textContent = t.title;
+      tWrap.appendChild(tt);
+      [1,2,3].forEach(lv => {
+        const m = masteryFor(t.id, lv);
+        const pct = Math.round(m * 100);
+        const row = document.createElement("div");
+        row.className = "mastery-row";
+        row.innerHTML = `<span>DOK ${lv}</span><div class="mastery-bar"><div class="mastery-fill l${lv}" style="width:${pct}%"></div></div><span>${pct}%</span>`;
+        tWrap.appendChild(row);
+      });
+      masteryCard.appendChild(tWrap);
+    });
+    body.appendChild(masteryCard);
+
+    // Sessions list
+    const sessionsCard = document.createElement("div");
+    sessionsCard.className = "card";
+    sessionsCard.innerHTML = "<h3>Session log</h3>";
+    if (!STATE.sessions.length) {
+      sessionsCard.innerHTML += '<p class="empty">No sessions yet. Complete tonight’s pre-work to start the log.</p>';
+    } else {
+      const headerRow = document.createElement("div");
+      headerRow.className = "session-row";
+      headerRow.innerHTML = '<div class="date">Date</div><div class="topics">Topics covered</div><div>Cards</div><div>Gates</div>';
+      sessionsCard.appendChild(headerRow);
+      STATE.sessions.slice().reverse().forEach(s => {
+        const row = document.createElement("div");
+        row.className = "session-row";
+        const titles = s.topicsCompleted.map(id => {
+          const t = topicById(id);
+          return t ? t.title : id;
+        }).join(", ") || "(in progress)";
+        row.innerHTML = `<div class="date">${s.date}</div><div class="topics">${escapeHtml(titles)}</div><div>${s.cardsReviewed}</div><div>${(s.gates || []).length}</div>`;
+        sessionsCard.appendChild(row);
+      });
+    }
+    body.appendChild(sessionsCard);
+
+    // Gate explanations (so professor can see understanding)
+    const gateCard = document.createElement("div");
+    gateCard.className = "card";
+    gateCard.innerHTML = "<h3>Your gate explanations</h3><p class=\"usage\">What you wrote in your own words to unlock each topic.</p>";
+    let any = false;
+    allTopics().forEach(t => {
+      const ts = STATE.topics[t.id];
+      if (ts && ts.gateCompleted && ts.gateExplanation) {
+        any = true;
+        const block = document.createElement("div");
+        block.style.cssText = "margin:12px 0;padding:12px 14px;background:var(--off-white);border-left:3px solid var(--gold);border-radius:4px;";
+        block.innerHTML = `<h4>${escapeHtml(t.title)}</h4><p style="white-space:pre-wrap;margin:6px 0 0;">${escapeHtml(ts.gateExplanation)}</p><p style="font-family:'DM Sans',sans-serif;font-size:11px;color:var(--gray-soft);margin-top:6px;">Submitted ${escapeHtml((ts.gateCompletedAt || "").slice(0,10))}</p>`;
+        gateCard.appendChild(block);
+      }
+    });
+    if (!any) gateCard.innerHTML += '<p class="empty">No gate explanations submitted yet.</p>';
+    body.appendChild(gateCard);
+  }
+
+  /* ---------- SETTINGS ---------- */
+
+  function renderSettings(){
+    // No dynamic content yet; buttons wired in init().
+  }
+
+  function resetAll(){
+    if (!confirm("Erase all progress on this device? This cannot be undone.")) return;
+    STATE = freshState();
+    saveState();
+    announce("All progress reset.");
+    nav("dashboard");
+  }
+
+  function simulateNextDay(){
+    STATE.daysSimulated = (STATE.daysSimulated || 0) + 1;
+    saveState();
+    announce("Simulated +1 day. Reload the dashboard to see due cards.");
+    nav("dashboard");
+  }
+
+  /* ---------- EXPORT / IMPORT ---------- */
+
+  function exportProgress(){
+    const blob = btoa(unescape(encodeURIComponent(JSON.stringify(STATE))));
+    const ta = document.createElement("textarea");
+    ta.value = blob;
+    ta.style.cssText = "position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:9999;width:80vw;height:40vh;padding:14px;border:2px solid var(--navy);border-radius:8px;font-family:monospace;font-size:12px;background:white;";
+    const close = document.createElement("button");
+    close.textContent = "Close";
+    close.className = "btn btn-primary";
+    close.style.cssText = "position:fixed;left:50%;top:calc(50% + 22vh);transform:translateX(-50%);z-index:9999;";
+    close.addEventListener("click", () => { ta.remove(); close.remove(); });
+    document.body.appendChild(ta);
+    document.body.appendChild(close);
+    ta.select();
+    announce("Progress code shown. Copy it and save it somewhere safe.");
+  }
+
+  function importProgress(){
+    const blob = prompt("Paste your exported progress code:");
+    if (!blob) return;
+    try {
+      const parsed = JSON.parse(decodeURIComponent(escape(atob(blob.trim()))));
+      if (!parsed.version) throw new Error("not valid");
+      STATE = parsed;
+      saveState();
+      announce("Progress imported.");
+      nav("dashboard");
+    } catch(e){
+      alert("That code did not parse. Make sure you copied the whole thing.");
+    }
+  }
+
+  /* ---------- UTIL ---------- */
+
+  function escapeHtml(s){
+    return String(s || "").replace(/[&<>"']/g, ch => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[ch]));
+  }
+
+  /* ---------- INIT ---------- */
+
+  function init(){
+    // Top nav
+    $$('nav.top-nav button').forEach(b => {
+      b.addEventListener("click", () => nav(b.dataset.nav));
+    });
+    // Back buttons inside views
+    $$('[data-nav]').forEach(b => {
+      if (b.closest("nav.top-nav")) return;
+      b.addEventListener("click", () => nav(b.dataset.nav));
+    });
+
+    // Topic / gate handlers
+    $("#btn-simulate-watch").addEventListener("click", simulateWatch);
+    $("#btn-mark-watched").addEventListener("click", markWatched);
+    $("#gate-input").addEventListener("input", (e) => {
+      const topic = topicById(CURRENT_TOPIC);
+      if (topic) updateGateMeter(topic, e.target.value);
+    });
+    $("#btn-submit-gate").addEventListener("click", submitGate);
+    $("#btn-toggle-preview-hint").addEventListener("click", () => {
+      const hint = $("#gate-preview-hint");
+      const btn = $("#btn-toggle-preview-hint");
+      const showing = !hint.hidden;
+      hint.hidden = showing;
+      btn.textContent = showing ? "Show concepts (preview)" : "Hide concepts";
+    });
+
+    // Card handlers
+    // (legacy btn-reveal removed; MC replaces it)
+    $$('.rate-btn').forEach(b => {
+      b.addEventListener("click", () => rateCard(b.dataset.rate));
+    });
+
+    // Keyboard shortcuts for card practice
+    document.addEventListener("keydown", (e) => {
+      if (!$("#view-learn").classList.contains("active")) return;
+      if (document.activeElement && document.activeElement.tagName === "TEXTAREA") return;
+      if (e.key === " " || e.key === "Enter") {
+        if (!$("#rate-row").hidden) return; // already revealed
+        e.preventDefault();
+        revealAnswer();
+      } else if (!$("#rate-row").hidden) {
+        if (e.key === "1") rateCard("again");
+        else if (e.key === "2") rateCard("hard");
+        else if (e.key === "3") rateCard("good");
+        else if (e.key === "4") rateCard("easy");
+      }
+    });
+
+    // Review mode toggle
+    const btnReviewDue = $("#btn-review-due");
+    const btnReviewAll = $("#btn-review-all");
+    if (btnReviewDue) btnReviewDue.addEventListener("click", () => setReviewMode("due"));
+    if (btnReviewAll) btnReviewAll.addEventListener("click", () => setReviewMode("all"));
+
+    // Report
+    $("#btn-print").addEventListener("click", () => { nav("report"); setTimeout(() => window.print(), 200); });
+    $("#btn-export").addEventListener("click", exportProgress);
+    $("#btn-import").addEventListener("click", importProgress);
+
+    // Settings
+    $("#btn-reset-day").addEventListener("click", simulateNextDay);
+    $("#btn-reset-all").addEventListener("click", resetAll);
+
+    // Track that the user opened the app today (counts toward streak even without finishing a card).
+    const today = todayKey(0);
+    if (STATE.lastOpenedDate !== today) {
+      STATE.lastOpenedDate = today;
+      // Pre-create today's session row so streak reflects activity.
+      if (!STATE.sessions.find(s => s.date === today)) {
+        STATE.sessions.push({ date: today, topicsCompleted: [], cardsReviewed: 0, gates: [] });
+      }
+      saveState();
+    }
+
+    // Deep-link routing based on URL hash.
+    //   #topic=t-X       -> open that topic (cards view if past gate, gate view otherwise)
+    //   #view=review     -> open the Daily Review view
+    //   #view=dashboard  -> open the dashboard (same as no hash)
+    //   anything else    -> dashboard
+    var deepLinkTopic = null;
+    var deepLinkView = null;
+    try {
+      var hash = window.location.hash || "";
+      var mTopic = hash.match(/#topic=([\w-]+)/);
+      var mView  = hash.match(/#view=(\w+)/);
+      if (mTopic && mTopic[1]) deepLinkTopic = mTopic[1];
+      if (mView  && mView[1])  deepLinkView  = mView[1];
+    } catch (e) {}
+    if (deepLinkTopic && topicById(deepLinkTopic)) {
+      CURRENT_TOPIC = deepLinkTopic;
+      const ts = getTopicState(deepLinkTopic);
+      if (ts.gateCompleted) nav("learn", deepLinkTopic);
+      else nav("topic", deepLinkTopic);
+      try { history.replaceState(null, "", window.location.pathname + window.location.search); } catch (e) {}
+    } else if (deepLinkView === "review") {
+      nav("review");
+      try { history.replaceState(null, "", window.location.pathname + window.location.search); } catch (e) {}
+    } else if (deepLinkView === "dashboard") {
+      nav("dashboard");
+    } else {
+      nav("dashboard");
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+
+})();
+
+/* ---------- IFRAME HEIGHT SENDER (required for Kajabi embeds) ---------- */
+(function(){
+  "use strict";
+  if (window.self === window.top) return; // not in an iframe
+  const id = (function(){
+    const u = new URL(window.location.href);
+    return u.searchParams.get("iframeId") || "bio004-prework";
+  })();
+  function sendHeight(){
+    const h = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight
+    );
+    try {
+      window.parent.postMessage({ type: "iframe-height", id: id, height: h }, "*");
+    } catch(e){}
+  }
+  window.addEventListener("load", sendHeight);
+  window.addEventListener("resize", sendHeight);
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(sendHeight);
+    ro.observe(document.body);
+  } else {
+    setInterval(sendHeight, 800);
+  }
+})();
+</script>
+<!-- mcas-chrome-footer -->
+</main>
+<div class="mcas-chrome">
+<footer class="mcas-footer">
+  <div class="mcas-footer-links">
+    <a class="mcas-footer-link" href="index.html" target="_top">Course home</a>
+    <a class="mcas-footer-link" href="biol004_syllabus.html" target="_top">Syllabus</a>
+    <a class="mcas-footer-link" href="course-orientation.html" target="_top">Orientation</a>
+    <a class="mcas-footer-link" href="concept_videos.html" target="_top">Concept videos</a>
+    <a class="mcas-footer-link" href="bio004-spaced-recall.html" target="_top">Spaced recall</a>
+    <a class="mcas-footer-link" href="biol004_accessibility.html" target="_top">Accessibility</a>
+  </div>
+  <div class="mcas-footer-row">
+    <div class="mcas-footer-copyright">BIO 004 Human Anatomy &middot; Solano Community College</div>
+    <div class="mcas-footer-byline">Dr. Sharilyn Rennie</div>
+  </div>
+</footer>
+</div>
+<!-- mcas-chrome-footer-end -->
+<!-- mcas-lecture-notes-injector -->
+<script>
+(function(){
+  function init(){
+    var videoPanel = document.querySelector("#video-panel, .video-panel");
+    if (!videoPanel) return;
+    if (document.getElementById("mcas-lecture-notes-input")) return;
+
+    var cfg = window.SHEET_CONFIG || {};
+    var m = (cfg.prework || "").match(/topic=([\w-]+)/);
+    var topicId = m ? m[1] : null;
+    var keyBase = topicId || (document.title || "page").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    var key = "bio004-lecture-notes-" + keyBase;
+
+    var section = document.createElement("section");
+    section.className = "mcas-lecture-notes";
+    section.setAttribute("aria-labelledby", "mcas-lecture-notes-h");
+    section.innerHTML =
+      '<p class="mcas-lecture-notes-eyebrow">While you watch</p>' +
+      '<h2 id="mcas-lecture-notes-h">Lecture video notes</h2>' +
+      '<p class="mcas-lecture-notes-instr">A scratchpad for what stands out as the video runs. Your notes save on this device and stay here when you come back.</p>' +
+      '<textarea id="mcas-lecture-notes-input" rows="8" aria-describedby="mcas-lecture-notes-status" placeholder="Type what is clicking for you..."></textarea>' +
+      '<p class="mcas-lecture-notes-status" id="mcas-lecture-notes-status" aria-live="polite"></p>';
+
+    if (videoPanel.parentNode) videoPanel.parentNode.insertBefore(section, videoPanel.nextSibling);
+
+    var ta = section.querySelector("#mcas-lecture-notes-input");
+    var status = section.querySelector("#mcas-lecture-notes-status");
+
+    try {
+      var saved = window.localStorage.getItem(key);
+      if (saved) ta.value = saved;
+      if (status) status.textContent = saved ? "Restored from your last session." : "";
+    } catch (e) {}
+
+    var t, debounceTimer;
+    function save(){
+      try { window.localStorage.setItem(key, ta.value); } catch (e) {}
+      if (status) {
+        status.textContent = "Saved on this device";
+        clearTimeout(t);
+        t = setTimeout(function(){ if (status) status.textContent = ""; }, 1400);
+      }
+    }
+    ta.addEventListener("input", function(){
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(save, 350);
+    });
+    ta.addEventListener("blur", save);
+    window.addEventListener("pagehide", save);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+<!-- mcas-lecture-notes-injector-end -->
+<!-- mcas-iframe-height-sender -->
+<script>
+/* MCAS iframe height-sender (rebrand-mcas.py) */
+(function(){
+  var FRAME_ID = "bio004-spaced-recall";
+  function sendHeight(){
+    var h = Math.max(document.documentElement.scrollHeight,
+                     document.body ? document.body.scrollHeight : 0);
+    parent.postMessage({type:"resize", id:FRAME_ID, height:h}, "*");
+  }
+  window.addEventListener("load", sendHeight);
+  window.addEventListener("resize", sendHeight);
+  if (window.ResizeObserver) new ResizeObserver(sendHeight).observe(document.body);
+})();
+</script>
+<!-- mcas-iframe-height-sender-end -->
+</body>
+</html>
